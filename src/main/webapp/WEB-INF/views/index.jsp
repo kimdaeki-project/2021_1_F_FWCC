@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>Index Page</h1>
-
+	<h1>인덱스 페이지</h1>
+	<!-- 주석 한글 -->
 </body>
 </html>
