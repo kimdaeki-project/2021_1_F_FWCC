@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-
+// 쩨발 되
 	
 	@GetMapping("/")
 	public String goHome() throws Exception {
