@@ -1,4 +1,4 @@
-package com.hs.s1;
+package com.fw.s1;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

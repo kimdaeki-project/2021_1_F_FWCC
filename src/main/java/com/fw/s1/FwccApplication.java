@@ -1,4 +1,4 @@
-package com.hs.s1;
+package com.fw.s1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
