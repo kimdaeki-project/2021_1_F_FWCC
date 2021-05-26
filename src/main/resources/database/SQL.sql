@@ -110,11 +110,11 @@ CREATE TABLE `fw01`.`member` (
   
 -- insert dummy data
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
-values('username1', 'password1', 'name1', 'phone1', 'email1', '21-05-26', true, true, true);
+values('username1', 'password1', 'name1', 'phone1', 'email1', curdate(), true, true, true);
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
-values('username2', 'password2', 'name2', 'phone2', 'email2', '21-05-26', true, true, true);
+values('username2', 'password2', 'name2', 'phone2', 'email2', curdate(), true, true, true);
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
-values('username3', 'password3', 'name3', 'phone3', 'email3', '21-05-26', true, true, true);
+values('username3', 'password3', 'name3', 'phone3', 'email3', curdate(), true, true, true);
 -- admin
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
 values('admin', 'admin', 'admin', '01099999999', 'admin@gmail.com', '21-05-26', true, true, true);
