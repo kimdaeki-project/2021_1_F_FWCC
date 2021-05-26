@@ -353,3 +353,226 @@ INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileConte
 VALUES(0, 0, 0, 'admin', '123-123', 'testing', 0);
 INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileContents, enabledMile)
 VALUES(0, 1000, 0, 'admin', '234-234', 'testing', 0);
+
+--한철 --------------------------------------------------------------------------------------------
+
+-- notice ----------------------------------------------------------------------------------------
+CREATE TABLE notice
+(
+    `num`       BIGINT          NOT NULL    AUTO_INCREMENT COMMENT '글번호', 
+    `writer`    VARCHAR(100)    NULL        COMMENT '쓴사람', 
+    `regDate`   DATETIME        NULL        COMMENT '등록일', 
+    `contents`  LONGTEXT        NULL        COMMENT '내용', 
+    `hit`       BIGINT          NULL        COMMENT '조회수', 
+    `title`     VARCHAR(100)    NULL        COMMENT '제목', 
+    CONSTRAINT  PRIMARY KEY (num)
+);
+
+ALTER TABLE notice COMMENT 'notice';
+
+INSERT INTO notice(title,writer,regDate,contents,hit)
+VALUES('title1','writer1',NOW(),'contents2',0);
+INSERT INTO notice(title,writer,regDate,contents,hit)
+VALUES('title2','writer2',NOW(),'contents2',0);
+INSERT INTO notice(title,writer,regDate,contents,hit)
+VALUES('title3','writer3',NOW(),'contents3',0);
+
+-- noticeFiles ----------------------------------------------------------------------------------------
+CREATE TABLE noticeFiles
+(
+    `fileNum`   BIGINT          NOT NULL    AUTO_INCREMENT COMMENT '파일번호', 
+    `num`       BIGINT          NULL        COMMENT '글번호', 
+    `fileName`  VARCHAR(100)    NULL        COMMENT '파일이름', 
+    `oriName`   VARCHAR(100)    NULL        COMMENT '오리진', 
+    CONSTRAINT  PRIMARY KEY (fileNum)
+);
+
+ALTER TABLE noticeFiles
+    ADD CONSTRAINT FK_noticeFiles_num_notice_num FOREIGN KEY (num)
+        REFERENCES notice (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+        
+INSERT INTO noticeFiles(num,fileName,oriName)
+VALUES(1,'fileName1','oriName1');
+INSERT INTO noticeFiles(num,fileName,oriName)
+VALUES(2,'fileName2','oriName2');
+INSERT INTO noticeFiles(num,fileName,oriName)
+VALUES(3,'fileName3','oriName3');
+
+-- noticeComment ----------------------------------------------------------------------------------------
+CREATE TABLE noticeComment
+(
+    `commentNum`  BIGINT          NOT NULL    AUTO_INCREMENT COMMENT '댓글번호', 
+    `writer`      VARCHAR(100)    NULL        COMMENT '쓴사람', 
+    `regDate`     DATETIME        NULL        COMMENT '등록일', 
+    `contents`    LONGTEXT        NULL        COMMENT '내용', 
+    `num`         BIGINT          NULL        COMMENT '글번호', 
+    CONSTRAINT  PRIMARY KEY (commentNum)
+);
+
+ALTER TABLE noticeComment
+    ADD CONSTRAINT FK_noticeComment_num_notice_num FOREIGN KEY (num)
+        REFERENCES notice (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO noticeComment(writer,regDate,contents,num)
+VALUES('writer1',NOW(),'contetns1',1);
+INSERT INTO noticeComment(writer,regDate,contents,num)
+VALUES('writer2',NOW(),'contetns2',2);
+INSERT INTO noticeComment(writer,regDate,contents,num)
+VALUES('writer3',NOW(),'contetns3',3);
+
+
+
+-- qna ----------------------------------------------------------------------------------------      
+CREATE TABLE qna
+(
+    `num`         BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '글번호', 
+    `productNum`  BIGINT         NULL        COMMENT '제품', 
+    `title`       VARCHAR(100)   NULL        COMMENT '제목', 
+    `writer`      VARCHAR(100)   NULL        COMMENT '쓴사람', 
+    `regDate`     DATETIME       NULL        COMMENT '등록일', 
+    `hit`         INT            NULL        COMMENT '조회수', 
+    `contents`    LONGTEXT       NULL        COMMENT '내용', 
+    CONSTRAINT  PRIMARY KEY (num)
+);
+
+ALTER TABLE qna COMMENT 'qna';
+
+ALTER TABLE qna
+    ADD CONSTRAINT FK_qna_productNum_product_productNum FOREIGN KEY (productNum)
+        REFERENCES product (productNum) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
+VALUES(1,'title1','writer1',NOW(),1,'contents1');
+INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
+VALUES(2,'title2','writer2',NOW(),2,'contents2');
+INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
+VALUES(3,'title3','writer3',NOW(),3,'contents3');
+
+-- qnaFiles ----------------------------------------------------------------------------------------         
+CREATE TABLE qnaFiles
+(
+    `fileNum`   BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '파일번호', 
+    `num`       BIGINT         NULL        COMMENT '글번호', 
+    `fileName`  VARCHAR(100)   NULL        COMMENT '파일이름', 
+    `oriName`   VARCHAR(100)   NULL        COMMENT '오리진', 
+    CONSTRAINT  PRIMARY KEY (fileNum)
+);
+
+ALTER TABLE qnaFiles
+    ADD CONSTRAINT FK_qnaFiles_num_qna_num FOREIGN KEY (num)
+        REFERENCES qna (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO qnaFiles(num,fileName,oriName)
+VALUES(1,'fileName1','oriName1');
+INSERT INTO qnaFiles(num,fileName,oriName)
+VALUES(2,'fileName2','oriName2');
+INSERT INTO qnaFiles(num,fileName,oriName)
+VALUES(3,'fileName3','oriName3');
+
+
+-- qnaComment ------------------------------------------------------------------------
+CREATE TABLE qnaComment
+(
+    `commentNum`  BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '댓글번호', 
+    `writer`      VARCHAR(100)   NULL        COMMENT '쓴사람', 
+    `regDate`     DATETIME       NULL        COMMENT '등록일', 
+    `contents`    TEXT           NULL        COMMENT '내용', 
+    `num`         BIGINT         NULL        COMMENT '글번호', 
+    CONSTRAINT  PRIMARY KEY (commentNum)
+);
+
+ALTER TABLE qnaComment
+    ADD CONSTRAINT FK_qnaComment_num_qna_num FOREIGN KEY (num)
+        REFERENCES qna (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO qnaComment(writer,regDate,contents,num)
+VALUES('writer1',NOW(),'contetns1',1);
+INSERT INTO qnaComment(writer,regDate,contents,num)
+VALUES('writer2',NOW(),'contetns2',2);
+INSERT INTO qnaComment(writer,regDate,contents,num)
+VALUES('writer3',NOW(),'contetns3',3);
+
+-- review -------------------------------------------------------------------------        
+CREATE TABLE review
+(
+    `num`       BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '글번호', 
+    `title`     VARCHAR(100)   NULL        COMMENT '제목', 
+    `writer`    VARCHAR(100)   NULL        COMMENT '쓴사람', 
+    `regDate`   DATETIME       NULL        COMMENT '등록일', 
+    `hit`       INT            NULL        COMMENT '조회수', 
+    `contents`  LONGTEXT       NULL        COMMENT '내용', 
+    CONSTRAINT  PRIMARY KEY (num)
+);
+
+ALTER TABLE review COMMENT '리뷰테이블';
+
+INSERT INTO review(title,writer,regDate,contents,hit)
+VALUES('title1','writer1',NOW(),'contents1',0);
+INSERT INTO review(title,writer,regDate,contents,hit)
+VALUES('title2','writer2',NOW(),'contents2',0);
+INSERT INTO review(title,writer,regDate,contents,hit)
+VALUES('title3','writer3',NOW(),'contents3',0);
+
+-- reviewFiles ----------------------------------------------------------------------
+CREATE TABLE reviewFiles
+(
+    `fileNum`   BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '파일번호', 
+    `num`       BIGINT         NULL        COMMENT '글번호', 
+    `fileName`  VARCHAR(100)   NULL        COMMENT '파일이름', 
+    `oriName`   VARCHAR(100)   NULL        COMMENT '오리진', 
+    CONSTRAINT  PRIMARY KEY (fileNum)
+);
+
+ALTER TABLE reviewFiles
+    ADD CONSTRAINT FK_reviewFiles_num_review_num FOREIGN KEY (num)
+        REFERENCES review (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO reviewFiles(num,fileName,oriName)
+VALUES(1,'fileName1','oriName1');
+INSERT INTO reviewFiles(num,fileName,oriName)
+VALUES(2,'fileName2','oriName2');
+INSERT INTO reviewFiles(num,fileName,oriName)
+VALUES(3,'fileName3','oriName3');
+ 
+-- reviewComment ----------------------------------------------------------------------        
+CREATE TABLE reviewComment
+(
+    `commentNum`  BIGINT         NOT NULL    AUTO_INCREMENT COMMENT '댓글번호', 
+    `writer`      VARCHAR(100)   NULL        COMMENT '쓴사람', 
+    `regDate`     DATETIME       NULL        COMMENT '등록일', 
+    `contents`    TEXT           NULL        COMMENT '내용', 
+    `num`         BIGINT         NULL        COMMENT '글번호', 
+    CONSTRAINT  PRIMARY KEY (commentNum)
+);
+
+
+ALTER TABLE reviewComment
+    ADD CONSTRAINT FK_reviewComment_num_review_num FOREIGN KEY (num)
+        REFERENCES review (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO reviewComment(writer,regDate,contents,num)
+VALUES('writer1',NOW(),'contetns1',1);
+INSERT INTO reviewComment(writer,regDate,contents,num)
+VALUES('writer2',NOW(),'contetns2',2);
+INSERT INTO reviewComment(writer,regDate,contents,num)
+VALUES('writer3',NOW(),'contetns3',3);
+
+-- lookbook ----------------------------------------------------------------------
+CREATE TABLE lookbook
+(
+    `lookbookNum`  BIGINT          NOT NULL    AUTO_INCREMENT COMMENT '글번호', 
+    `division`     VARCHAR(10)     NULL        COMMENT '매체 종류', 
+    `fileName`     VARCHAR(100)    NULL        COMMENT '파일이름', 
+    `title`        varchar(100)    NULL        COMMENT '제목', 
+    CONSTRAINT  PRIMARY KEY (lookbookNum)
+);
+
+ALTER TABLE lookbook COMMENT 'lookbook';
+
+INSERT INTO lookbook(division,fileName,title)
+VALUES('p','fileName1','title1');
+INSERT INTO lookbook(division,fileName,title)
+VALUES('p','fileName2','title12');
+INSERT INTO lookbook(division,fileName,title)
+VALUES('v','fileName3','title3');
+-- borad end ----------------------------------------------------------------------
