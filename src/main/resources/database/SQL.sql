@@ -115,6 +115,9 @@ insert into member(username, password, name, phone, email, birth, smsAgree, emai
 values('username2', 'password2', 'name2', 'phone2', 'email2', '21-05-26', true, true, true);
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
 values('username3', 'password3', 'name3', 'phone3', 'email3', '21-05-26', true, true, true);
+-- admin
+insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
+values('admin', 'admin', 'admin', '01099999999', 'admin@gmail.com', '21-05-26', true, true, true);
 
 -- role table -----------------------------------------------------------------------------------
 -- role table create
@@ -154,6 +157,11 @@ insert into memberRole(username, id)
 values('username2', 2);
 insert into memberRole(username, id)
 values('username3', 2);
+-- admin
+insert into memberRole(username, id)
+values('admin', 1);
+insert into memberRole(username, id)
+values('admin', 2);
 
 -- address table -----------------------------------------------------------------------------------
 -- address table create
