@@ -18,6 +18,13 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
 			<!--tomcat-jasper for JSP in Sprng boot -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -30,6 +37,7 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
+		<!-- default dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
