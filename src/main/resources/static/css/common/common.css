@@ -1499,6 +1499,42 @@ ul.hovermenu>li>.sub {
 	width: 120px;
 }
 
+ul.hovermenu>li>.sub-top {
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.1s;
+	position: absolute;
+	z-index: 11;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+	width: 240px;
+}
+
+ul.hovermenu>li>.sub-bottom {
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.1s;
+	position: absolute;
+	z-index: 11;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+	width: 300px;
+}
+
+ul.hovermenu>li>.sub-collab {
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.1s;
+	position: absolute;
+	z-index: 11;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+	width: 450px;
+}
+
 ul.hovermenu>li:hover>.sub {
 	visibility: visible;
 	display: block;

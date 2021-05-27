@@ -8,10 +8,11 @@
 <!-- CSS & JS -->
 <script type="text/javascript" src="/js/common/common.js"></script>
 <!-- 해당 JS는 플래시를 사용하기 위한 스크립트입니다. -->
-<script type="text/javascript" src="/suhon_studio/js/jquery-1.11.0.min.js"></script><script type="text/javascript" src="/suhon_studio/js/jquery-migrate-1.2.1.min.js"></script><script type="text/javascript" src="/suhon_studio/js/slick.min.js"></script>
-<link rel="canonical" href="https://frizm.co.kr/" />
-<link rel="alternate" href="https://m.frizm.co.kr/" />
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- <script type="text/javascript" src="slick/slick.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="/css/common/common.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- CSS & JS -->
 
 </head>
@@ -28,6 +29,7 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="inner">
+			
 				<div class="fl-left">
 					<h1>
 						<a href="/index.html"><span class="logo_bk"><img src="/web/upload/suhon_studio/vol98/logo.png" alt="" /></span><span class="logo_w"><img
@@ -37,20 +39,52 @@
 					<div id="category">
 
 						<div class="xans-element- xans-layout xans-layout-category position">
-							<ul>
+							<ul class="logbar hovermenu">
 								<li class="xans-record-"><a href="/product/list.html?cate_no=33">All (New arrival)</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=24">Outer</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=52">Top</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=26">Bottom</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=4">Acc</a></li>
+								<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=24">Outer</a></li> -->
+								<li class="xans-record-"><a href="/product/list.html?cate_no=52">Top</a>
+									<div class="sub sub-top">
+										<ul>
+											<li><a href="#">TOP (long)</a></li>
+											<li><a href="#">TOP (short)</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="xans-record-"><a href="/product/list.html?cate_no=26">Bottom</a>
+									<div class="sub sub-bottom">
+										<ul>
+											<li><a href="#">BOTTOM (long)</a></li>
+											<li><a href="#">BOTTOM (short)</a></li>
+										</ul>
+									</div>
+								</li>
+								<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=4">Acc</a></li> -->
 								<li class="xans-record-"><a href="/product/list.html?cate_no=30">Sale</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=38">Collaboration</a></li>
-								<li class="xans-record-"><a href="/product/list.html?cate_no=37">Original Garments®</a></li>
+								<li class="xans-record-"><a href="/product/list.html?cate_no=38">Collaboration</a>
+									<div class="sub sub-collab">
+										<ul>
+											<li><a href="#">10th Anniversary Collection</a></li>
+											<li><a href="#">TAW&TOE X FrizmWORKS</a></li>
+											<li><a href="#">Penfield X FrizmWORKS</a></li>
+											<li><a href="#">SLOWBOY X FrizmWORKS</a></li>
+											<li><a href="#">Targetto X FrizmWORKS</a></li>
+											<li><a href="#">Thorogood X FrizmWORKS</a></li>
+											<li><a href="#">mazi untitled X FrizmWORKS</a></li>
+											<li><a href="#">Hugplus X FrizmWORKS</a></li>
+											<li><a href="#">Webzen X FrizmWORKS</a></li>
+											<li><a href="#">Hummel X FrizmWORKS</a></li>
+											<li><a href="#">The Knitted X FrizmWORKS</a></li>
+											<li><a href="#">Amon movement X FrizmWORKS</a></li>
+											<li><a href="#">USS2 X FrizmWORKS</a></li>
+										</ul>
+									</div>
+								</li>
+								<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=37">Original Garments®</a></li> -->
 								<li class="xans-record-"><a href="/product/lookbook.html?cate_no=34">Lookbook</a></li>
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div>	
 
 				<div class="fl-right">
 					<ul class="logbar hovermenu">
@@ -105,7 +139,7 @@
 
 				<div id="mainslider-wraper">
 					<ul id="mainslider">
-						<li class="banner"><a href="https://frizm.co.kr/article/notice/1/59172/" target=""><img src="/web/upload/suhon_studio/vol98/main2_20210520.jpg" alt="" /></a></li>
+						<li class="banner"><a href="https://frizm.co.kr/article/notice/1/59172/" target=""><img src="/images/grayscale.png" alt="" /></a></li>
 						<li class="banner"><a href="https://frizm.co.kr/article/notice/1/59172/" target=""><img src="/web/upload/suhon_studio/vol98/main1_20210520.jpg" alt="" /></a></li>
 						<li class="banner"><a href="http://frizm.cafe24.com/article/notice/1/59055/" target=""><img src="/web/upload/suhon_studio/vol98/main3_20210520.jpg" alt="" /></a></li>
 						<li class="banner"><a href="http://frizm.cafe24.com/article/notice/1/58993/" target=""><img src="/web/upload/suhon_studio/vol98/main4_20210520.jpg" alt="" /></a></li>
@@ -534,20 +568,23 @@
 
 	<!-- External Script End -->
 
-	<script type="text/javascript" src="/ind-script/i18n.php?lang=ko_KR&domain=front&v=2105131222" charset="utf-8"></script>
+<script type="text/javascript" src="/js/ind-script/i18n.php?lang=ko_KR&domain=front&v=2105131222" charset="utf-8"></script>
 
 	<script type="text/javascript"
 		src="/ind-script/optimizer.php?filename=zZXPbtswDMZfwNc9h5D9AXptOvTUYEPXYmdaph0lkqhR1Fr36UenOSTDnDjOZfDBgsTfR0r8LJs1BTSLj2xahoAvxFvDmKmwRbPJxi1uYrXJH8ypuOIS2K3Z_CrI_f71qfpSLS4k8VWQI_i8n6gs0dbhtSqF_awtVGirNs5GI1mKrXdWZkksqs_6zEquq0L817klpk75o-42IChOA4JGRTFoV7vBTyfrp7evIFAFFy_Q8a5WCp90fJ7KiV2UdoI82TKUdU8c7igKk_fI57nvvuTblJbsmm5CPUWcPx_VslZgLIVAcWr0K0T9lKL6MjHKlNIPOMGQvB7qvyFIyayodh7N4wH_Xt-JLY1wgZqiU_nFpcsStiVacZpS45qing-jDpyqcKII9Zl5frf-oYSHt94TNBdBoQgMeb_VGfn3WHNG4ES-b52f7JsGWyhehiPIAViWEONYyiHox5rSUcL7nczdrr3PJ7s7hqqVOuL-wWUZh5cE3BzROlvVw-y113HduR30f_wcGr2qYtb252uVELKL3bUqAQWa4eK9tK-3uY92CXmL8gD9DE-t1Jcu69reGX8A&type=js&k=4faaff7a6e616f774e66cd6944ec613d7b29e1e3&t=1618942812"
 	></script>
+	<script type="text/javascript" src="/js/common/common3.js"></script>
+	
 	<script type="text/javascript"
 		src="/ind-script/optimizer.php?filename=rZRBTsMwEEUPULacw4IbQJBgkYqqFLGeONNmGsdjje1WuT1R6IKKgpCnG0uR85-_nRebjgc0d_digvBOYDAQglmChx2aNUbOYtHsozli43h3s4-35kfEUWPeKYDtzyJVFkFvRxM7DosgZFGRt6enxZZlgKRtci1MTuQuQ-RbskuDQ58oEcbLb_9y7BBHb7_G4tyAQ4NSHH-VFsX6VAx4hNhj0hP-MOjfjJVwm215k4pzYK_Zy5IcTvPF-ScMHKl8_Q-KXU1RB7CcFUcgaFERX8_xDSdwlarHbHa5UOhxS1qpaxgVHZ4F2nKVHnLi6Q4kO2PeOj6WW51dohWHHMoRY009nn5Q3Yc9Q6lkr-mAjnzPXmfZy1SCZbyCryfSBpoCToDUCTtcHMBRCxNognwC&type=js&k=0f9e681f92e21c3fafd37709e3c4ffc2b32dfadc&t=1621970990"
 	></script>
 	<script type="text/javascript"
 		src="/ind-script/optimizer.php?filename=lcvBCYAwDEbhAezVOX50Dr24QayhWtqmJIq4vYIL6OVdHh9WyYyuV1SVoJRBtWKkQoExscmhnhENZFfxb90gtLhoLb7iZy-H33-ZzHlmbZKErfyCdjpPKbE-6gY&type=js&k=6be9436111e1cac9f7ec09730f5e2988c60a07a2&t=1619547299"
 	></script>
-	<script type="text/javascript"
-		src="/ind-script/optimizer.php?filename=rdBBDoIwEAXQA9St5xgI8SSeoLQjHWg7lelo8PSCceNSwu5v_svPh8AJAZ1RwVngNtMrQdE-kjOhpgji0XgUGjLIRLltYRRI7DUiRLuwVnC24sDzchrlDP97ooGzkaqeeMPtxVrbd03X7AS_s3or5DbwE3Zaa91xSpz393_Puiu5yTwInwfddey8pLGSBC7XQKVQHlb4DQ&type=js&k=0f5957df96319b0c4d78efc2002267cbda1ee42d&t=1611822234&user=T"
-	></script>
+	
+	<script type="text/javascript" src="/ind-script/optimizer.php?filename=rdBBDoIwEAXQA9St5xgI8SSeoLQjHWg7lelo8PSCceNSwu5v_svPh8AJAZ1RwVngNtMrQdE-kjOhpgji0XgUGjLIRLltYRRI7DUiRLuwVnC24sDzchrlDP97ooGzkaqeeMPtxVrbd03X7AS_s3or5DbwE3Zaa91xSpz393_Puiu5yTwInwfddey8pLGSBC7XQKVQHlb4DQ&type=js&k=0f5957df96319b0c4d78efc2002267cbda1ee42d&t=1611822234&user=T"></script>
+	<script type="text/javascript" src="/js/common/common2.js"></script>
+	
 	<script type="text/javascript">
 		var EC_MOBILE = false;
 		var EC_MOBILE_DEVICE = false;
@@ -613,5 +650,8 @@
 			EC$('[async_section=before]').addClass('displaynone');
 		}
 	</script>
+	
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	
 </body>
 </html>
