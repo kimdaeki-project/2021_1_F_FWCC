@@ -2,9 +2,16 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
+
 <configuration>
- 	<typeAliases>
-		
+	<typeAliases>
+		<typeAlias type="com.fw.s1.product.ProductVO"
+			alias="ProductVO" />
+		<typeAlias type="com.fw.s1.product.ProductFileVO"
+			alias="ProductFileVO" />
+		<typeAlias type="com.fw.s1.product.ProductInfoVO"
+			alias="ProductInfoVO" />
+
+
 	</typeAliases>
 </configuration>
