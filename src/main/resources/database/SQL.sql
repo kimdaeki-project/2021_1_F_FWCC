@@ -237,33 +237,47 @@ VALUES(0, 3, 9, 1, 'admin');
 INSERT INTO cart (cartNum, productNum, pInfoNum, productCount, username)
 VALUES(0, 3, 10, 1, 'admin');
 
----------------------------------------------------------- create table coupon ---------------------------------------------------------------------
+---------------------------------------------------------- create table couponsp -------------------------------------------------------
 
+CREATE TABLE `fw01`.`couponsp` (
+    cuSpNum BIGINT NOT NULL AUTO_INCREMENT,
+    cuName VARCHAR(100) NOT NULL,
+    disRate INT NOT NULL,
+    PRIMARY KEY (cuSpNum) USING BTREE
+)
+;
+
+------------------------------------- couponsp 더미데이터 -----------------------------------------------
+
+INSERT INTO couponsp(cuName, disRate) VALUES('default', 0);
+INSERT INTO couponsp(cuName, disRate) VALUES('test1', 10);
+INSERT INTO couponsp(cuName, disRate) VALUES('test2', 20);
+INSERT INTO couponsp(cuName, disRate) VALUES('test3', 30);
+INSERT INTO couponsp(cuName, disRate) VALUES('test4', 40);
+INSERT INTO couponsp(cuName, disRate) VALUES('test5', 50);
+
+---------------------------------------------------------- create table coupon ---------------------------------------------------------
 CREATE TABLE `fw01`.`coupon` (
 	`cuNum` BIGINT NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(100) NOT NULL,
-	`disRate` INT NOT NULL,
+	`cuSpNum` BIGINT NOT NULL DEFAULT '1',
 	`pubDate` DATE NOT NULL,
 	`exDate` DATE NOT NULL,
-	`cuName` VARCHAR(100) NOT NULL,
 	PRIMARY KEY (`cuNum`) USING BTREE,
 	INDEX `CU_UN_FK` (`username`) USING BTREE,
 	CONSTRAINT `CU_UN_FK` FOREIGN KEY (`username`) REFERENCES `fw01`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 ;
+ALTER TABLE coupon ADD FOREIGN KEY (cuSpNum) REFERENCES couponsp(cuSpNum) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ------------------------------------- coupon 더미데이터 -----------------------------------------------
 
-INSERT INTO coupon (cuNum, username, disRate, pubDate, exDate, cuName)
-VALUES(0, 'admin', 0, NOW(), NOW(), 'null');
-INSERT INTO coupon (cuNum, username, disRate, pubDate, exDate, cuName)
-VALUES(0, 'admin', 10, NOW(), NOW(), 'test1');
-INSERT INTO coupon (cuNum, username, disRate, pubDate, exDate, cuName)
-VALUES(0, 'admin', 20, NOW(), NOW(), 'test2');
-INSERT INTO coupon (cuNum, username, disRate, pubDate, exDate, cuName)
-VALUES(0, 'admin', 30, NOW(), NOW(), 'test3');
-INSERT INTO coupon (cuNum, username, disRate, pubDate, exDate, cuName)
-VALUES(0, 'admin', 40, NOW(), NOW(), 'test4');
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 3,CURDATE(), (select date_add(curdate(), interval 1 month) from DUAL));
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 2,CURDATE(), (select date_add(curdate(), interval 1 month) from DUAL));
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 4,CURDATE(), (select date_add(curdate(), interval 1 month) from DUAL));
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 5,CURDATE(), (select date_add(curdate(), interval 1 month) from DUAL));
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 6,CURDATE(), (select date_add(curdate(), interval 1 month) from DUAL));
+INSERT INTO coupon(username, cuSpNum, pubDate, exDate) VALUES('admin', 2,CURDATE(), (select date_add(curdate(), interval 1 month) from dual));
 
 ---------------------------------------------------------- create table orderlist ---------------------------------------------------------------------
 
