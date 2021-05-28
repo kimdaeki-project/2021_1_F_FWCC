@@ -16,11 +16,35 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
-	@Test
-	void test() throws Exception {
+//	@Test
+	void getListTest() throws Exception {
 		List<ProductVO> list = productMapper.getList();
 		System.out.println(list.size());
 		assertNotNull(list);
 	}
-
+	
+	@Test
+	void setInsertTest() throws Exception{
+		int total=0;
+		for(int i=0;i<10;i++) {
+			ProductVO vo = new ProductVO();
+			vo.setProductTitle("productTitle"+i);
+			vo.setProductPrice((long) (i*10000));
+			vo.setProductContents("productContents"+i);
+			vo.setCollab("collab"+i);
+			vo.setProductType("productType"+i);
+			int result = productMapper.setInsert(vo);
+			total += result;
+			System.out.println("r : "+result+" t : "+total);
+		}
+		assertNotEquals(0, total);
+	}
+	
+	
+	void setUpdateTest() throws Exception {
+		ProductVO vo = new ProductVO();
+		vo.setProductTitle("productTitle");
+		vo.setCollab("collab");
+		vo.setProductType("productType");
+	}
 }
