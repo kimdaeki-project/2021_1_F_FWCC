@@ -24,6 +24,17 @@ class ProductMapperTest {
 	}
 	
 	@Test
+	void getSelectTest() throws Exception{
+		ProductVO vo = new ProductVO();
+		vo.setProductNum(33L);
+		vo = productMapper.getSelect(vo);
+		System.out.println(vo.getProductTitle());
+		
+		assertNotNull(vo);
+		
+	}
+	
+//	@Test
 	void setInsertTest() throws Exception{
 		int total=0;
 		for(int i=0;i<10;i++) {
@@ -40,11 +51,21 @@ class ProductMapperTest {
 		assertNotEquals(0, total);
 	}
 	
-	
+//	@Test
 	void setUpdateTest() throws Exception {
 		ProductVO vo = new ProductVO();
-		vo.setProductTitle("productTitle");
-		vo.setCollab("collab");
-		vo.setProductType("productType");
+		vo.setProductTitle("Change-productTitle");
+		vo.setCollab("Change-collab");
+		vo.setProductNum(36L);
+		vo.setProductType("Change-productType");
+		int result = productMapper.setUpdate(vo);
+	}
+	
+//	@Test
+	void setDeleteTest() throws Exception{
+		ProductVO vo = new ProductVO();
+		vo.setProductNum(36L);
+		int result = productMapper.setDelete(vo);
+		assertNotEquals(0, result);
 	}
 }

@@ -19,7 +19,7 @@
 		#{productPrice},#{productContents},#{collab},#{productType})
 	</insert>
 
-	<select id="setSelect" parameterType="ProductVO"
+	<select id="getSelect" parameterType="ProductVO"
 		resultType="ProductVO">
 		select * from product where productNum=#{productNum}
 	</select>
