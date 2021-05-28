@@ -69,7 +69,7 @@
 									<li class="xans-record-"><a href="#">Review</a></li>
 								</ul>
 							</div></li>
-						<li class="xans-element- xans-layout xans-layout-statelogoff "><a href="#">Login</a> / <a href="#">Join</a></li>
+						<li class="xans-element- xans-layout xans-layout-statelogoff "><a href="${pageContext.request.contextPath }/member/login">Login</a> / <a href="#">Join</a></li>
 						<li><a href="#">My Account</a>
 							<div class="sub">
 								<ul>
