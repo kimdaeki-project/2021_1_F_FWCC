@@ -18,7 +18,7 @@ $(document).ready(function(){
 	    console.log(rsp);
 		$.ajax({
 			type:"post",
-			url:"/vertify/"+rsp.imp_uid
+			url:"/order/vertify/"+rsp.imp_uid
 		}).done(function(data){
 			console.log(data);
 		});
