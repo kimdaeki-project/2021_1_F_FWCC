@@ -7,10 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<c:import url="/WEB-INF/views/templates/headStatics.jsp"></c:import>
 </head>
 <body>
-
+<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
+<div id="container">
+<div id="ontents">
 <div class="container">
 	
 			<h2>notice</h2>
@@ -99,7 +101,9 @@
 
 		
 	});
-</script>  
+</script> 
+</div> 
+</div>
 </div>
 </body>
 </html>
