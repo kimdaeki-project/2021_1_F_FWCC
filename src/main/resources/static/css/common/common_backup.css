@@ -575,7 +575,7 @@ body.eMobilePopup {
 	top: 30px;
 	overflow: auto;
 	width: 160px;
-	/* height:; */
+	height:;
 	border: 1px solid #d5d5d5;
 	background: #fff;
 }
@@ -1072,8 +1072,8 @@ div.layerProgress {
 	margin: 0 auto;
 	width: 100%;
 	height: 68px;
-	/* overflow-y:;
-	background:; */
+	overflow-y:;
+	background:;
 }
 
 #header:hover {
@@ -1110,7 +1110,7 @@ div.layerProgress {
 }
 
 #header .logo_bk {
-	/* display:; */
+	display:;
 }
 
 #header .logo_w {
@@ -1150,7 +1150,7 @@ div.layerProgress {
 #header #category ul>li>a {
 	display: block;
 	font-size: 12px;
-	/* letter-spacing:; */
+	letter-spacing:;
 	color: #000;
 	line-height: 25px;
 	text-decoration: none;
@@ -1198,7 +1198,7 @@ div.layerProgress {
 	display: inline-block;
 	padding: 0 0 3px;
 	font-size: 12px;
-	/* letter-spacing:; */
+	letter-spacing:;
 	color: #000;
 	border-bottom: 1px solid #fff;
 	line-height: 1.4em;
@@ -1303,7 +1303,7 @@ div.layerProgress {
 	clear: both;
 	position: relative;
 	z-index: 1;
-	/* width:; */
+	width:;
 	padding: 68px 34px 0;
 	margin: 0 auto;
 	max-width: 1320.1px;
@@ -1318,7 +1318,7 @@ div.layerProgress {
 #footer {
 	margin: 80px auto 0;
 	padding: 0px 0 30px;
-	/* width:; */
+	width:;
 	border-top: 0px solid #ededed;
 	font-size: 11px;
 	letter-spacing: 0.05em;
@@ -1357,7 +1357,7 @@ div.layerProgress {
 
 #footer .footer-menu {
 	margin: 50px 0 0;
-	/* padding:; */
+	padding:;
 	overflow: hidden;
 }
 
@@ -1438,7 +1438,7 @@ div.layerProgress {
 #quickmenu i {
 	display: block;
 	cursor: pointer;
-	/* padding:; */
+	padding:;
 	margin: 0;
 	width: 27px;
 	height: 27px;
@@ -2237,7 +2237,7 @@ div.ec-base-help h4 {
 }
 
 div.ec-base-help h4:first-child {
-	/* margin-top:; */
+	margin-top:;
 }
 
 div.ec-base-help p {
@@ -2393,7 +2393,7 @@ div.ec-base-help ul li {
 .ec-base-product .prdList .description .icon {
 	margin: 10px 0 0;
 	vertical-align: middle;
-	/* text-align:; */
+	text-align:;
 }
 
 .ec-base-product .prdList .description .icon:after {
@@ -2408,17 +2408,17 @@ div.ec-base-help ul li {
 }
 
 .ec-base-product .prdList .description .promotion {
-	/* float:; */
+	float:;
 	display: inline-block;
 	margin: 0;
-	/* text-align:; */
+	text-align:;
 }
 
 .ec-base-product .prdList .description .button {
-	/* float:; */
+	float:;
 	display: inline-block;
 	margin: 0;
-	/* text-align:; */
+	text-align:;
 }
 
 .ec-base-product .prdList .description .button img {
@@ -2469,7 +2469,7 @@ div.ec-base-help ul li {
 .ec-base-product.listrecommend {
 	margin: 0px 0 20px;
 	padding: 0;
-	/* background:; */
+	background:;
 	text-align: center;
 }
 
@@ -2505,7 +2505,7 @@ div.ec-base-help ul li {
 	background: #333;
 	color: #fff;
 	font-size: 10px;
-	/* letter-spacing:; */
+	letter-spacing:;
 	text-align: center;
 }
 
@@ -2584,11 +2584,11 @@ div.ec-base-help ul li {
 }
 
 .ec-base-product .lookbookList>li {
-	/* margin-bottom:; */
+	margin-bottom:;
 }
 
 .ec-base-product .lookbookList .thumbnail {
-	/* margin-bottom:; */
+	margin-bottom:;
 }
 
 .ec-base-product .hoverList {
@@ -2638,7 +2638,7 @@ div.ec-base-help ul li {
 
 .ec-base-product .hoverList .description .display-tablecell {
 	display: table-cell;
-	/* width:; */
+	width:;
 	height: 100%;
 	padding: 26px 29px;
 	vertical-align: middle;
@@ -3007,7 +3007,7 @@ div.ec-base-help ul li {
 
 .ec-base-tab .menu li a {
 	display: block;
-	/* min-width:; */
+	min-width:;
 	padding: 5px 1px;
 	border-bottom: 1px solid transparent;
 	font-size: 11px;
@@ -3103,11 +3103,11 @@ div.ec-base-help ul li {
 
 .ec-base-tab.grid7 .menu li {
 	width: 14.8%;
-	/* width: 15% \0/; */
+	width: 15% \0/;
 }
 
 .ec-base-tab.grid7 .menu li:first-child {
-	/* width: 13% \0/; */
+	width: 13% \0/;
 }
 
 .ec-base-button {
@@ -3160,7 +3160,7 @@ div.ec-base-help ul li {
 .ec-base-button.typeBG {
 	padding: 10px 0px;
 	border: 0px solid #d7d5d5;
-	/* background:; */
+	background:;
 }
 
 .txtBtn a {
@@ -4028,7 +4028,7 @@ div.ec-base-help ul li {
 	left: -100px;
 	background: url('/images/slider_nav_prev.png')
 		no-repeat center center;
-	/* background-size:; */
+	background-size:;
 }
 
 .slick-slider:hover .slick-prev {
@@ -4053,7 +4053,7 @@ div.ec-base-help ul li {
 	right: -100px;
 	background: url('/images/slider_nav_next.png')
 		no-repeat center center;
-	/* background-size:; */
+	background-size:;
 }
 
 .slick-slider:hover .slick-next {
