@@ -33,7 +33,6 @@ private IamportClient api;
 	public IamportResponse<Payment> getVertify(Model model, Locale locale, 
 												HttpSession httpSession, @PathVariable(value="imp_uid")String imp_uid)
 																		throws IamportResponseException, IOException {
-		System.out.println(imp_uid);
 		return api.paymentByImpUid(imp_uid);
 	}
 	

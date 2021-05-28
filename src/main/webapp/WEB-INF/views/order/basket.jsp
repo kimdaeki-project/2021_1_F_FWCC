@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/header.jsp"></c:import>
-	<div style="margin:10% 5%; text-align: center;">
+	<div style="margin:10% 5% 0% 5%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
 			<div style="text-align: left;">
@@ -61,10 +61,12 @@
 							
 							</td>
 							<td>
-								<c:out value="item."></c:out>
+								<c:out value="${item.productName}"></c:out>
 							</td>
 							<td></td>
-							<td></td>
+							<td>
+							
+							</td>
 							<td></td>
 							<td></td>
 							<td></td>

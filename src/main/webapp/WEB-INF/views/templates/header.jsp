@@ -83,7 +83,8 @@
 								</ul>
 							</div></li>
 						<li class="mSearch"><a href="#">Search <img src="/images/header_ico_search.png" alt="검색" /></a></li>
-						<li id="ec_async_basket_layer_hover" class="xans-element- xans-layout xans-layout-orderbasketcount mCart "><a href="#">Cart <span class="count">0</span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
+						<li id="ec_async_basket_layer_hover" class="xans-element- xans-layout xans-layout-orderbasketcount mCart ">
+							<a href="${pageContext.request.contextPath}/order/basket">Cart <span class="count">0</span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
 							<div id="ec_async_basket_layer_container" style="display: none;" class="xans-element- xans-layout xans-layout-orderasyncbasketlayer "></div></li>
 						<li>
 							<div class="xans-element- xans-layout xans-layout-multishoplist list ">
