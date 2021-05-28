@@ -5,6 +5,6 @@
   
 <configuration>
  	<typeAliases>
-		
+		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
 	</typeAliases>
 </configuration>
