@@ -1,7 +1,5 @@
 package com.fw.s1.mileage;
 
-import com.fw.s1.coupon.CouponspVO;
-
 import lombok.Data;
 
 @Data
@@ -14,6 +12,4 @@ public class MileageVO {
 	private String orderNum;
 	private String mileContents;
 	private Long enableMile;
-	
-	private CouponspVO couponspVO;
 }

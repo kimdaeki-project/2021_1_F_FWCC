@@ -57,15 +57,17 @@
 							<td>
 								<input type="checkbox" name="checklist">
 							</td>
-							<td>
+							<td> <!-- 섬네일 -->
 							
 							</td>
 							<td>
 								<c:out value="${item.productName}"></c:out>
 							</td>
-							<td></td>
 							<td>
 							
+							</td>
+							<td>
+								
 							</td>
 							<td></td>
 							<td></td>
@@ -125,8 +127,8 @@
 		</div>
 	</div>
 	
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/order/basket.js"></script>
 </body>

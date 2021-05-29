@@ -12,4 +12,6 @@ public class CouponVO {
 	private Long cuSpNum;
 	private Date pubDate;
 	private Date exDate;
+	
+	private CouponspVO couponspVO;
 }

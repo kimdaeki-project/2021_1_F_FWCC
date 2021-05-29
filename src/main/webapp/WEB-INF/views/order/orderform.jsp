@@ -5,8 +5,6 @@
 <html>
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/headStatics.jsp"></c:import>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -49,14 +47,31 @@
 			<tbody>
 				<c:forEach items="${items}" var="item">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>
+							섬네일
+						</td>
+						<td>
+							<c:out value="${item.productName}"></c:out>
+							<c:out value="${item.productInfo.pInfoName}"></c:out>
+						</td>
+						<td>
+							<c:out value="${item.productPrice}"></c:out>
+						</td>
+						<td><!-- 선택 개수를 찍어야 한다. -->
+							<c:out value=""></c:out>
+						</td>
+						<td><!-- 받을 수 잇는 총 마일리지를 체크해야한다. -->
+						
+						</td>
+						<td>
+							기본배송
+						</td>
+						<td>
+							무료
+						</td>
+						<td>
+							총 가격
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -92,10 +107,9 @@
 		</div>
 	</div>
 	
-	
-	
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
+	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/order/orderform.js"></script>
 </body>
