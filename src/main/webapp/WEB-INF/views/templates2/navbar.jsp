@@ -72,7 +72,7 @@
 			</li>
 			<li><a href="#">Search <img src="/images/header_ico_search.png" alt="검색" /></a></li>
 			<li id="ec_async_basket_layer_hover">
-				<a href="${pageContext.request.contextPath}/order/basket">Cart <span class="count">0</span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
+				<a href="${pageContext.request.contextPath}/order/basket">Cart <span id="navbar-cartspan"> 0 </span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
 				<div></div>
 			</li>
 			<li id="navbar-language">

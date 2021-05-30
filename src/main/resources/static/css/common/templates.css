@@ -60,8 +60,8 @@
 	text-align:center;
 	display: none;
 	position:absolute;
-	left:1rem;
-	width:5rem;
+	left:0;
+	width:7rem;
 	padding-top:1rem;
 	background-color: white;
 }
@@ -75,10 +75,16 @@
 	padding-top:1rem;
 	background-color: white;
 }
-
-#navbar-columnul{
-	text-align: center;
+#navbar-leftul>li{
+	padding-top:0.5rem;
 }
+#navbar-rightul>li{
+	padding-top:0.5rem;	
+}
+#navbar-colaul>li{
+	padding-top:0.5rem;	
+}
+
 
 #navbar-columnlist:hover ul, #navbar-rowlist:hover ul{
 	display:block;
@@ -92,6 +98,14 @@
 
 #navbar-language-select{
 	display: none;
+}
+
+#navbar-cartspan{
+	display:inline-block;
+	padding:0 0.5rem;
+	border-radius: 50%;
+	background-color: black;
+	color: white;
 }
 
 #footer-tag{
