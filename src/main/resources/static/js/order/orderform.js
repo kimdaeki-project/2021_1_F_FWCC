@@ -5,8 +5,7 @@ $(document).ready(function(){
 	
 });
 
-$("#purchasebutton").click(function(event){
-	event.preventDefault();
+$("#purchasebutton").click(function(){
 	if(!$("#agreepayment").prop("checked")){
 		swal({
 			icon:"warning",
