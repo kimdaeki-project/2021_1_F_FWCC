@@ -17,16 +17,16 @@
 								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top&name=top">Top</a>
 									<div class="sub sub-top">
 										<ul>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-long&name=top">TOP (long)</a></li>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-short&name=top">TOP (short)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-long&name=top">TOP (long)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-short&name=top">TOP (short)</a></li>
 										</ul>
 									</div>
 								</li>
-								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom&name=bottom">Bottom</a>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom&name=bottom">Bottom</a>
 									<div class="sub sub-bottom">
 										<ul>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom-long&name=bottom">BOTTOM (long)</a></li>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom-short&name=bottom">BOTTOM (short)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-long&name=bottom">BOTTOM (long)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-short&name=bottom">BOTTOM (short)</a></li>
 										</ul>
 									</div>
 								</li>
