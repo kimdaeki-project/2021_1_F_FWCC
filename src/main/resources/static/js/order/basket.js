@@ -11,6 +11,16 @@ $("#buyall").click(function(event){
 			title:"실패",
 			text:"구매할 상품이 없습니다."
 		});
+	}else{
+		let carts = new Array();
+		
+		$(".checklist").each(function(){
+			$(this).val('true');
+		});
+		
+		$("body").append('<form id="transferorderform" action="./orderform"></form>');
+		$("#transferorderform").append();
+		$("#transferorderform").submit();
 	}
 });
 

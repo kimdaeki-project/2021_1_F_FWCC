@@ -23,7 +23,7 @@ import com.siot.IamportRestClient.response.Payment;
 @RequestMapping("/order/**")
 public class OrderController {
 
-private IamportClient api;
+	private IamportClient api;
 	
 	public OrderController(){
 		this.api = new IamportClient("imp_apikey", "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f");
