@@ -12,21 +12,21 @@
 					<div id="category">
 						<div class="xans-element- xans-layout xans-layout-category position">
 							<ul class="logbar hovermenu">
-								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=">All (New arrival)</a></li>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=">All (New arrival)</a></li>
 								<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=24">Outer</a></li> -->
-								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top">Top</a>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top&name=top">Top</a>
 									<div class="sub sub-top">
 										<ul>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-long">TOP (long)</a></li>
-											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-short">TOP (short)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-long&name=top">TOP (long)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-short&name=top">TOP (short)</a></li>
 										</ul>
 									</div>
 								</li>
-								<li class="xans-record-"><a href="#">Bottom</a>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom&name=bottom">Bottom</a>
 									<div class="sub sub-bottom">
 										<ul>
-											<li><a href="#">BOTTOM (long)</a></li>
-											<li><a href="#">BOTTOM (short)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom-long&name=bottom">BOTTOM (long)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=bottom-short&name=bottom">BOTTOM (short)</a></li>
 										</ul>
 									</div>
 								</li>

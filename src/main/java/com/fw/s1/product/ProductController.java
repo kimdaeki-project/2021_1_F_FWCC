@@ -16,11 +16,12 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping(value="list")
-	public String getList(ProductVO productVO, Model model)throws Exception{
+	public String getList(ProductVO productVO, Model model,String name)throws Exception{
 		System.out.println(productVO.getCollab());
 		System.out.println(productVO.getProductType());
 		List<ProductVO> list = productService.getList(productVO);
 		model.addAttribute("productList", list);
+		model.addAttribute("name",name);
 		return "/product/productList";
 	}
 }
