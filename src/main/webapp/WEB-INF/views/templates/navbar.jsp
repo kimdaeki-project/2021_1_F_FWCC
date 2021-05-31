@@ -6,7 +6,12 @@
 		<ul>
 			<li>
 				<a href="${pageContext.request.contextPath}/">
-					<img src="/images/logo_b.png" alt="" />
+					<c:if test='${param.isCommon eq "true"}'>
+						<img src="/images/logo_b.png" alt="" />
+					</c:if>
+					<c:if test='${param.isCommon eq "false"}'>
+						<img src="/images/logo_w.png" alt="" />
+					</c:if>
 				</a>
 			</li>
 			<li><a href="#">All (New arrival)</a></li>

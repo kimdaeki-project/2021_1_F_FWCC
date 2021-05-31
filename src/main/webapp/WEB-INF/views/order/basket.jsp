@@ -4,12 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/headStatics.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/header.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
+		<c:param name="isCommon" value="true"></c:param>
+	</c:import>
 	<div style="margin:10% 5% 0% 5%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
@@ -128,7 +130,6 @@
 	</div>
 	
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/basket.js"></script>
 </body>

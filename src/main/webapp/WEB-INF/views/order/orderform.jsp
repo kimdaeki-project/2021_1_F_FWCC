@@ -4,12 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates2/head.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates2/navbar.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
+	<c:param name="isCommon" value="true"></c:param>
+</c:import>
 	<div style="margin:10% 5%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<div style="text-align: left;">
@@ -105,7 +107,7 @@
 		</div>
 	</div>
 	
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates2/footer.jsp"></c:import>
+	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
