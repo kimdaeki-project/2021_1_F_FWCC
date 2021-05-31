@@ -5,9 +5,13 @@
 
 <mapper namespace="com.fw.s1.product.ProductMapper">
 
-	<select id="getList" resultType="ProductVO">
-		select * from product order by
-		productNum desc
+	<select id="getList" parameterType="ProductVO" resultType="ProductVO">
+		select * from product
+		where
+		collab like concat('%',#{collab},'%')
+		and
+		productType like concat('%',#{productType},'%')
+		order by productNum desc
 	</select>
 
 	<insert id="setInsert" parameterType="ProductVO">

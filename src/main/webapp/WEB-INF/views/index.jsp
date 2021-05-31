@@ -4,6 +4,7 @@
 <html>
 <head>
 <c:import url="/WEB-INF/views/templates/headStatics.jsp"></c:import>
+
 <title>FWCC-index</title>
 </head>
 <body id="main">

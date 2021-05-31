@@ -12,13 +12,13 @@
 					<div id="category">
 						<div class="xans-element- xans-layout xans-layout-category position">
 							<ul class="logbar hovermenu">
-								<li class="xans-record-"><a href="#">All (New arrival)</a></li>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=">All (New arrival)</a></li>
 								<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=24">Outer</a></li> -->
-								<li class="xans-record-"><a href="#">Top</a>
+								<li class="xans-record-"><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top">Top</a>
 									<div class="sub sub-top">
 										<ul>
-											<li><a href="#">TOP (long)</a></li>
-											<li><a href="#">TOP (short)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-long">TOP (long)</a></li>
+											<li><a href="${pageContext.request.contextPath }/product/list?collab=none&productType=top-short">TOP (short)</a></li>
 										</ul>
 									</div>
 								</li>
