@@ -365,7 +365,7 @@ VALUES(0, 1000, 0, 'admin', '234-234', 'testing', 0);
 ----------------------------------------admin table-----------------------------------------------
 
 CREATE TABLE `fw01`.`admin` (
-	`adminIdx` BIGINT( NOT NULL AUTO_INCREMENT,
+	`adminIdx` BIGINT NOT NULL AUTO_INCREMENT,
 	`adminDate` DATE NOT NULL,
 	`productNum` BIGINT NOT NULL DEFAULT '0',
 	`sellCount` BIGINT NOT NULL DEFAULT '0',
