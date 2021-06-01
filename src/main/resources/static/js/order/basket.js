@@ -43,6 +43,13 @@ $("#buyselects").click(function(event){
 
 $("#allcartremove").click(function(event){
 	event.preventDefault();
+	
+	let carts = new Array();
+		
+	$(".checklist").each(function(){
+		carts.push();/* 집어넣고 테스트 하면 된다. */
+	});
+	
 	$.ajax({
 		
 	});
