@@ -31,9 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
+				// --- member START ---
 				.antMatchers("/member/login").permitAll()
-				.antMatchers("/**").permitAll()
-				// 여기부터 쓰시오
+				.antMatchers("/member/join").permitAll()
+				// --- member END ---
 				.anyRequest().authenticated()
 				;
 	}
