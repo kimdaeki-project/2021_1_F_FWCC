@@ -31,10 +31,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/**").permitAll()
-				// 여기부터 쓰시오
+				.antMatchers("/").permitAll()
+				// --- community START ---
+				.antMatchers("/notice/list", "/notice/select","/notice/insert").permitAll()
+				// --- community END ---
+				// --- product START ---
 				.antMatchers("/product/list").permitAll()
 				.antMatchers("/product/select").permitAll()
 				.antMatchers("/product/**").hasRole("ADMIN")
+				// --- product END ---
 				.anyRequest().authenticated()
 				;
 	}
