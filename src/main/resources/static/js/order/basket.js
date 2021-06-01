@@ -1,3 +1,19 @@
+$("#allcheck").click(function(){
+	$(".selectcheck").each(function(){
+		$(this).prop("checked",$("#allcheck").prop("checked"));
+	});
+});
+
+$(".selectcheck").click(function(){
+	let check = true;
+	$(".selectcheck").each(function(){
+		if(!$(this).prop("checked"))	{
+			check=false;
+		}
+	});
+	$("#allcheck").prop("checked", check);
+});
+
 $("#buyall").click(function(event){
 	event.preventDefault();
 	let count = 0;

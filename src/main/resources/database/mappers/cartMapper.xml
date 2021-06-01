@@ -36,7 +36,8 @@
   	SELECT cf.*, p.*, i.* 
   		from (SELECT c.*, pf.fileName 
   			FROM cart c INNER JOIN productfiles pf ON c.productnum=pf.productNum 
-  			WHERE c.username=#{username} and pf.fileName LIKE CONCAT('T\_', '%')) cf
+  			WHERE c.username=#{username} and pf.fileName like concat('fileName', '_')
+  			<!-- LIKE CONCAT('T\_', '%') --> ) cf
 		INNER JOIN product p ON cf.productNum=p.productNum 
 		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum
   </select>

@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fw.s1.cart.CartService;
+import com.fw.s1.member.MemberVO;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -81,8 +83,10 @@ public class OrderController {
 	}
 	
 	@GetMapping("basket")
-	public void getCartList() throws Exception{
-		
+	public void getCartList(Model model) throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername("admin");
+		model.addAttribute("items", cartService.getCartList(memberVO));
 	}
 	
 	@GetMapping("orderform")

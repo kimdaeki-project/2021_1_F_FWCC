@@ -1,5 +1,8 @@
 package com.fw.s1.cart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,4 +37,28 @@ public class CartController {
 		return cartService.deleteCart(memberVO);
 	}
 	
+	@GetMapping("deleteItem")
+	public Long deleteItem(List<Long> cartNums ,Authentication authentication)throws Exception{
+		int length = cartNums.size();
+		List<CartVO> carts = new ArrayList<CartVO>();
+		for(int i = 0 ; i < length; i++) {
+			CartVO cartVO = new CartVO();
+			cartVO.setCartNum(cartNums.get(i));
+			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			carts.add(cartVO);
+		}
+		return cartService.deleteItem(carts);
+	}
+	
+	@GetMapping("updateCount")
+	public Long updateCount(CartVO cartVO, Authentication authentication)throws Exception{
+		cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		return cartService.updateCount(cartVO);
+	}
+	
+	@GetMapping("setCart")
+	public Long setCart(CartVO cartVO, Authentication authentication)throws Exception{
+		cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		return cartService.setCart(cartVO);
+	}
 }

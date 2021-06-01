@@ -46,18 +46,18 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="text-align: center;">
 				<c:forEach items="${items}" var="item">
 					<tr>
 						<td>
 							섬네일
 						</td>
 						<td>
-							<c:out value="${item.productName}"></c:out>
-							<c:out value="${item.productInfo.pInfoName}"></c:out>
+							<c:out value="${item.productVO.productName}"></c:out>
+							<span>[옵션: <c:out value="${item.productInfo.size}"></c:out>]</span>
 						</td>
 						<td>
-							<strong><span>KRW</span> <c:out value="${item.productPrice}"></c:out></strong>
+							<strong><span>KRW</span> <c:out value="${item.productVO.productPrice}"></c:out></strong>
 						</td>
 						<td><!-- 선택 개수를 찍어야 한다. -->
 							<c:out value="${cart.productCount}"></c:out>
@@ -66,10 +66,10 @@
 							<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
 						</td>
 						<td>
-							기본배송
+							<span>기본배송</span>
 						</td>
 						<td>
-							무료
+							<span>무료</span>
 						</td>
 						<td>
 							<strong><span>KRW <c:out value="${totalPrice}"></c:out></span></strong>
@@ -128,6 +128,16 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		
+		<div style="font-size: 0.75rem">
+			<p><strong>이용안내</strong></p>
+			<p>
+				결제가능브라우저 : 크롬,파이어폭스,사파리,오페라 브라우저에서 결제 가능
+				(단, window os 사용자에 한하며 리눅스/mac os 사용자는 사용불가)
+				최초 결제 시도시에는 플러그인을 추가 설치 후 반드시 브라우저 종료 후 재시작해야만 결제가 가능합니다.
+				(무통장, 휴대폰결제 포함)
+			</p>
 		</div>
 	</div>
 	

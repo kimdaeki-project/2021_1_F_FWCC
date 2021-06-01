@@ -49,7 +49,6 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 </body>
 </html>

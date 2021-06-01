@@ -12,13 +12,13 @@
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
-	<div style="margin:10% 5%; text-align: center;">
+	<div style="margin:10% 8%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
 			<div style="text-align: left;">
 				<strong>일반상품(<c:out value="0"></c:out>)</strong>
 			</div>
-			<table>
+			<table style="width:100%;">
 				<thead>
 					<tr>
 						<th>
@@ -57,35 +57,37 @@
 					<c:forEach items="${items}" var="item">
 						<tr>
 							<td>
-								<input type="checkbox" name="checklist">
+								<input type="checkbox" class="selectcheck" name="checklist">
 							</td>
 							<td> <!-- 섬네일 -->
-							
+								<div style="width:100px; height:100px; border: 1px black solid; display: inline-block;"></div>
 							</td>
 							<td><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
-								<c:out value="${item.productName}"></c:out><br>
+								<c:out value="${item.productVO.productTitle}"></c:out><br>
+								<span>[옵션: <c:out value="${item.productInfoVO.size}"></c:out>]</span>
 							</td>
 							<td><!-- 가격 --><!-- 할인 가격은 제대로 안나옴 결제할때 할인 나오려나봄 -->
-								<c:out value="${item.productPrice}"></c:out>
+								<span><strong>KRW <c:out value="${item.productVO.productPrice}"></c:out></strong></span>
 							</td>
 							<td><!-- 선택 개수 -->
 								<input type="number" value='<c:out value="${item.productCount}"></c:out>' min="1">
 								<button id="changeCount">변경</button>
 							</td>
-							<td><!-- 주는 마일리지 -->
-							
+							<td><!-- 주는 마일리지 --><!-- 아직 테이블이 만들어지지않음 -->
+								<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
+								<span> <c:out value=""></c:out>원</span>
 							</td>
 							<td><!-- 배달방식 -->
-							
+								<span>기본배송</span>
 							</td>
 							<td><!-- 배달비용 -->
-							
+								<span>[무료]</span>
 							</td>
 							<td><!-- 전체 총합 가격 -->
-							
+								<span><strong>KRW <c:out value=""></c:out></span>
 							</td>
 							<td>
-								<button>주문하기</button>
+								<button>주문하기</button><br>
 								<button>삭제하기</button>
 							</td>
 						</tr>
@@ -130,7 +132,7 @@
 			<div style="padding:1% 4.25%">
 			</div>
 			<div>
-				<button id="buyall">BUY NOW</button> 
+				<button id="buyall">BUY NOW</button>
 				<button id="buyselects">ORDER SELECT</button>
 			</div>
 			<div>
