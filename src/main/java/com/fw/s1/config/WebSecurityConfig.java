@@ -30,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/**").permitAll()
 				.antMatchers("/").permitAll()
 				// --- community START ---
 				.antMatchers("/notice/list", "/notice/select","/notice/insert").permitAll()
@@ -40,6 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/product/select").permitAll()
 				.antMatchers("/product/**").hasRole("ADMIN")
 				// --- product END ---
+				// --- cart END ---
+				.antMatchers("/cart/counting").permitAll()
+				.antMatchers("/cart/**").hasAnyRole("MEMBER","ADMIN")
+				// --- cart END ---
+				.antMatchers("/**").permitAll()
 				.anyRequest().authenticated()
 				;
 	}

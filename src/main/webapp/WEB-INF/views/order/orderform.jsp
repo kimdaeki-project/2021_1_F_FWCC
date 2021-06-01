@@ -57,13 +57,13 @@
 							<c:out value="${item.productInfo.pInfoName}"></c:out>
 						</td>
 						<td>
-							<c:out value="${item.productPrice}"></c:out>
+							<strong><span>KRW</span> <c:out value="${item.productPrice}"></c:out></strong>
 						</td>
 						<td><!-- 선택 개수를 찍어야 한다. -->
-							<c:out value=""></c:out>
+							<c:out value="${cart.productCount}"></c:out>
 						</td>
 						<td><!-- 받을 수 잇는 총 마일리지를 체크해야한다. -->
-						
+							<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
 						</td>
 						<td>
 							기본배송
@@ -72,7 +72,7 @@
 							무료
 						</td>
 						<td>
-							총 가격
+							<strong><span>KRW <c:out value="${totalPrice}"></c:out></span></strong>
 						</td>
 					</tr>
 				</c:forEach>

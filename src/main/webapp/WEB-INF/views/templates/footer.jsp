@@ -62,3 +62,6 @@
 			</p>
 		</div>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common/navbar.js">
+
+</script>

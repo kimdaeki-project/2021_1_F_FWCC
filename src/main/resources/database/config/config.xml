@@ -5,12 +5,9 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.fw.s1.product.ProductVO"
-			alias="ProductVO" />
-		<typeAlias type="com.fw.s1.product.ProductFileVO"
-			alias="ProductFileVO" />
-		<typeAlias type="com.fw.s1.product.ProductInfoVO"
-			alias="ProductInfoVO" />
+		<typeAlias type="com.fw.s1.product.ProductVO" alias="ProductVO" />
+		<typeAlias type="com.fw.s1.product.ProductFileVO" alias="ProductFileVO" />
+		<typeAlias type="com.fw.s1.product.ProductInfoVO" alias="ProductInfoVO" />
 		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
 		<typeAlias type="com.fw.s1.order.OrderlistVO" alias="OrderlistVO"/>
 		<typeAlias type="com.fw.s1.purchase.PurchaseVO" alias="PurchaseVO"/>
@@ -19,6 +16,7 @@
 		<typeAlias type="com.fw.s1.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.fw.s1.board.BoardFileVO" alias="BoardFileVO"/>
   		<typeAlias type="com.fw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
   		<typeAlias type="com.fw.s1.util.Pager" alias="Pager"/>
 	</typeAliases>
 </configuration>

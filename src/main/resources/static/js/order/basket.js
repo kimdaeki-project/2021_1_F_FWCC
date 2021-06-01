@@ -1,4 +1,3 @@
-
 $("#buyall").click(function(event){
 	event.preventDefault();
 	let count = 0;

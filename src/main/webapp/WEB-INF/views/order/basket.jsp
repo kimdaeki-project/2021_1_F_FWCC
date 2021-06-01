@@ -63,13 +63,14 @@
 							
 							</td>
 							<td><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
-								<c:out value="${item.productName}"></c:out>
+								<c:out value="${item.productName}"></c:out><br>
 							</td>
 							<td><!-- 가격 --><!-- 할인 가격은 제대로 안나옴 결제할때 할인 나오려나봄 -->
-							
+								<c:out value="${item.productPrice}"></c:out>
 							</td>
 							<td><!-- 선택 개수 -->
-								
+								<input type="number" value='<c:out value="${item.productCount}"></c:out>' min="1">
+								<button id="changeCount">변경</button>
 							</td>
 							<td><!-- 주는 마일리지 -->
 							
@@ -149,18 +150,8 @@
 			</ol>
 		</div>
 	</div>
-	<form id="canclemerchant" method="post">
-		<input id="merchant_uid" type="text">
-	</form>
-	<button id="cancle">전송</button>
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/basket.js"></script>
-	<script>
-		$("#cancle").click(function(){
-			$("#canclemerchant").attr("action", "./cancle/"+$("#merchant_uid").val());
-			$("#canclemerchant").submit();
-		});
-	</script>
 </body>
 </html>

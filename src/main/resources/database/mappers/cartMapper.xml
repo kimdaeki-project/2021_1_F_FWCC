@@ -2,10 +2,65 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.fw.cart.CartMapper">
-  <select id="getCartList">
-  	
+<mapper namespace="com.fw.s1.cart.CartMapper">
+	<resultMap id="cartfragments" type="CartVO">
+		<id column="cartNum" property="cartNum"/>
+		<result column="productNum" property="productNum"/>
+		<result column="pInfoNum" property="pInfoNum"/>
+		<result column="productCount" property="productCount"/>
+		<result column="username" property="username"/>
+		<association property="productVO" javaType="ProductVO">
+			<id column="productNum" property="productNum"/>
+			<result column="productTitle" property="productTitle"/>
+			<result column="productPrice" property="productPrice"/>
+			<result column="productDisRate" property="productDisRate"/>
+			<result column="productContents" property="productContents"/>
+			<result column="productType" property="productType"/>
+			<result column="collab" property="collab"/>
+		</association>
+		<association property="productInfoVO" javaType="ProductInfoVO">
+			<id column="pInfoNum" property="pInfoNum"/>
+			<result column="productNum" property="productNum"/>
+			<result column="size" property="size"/>
+			<result column="stock" property="stock"/>
+		</association>
+		<association property="productFileVO" javaType="ProductFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="productNum" property="productNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+	</resultMap>
+
+  <select id="getCartList" parameterType="MemberVO" resultMap="cartfragments">
+  	SELECT cf.*, p.*, i.* 
+  		from (SELECT c.*, pf.fileName 
+  			FROM cart c INNER JOIN productfiles pf ON c.productnum=pf.productNum 
+  			WHERE c.username=#{username} and pf.fileName LIKE CONCAT('T\_', '%')) cf
+		INNER JOIN product p ON cf.productNum=p.productNum 
+		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum
   </select>
   
+  <select id="getCartCount" parameterType="MemberVO" resultType="java.lang.Long">
+  	SELECT count(cartNum) FROM CART WHERE username=#{username}
+  </select>
+  
+  <insert id="setCart" parameterType="CartVO">
+  	insert into cart(productNum, pInfoNum, productCount, username) 
+  	values(#{productNum}, #{pInfoNum}, #{productCount}, #{username})
+  </insert>
+  
+  <update id="updateCount" parameterType="CartVO">
+  	update cart set productCount = #{productCount} where cartNum=#{cartNum} and username = #{username}
+  </update>
+  
+  <delete id="deleteItem" parameterType="java.util.List">
+  	<foreach collection="list" item="item" separator=";">
+  		delete cart where cartNum=#{item.cartNum}
+  	</foreach>
+  </delete>
+  
+  <delete id="deleteCart" parameterType="MemberVO">
+  	delete cart where username=#{username}
+  </delete>
 </mapper>
