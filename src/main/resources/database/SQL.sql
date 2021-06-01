@@ -290,6 +290,8 @@ CREATE TABLE `fw01`.`orderlist` (
 	`username` VARCHAR(100) NOT NULL,
 	`destination` VARCHAR(450) NOT NULL DEFAULT '',
 	`orderDate` DATETIME NOT NULL,
+	`orderState` BIGINT NOT NULL default '1',
+	`orderMessage` TEXT NOT NULL,
 	PRIMARY KEY (`orderNum`) USING BTREE,
 	INDEX `OD_CN_FK` (`cuNum`) USING BTREE,
 	INDEX `OD_UN_FK` (`username`) USING BTREE,
@@ -359,6 +361,21 @@ INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileConte
 VALUES(0, 0, 0, 'admin', '123-123', 'testing', 0);
 INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileContents, enabledMile)
 VALUES(0, 1000, 0, 'admin', '234-234', 'testing', 0);
+
+----------------------------------------admin table-----------------------------------------------
+
+CREATE TABLE `fw01`.`admin` (
+	`adminIdx` BIGINT( NOT NULL AUTO_INCREMENT,
+	`adminDate` DATE NOT NULL,
+	`productNum` BIGINT NOT NULL DEFAULT '0',
+	`sellCount` BIGINT NOT NULL DEFAULT '0',
+	`productType` VARCHAR(100) NOT NULL DEFAULT '',
+	`collab` VARCHAR(100) NOT NULL DEFAULT '',
+	PRIMARY KEY (`adminIdx`) USING BTREE,
+	INDEX `ADM_PN_FK` (`productNum`) USING BTREE,
+	CONSTRAINT `ADM_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `fw01`.`product` (`productNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
 
 --한철 --------------------------------------------------------------------------------------------
 -- notice ----------------------------------------------------------------------------------------
