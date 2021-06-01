@@ -5,6 +5,11 @@
   
 <configuration>
  	<typeAliases>
-		
+ 		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
+		<typeAlias type="com.fw.s1.order.OrderlistVO" alias="OrderlistVO"/>
+		<typeAlias type="com.fw.s1.purchase.PurchaseVO" alias="PurchaseVO"/>
+		<typeAlias type="com.fw.s1.coupon.CouponVO" alias="CouponVO"/>
+		<typeAlias type="com.fw.s1.coupon.CouponspVO" alias="CouponspVO"/>
 	</typeAliases>
 </configuration>

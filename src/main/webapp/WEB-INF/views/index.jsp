@@ -3,111 +3,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/WEB-INF/views/templates/headStatics.jsp"></c:import>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common/templatesindexver.css">
 <title>FWCC-index</title>
 </head>
-<body id="main">
-	<!-- 뭔지몰라서 안건듬 START -->
-	<div id="skipNavigation">
-		<p>
-			<a href="#category">전체상품목록 바로가기</a>
-		</p>
-		<p>
-			<a href="#contents">본문 바로가기</a>
-		</p>
-	</div>
-	<!-- 뭔지몰라서 안건듬 END -->
-	
-	<div id="wrap">
-		<!-- header START -->
-		<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
-		<!-- header END -->
-		
-		<!-- contents START -->
-		<div id="container">
-			<div id="contents">
-				<div id="mainslider-wraper">
-					<ul id="mainslider">
-						<li class="banner"><a href="#" target=""><img src="/images/main1_20210528.jpg" alt="" /></a></li>
-						<li class="banner"><a href="#" target=""><img src="/images/main2_20210528.jpg" alt="" /></a></li>
-						<li class="banner"><a href="#" target=""><img src="/images/main3_20210528.jpg" alt="" /></a></li>
-						<li class="banner"><a href="#" target=""><img src="/images/main4_20210528.jpg" alt="" /></a></li>
-					</ul>
-				</div>
-				<script>
-					;
-					(function($) {
-						//$(document).ready(function(){
-						$('#mainslider').slick({
-							autoplay : true,
-							pauseOnHover : false,
-							dots : true,
-							arrows : true,
-							fade : true,
-							autoplaySpeed : 4000, //머무르는 시간
-							speed : 1700
-						//효과속도
-						});
-						//});
-					})(jQuery);
-				</script>
-				<!-- // 메인플래시 수정시 [파일열기] -->
+<body>
+<c:import url="/WEB-INF/views/templates/navbar.jsp">
+	<c:param name="isCommon" value="false"></c:param>
+</c:import>
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li>
+  </ul>
 
-				<!-- 추천상품 -->
-				<!-- //추천상품 -->
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="#" target=""><img class="index-carousel" src="/images/main1_20210528.jpg" alt="" /></a>
+    </div>
+    <div class="carousel-item">
+      <a href="#" target=""><img class="index-carousel" src="/images/main2_20210528.jpg" alt="" /></a>
+    </div>
+    <div class="carousel-item">
+      <a href="#" target=""><img class="index-carousel" src="/images/main3_20210528.jpg" alt="" /></a>
+    </div>
+    <div class="carousel-item">
+      <a href="#" target=""><img class="index-carousel" src="/images/main4_20210528.jpg" alt="" /></a>
+    </div>
+  </div>
 
-				<!-- 신상품 -->
-				<!-- //신상품 -->
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
 
-				<!-- 추가카테고리1 -->
-				<!-- //추가카테고리1 -->
-
-				<!-- 추가카테고리2 -->
-				<!-- //추가카테고리2 -->
-
-				<!-- 추가분류관리(진열순서1) -->
-				<!-- //추가분류관리(진열순서1) -->
-
-				<!-- 추가분류관리(진열순서2) -->
-				<!-- 추가분류관리(진열순서2) -->
-
-				<!-- 추가분류관리(진열순서3) -->
-				<!-- //추가분류관리(진열순서3) -->
-			</div>
-			<!-- contents END -->
-			
-			<!-- footer START -->
-			<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-			<!-- footer END -->
-			
-			<!-- 맨 위로 보내는 버튼 START -->
-			<div id="quickmenu">
-				<p class="pageTop">
-					<a onclick="go_top();"><i class="fa fa-angle-up" aria-hidden="true">top</i></a>
-				</p>
-			</div>
-			<!-- 맨 위로 보내는 버튼 END -->
-		</div>
-	</div>
-	<!-- wrap END -->
-
-	<!-- 참고: 결제를 위한 필수 영역 -->
-	<div id="progressPaybar" style="display: none;">
-		<div id="progressPaybarBackground" class="layerProgress"></div>
-		<div id="progressPaybarView">
-			<div class="box">
-				<p class="graph">
-					<span><img src="//img.echosting.cafe24.com/skin/base_ko_KR/layout/txt_progress.gif" alt="현재 결제가 진행중입니다." /></span> <span><img
-						src="//img.echosting.cafe24.com/skin/base/layout/img_loading.gif" alt=""
-					/></span>
-				</p>
-				<p class="txt">
-					본 결제 창은 결제완료 후 자동으로 닫히며,결제 진행 중에 본 결제 창을 닫으시면<br /> 주문이 되지 않으니 결제 완료 될 때 까지 닫지 마시기 바랍니다.
-				</p>
-			</div>
-		</div>
-	</div>
-	<!-- //참고 -->
-<c:import url="/WEB-INF/views/templates/bodyStatics.jsp"></c:import>
+<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 </body>
 </html>
