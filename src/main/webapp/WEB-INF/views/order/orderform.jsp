@@ -13,7 +13,7 @@
 	<c:param name="isCommon" value="true"></c:param>
 </c:import>
 	<div style="margin:10% 5%; text-align: center;">
-		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
+		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">ORDER</h2>
 		<div style="text-align: left;">
 			<h5>일반상품(<c:out value="0"></c:out>)</h5>
 		</div>
@@ -104,6 +104,30 @@
 			<input type="checkbox" id="agreepayment">
 			<span>결제정보를 확인하였으며, 구매진행에 동의합니다.</span><br>
 			<button id="purchasebutton">PAYMENT</button>
+		</div>
+		<div style="text-align: right; margin-top:3%;">
+			<table style="float: right;">
+				<thead>
+					<tr>
+						<th>총 적립예정금액</th>
+						<th>원</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>상품별 적립금</td>
+						<td><span>원</span></td>
+					</tr>
+					<tr>
+						<td>회원 적립금</td>
+						<td><span>원</span></td>
+					</tr>
+					<tr>
+						<td>쿠폰 적립금</td>
+						<td><span>원</span></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	

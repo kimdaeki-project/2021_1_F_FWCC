@@ -12,11 +12,11 @@
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
-	<div style="margin:10% 5% 0% 5%; text-align: center;">
+	<div style="margin:10% 5%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
 			<div style="text-align: left;">
-				<h5>일반상품(<c:out value="0"></c:out>)</h5>
+				<strong>일반상품(<c:out value="0"></c:out>)</strong>
 			</div>
 			<table>
 				<thead>
@@ -62,19 +62,27 @@
 							<td> <!-- 섬네일 -->
 							
 							</td>
-							<td>
+							<td><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
 								<c:out value="${item.productName}"></c:out>
 							</td>
-							<td>
+							<td><!-- 가격 --><!-- 할인 가격은 제대로 안나옴 결제할때 할인 나오려나봄 -->
 							
 							</td>
-							<td>
+							<td><!-- 선택 개수 -->
 								
 							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><!-- 주는 마일리지 -->
+							
+							</td>
+							<td><!-- 배달방식 -->
+							
+							</td>
+							<td><!-- 배달비용 -->
+							
+							</td>
+							<td><!-- 전체 총합 가격 -->
+							
+							</td>
 							<td>
 								<button>주문하기</button>
 								<button>삭제하기</button>
@@ -118,14 +126,27 @@
 			</div>
 		</div>
 		<div style="margin-top: 3%; display: flex; width:100%; justify-content: space-between;">
-			<div style="padding:1% 4.25%"></div>
+			<div style="padding:1% 4.25%">
+			</div>
 			<div>
 				<button id="buyall">BUY NOW</button> 
 				<button id="buyselects">ORDER SELECT</button>
 			</div>
 			<div>
-				<a href="/">GO SHOPPING</a>
+				<a href="/" style="text-decoration: none; color: gray; border: gray 2px outset; background-color: white; padding:1px 6px;">GO SHOPPING</a>
 			</div>
+		</div>
+		<div style="text-align: left; font-size: 0.75rem; margin-top:3%;">
+			<strong><span>이용안내</span></strong><br><br>
+			<strong><span>장바구니 이용안내</span></strong>
+			<ol style="list-style: none; padding-left: 0;">
+				<li>해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별로 따로 결제해 주시기 바랍니다.</li>
+			    <li>해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.</li>
+			    <li>선택하신 상품의 수량을 변경하시려면 수량변경 후 [변경] 버튼을 누르시면 됩니다.</li>
+			    <li>[쇼핑계속하기] 버튼을 누르시면 쇼핑을 계속 하실 수 있습니다.</li>
+			    <li>장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.</li>
+			    <li>파일첨부 옵션은 동일상품을 장바구니에 추가할 경우 마지막에 업로드 한 파일로 교체됩니다.</li>
+			</ol>
 		</div>
 	</div>
 	
