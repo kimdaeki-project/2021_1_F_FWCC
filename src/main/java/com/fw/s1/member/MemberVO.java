@@ -21,6 +21,19 @@ public class MemberVO implements UserDetails{
 	private boolean smsAgree;
 	private boolean emailAgree;
 	
+	
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
