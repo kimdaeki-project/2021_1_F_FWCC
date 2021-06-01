@@ -41,23 +41,82 @@ $("#buyselects").click(function(event){
 	}
 });
 
-$("#allcartremove").click(function(event){
-	event.preventDefault();
-	
+$("#allcartremove").click(function(){
+	let count = 0;
 	let carts = new Array();
 		
 	$(".checklist").each(function(){
-		carts.push();/* 집어넣고 테스트 하면 된다. */
+		carts.push();/* cartnum을 집어넣고 테스트 하면 된다. */
+		count++;
 	});
 	
-	$.ajax({
-		
+	if(count==0){
+		swal({
+			icon:"info",
+			title:"INFO",
+			text:"장바구니가 이미 비어있습니다."
+		});
+	}
+	
+	$.post({
+		url:"",
+		data:{
+			
+		},
+		success:function(result){
+			if(result>0){
+				swal({
+					icon:"success",
+					title:"삭제 완료",
+					text:"장바구니를 모두 비웠습니다."
+				});
+			}else{
+				swal({
+					icon:"error",
+					title:"에러발생",
+					text:"장바구니를 비우는 동안 에러가 발생했습니다."
+				});
+			}
+		}
 	});
 });
 
-$("#selectcartremove").click(function(event){
-	event.preventDefault();
-	$.ajax({
+$("#selectcartremove").click(function(){
+	let count = 0;
+	let carts = new Array();
 		
+	$(".checklist").each(function(){
+		carts.push();/* cartnum을 집어넣고 테스트 하면 된다. */
+		count++;
+	});
+	
+	if(count==0){
+		swal({
+			icon:"info",
+			title:"INFO",
+			text:"선택된 항목이 존재하지 않습니다."
+		});
+	}
+	
+	$.post({
+		url:"",
+		data:{
+			
+		},
+		success:function(result){
+			if(result>0){
+				swal({
+					icon:"success",
+					title:"삭제 완료",
+					text:"선택된 항목을 비웠습니다."
+				});
+			}else{
+				swal({
+					icon:"error",
+					title:"에러발생",
+					text:"장바구니를 비우는 동안 에러가 발생했습니다."
+				});
+			}
+		}
 	});
 });

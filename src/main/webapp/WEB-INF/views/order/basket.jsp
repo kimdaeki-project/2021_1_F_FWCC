@@ -149,9 +149,18 @@
 			</ol>
 		</div>
 	</div>
-	
+	<form id="canclemerchant" method="post">
+		<input id="merchant_uid" type="text">
+	</form>
+	<button id="cancle">전송</button>
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/basket.js"></script>
+	<script>
+		$("#cancle").click(function(){
+			$("#canclemerchant").attr("action", "./cancle/"+$("#merchant_uid").val());
+			$("#canclemerchant").submit();
+		});
+	</script>
 </body>
 </html>

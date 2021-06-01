@@ -14,4 +14,6 @@ public class OrderlistVO {
 	private String username;
 	private String destination;
 	private Date orderDate;
+	private Long orderState;
+	private String orderMessage;
 }
