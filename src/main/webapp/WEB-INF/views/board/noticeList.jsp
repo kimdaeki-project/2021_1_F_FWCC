@@ -8,20 +8,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/headStatics.jsp"></c:import>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 <div id="container">
-<div id="ontents">
+<div id="contents">
 <div class="container">
-	
-			<h2>notice</h2>
-		
+	<div class="title" style="margin: 60px 0 40px;">
+			<h2><font color>Notice</font></h2>
+	</div>	
 		<table class="table">
-			<thead class="thead-dark">
+			<thead class="xans-element">
 				<tr>
-					<th>NUM</th>
-					<th>TITLE</th>
+					<th>NO</th>
+					<th>SUBJECT</th>
 					<th>WRITER</th>
 					<th>DATE</th>
 					<th>HIT</th>
@@ -49,24 +50,29 @@
 		</table>
 	</div>
 	
-	<div class="container">
-	  <ul class="pagination">
+	<div style="margin: 40px 0 40px;">
+	  <ul class="pagination" style=" justify-content: center;">
 	  
-	  <c:if test="${pager.pre}">	
-	    <li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}">Previous</a></li>
-	   </c:if>
+	  	
+	    <li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}"><span class="material-icons">
+keyboard_arrow_left
+</span></a></li>
+	   
 	   
 	   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 	   
 	    <li class="page-item"><a class="page-link p" href="#" title="${i}">${i}</a></li>
 	   </c:forEach>
 	   
-	    <c:if test="${pager.next}">
-	    <li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum+1}">Next</a></li>
-	    </c:if>
+	    
+	    <li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum+1}"><span class="material-icons">
+keyboard_arrow_right
+</span></a></li>
+	    
 	  </ul>
+	 </div> 
 	  
-	<div class="input-group mt-3 mb-3">
+	<div class="input-group mt-3 mb-3" style=" justify-content: center;">
 	<form id="frm" action="./list" class="form-inline">
 		<input type="hidden" name="curPage" value="1" id="curPage">
 	  <div class="input-group-prepend">
@@ -102,7 +108,7 @@
 		
 	});
 </script> 
-</div> 
+
 </div>
 </div>
 </body>

@@ -46,7 +46,7 @@ public class NoticeController {
 			model.addAttribute("list", ar);
 			model.addAttribute("pager", pager);
 
-			return "board/list";
+			return "board/noticeList";
 		}
 		
 		@GetMapping("select")
@@ -54,27 +54,27 @@ public class NoticeController {
 			ModelAndView mv = new ModelAndView();
 			boardVO = noticeService.getSelect(boardVO);
 			mv.addObject("vo", boardVO);
-			mv.setViewName("board/select");
+			mv.setViewName("board/noticeSelect");
 			return mv;
 		}
 		
 		@GetMapping("insert")
 		public String setInsert(Model model)throws Exception{
 			model.addAttribute("vo", new BoardVO());
-			model.addAttribute("action", "insert");
-			return "board/form";
+			model.addAttribute("action", "noticeInsert");
+			return "board/noticeInsert";
 		}
 		
 		@PostMapping("insert")
 		public String setInsert(BoardVO boardVO, MultipartFile [] files)throws Exception{
-//			System.out.println(files.length);
-//			for(MultipartFile f : files) {
-//				System.out.println(f.getOriginalFilename());
-//			}
+			System.out.println(files.length);
+			for(MultipartFile f : files) {
+				System.out.println(f.getOriginalFilename());
+			}
 			
 			int result = noticeService.setInsert(boardVO, files);
 			
-			return "redirect:./list";
+			return "redirect:./noticeList";
 		}
 		
 		@GetMapping("update")
