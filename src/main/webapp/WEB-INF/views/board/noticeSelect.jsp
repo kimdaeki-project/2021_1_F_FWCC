@@ -11,10 +11,14 @@
 	<table class="table">
 	<thead class="xans-element">
 				<tr>
-					<th>SUBJECT</th>
-					<th>WRITER</th>
-					<th>Date</th>
+					<th scope="row">SUBJECT</th>
+					<th scope="row">WRITER</th>
+					<th scope="row">Date</th>
 					<th>Hit</th>
+				</tr>
+				<tr>
+					<th scope="row">WRITER</th>
+					<td>${vo.title}</td>
 				</tr>
 			</thead>
 	<tbody>
