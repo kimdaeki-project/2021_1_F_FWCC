@@ -11,24 +11,29 @@
 	<table class="table">
 	<thead class="xans-element">
 				<tr>
-					<th scope="row">SUBJECT</th>
-					<th scope="row">WRITER</th>
-					<th scope="row">Date</th>
-					<th>Hit</th>
-				</tr>
-				<tr>
-					<th scope="row">WRITER</th>
-					<td>${vo.title}</td>
+					<th>NOTICE</th>
 				</tr>
 			</thead>
 	<tbody>
 	<tr>
-		<th><h1>${vo.title}</h1></th>
-		<th><h5>${vo.regDate}</h5></th>
-		<th><h3>${vo.contents}</h3></th>
-		<th><h3>${vo.hit}</h3></th>
+		<th scope="row">SUBJECT</th>
+		<td>${vo.title}</td>
 	</tr>
-
+	
+	<tr>
+		<th scope="row">WRITER</th>
+		<td>${vo.writer}</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">DATE</th>
+		<td>${vo.regDate}</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">HIT</th>
+		<td>${vo.hit}</td>
+	</tr>
 	</tbody>
 	</table>
 	
