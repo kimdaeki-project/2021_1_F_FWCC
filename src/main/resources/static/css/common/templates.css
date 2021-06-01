@@ -55,6 +55,7 @@
 	width:10rem;
 	padding-top:1rem;
 	background-color: white;
+	padding-bottom:1.25rem;
 }
 
 #navbar-rightul{
@@ -62,9 +63,10 @@
 	display: none;
 	position:absolute;
 	left:0;
-	width:7rem;
+	width:6rem;
 	padding-top:1rem;
 	background-color: white;
+	padding-bottom:1.25rem;
 }
 
 #navbar-colaul{
@@ -75,7 +77,9 @@
 	width:15rem;
 	padding-top:1rem;
 	background-color: white;
+	padding-bottom:1.25rem;
 }
+
 #navbar-leftul>li{
 	padding-top:0.5rem;
 }
