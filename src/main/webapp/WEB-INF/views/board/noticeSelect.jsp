@@ -28,10 +28,8 @@
 	<tr>
 		<th scope="row">DATE</th>
 		<td>${vo.regDate}</td>
-	</tr>
-	
-	<tr>
-		<th scope="row">HIT</th>
+		
+		<th>HIT</th>
 		<td>${vo.hit}</td>
 	</tr>
 	</tbody>
