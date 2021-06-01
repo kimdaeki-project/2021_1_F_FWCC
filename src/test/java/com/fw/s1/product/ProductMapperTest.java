@@ -19,9 +19,9 @@ class ProductMapperTest {
 //	@Test
 	void getListTest() throws Exception {
 		ProductVO vo = new ProductVO();
-		List<ProductVO> list = productMapper.getList(vo);
-		System.out.println(list.size());
-		assertNotNull(list);
+//		List<ProductVO> list = productMapper.getList(vo);
+//		System.out.println(list.size());
+//		assertNotNull(list);
 	}
 	
 //	@Test
@@ -38,17 +38,20 @@ class ProductMapperTest {
 	@Test
 	void setInsertTest() throws Exception{
 		int total=0;
-		String name = "bottom-short";
-		for(int i=0;i<10;i++) {
+		String name = "top-short";
+		for(int i=0;i<300;i++) {
 			ProductVO vo = new ProductVO();
 			vo.setProductTitle(name+i);
-			vo.setProductPrice((long) (i*10000));
+			vo.setProductPrice((long) ((i+1)*10000));
 			vo.setProductContents("productContents"+i);
 			vo.setCollab("collab"+i%3);
 			vo.setProductType(name);
 			int result = productMapper.setInsert(vo);
 			total += result;
 			System.out.println("r : "+result+" t : "+total);
+			if(i%10==0) {
+				Thread.sleep(1000);
+			}
 		}
 		assertNotEquals(0, total);
 	}

@@ -14,11 +14,11 @@
 					</c:if>
 				</a>
 			</li>
-			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=productList">All (New arrival)</a></li>
-			<li id="navbar-rowlist"><a href="#">Top</a>
+			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=All (New arrival)">All (New arrival)</a></li>
+			<li id="navbar-rowlist"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top&name=TOP&division=">Top</a>
 				<ul id="navbar-leftul">
-					<li><a href="#">TOP (long)</a></li>
-					<li><a href="#">TOP (short)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-long&name=TOP&division=(long)">TOP (long)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-short&name=TOP&division=(short)">TOP (short)</a></li>
 				</ul>
 			</li>
 			<li id="navbar-rowlist"><a href="#">Bottom</a>

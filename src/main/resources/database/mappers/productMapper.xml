@@ -5,13 +5,16 @@
 
 <mapper namespace="com.fw.s1.product.ProductMapper">
 
-	<select id="getList" parameterType="ProductVO" resultType="ProductVO">
-		select * from product
-		where
-		collab like concat('%',#{collab},'%')
-		and
-		productType like concat('%',#{productType},'%')
-		order by productNum desc
+	<select id="getList" parameterType="ProductPager"
+		resultType="ProductVO">
+		select * from
+		(select row_number() over(order by productNum desc) as R, P.* from
+		(select * from product
+		where collab like concat('%',#{collab},'%')
+		and productType like concat('%',#{productType},'%')
+		) as P
+		) as RP
+		where R between #{startRow} and #{lastRow}
 	</select>
 
 	<insert id="setInsert" parameterType="ProductVO">
@@ -38,9 +41,19 @@
 		where
 		productNum=#{productNum}
 	</update>
-	
+
 	<delete id="setDelete" parameterType="ProductVO">
-		delete from product where productNum=#{productNum}
+		delete from product where
+		productNum=#{productNum}
 	</delete>
-	
+
+	<select id="getTotalCount" parameterType="ProductPager"
+		resultType="java.lang.Long">
+		select count(productNum) from product
+		where collab like
+		concat('%',#{collab},'%')
+		and productType like
+		concat('%',#{productType},'%')
+	</select>
+
 </mapper>
