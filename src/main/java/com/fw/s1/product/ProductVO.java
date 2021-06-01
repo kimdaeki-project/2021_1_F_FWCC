@@ -1,5 +1,7 @@
 package com.fw.s1.product;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,5 +14,8 @@ public class ProductVO {
 	private String productContents;
 	private String collab;
 	private String productType;
+	
+	private List<ProductFileVO> files;
+	private List<ProductInfoVO> infos;
 	
 }

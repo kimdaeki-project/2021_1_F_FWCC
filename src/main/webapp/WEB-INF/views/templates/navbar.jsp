@@ -14,7 +14,7 @@
 					</c:if>
 				</a>
 			</li>
-			<li><a href="#">All (New arrival)</a></li>
+			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=productList">All (New arrival)</a></li>
 			<li id="navbar-rowlist"><a href="#">Top</a>
 				<ul id="navbar-leftul">
 					<li><a href="#">TOP (long)</a></li>
