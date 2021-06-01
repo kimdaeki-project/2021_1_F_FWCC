@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fw.s1.product.ProductMapper">
+
+	<select id="getList" parameterType="ProductVO" resultType="ProductVO">
+		select * from product
+		where
+		collab like concat('%',#{collab},'%')
+		and
+		productType like concat('%',#{productType},'%')
+		order by productNum desc
+	</select>
+
+	<insert id="setInsert" parameterType="ProductVO">
+		insert into product
+		(productTitle,
+		productPrice,productContents,collab,productType)
+		values
+		(#{productTitle},
+		#{productPrice},#{productContents},#{collab},#{productType})
+	</insert>
+
+	<select id="getSelect" parameterType="ProductVO"
+		resultType="ProductVO">
+		select * from product where productNum=#{productNum}
+	</select>
+
+	<update id="setUpdate" parameterType="ProductVO">
+		update product set
+		productTitle=#{productTitle},
+		productPrice=#{productPrice},
+		productContents=#{productContents},
+		collab=#{collab},
+		productType=#{productType}
+		where
+		productNum=#{productNum}
+	</update>
+	
+	<delete id="setDelete" parameterType="ProductVO">
+		delete from product where productNum=#{productNum}
+	</delete>
+	
+</mapper>
