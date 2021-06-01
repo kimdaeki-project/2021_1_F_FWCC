@@ -53,33 +53,6 @@
 	
 	<div id="navbar-right">
 		<ul>
-			<li id="navbar-columnlist">
-				<a href="#">Community</a>
-				<ul id="navbar-rightul">
-					<li><a href="#">Notice</a></li>
-					<li><a href="#">Stockist</a></li>
-					<li><a href="#">Q&A</a></li>
-					<li><a href="#">Review</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Login</a> / <a href="#">Join</a></li>
-			<li id="navbar-columnlist">
-				<a href="#">My Account</a>
-				<ul id="navbar-rightul">
-					<li><a href="#">ORDER LIST</a></li>
-					<li><a href="#">PROFILE</a></li>
-					<li><a href="#">WISHLIST</a></li>
-					<li><a href="#">TODAY VIEW</a></li>
-					<li><a href="#">MILEAGE</a></li>
-					<li><a href="#">COUPON</a></li>
-					<li><a href="#">MY BOARD</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Search <img src="/images/header_ico_search.png" alt="검색" /></a></li>
-			<li id="ec_async_basket_layer_hover">
-				<a href="${pageContext.request.contextPath}/order/basket">Cart <span id="navbar-cartspan"> 0 </span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
-				<div></div>
-			</li>
 			<li id="navbar-language">
 				<button id="navbar-language">
 					<span><img src="//img.cafe24.com/img/common/global/ko_KR_18x12.png" alt="" /> 한국어</span>
@@ -99,6 +72,33 @@
 							<span class="unit">USD</span>
 						</a>
 					</li>
+				</ul>
+			</li>
+			<li id="ec_async_basket_layer_hover">
+				<a href="${pageContext.request.contextPath}/order/basket">Cart <span id="navbar-cartspan"> 0 </span></a> <!-- 비동기 레이어를 담기위한 컨테이너 -->
+				<div></div>
+			</li>
+			<li><a href="#">Search <img src="/images/header_ico_search.png" alt="검색" /></a></li>
+			<li id="navbar-columnlist">
+				<a href="#">My Account</a>
+				<ul id="navbar-rightul">
+					<li><a href="#">ORDER LIST</a></li>
+					<li><a href="#">PROFILE</a></li>
+					<li><a href="#">WISHLIST</a></li>
+					<li><a href="#">TODAY VIEW</a></li>
+					<li><a href="#">MILEAGE</a></li>
+					<li><a href="#">COUPON</a></li>
+					<li><a href="#">MY BOARD</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Login</a> / <a href="#">Join</a></li>
+			<li id="navbar-columnlist">
+				<a href="#">Community</a>
+				<ul id="navbar-rightul">
+					<li><a href="#">Notice</a></li>
+					<li><a href="#">Stockist</a></li>
+					<li><a href="#">Q&A</a></li>
+					<li><a href="#">Review</a></li>
 				</ul>
 			</li>
 		</ul>
