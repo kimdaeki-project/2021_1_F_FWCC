@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fw.s1.member.MemberVO;
@@ -37,8 +39,8 @@ public class CartController {
 		return cartService.deleteCart(memberVO);
 	}
 	
-	@GetMapping("deleteItem")
-	public Long deleteItem(List<Long> cartNums ,Authentication authentication)throws Exception{
+	@PostMapping("deleteItems")
+	public Long deleteItem(@RequestParam(value="cartNums") ArrayList<Long> cartNums ,Authentication authentication)throws Exception{
 		int length = cartNums.size();
 		List<CartVO> carts = new ArrayList<CartVO>();
 		for(int i = 0 ; i < length; i++) {
@@ -52,7 +54,13 @@ public class CartController {
 	
 	@GetMapping("updateCount")
 	public Long updateCount(CartVO cartVO, Authentication authentication)throws Exception{
-		cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		cartVO.setUsername("admin");
+		if(cartVO.getProductCount()>cartService.getStock(cartVO)) {
+			return 0L;
+		}else if(cartVO.getProductCount()<1) {
+			return 0L;
+		}
 		return cartService.updateCount(cartVO);
 	}
 	

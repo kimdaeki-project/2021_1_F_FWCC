@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// --- product END ---
 				// --- cart END ---
 				.antMatchers("/cart/counting").permitAll()
-				.antMatchers("/cart/**").hasAnyRole("MEMBER","ADMIN")
+				//.antMatchers("/cart/**").hasAnyRole("MEMBER","ADMIN")
 				// --- cart END ---
 				// --- orderlist START
 				//.antMatchers("/order/**").hasAnyRole("MEMBER", "ADMIN")

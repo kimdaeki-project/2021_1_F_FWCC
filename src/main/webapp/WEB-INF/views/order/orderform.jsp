@@ -12,36 +12,36 @@
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
 	<c:param name="isCommon" value="true"></c:param>
 </c:import>
-	<div style="margin:10% 5%; text-align: center;">
+	<div style="margin:10% 8% 5% 8%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">ORDER</h2>
 		<div style="text-align: left;">
 			<h5>일반상품(<c:out value="0"></c:out>)</h5>
 		</div>
-		<table>
+		<table style="width:100%;">
 			<thead>
 				<tr>
-					<th>
+					<th style="width:15%;">
 						THUMB
 					</th>
 					<th>
 						PRODUCT
 					</th>
-					<th>
+					<th style="width:10%;">
 						PRICE
 					</th>
-					<th>
+					<th style="width:10%;">
 						QUANTITY
 					</th>
-					<th>
+					<th style="width:10%;">
 						MILEAGE
 					</th>
-					<th>
+					<th style="width:10%;">
 						DELIVERY
 					</th>
-					<th>
+					<th style="width:10%;">
 						CHARGE
 					</th>
-					<th>
+					<th style="width:10%;">
 						TOTAL
 					</th>
 				</tr>
@@ -50,17 +50,17 @@
 				<c:forEach items="${items}" var="item">
 					<tr>
 						<td>
-							섬네일
+							<div style="width:100px; height:100px; display:inline-block; border: 1px black solid;"></div>
 						</td>
-						<td>
-							<c:out value="${item.productVO.productName}"></c:out>
-							<span>[옵션: <c:out value="${item.productInfo.size}"></c:out>]</span>
+						<td style="text-align: left; padding:1% 3%;">
+							<c:out value="${item.productVO.productTitle}"></c:out><br>
+							<span>[옵션: <c:out value="${item.productInfoVO.size}"></c:out>]</span>
 						</td>
 						<td>
 							<strong><span>KRW</span> <c:out value="${item.productVO.productPrice}"></c:out></strong>
 						</td>
 						<td><!-- 선택 개수를 찍어야 한다. -->
-							<c:out value="${cart.productCount}"></c:out>
+							<c:out value="${item.productCount}"></c:out>
 						</td>
 						<td><!-- 받을 수 잇는 총 마일리지를 체크해야한다. -->
 							<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
@@ -72,7 +72,7 @@
 							<span>무료</span>
 						</td>
 						<td>
-							<strong><span>KRW <c:out value="${totalPrice}"></c:out></span></strong>
+							<strong><span>KRW <c:out value="${item.productCount*item.productVO.productPrice}"></c:out></span></strong>
 						</td>
 					</tr>
 				</c:forEach>
@@ -130,12 +130,12 @@
 			</table>
 		</div>
 		
-		<div style="font-size: 0.75rem">
+		<div style="font-size: 0.75rem; clear: both; text-align: left;">
 			<p><strong>이용안내</strong></p>
 			<p>
-				결제가능브라우저 : 크롬,파이어폭스,사파리,오페라 브라우저에서 결제 가능
-				(단, window os 사용자에 한하며 리눅스/mac os 사용자는 사용불가)
-				최초 결제 시도시에는 플러그인을 추가 설치 후 반드시 브라우저 종료 후 재시작해야만 결제가 가능합니다.
+				결제가능브라우저 : 크롬,파이어폭스,사파리,오페라 브라우저에서 결제 가능<br>
+				(단, window os 사용자에 한하며 리눅스/mac os 사용자는 사용불가)<br>
+				최초 결제 시도시에는 플러그인을 추가 설치 후 반드시 브라우저 종료 후 재시작해야만 결제가 가능합니다.<br>
 				(무통장, 휴대폰결제 포함)
 			</p>
 		</div>

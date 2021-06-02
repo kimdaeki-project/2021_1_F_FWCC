@@ -2,7 +2,6 @@
 $(document).ready(function(){
 	var IMP = window.IMP;
 	IMP.init('iamport');
-	
 });
 
 $("#purchasebutton").click(function(){
@@ -13,7 +12,7 @@ $("#purchasebutton").click(function(){
 			text:"약관동의에 체크해 주세요."
 		});
 		return;
-	}
+	}//그러면 결제 하기 전에 우선적으로 인증부터 받으면 되는건가
 	
 	const date = new Date();
 	const merchant_uid= date.getTime() + '-' + date.getFullYear()+date.getMonth()+date.getDate()+date.getHours()

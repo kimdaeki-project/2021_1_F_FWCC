@@ -17,8 +17,16 @@ public class CartService {
 		return cartMapper.getCartList(memberVO);
 	}
 	
+	public List<CartVO> getCartSelectList(List<CartVO> list)throws Exception{
+		return cartMapper.getCartSelectList(list);
+	}
+	
 	public Long getCartCount(MemberVO memberVO)throws Exception{
 		return cartMapper.getCartCount(memberVO);
+	}
+	
+	public Long getStock(CartVO cartVO)throws Exception{
+		return cartMapper.getStock(cartVO);
 	}
 	
 	public Long setCart(CartVO cartVO)throws Exception{

@@ -42,8 +42,23 @@
 		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum
   </select>
   
+  <select id="getCartSelectList" parameterType="java.util.List" resultMap="cartfragments">
+ 		SELECT cf.*, p.*, i.* from
+		(select c.*, pf.fileName from cart c inner join productfiles pf on c.productNum = pf.productNum where 
+		<foreach collection="list" item="item" separator="or">
+			(c.username=#{item.username} and c.cartNum=#{item.cartNum} and pf.fileName like concat('fileName', '_'))
+  			<!-- LIKE CONCAT('T\_', '%') -->
+		</foreach>) cf
+		INNER JOIN product p ON cf.productNum=p.productNum 
+		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum
+  </select>
+  
   <select id="getCartCount" parameterType="MemberVO" resultType="java.lang.Long">
   	SELECT count(cartNum) FROM CART WHERE username=#{username}
+  </select>
+  
+  <select id="getStock" parameterType="CartVO" resultType="java.lang.Long">
+  	select i.stock from productInfo i where i.pInfoNum = #{pInfoNum}
   </select>
   
   <insert id="setCart" parameterType="CartVO">

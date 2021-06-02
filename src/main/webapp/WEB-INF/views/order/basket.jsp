@@ -12,43 +12,43 @@
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
-	<div style="margin:10% 8%; text-align: center;">
+	<div style="margin:10% 8% 5% 8%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
 			<div style="text-align: left;">
 				<strong>일반상품(<c:out value="0"></c:out>)</strong>
 			</div>
-			<table style="width:100%;">
-				<thead>
+			<table style="width:100%; margin-bottom:1%;">
+				<thead style="border-bottom: 1px gray solid;">
 					<tr>
 						<th>
-							<input type="checkbox" id="allcheck"/>
+							<input style="transform: scale(1.25);" type="checkbox" id="allcheck"/>
 						</th>
-						<th>
+						<th style="padding:1% 0; width:15%;">
 							THUMB
 						</th>
 						<th>
 							PRODUCT
 						</th>
-						<th>
+						<th style="width:8%;">
 							PRICE
 						</th>
-						<th>
+						<th style="width:8%;">
 							QUANTITY
 						</th>
-						<th>
+						<th style="width:8%;">
 							MILEAGE
 						</th>
-						<th>
+						<th style="width:8%;">
 							DELIVERY
 						</th>
-						<th>
+						<th style="width:8%;">
 							CHARGE
 						</th>
-						<th>
+						<th style="width:8%;">
 							TOTAL
 						</th>
-						<th>
+						<th style="width:8%;">
 							SELECT
 						</th>
 					</tr>
@@ -57,12 +57,14 @@
 					<c:forEach items="${items}" var="item">
 						<tr>
 							<td>
-								<input type="checkbox" class="selectcheck" name="checklist">
+								<input style="transform: scale(1.25);" type="checkbox" class="selectcheck" 
+										data-cartNum='<c:out value="${item.cartNum}"></c:out>'
+										name="checklist">
 							</td>
-							<td> <!-- 섬네일 -->
+							<td style="padding: 1%;"> <!-- 섬네일 -->
 								<div style="width:100px; height:100px; border: 1px black solid; display: inline-block;"></div>
 							</td>
-							<td><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
+							<td style="text-align: left; padding:1% 3%;"><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
 								<c:out value="${item.productVO.productTitle}"></c:out><br>
 								<span>[옵션: <c:out value="${item.productInfoVO.size}"></c:out>]</span>
 							</td>
@@ -70,8 +72,12 @@
 								<span><strong>KRW <c:out value="${item.productVO.productPrice}"></c:out></strong></span>
 							</td>
 							<td><!-- 선택 개수 -->
-								<input type="number" value='<c:out value="${item.productCount}"></c:out>' min="1">
-								<button id="changeCount">변경</button>
+								<input style="width:65%; border-radius: 0.4rem;" type="number" value='<c:out value="${item.productCount}"></c:out>' min="1" max='<c:out value="${item.productInfoVO.stock}"></c:out>'>
+								<input type="hidden" readonly="readonly"
+								data-productCount="${item.productCount}"
+								data-cartNum='<c:out value="${item.cartNum}"></c:out>'
+								data-pInfoNum='<c:out value="${item.PInfoNum}"></c:out>'>
+								<button class="countchange">변경</button>
 							</td>
 							<td><!-- 주는 마일리지 --><!-- 아직 테이블이 만들어지지않음 -->
 								<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
@@ -84,7 +90,7 @@
 								<span>[무료]</span>
 							</td>
 							<td><!-- 전체 총합 가격 -->
-								<span><strong>KRW <c:out value=""></c:out></span>
+								<span><strong>KRW <c:out value="${item.productCount*item.productVO.productPrice}"></c:out></strong></span>
 							</td>
 							<td>
 								<button>주문하기</button><br>
@@ -94,20 +100,22 @@
 					</c:forEach>
 				</tbody>
 				<tfoot>
-					<tr>
+					<tr style="border-top: 1px gray solid; border-bottom: 1px gray solid;">
 						<td colspan="10">
+							<br>
 							<div style="display: flex; justify-content: space-between; width:100%;">
 								<div>
 									[기본배송]
 								</div>
 								<div>
-									상품구매금액 <c:out value=""></c:out>+배송비 0 (무료) = 합계: 
-									<span>KRW <c:out value=""></c:out></span>
+									상품구매금액 <strong><c:out value="${totalprice}"></c:out></strong> + 배송비 0 (무료) = 합계: 
+									<strong>KRW <span style="font-size: 1.5em;"><c:out value="${totalprice}"></c:out></span></strong>
 								</div>
 							</div>
+							<br>
 						</td>
 					</tr>
-					<tr>
+					<tr style="border-bottom:1px rgba(128,128,128,0.5) solid">
 						<td colspan="10" style="text-align: left;">
 							<span>할인 적용 금액은 주문서작성의 결제예정금액에서 확인가능합니다.</span>
 						<td>
@@ -155,5 +163,16 @@
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/basket.js"></script>
+	<script>
+		var msg = "${msg}";
+		
+		if(msg=="재고보다 선택한 수량이 더 많습니다."){
+			swal({
+				icon:"info",
+				title:"INFO",
+				text:msg
+			});
+		}
+	</script>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package com.fw.s1.order;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fw.s1.cart.CartService;
+import com.fw.s1.cart.CartVO;
 import com.fw.s1.member.MemberVO;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -83,14 +88,40 @@ public class OrderController {
 	}
 	
 	@GetMapping("basket")
-	public void getCartList(Model model) throws Exception{
+	public void getCartList(Authentication authentication, Model model) throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("admin");
-		model.addAttribute("items", cartService.getCartList(memberVO));
+		List<CartVO> list = cartService.getCartList(memberVO);
+		model.addAttribute("items", list);
+		
+		long totalprice = 0;
+		for(CartVO cartVO : list) {
+			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
+		}
+		
+		model.addAttribute("totalprice", totalprice);
 	}
 	
-	@GetMapping("orderform")
-	public void getPurchase() {
+	@PostMapping("orderform")
+	public void getPurchase(long[] cartNums, Authentication authentication, Model model)throws Exception {
+		List<CartVO> list = new ArrayList<>();
 		
+		for(long cartNum : cartNums) {
+			CartVO cartVO = new CartVO();
+			cartVO.setCartNum(cartNum);
+			cartVO.setUsername("admin");
+			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			list.add(cartVO);
+		}
+		
+		list = cartService.getCartSelectList(list);
+		
+		long totalprice=0;
+		for(CartVO cartVO : list) {
+			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
+		}
+		
+		model.addAttribute("items", list);
+		model.addAttribute("totalprice", totalprice);
 	}
 }
