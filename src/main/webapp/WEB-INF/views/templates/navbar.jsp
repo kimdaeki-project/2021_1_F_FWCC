@@ -14,17 +14,17 @@
 					</c:if>
 				</a>
 			</li>
-			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=All (New arrival)">All (New arrival)</a></li>
+			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=All&division=New arrival">All (New arrival)</a></li>
 			<li id="navbar-rowlist"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top&name=TOP&division=">Top</a>
 				<ul id="navbar-leftul">
-					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-long&name=TOP&division=(long)">TOP (long)</a></li>
-					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-short&name=TOP&division=(short)">TOP (short)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-long&name=TOP&division=long">TOP (long)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-short&name=TOP&division=short">TOP (short)</a></li>
 				</ul>
 			</li>
-			<li id="navbar-rowlist"><a href="#">Bottom</a>
+			<li id="navbar-rowlist"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom&name=BOTTOM&division=">Bottom</a>
 				<ul id="navbar-leftul">
-					<li><a href="#">BOTTOM (long)</a></li>
-					<li><a href="#">BOTTOM (short)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-long&name=BOTTOM&division=long">BOTTOM (long)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-short&name=BOTTOM&division=short">BOTTOM (short)</a></li>
 				</ul>
 			</li>
 			<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=4">Acc</a></li> -->

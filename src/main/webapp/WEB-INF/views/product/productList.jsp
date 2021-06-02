@@ -15,38 +15,80 @@
 .page-link {
 	border: 0px;
 }
+
+#wrap{
+padding: 80px 34px 0px;
+	min-width:1252px;
+    max-width: 1320.1px;
+    margin: 0 auto;
+    min-height: 480px;
+
+}
+.divTest{
+
+min-height: 480px;
+}
+.ulTest{
+display: table;
+    width: 100%;
+    margin: 0 auto 50px;
+}
+.liTest{
+display: inline-block;
+	width:20%;
+    margin: 0 2% 40px;
+    vertical-align: top;
+}
+#cardImg{
+width: 100%;
+height: 100%;
+}
 </style>
+<c:if test="${division eq ''}">
 <title>${name}</title>
+</c:if>
+<c:if test="${division ne ''}">
+<title>${name} (${division})</title>
+</c:if>
+
 </head>
 <body>
 	<c:import url="/WEB-INF/views/templates/navbar.jsp">
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
-	<div id="wrap" style="padding: 68px 34px 0px 34px; text-align: center;">
-		<h1 style="text-align: center;">${name}${division}</h1>
+	<div id="wrap" style="">
+	<c:if test="${division ne ''}">
+		<h1 style="text-align: center;">${name} (${division})</h1>
+	</c:if>
+	<c:if test="${division eq ''}">
+		<h1 style="text-align: center;">${name}</h1>
+	</c:if>
 
-		<c:if test="${name ne 'All (New arrival)'}">
-			<span><a class="selBtn"
-				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=(long)">long</a><a
+		<c:if test="${name ne 'All'}">
+		<div style="text-align:center;">
+			<span ><a class="selBtn"
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long">long</a><a
 				class="selBtn"
-				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=(short)">short</a></span>
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short">short</a></span>
+		</div>
 		</c:if>
-
-			<div class="row">
-
-						<c:forEach items="${productList}" var="product">
-					<div class="col">
-					<div style="width:20rem; border:1px solid red;">
-							<h2>${product.productNum}</h2>
+			<div class="divTest">
+<!-- 
+					<ul class="ulTest" >
+					 -->
+				<c:forEach items="${productList}" var="product">
+						<li class="liTest">
+						<img id="cardImg" alt="test" src="${pageContext.request.contextPath}/images/product/test/c5.gif">
+							<p>${product.productNum}</p>
 							<h3 style="color: green;">${product.productTitle}</h3>
 							<p style="color: blue;">${product.productPrice}</p>
 							<p style="color: blue;">${product.productDisRate}%</p>
-					</div>
-					</div>
-						</c:forEach>
-
+						</li>
+				</c:forEach>
+				<!-- 
+					</ul>
+ -->
 			</div>
-
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link p"
 				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=1"
@@ -57,18 +99,22 @@
 
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${i}">${i}</a></li>
+					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}">${i}</a></li>
 			</c:forEach>
+			<c:if test="${pager.lastNum%5 eq 0}">
 			<li class="page-item"><a class="page-link p"
-				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.lastNum+1}">NEXT</a></li>
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}">NEXT</a></li>
 			<li class="page-item"><a class="page-link p"
-				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.totalPage}">></a></li>
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}">></a></li>
+			</c:if>
+			<c:if test="${pager.lastNum%5 ne 0}">
+			<li class="page-item"><a class="page-link p"
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}">NEXT</a></li>
+			<li class="page-item"><a class="page-link p"
+				href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}">></a></li>
+			</c:if>
 		</ul>
 	</div>
-	</div>
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>

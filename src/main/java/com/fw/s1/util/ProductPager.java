@@ -54,6 +54,9 @@ public class ProductPager {
 		}
 		
 		this.setTotalPage(totalPage);
+		if(this.curPage>totalPage) {
+			this.curPage=totalPage;
+		}
 		this.setStartNum(startNum);
 		this.setLastNum(lastNum);
 		
@@ -108,6 +111,7 @@ public class ProductPager {
 		if(curPage<1) {
 			curPage=1;
 		}
+		
 		this.curPage = curPage;
 	}
 	public long getStartRow() {
