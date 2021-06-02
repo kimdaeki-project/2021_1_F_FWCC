@@ -12,11 +12,12 @@
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
+	<h1></h1>
 	<div style="margin:10% 8% 5% 8%; text-align: center;">
 		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
 		<c:if test="${items ne null}">
 			<div style="text-align: left;">
-				<strong>일반상품(<c:out value="0"></c:out>)</strong>
+				<strong>일반상품(<c:out value="${cartCount}"></c:out>)</strong>
 			</div>
 			<table style="width:100%; margin-bottom:1%;">
 				<thead style="border-bottom: 1px gray solid;">
@@ -30,7 +31,7 @@
 						<th>
 							PRODUCT
 						</th>
-						<th style="width:8%;">
+						<th style="width:12%;">
 							PRICE
 						</th>
 						<th style="width:8%;">
@@ -45,7 +46,7 @@
 						<th style="width:8%;">
 							CHARGE
 						</th>
-						<th style="width:8%;">
+						<th style="width:14%;">
 							TOTAL
 						</th>
 						<th style="width:8%;">
@@ -69,10 +70,11 @@
 								<span>[옵션: <c:out value="${item.productInfoVO.size}"></c:out>]</span>
 							</td>
 							<td><!-- 가격 --><!-- 할인 가격은 제대로 안나옴 결제할때 할인 나오려나봄 -->
-								<span><strong>KRW <c:out value="${item.productVO.productPrice}"></c:out></strong></span>
+								<span><strong>KRW <c:out value="${item.productVO.productPrice}"></c:out></strong></span><br>
+								<span>[할인률 : <c:out value="${item.productVO.productDisRate}"></c:out>%]</span>
 							</td>
 							<td><!-- 선택 개수 -->
-								<input style="width:65%; border-radius: 0.4rem;" type="number" value='<c:out value="${item.productCount}"></c:out>' min="1" max='<c:out value="${item.productInfoVO.stock}"></c:out>'>
+								<input style="width:60%; border-radius: 0.4rem;" type="number" value='<c:out value="${item.productCount}"></c:out>' min="1" max='<c:out value="${item.productInfoVO.stock}"></c:out>'>
 								<input type="hidden" readonly="readonly"
 								data-productCount="${item.productCount}"
 								data-cartNum='<c:out value="${item.cartNum}"></c:out>'
@@ -90,11 +92,17 @@
 								<span>[무료]</span>
 							</td>
 							<td><!-- 전체 총합 가격 -->
-								<span><strong>KRW <c:out value="${item.productCount*item.productVO.productPrice}"></c:out></strong></span>
+								<c:if test="${item.productVO.productDisRate eq 0}">
+									<span><strong>KRW <c:out value="${item.productCount*item.productVO.productPrice}"></c:out></strong></span>
+								</c:if>
+								<c:if test="${item.productVO.productDisRate ne 0}">
+									<del>KRW <c:out value="${item.productCount*item.productVO.productPrice}"></c:out></del><br>
+									<strong>KRW <c:out value="${item.finalPrice}"></c:out></strong>
+								</c:if>
 							</td>
 							<td>
-								<button>주문하기</button><br>
-								<button>삭제하기</button>
+								<button class="oneOrder" data-cartNum='<c:out value="${item.cartNum}"></c:out>'>주문하기</button><br>
+								<button class="oneDelete" data-cartNum='<c:out value="${item.cartNum}"></c:out>'>삭제하기</button>
 							</td>
 						</tr>
 					</c:forEach>

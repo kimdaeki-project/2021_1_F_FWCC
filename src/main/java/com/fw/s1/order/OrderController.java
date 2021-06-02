@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fw.s1.cart.CartService;
 import com.fw.s1.cart.CartVO;
 import com.fw.s1.member.MemberVO;
+import com.fw.s1.product.ProductVO;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -87,21 +88,35 @@ public class OrderController {
 		return check;
 	}
 	
+	//마일리지 계산 작업도 추가해야한다.
 	@GetMapping("basket")
 	public void getCartList(Authentication authentication, Model model) throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("admin");
+		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		List<CartVO> list = cartService.getCartList(memberVO);
-		model.addAttribute("items", list);
+		long cartCount = list.size();
 		
 		long totalprice = 0;
 		for(CartVO cartVO : list) {
 			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
+			ProductVO productVO = cartVO.getProductVO();
+			if(productVO.getProductDisRate()>0) {
+				long cal = (((100-productVO.getProductDisRate())*productVO.getProductPrice()/100)/100)*100;
+				cartVO.setFinalPrice(cal*cartVO.getProductCount());
+				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
+			}
 		}
 		
+		model.addAttribute("cartCount", cartCount);
+		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
 	}
 	
+	//마일리지 계산 작업도 추가해야한다.
+	//마일리지 추가 작업필요
+	//쿠폰 사용작업 필요
+	//주소 추가작업 필요
 	@PostMapping("orderform")
 	public void getPurchase(long[] cartNums, Authentication authentication, Model model)throws Exception {
 		List<CartVO> list = new ArrayList<>();
@@ -115,12 +130,22 @@ public class OrderController {
 		}
 		
 		list = cartService.getCartSelectList(list);
+		long orderCount = list.size();
 		
 		long totalprice=0;
+		long totalMileage=0;
 		for(CartVO cartVO : list) {
 			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
+			ProductVO productVO = cartVO.getProductVO();
+			if(productVO.getProductDisRate()>0) {
+				long cal = (((100-productVO.getProductDisRate())*productVO.getProductPrice()/100)/100)*100;
+				cartVO.setFinalPrice(cal*cartVO.getProductCount());
+				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
+			}
 		}
 		
+		model.addAttribute("totalMileage", totalMileage);
+		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
 	}

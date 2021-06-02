@@ -161,3 +161,13 @@
 	margin-right: 3%;
 }
 
+#footer-upper{
+	position: fixed;
+	bottom: 7%;
+	right: 3%;
+}
+
+#footer-upper>a>i{
+	transform:scale(2);
+	color: rgba(128,128,128,0.5);
+}

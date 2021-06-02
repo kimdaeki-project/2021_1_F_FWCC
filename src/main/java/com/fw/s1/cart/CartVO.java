@@ -15,6 +15,8 @@ public class CartVO {
 	private Long productCount;
 	private String username;
 	
+	private Long finalPrice;
+	
 	private ProductVO productVO;
 	private ProductInfoVO productInfoVO;
 	private ProductFileVO productFileVO;

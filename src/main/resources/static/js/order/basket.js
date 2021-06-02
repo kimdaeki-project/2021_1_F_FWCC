@@ -51,7 +51,7 @@ $("#buyselects").click(function(event){
 	let cartNums = new Array();
 	let count = 0;
 	$(".selectcheck").each(function(){
-		if(this.prop("checked")){
+		if($(this).prop("checked")){
 			cartNums.push($(this).attr("data-cartNum"));
 			count++;
 		}
@@ -74,7 +74,9 @@ $("#buyselects").click(function(event){
 });
 
 //장바구니에서 모든 항목 제거
-$("#allcartremove").click(function(){
+$("#allcartremove").click(function(event){
+	event.preventDefault();
+	
 	let count = 0;
 		
 	$(".selectcheck").each(function(){
@@ -111,7 +113,9 @@ $("#allcartremove").click(function(){
 });
 
 //장바구니에서 체크한 항목 제거
-$("#selectcartremove").click(function(){
+$("#selectcartremove").click(function(event){
+	event.preventDefault();
+	
 	let count = 0;
 	let cartNums = new Array();
 	
@@ -191,6 +195,53 @@ $(".countchange").click(function(event){
 					text:"현재 재고보다 수량이 더 많습니다."
 				});
 				typenumber.val(typehidden.attr("data-productCount"));
+			}
+		}
+	});
+});
+
+//선택된 항목 하나만 주문
+$(".oneOrder").click(function(event){
+	event.preventDefault();
+	
+	let cartNums = new Array();
+
+	cartNums.push($(this).attr("data-cartNum"));
+	
+	$("body").append('<form id="transferorderform" action="/order/orderform" method="post"></form>');
+	for(let cartNum of cartNums){
+		$("#transferorderform").append('<input type="hidden" name="cartNums" value="'+cartNum+'">');
+	}
+	$("#transferorderform").submit();
+});
+
+//선택된 항목 하나만 제거
+$(".oneDelete").click(function(event){
+	event.preventDefault();
+	
+	let cartNums = new Array();
+	cartNums.push($(this).attr("data-cartNum"));
+
+	$.post({
+		url:"/cart/deleteItems",
+		traditional:true,
+       	data : {
+			cartNums:cartNums
+		},
+		success:function(result){
+			if(result>0){
+				swal({
+					icon:"success",
+					title:"삭제 완료",
+					text:"선택된 항목을 제거하였습니다."
+				});
+				location.href="/order/basket";
+			}else{
+				swal({
+					icon:"error",
+					title:"에러발생",
+					text:"장바구니에서 제거하지 못했습니다."
+				});
 			}
 		}
 	});
