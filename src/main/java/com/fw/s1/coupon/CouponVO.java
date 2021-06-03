@@ -12,6 +12,7 @@ public class CouponVO {
 	private Long cuSpNum;
 	private Date pubDate;
 	private Date exDate;
+	private Boolean useCheck;
 	
 	private CouponspVO couponspVO;
 }

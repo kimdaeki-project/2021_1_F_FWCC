@@ -21,6 +21,10 @@ public class MemberVO implements UserDetails{
 	private boolean smsAgree;
 	private boolean emailAgree;
 	
+	private String email1;
+	private String email2;
+	private String email3;
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,4 +56,10 @@ public class MemberVO implements UserDetails{
 		return this.enabled;
 	}
 
+	public void emailSeperator() {
+		String[] templist = this.email.split("[@\\.]");
+		this.email1 = templist[0];
+		this.email2 = templist[1];
+		this.email3 = templist[2];
+	}
 }

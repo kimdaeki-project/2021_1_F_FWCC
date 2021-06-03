@@ -26,11 +26,11 @@
 }
 
 #navbar-left{
-	width:57.5%;
+	width:55%;
 }
 
 #navbar-right{
-	width:42.5%;
+	width:45%;
 }
 
 #navbar-left>ul>li{
@@ -42,7 +42,7 @@
 
 #navbar-right>ul>li{
 	float: right;
-	padding: 0 2%;
+	padding: 0 1.75%;
 	position:relative;
 	height:100%;
 }

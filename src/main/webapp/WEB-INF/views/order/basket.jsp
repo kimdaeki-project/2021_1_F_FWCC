@@ -81,9 +81,9 @@
 								data-pInfoNum='<c:out value="${item.PInfoNum}"></c:out>'>
 								<button class="countchange">변경</button>
 							</td>
-							<td><!-- 주는 마일리지 --><!-- 아직 테이블이 만들어지지않음 -->
+							<td><!-- 주는 마일리지 -->
 								<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
-								<span> <c:out value=""></c:out>원</span>
+								<span> <c:out value="${item.productVO.productMileage}"></c:out>원</span>
 							</td>
 							<td><!-- 배달방식 -->
 								<span>기본배송</span>

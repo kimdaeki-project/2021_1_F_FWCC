@@ -1,13 +1,13 @@
 package com.fw.s1.order;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fw.s1.address.AddressService;
+import com.fw.s1.address.AddressVO;
 import com.fw.s1.cart.CartService;
 import com.fw.s1.cart.CartVO;
+import com.fw.s1.coupon.CouponService;
+import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.member.MemberVO;
 import com.fw.s1.product.ProductVO;
 import com.siot.IamportRestClient.IamportClient;
@@ -35,6 +39,10 @@ public class OrderController {
 
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private CouponService couponService;
 	
 	
 	private IamportClient api;
@@ -43,6 +51,7 @@ public class OrderController {
 		this.api = new IamportClient("imp_apikey", "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f");
 	}
 	
+	//결제를 위한 메서드, 결제 검증을 위해 필요하다.
 	@ResponseBody
 	@PostMapping("vertify/{imp_uid}")
 	public IamportResponse<Payment> getVertify(Model model, Locale locale, 
@@ -51,6 +60,7 @@ public class OrderController {
 		return api.paymentByImpUid(imp_uid);
 	}
 	
+	//삭제 작업을 위한 메서드, 후반에 완성시키자.
 	@ResponseBody
 	@PostMapping("cancle/{merchant_uid}")
 	public boolean testCancelPaymentAlreadyCancelledMerchantUid(@PathVariable(value="merchant_uid")String merchant_uid) {
@@ -88,7 +98,6 @@ public class OrderController {
 		return check;
 	}
 	
-	//마일리지 계산 작업도 추가해야한다.
 	@GetMapping("basket")
 	public void getCartList(Authentication authentication, Model model) throws Exception{
 		MemberVO memberVO = new MemberVO();
@@ -113,13 +122,14 @@ public class OrderController {
 		model.addAttribute("totalprice", totalprice);
 	}
 	
-	//마일리지 계산 작업도 추가해야한다.
-	//마일리지 추가 작업필요
 	//쿠폰 사용작업 필요
 	//주소 추가작업 필요
 	@PostMapping("orderform")
 	public void getPurchase(long[] cartNums, Authentication authentication, Model model)throws Exception {
 		List<CartVO> list = new ArrayList<>();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername("admin");
+		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		
 		for(long cartNum : cartNums) {
 			CartVO cartVO = new CartVO();
@@ -142,8 +152,32 @@ public class OrderController {
 				cartVO.setFinalPrice(cal*cartVO.getProductCount());
 				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
 			}
+			totalMileage += productVO.getProductMileage();
 		}
 		
+		List<AddressVO> addresslist = addressService.getAddressList(memberVO);
+		List<AddressVO> addrList = new ArrayList<>();
+		AddressVO orderAddr = new AddressVO();
+		AddressVO recentAddr = new AddressVO();
+		
+		for(AddressVO addressVO : addresslist) {
+			if(addressVO.getOrderAddr()) {
+				orderAddr = addressVO;
+			}else if(addressVO.getRecentUse()){
+				recentAddr = addressVO;
+				addrList.add(recentAddr);
+			}else {
+				addrList.add(addressVO);
+			}
+		}
+		
+		List<CouponVO> cuList = couponService.getCouponList(memberVO);
+
+		orderAddr.phoneSeperator();
+		model.addAttribute("recentAddr", recentAddr);
+		model.addAttribute("orderAddr", orderAddr);
+		model.addAttribute("orderDetail");
+		model.addAttribute("addressList", addrList);
 		model.addAttribute("totalMileage", totalMileage);
 		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("items", list);

@@ -30,16 +30,16 @@
 					<th style="width:12%;">
 						PRICE
 					</th>
-					<th style="width:10%;">
+					<th style="width:8%;">
 						QUANTITY
 					</th>
-					<th style="width:10%;">
+					<th style="width:8%;">
 						MILEAGE
 					</th>
-					<th style="width:10%;">
+					<th style="width:8%;">
 						DELIVERY
 					</th>
-					<th style="width:10%;">
+					<th style="width:8%;">
 						CHARGE
 					</th>
 					<th style="width:14%;">
@@ -66,7 +66,7 @@
 						</td>
 						<td><!-- 받을 수 잇는 총 마일리지를 체크해야한다. -->
 							<img alt="적립" src="${pageContext.request.contextPath}/images/cartAndOrder/icon_cash.gif">
-							<span> <c:out value=""></c:out>원</span>
+							<span> <c:out value="${item.productVO.productMileage}"></c:out>원</span>
 						</td>
 						<td>
 							<span>기본배송</span>
@@ -109,6 +109,122 @@
 				</tr>
 			</tfoot>
 		</table>
+		<table style="width:100%;margin-top:7%;">
+			<thead>
+				<tr>
+					<th style="text-align: left; width:16%;">주문 정보</th>
+					<th style="text-align: right;"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""> 필수입력사항</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: left;">
+				<tr>
+					<td style="padding:1%;">주문하시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td><input type="text" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td>
+						<input type="text" value='<c:out value="${orderAddr.zipCode}"></c:out>' readonly="readonly"><br>
+						<input type="text" value='<c:out value="${orderAddr.basicAddr}"></c:out>' readonly="readonly"> <span>기본주소</span><br>
+						<input type="text" value='<c:out value="${orderAddr.detailAddr}"></c:out>' readonly="readonly"> <span>나머지주소</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td><input type="text" value='<c:out value="${orderAddr.addrPhone1}"></c:out>' readonly="readonly"> 
+					- <input type="text" value='<c:out value="${orderAddr.addrPhone2}"></c:out>' readonly="readonly"> 
+					- <input type="text" value='<c:out value="${orderAddr.addrPhone3}"></c:out>' readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">이메일 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td>
+						<input type="text" readonly="readonly"> @ <input type="text" readonly="readonly"> . <input type="text" readonly="readonly"> 
+						<br><span>- 이메일을 통해 주문처리과정을 보내드립니다.</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table style="width:100%;margin-top:7%;">
+			<thead>
+				<tr>
+					<th style="text-align: left; width:16%;">배송 정보</th>
+					<th style="text-align: right;"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""> 필수입력사항</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: left;">
+				<tr>
+					<td style="padding:1%;">받으시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td>
+						
+					</td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td><input type="text" id="reccall1"> - <input type="text" id="reccall2"> - <input type="text" id="reccall3"></td>
+				</tr>
+				<tr>
+					<td style="padding:1%;">이메일 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td>
+						<input type="text"> @ <input type="text"> . <input type="text"> 
+						<br><span>- 이메일을 통해 주문처리과정을 보내드립니다.</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table style="width:100%; margin-top:7%;">
+			<thead>
+				<tr>
+					<th colspan="3" style="text-align: left;">결제 예정 금액</th>
+				</tr>
+				<tr>
+					<th style="padding: 1%;">총 주문금액</th>
+					<th style="padding: 1%;">총 할인 + 부가결제 금액</th>
+					<th style="padding: 1%;">총 결제예정 금액</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="padding: 3%;"><strong>KRW <span><c:out value="${totalprice}"></c:out></span></strong></td>
+					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice"></span></strong></td>
+					<td style="padding: 3%;"><strong>= KRW <span id="endprice"></span></strong></td>
+				</tr>
+			</tbody>
+		</table>
+		<table style="width:100%;">
+			<tbody>
+				<tr>
+					<td style="width:16%; text-align: left; padding:1%;">총 할인금액</td>
+					<td style="text-align: left; padding:1%;">
+					
+					</td>
+				</tr>
+				<tr>
+					<td style="width:16%; text-align: left; padding:1%;">구폰할인</td>
+					<td style="text-align: left; padding:1%;">
+					
+					</td>
+				</tr>
+				<tr>
+					<td style="width:16%; text-align: left; padding:1%;">총 부가결제금액</td>
+					<td style="text-align: left; padding:1%;">
+					
+					</td>
+				</tr>
+				<tr>
+					<td style="width:16%; text-align: left; padding:1%;">적립금</td>
+					<td style="text-align: left; padding:1%;">
+						<input type="text"> 원 (총 사용가능 적립금: <span></span>원)
+						<br>- 적립금은 최소 1000이상일 때 결제가 가능합니다.
+						<br>- 1회 구매시 적립금 최대 사용금액은 2000원입니다.
+						<br>- 적립금으로만 결제할 경우, 결제금액이 0으로 보여지는 것은 정상이며 [결제하기] 버튼을 누르면 주문이 완료됩니다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		<div style="text-align: right;">
 			<strong>최종결제 금액</strong>
 			<p><strong>KRW <span style="font-size:1.8rem;"><c:out value="${totalprice}"></c:out></span></strong></p>
@@ -127,7 +243,6 @@
 				</tbody>
 			</table>
 		</div>
-		
 		<div style="font-size: 0.75rem; clear: both; text-align: left;">
 			<p><strong>이용안내</strong></p>
 			<ol style="list-style: none; padding-left: 0;">
@@ -139,9 +254,18 @@
 		</div>
 	</div>
 	
+	<div style="display:none;">
+	
+	</div>
+	
+	<div style="display:none;">
+	
+	</div>
+	
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

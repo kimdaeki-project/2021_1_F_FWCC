@@ -17,6 +17,8 @@
 			<result column="productContents" property="productContents"/>
 			<result column="productType" property="productType"/>
 			<result column="collab" property="collab"/>
+			<result column="finalPrice" property="finalPrice"/>
+			<result column="productMileage" property="productMileage"/>
 		</association>
 		<association property="productInfoVO" javaType="ProductInfoVO">
 			<id column="pInfoNum" property="pInfoNum"/>
