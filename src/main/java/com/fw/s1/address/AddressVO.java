@@ -26,4 +26,5 @@ public class AddressVO {
 		this.addrPhone2 = tempphone[1];
 		this.addrPhone3 = tempphone[2];
 	}
+
 }

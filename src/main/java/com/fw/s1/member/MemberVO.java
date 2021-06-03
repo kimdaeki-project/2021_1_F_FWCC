@@ -13,13 +13,13 @@ public class MemberVO implements UserDetails{
 	
 	private String username;
 	private String password;
-	private String phone;
 	private String name;
+	private String phone;
 	private String email;
 	private Date birth;
-	private boolean enabled;
 	private boolean smsAgree;
 	private boolean emailAgree;
+	private boolean enabled;
 	
 	private String email1;
 	private String email2;
