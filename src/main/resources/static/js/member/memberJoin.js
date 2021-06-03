@@ -97,7 +97,11 @@ let birth = "";
 let smsAgree = "";
 let emailAgree = "";
 
-// table -> form ====================================
+// ID 중복 체크 ===========================================================
+
+
+
+// table -> form ==========================================================
 $(".joinBtn").click(function(){
 	username = $("#usernameT").val();
 	password = $("#passwordT").val();
