@@ -56,14 +56,15 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${items}" var="item">
-						<tr>
+						<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 							<td>
 								<input style="transform: scale(1.25);" type="checkbox" class="selectcheck" 
 										data-cartNum='<c:out value="${item.cartNum}"></c:out>'
 										name="checklist">
 							</td>
 							<td style="padding: 1%;"> <!-- 섬네일 -->
-								<div style="width:100px; height:100px; border: 1px black solid; display: inline-block;"></div>
+								<img alt="" src="${pageContext.request.contextPath}/images/${item.productVO.productTitle}/${item.productFileVO.fileName}"
+									width="100px" height="100px">
 							</td>
 							<td style="text-align: left; padding:1% 3%;"><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
 								<c:out value="${item.productVO.productTitle}"></c:out><br>

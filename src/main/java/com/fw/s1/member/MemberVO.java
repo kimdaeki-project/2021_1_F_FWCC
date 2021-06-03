@@ -6,6 +6,8 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fw.s1.mileage.MileageVO;
+
 import lombok.Data;
 
 @Data
@@ -24,7 +26,7 @@ public class MemberVO implements UserDetails{
 	private String email1;
 	private String email2;
 	private String email3;
-	
+	private MileageVO mileageVO;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

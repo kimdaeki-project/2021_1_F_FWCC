@@ -13,4 +13,8 @@ public class MemberService {
 		return memberMapper.getUsernameCheck(memberVO);
 	}
 	
+	
+	public MemberVO getUsernameandemail(MemberVO memberVO)throws Exception{
+		return memberMapper.getUsernameandemail(memberVO);
+	}
 }

@@ -5,6 +5,8 @@
 <html>
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -49,9 +51,10 @@
 			</thead>
 			<tbody style="text-align: center; border-bottom: 1px gray solid;">
 				<c:forEach items="${items}" var="item">
-					<tr>
+					<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 						<td style="padding:1%;">
-							<div style="width:100px; height:100px; display:inline-block; border: 1px black solid;"></div>
+							<img alt="" src="${pageContext.request.contextPath}/images/${item.productVO.productTitle}/${item.productFileVO.fileName}"
+								width="100px" height="100px">
 						</td>
 						<td style="text-align: left; padding:1% 3%;">
 							<c:out value="${item.productVO.productTitle}"></c:out><br>
@@ -111,126 +114,154 @@
 		</table>
 		<table style="width:100%;margin-top:7%;">
 			<thead>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<th style="text-align: left; width:16%;">주문 정보</th>
 					<th style="text-align: right;"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""> 필수입력사항</th>
 				</tr>
 			</thead>
 			<tbody style="text-align: left;">
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<td style="padding:1%;">주문하시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td><input type="text" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td>
-						<input type="text" value='<c:out value="${orderAddr.zipCode}"></c:out>' readonly="readonly"><br>
-						<input type="text" value='<c:out value="${orderAddr.basicAddr}"></c:out>' readonly="readonly"> <span>기본주소</span><br>
-						<input type="text" value='<c:out value="${orderAddr.detailAddr}"></c:out>' readonly="readonly"> <span>나머지주소</span>
+					<td style="padding:1%;">
+						<input type="text" id="buyerName" value='<c:out value="${orderAddr.recipient}"></c:out>' readonly="readonly">
 					</td>
 				</tr>
-				<tr>
-					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td><input type="text" value='<c:out value="${orderAddr.addrPhone1}"></c:out>' readonly="readonly"> 
-					- <input type="text" value='<c:out value="${orderAddr.addrPhone2}"></c:out>' readonly="readonly"> 
-					- <input type="text" value='<c:out value="${orderAddr.addrPhone3}"></c:out>' readonly="readonly"></td>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<input type="text" style="width:8%;" id="buyerZipcode" value='<c:out value="${orderAddr.zipCode}"></c:out>' readonly="readonly"><br>
+						<input type="text" style="margin-top:0.5%;" id="buyerBasic" value='<c:out value="${orderAddr.basicAddr}"></c:out>' readonly="readonly"> <span>기본주소</span><br>
+						<input type="text" style="margin-top:0.5%;" id="buyerDetail" value='<c:out value="${orderAddr.detailAddr}"></c:out>' readonly="readonly"> <span>나머지주소</span>
+					</td>
 				</tr>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<input type="text" id="buyerPhone1" value='<c:out value="${orderAddr.addrPhone1}"></c:out>' readonly="readonly"> 
+						- <input type="text" id="buyerPhone2" value='<c:out value="${orderAddr.addrPhone2}"></c:out>' readonly="readonly"> 
+						- <input type="text" id="buyerPhone3" value='<c:out value="${orderAddr.addrPhone3}"></c:out>' readonly="readonly">
+					</td>
+				</tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<td style="padding:1%;">이메일 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td>
-						<input type="text" readonly="readonly"> @ <input type="text" readonly="readonly"> . <input type="text" readonly="readonly"> 
+					<td style="padding:1%;">
+						<input type="text" id="buyerEmail1" value='${orderDetail.email1}' readonly="readonly"> 
+						@ <input type="text" id="buyerEmail2" value='${orderDetail.email2}' readonly="readonly"> 
+						. <input type="text" id="buyerEmail3" value='${orderDetail.email3}' readonly="readonly"> 
 						<br><span>- 이메일을 통해 주문처리과정을 보내드립니다.</span>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+
 		<table style="width:100%;margin-top:7%;">
 			<thead>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<th style="text-align: left; width:16%;">배송 정보</th>
 					<th style="text-align: right;"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""> 필수입력사항</th>
 				</tr>
 			</thead>
 			<tbody style="text-align: left;">
-				<tr>
-					<td style="padding:1%;">받으시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td>
-						
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">배송지 선택 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<a id="recSelect" href="#forAddAddress" rel="modal:open">주소록 보기</a>
 					</td>
 				</tr>
-				<tr>
-					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td><input type="text" id="reccall1"> - <input type="text" id="reccall2"> - <input type="text" id="reccall3"></td>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">받으시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<input type="text" id="recPeople" value='<c:out value="${recentAddr.recipient}"></c:out>' readonly="readonly">
+					</td>
 				</tr>
-				<tr>
-					<td style="padding:1%;">이메일 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
-					<td>
-						<input type="text"> @ <input type="text"> . <input type="text"> 
-						<br><span>- 이메일을 통해 주문처리과정을 보내드립니다.</span>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<input type="text" style="width:8%;" id="recZipcode" value='<c:out value="${recentAddr.zipCode}"></c:out>' readonly="readonly">
+						<br><input style="margin-top:0.5%;" type="text" id="recBasic" value='<c:out value="${recentAddr.basicAddr}"></c:out>' readonly="readonly"> 기본주소
+						<br><input style="margin-top:0.5%;" type="text" id="recDetail" value='<c:out value="${recentAddr.detailAddr}"></c:out>' readonly="readonly"> 나머지주소
+					</td>
+				</tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">
+						<input type="text" id="reccall1" value='<c:out value="${recentAddr.addrPhone1}"></c:out>' readonly="readonly"> 
+						- <input type="text" id="reccall2" value='<c:out value="${recentAddr.addrPhone2}"></c:out>' readonly="readonly"> 
+						- <input type="text" id="reccall3" value='<c:out value="${recentAddr.addrPhone3}"></c:out>' readonly="readonly">
+					</td>
+				</tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="padding:1%;">배송 메세지</td>
+					<td style="padding:1%;">
+						<textarea id="orderMessage" rows="2" style="width:100%;"></textarea>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		
 		<table style="width:100%; margin-top:7%;">
 			<thead>
 				<tr>
-					<th colspan="3" style="text-align: left;">결제 예정 금액</th>
+					<th colspan="3" style="text-align: left; padding-bottom:3%;">결제 예정 금액</th>
 				</tr>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<th style="padding: 1%;">총 주문금액</th>
 					<th style="padding: 1%;">총 할인 + 부가결제 금액</th>
 					<th style="padding: 1%;">총 결제예정 금액</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr style="border-bottom: 2px rgba(128,128,128, 0.5) solid; font-size:1.6rem;">
 					<td style="padding: 3%;"><strong>KRW <span><c:out value="${totalprice}"></c:out></span></strong></td>
-					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice"></span></strong></td>
-					<td style="padding: 3%;"><strong>= KRW <span id="endprice"></span></strong></td>
+					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice">0</span></strong></td>
+					<td style="padding: 3%;"><strong>= KRW <span id="endprice"><c:out value="${totalprice}"></c:out></span></strong></td>
 				</tr>
 			</tbody>
 		</table>
 		<table style="width:100%;">
 			<tbody>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<td style="width:16%; text-align: left; padding:1%;">총 할인금액</td>
 					<td style="text-align: left; padding:1%;">
-					
+						<strong>KRW <span><c:out value="${totalprice}"></c:out></span></strong>
 					</td>
 				</tr>
-				<tr>
-					<td style="width:16%; text-align: left; padding:1%;">구폰할인</td>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<td style="width:16%; text-align: left; padding:1%;">쿠폰할인</td>
 					<td style="text-align: left; padding:1%;">
-					
+						<a id="cuSelect" href="#forAddCoupon" rel="modal:open">쿠폰적용</a>
 					</td>
 				</tr>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<td style="width:16%; text-align: left; padding:1%;">총 부가결제금액</td>
 					<td style="text-align: left; padding:1%;">
-					
+						<strong>KRW <span id="delPriceInsert">0</span></strong>
 					</td>
 				</tr>
-				<tr>
+				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 					<td style="width:16%; text-align: left; padding:1%;">적립금</td>
 					<td style="text-align: left; padding:1%;">
-						<input type="text"> 원 (총 사용가능 적립금: <span></span>원)
-						<br>- 적립금은 최소 1000이상일 때 결제가 가능합니다.
-						<br>- 1회 구매시 적립금 최대 사용금액은 2000원입니다.
-						<br>- 적립금으로만 결제할 경우, 결제금액이 0으로 보여지는 것은 정상이며 [결제하기] 버튼을 누르면 주문이 완료됩니다.
+						<input type="text" id="useMile" value="0"> 원 (총 사용가능 적립금: <span><c:out value="${orderDetail.mileageVO.enabledMile}"></c:out></span>원)
+						<br><button style="margin-top:0.5%;" id="mileAccept">적용</button>
+						<p>
+							<br>- 적립금은 최소 1000이상일 때 결제가 가능합니다.
+							<br>- 1회 구매시 적립금 최대 사용금액은 2000원입니다.
+							<br>- 적립금으로만 결제할 경우, 결제금액이 0으로 보여지는 것은 정상이며 [결제하기] 버튼을 누르면 주문이 완료됩니다.
+						</p>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<div style="text-align: right;">
+		<div style="text-align: right; margin-top: 4%;">
 			<strong>최종결제 금액</strong>
-			<p><strong>KRW <span style="font-size:1.8rem;"><c:out value="${totalprice}"></c:out></span></strong></p>
+			<p><strong><span style="font-size:1.8rem;"><c:out value="${totalprice}"></c:out></span></strong></p>
 			<input type="checkbox" id="agreepayment">
 			<span>결제정보를 확인하였으며, 구매진행에 동의합니다.</span><br>
-			<button id="purchasebutton">PAYMENT</button>
+			<button id="purchasebutton"
+				data-name="${name}"
+				data-orderPrice="${totalprice}">
+				PAYMENT
+			</button>
 		</div>
 		<div style="text-align: right; margin-top:3%;">
 			<table style="float: right;">
@@ -254,18 +285,26 @@
 		</div>
 	</div>
 	
-	<div style="display:none;">
-	
+	<div style="display:none; position: fixed; top:15%; left:35%; width:35%; height:65%;" id="forAddAddress" class="modal">
+		<div style="margin:10%; width:80%;">
+			<table>
+				<c:forEach items="${addressList}" var="item">
+				
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 	
-	<div style="display:none;">
-	
+	<div style="display:none; position: fixed; top:15%; left:35%; width:35%; height:65%;" id="forAddCoupon" class="modal">
+		<c:forEach items="${cuList}" var="item">
+		
+		</c:forEach>
 	</div>
 	
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
 </body>
 </html>

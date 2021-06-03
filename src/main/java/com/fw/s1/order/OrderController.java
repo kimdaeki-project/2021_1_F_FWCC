@@ -25,6 +25,7 @@ import com.fw.s1.cart.CartService;
 import com.fw.s1.cart.CartVO;
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
+import com.fw.s1.member.MemberService;
 import com.fw.s1.member.MemberVO;
 import com.fw.s1.product.ProductVO;
 import com.siot.IamportRestClient.IamportClient;
@@ -43,6 +44,8 @@ public class OrderController {
 	private AddressService addressService;
 	@Autowired
 	private CouponService couponService;
+	@Autowired
+	private MemberService memberService;
 	
 	
 	private IamportClient api;
@@ -130,6 +133,8 @@ public class OrderController {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("admin");
 		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		memberVO = memberService.getUsernameandemail(memberVO);
+		memberVO.emailSeperator();
 		
 		for(long cartNum : cartNums) {
 			CartVO cartVO = new CartVO();
@@ -144,6 +149,9 @@ public class OrderController {
 		
 		long totalprice=0;
 		long totalMileage=0;
+		int count = -1;
+		String name = "";
+		name += list.get(0).getProductVO().getProductTitle();
 		for(CartVO cartVO : list) {
 			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
 			ProductVO productVO = cartVO.getProductVO();
@@ -153,6 +161,11 @@ public class OrderController {
 				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
 			}
 			totalMileage += productVO.getProductMileage();
+			count++;
+		}
+		
+		if(count>0) {
+			name+=" 외"+count+"벌	";
 		}
 		
 		List<AddressVO> addresslist = addressService.getAddressList(memberVO);
@@ -161,6 +174,7 @@ public class OrderController {
 		AddressVO recentAddr = new AddressVO();
 		
 		for(AddressVO addressVO : addresslist) {
+			addressVO.phoneSeperator();
 			if(addressVO.getOrderAddr()) {
 				orderAddr = addressVO;
 			}else if(addressVO.getRecentUse()){
@@ -173,10 +187,11 @@ public class OrderController {
 		
 		List<CouponVO> cuList = couponService.getCouponList(memberVO);
 
-		orderAddr.phoneSeperator();
+		model.addAttribute("name", name);
+		model.addAttribute("cuList", cuList);
 		model.addAttribute("recentAddr", recentAddr);
 		model.addAttribute("orderAddr", orderAddr);
-		model.addAttribute("orderDetail");
+		model.addAttribute("orderDetail", memberVO);
 		model.addAttribute("addressList", addrList);
 		model.addAttribute("totalMileage", totalMileage);
 		model.addAttribute("orderCount", orderCount);

@@ -7,4 +7,18 @@
 	<select id="getUsernameCheck" parameterType="MemberVO" resultType="MemberVO">
 		select username from member where username = #{username}
 	</select>
+	
+	
+	<select id="getUsernameandemail" parameterType="MemberVO" resultMap="getMemberMile">
+		select m.username, m.email, mi.enabledMile 
+		from member m inner join mileage mi on m.username=mi.username
+		where mi.mileNum = (select max(mileNum) from mileage where username=#{username})
+	</select>
+	<resultMap type="MemberVO" id="getMemberMile">
+		<id column="username" property="username"/>
+		<result column="email" property="email"/>
+		<association property="mileageVO" javaType="MileageVO">
+			<result column="enabledMile" property="enabledMile"/>
+		</association>
+	</resultMap>
 </mapper>
