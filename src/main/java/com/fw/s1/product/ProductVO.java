@@ -14,6 +14,8 @@ public class ProductVO {
 	private String productContents;
 	private String collab;
 	private String productType;
+	private Long finalPrice;
+	private Long productMileage;
 	
 	private List<ProductFileVO> files;
 	private List<ProductInfoVO> infos;

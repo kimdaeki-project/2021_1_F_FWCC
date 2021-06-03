@@ -3,6 +3,7 @@ package com.fw.s1.product;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fw.s1.product.ProductMapper;
 import com.fw.s1.product.ProductVO;
+import com.fw.s1.util.ProductPager;
 @SpringBootTest
 class ProductMapperTest {
 	
@@ -35,7 +37,7 @@ class ProductMapperTest {
 		
 	}
 	
-	@Test
+//	@Test
 	void setInsertTest() throws Exception{
 		int total=0;
 		String name = "top-short";
@@ -57,13 +59,52 @@ class ProductMapperTest {
 	}
 	
 //	@Test
+	void getTotalListTest() throws Exception{
+		ProductPager productPager = new ProductPager();
+		long num = productMapper.getTotalCount(productPager);
+		productPager.setStartRow(0);
+		productPager.setLastRow(num);
+		
+		List<ProductVO> list = productMapper.getList(productPager);
+		
+		System.out.println(list.size());
+		
+		assertNotEquals(0, list);
+	}
+	
+	@Test
 	void setUpdateTest() throws Exception {
-		ProductVO vo = new ProductVO();
-		vo.setProductTitle("Change-productTitle");
-		vo.setCollab("Change-collab");
-		vo.setProductNum(36L);
-		vo.setProductType("Change-productType");
-		int result = productMapper.setUpdate(vo);
+		ProductPager productPager = new ProductPager();
+		long num = productMapper.getTotalCount(productPager);
+		productPager.setStartRow(0);
+		productPager.setLastRow(num);
+		int totalResult=0;
+		Random rm = new Random();
+		List<ProductVO> list = productMapper.getList(productPager);
+		for(ProductVO vo:list) {
+			vo.setProductDisRate((long)((rm.nextInt(11))*5));
+			long price = vo.getProductPrice();
+			long rate = vo.getProductDisRate();
+			rate = (100-rate);
+			long fPrice = ((price*rate)/10000)*100;
+			
+			long mileage = price/2000*100;
+			vo.setFinalPrice(fPrice);
+			vo.setProductMileage(mileage);
+			
+			
+			int result = productMapper.setUpdate(vo);
+			totalResult += result;
+			if(totalResult%10==0) {
+				System.out.println("===================================");
+				System.out.println("price : "+price);
+				System.out.println("rate : "+(100-rate));
+				System.out.println("finalPrice : "+fPrice);
+				System.out.println("===================================");
+			}
+		}
+		System.out.println(totalResult);
+		assertNotEquals(0, totalResult);
 	}
 	
 //	@Test

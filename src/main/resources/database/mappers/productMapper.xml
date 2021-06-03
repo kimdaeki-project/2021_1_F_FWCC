@@ -36,8 +36,11 @@
 		productTitle=#{productTitle},
 		productPrice=#{productPrice},
 		productContents=#{productContents},
+		productDisRate=#{productDisRate},
 		collab=#{collab},
-		productType=#{productType}
+		productType=#{productType},
+		finalPrice=#{finalPrice},
+		productMileage=#{productMileage}
 		where
 		productNum=#{productNum}
 	</update>
