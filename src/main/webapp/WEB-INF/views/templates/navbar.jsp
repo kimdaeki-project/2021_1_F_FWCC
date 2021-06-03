@@ -91,7 +91,7 @@
 					<li><a href="#">MY BOARD</a></li>
 				</ul>
 			</li>
-			<li><a href="#">Login</a> / <a href="#">Join</a></li>
+			<li><a href="#">Login</a> / <a href="${pageContext.request.contextPath }/member/memberJoin">Join</a></li>
 			<li id="navbar-columnlist">
 				<a href="#">Community</a>
 				<ul id="navbar-rightul">

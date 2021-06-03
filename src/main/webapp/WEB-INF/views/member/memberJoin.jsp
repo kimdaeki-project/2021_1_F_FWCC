@@ -62,7 +62,9 @@
 							class="inputTypeText"
 							placeholder=""
 							type="text"
-						/> <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)</td>
+						/> <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)
+						<a role="button" style="margin-left: 50px;" class="btn btn-sm">중복확인</a>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">비밀번호 <img
