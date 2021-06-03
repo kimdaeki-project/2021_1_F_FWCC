@@ -182,27 +182,33 @@ CREATE TABLE `fw01`.`address` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
+truncate table address;
+
+ALTER TABLE `fw01`.`address` 
+ADD COLUMN `orderAddr` BIT NULL AFTER `detailAddr`,
+ADD COLUMN `recentUse` BIT NULL AFTER `orderAddr`;
+    
 -- insert dummy data
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username1', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username1', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username1', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3');
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username1', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1', true, true);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username1', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2', false, false);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username1', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3', false, false);
 --
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username2', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username2', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username2', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3');
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username2', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1', true, true);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username2', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2', false, false);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username2', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3', false, false);
 --
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username3', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username3', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2');
-insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr)
-values(0, 'username3', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3');
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username3', 'addrName1', 'recipient1', 'addrPhone1', 'zipCode1', 'basicAddr1', 'detailAddr1', true, true);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username3', 'addrName2', 'recipient2', 'addrPhone2', 'zipCode2', 'basicAddr2', 'detailAddr2', false, false);
+insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+values(0, 'username3', 'addrName3', 'recipient3', 'addrPhone3', 'zipCode3', 'basicAddr3', 'detailAddr3', false, false);
 
 
 =====================================이리희=======================================================
