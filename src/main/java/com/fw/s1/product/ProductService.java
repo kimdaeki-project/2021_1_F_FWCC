@@ -22,4 +22,8 @@ public class ProductService {
 		System.out.println(list.size());
 		return list;
 	}
+	
+	public long getTotalCount(ProductPager productPager) throws Exception{
+		return productMapper.getTotalCount(productPager);
+	}
 }

@@ -19,8 +19,10 @@ public class ProductController {
 	
 	@GetMapping(value="list")
 	public String getList(ProductPager productPager, Model model,String name,String division)throws Exception{
+		Long total = productService.getTotalCount(productPager);
 		List<ProductVO> list = productService.getList(productPager);
 		model.addAttribute("productList", list);
+		model.addAttribute("totalCount",total);
 		model.addAttribute("name",name);
 		model.addAttribute("division", division);
 		model.addAttribute("pager", productPager);

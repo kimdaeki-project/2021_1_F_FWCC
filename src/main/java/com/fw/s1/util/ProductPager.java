@@ -16,6 +16,8 @@ public class ProductPager {
 	
 	private long totalPage;
 	
+	private String sortStandard;
+	
 	
 	
 	

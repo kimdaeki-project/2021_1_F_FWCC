@@ -24,30 +24,29 @@
 #wrap {
 	padding: 85px 34px 0px;
 	min-width: 1252px;
-	max-width: 1400.1px;
+	max-width: 1400px;
 	margin: 0 auto;
 	min-height: 480px;
 }
 
 .divTest {
+	border-width: 0px;
 	min-height: 480px;
+	width:100%;
+	padding:0px;
 }
 
-.ulTest {
-	display: table;
-	width: 100%;
-	margin: 0 auto 50px;
-}
 
-.liTest {
-	display: inline-block;
-	width: 22%;
-	margin: 0 1% 40px;
-	vertical-align: top;
+.cardList {
+vertical-align: top;
+	display:inline-block;
+	width: 25%;
+	padding:0px;
+	margin: 0 -2px 40px;
+	border:0px;
 }
 
 #thumb {
-	position: relative;
 	margin: 0 10px 18px;
 	text-align: center;
 }
@@ -71,6 +70,7 @@
 
 .sort {
 	float: right;
+	margin-right:10px;
 }
 
 .sortName {
@@ -80,6 +80,12 @@
 
 .sortDiv {
 	height: 40px;
+}
+#cardContents{
+margin:0 10px;
+}
+.page{
+clear:both;
 }
 </style>
 <c:if test="${division eq ''}">
@@ -107,22 +113,24 @@
 			<c:if test="${name ne 'All'}">
 				<div style="text-align: center;">
 					<span><a class="selBtn"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long">long</a><a
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long&sortStandard=">long</a><a
 						class="selBtn"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short">short</a></span>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=">short</a></span>
 				</div>
 			</c:if>
 
 			<div class="sortDiv">
 				<p class="prdCount">
-					Total <strong>1276</strong> items.
+					Total <strong>${totalCount}</strong> items.
 				</p>
 				<div class="sort">
-					<span><a class="sortName" href="#">신상품</a></span> <span
-						class="sortName"> | </span> <span><a class="sortName"
-						href="#">상품명</a></span> <span class="sortName"> | </span> <span><a
-						class="sortName" href="#">낮은가격</a></span> <span class="sortName">
-						| </span> <span><a class="sortName" href="#">높은가격</a></span>
+					<span><a class="sortName" href="#">신상품</a></span>
+					<span class="sortName"> | </span>
+					<span><a class="sortName" href="#">상품명</a></span>
+					<span class="sortName"> | </span>
+					<span><a class="sortName" href="#">낮은가격</a></span>
+					<span class="sortName"> | </span>
+					<span><a class="sortName" href="#">높은가격</a></span>
 				</div>
 			</div>
 
@@ -133,17 +141,21 @@
 					<ul class="ulTest" >
 					 -->
 				<c:forEach items="${productList}" var="product">
-					<li class="liTest">
+					<div class="cardList">
 						<div id="thumb">
 							<a href="#"><img id="cardImg" alt="test"
-								src="${pageContext.request.contextPath}/images/product/test/c4.jpeg"></a>
-						</div> <a><span style="font-size: 11px; color: #838383;">${product.productTitle}</span></a>
+								src="${pageContext.request.contextPath}/images/product/test/frizm_278.jpg"></a>
+						</div>
+						<div id="cardContents">
+						<span ><a href="#" style="font-size: 11px; color: #838383;">${product.productTitle}</a></span>
 						<br>
 						<c:if test="${product.productDisRate eq 0}">
-							<p>KRW ${product.productPrice}</p>
+							<span style=" font-size: 12px; color: #000000;">KRW ${product.productPrice}</span>
+							
+								
 						</c:if> <c:if test="${product.productDisRate ne 0}">
 							<span
-								style="text-decoration: line-through; font-size: 12px; color: #000000; text-decoration: line-through;">KRW ${product.productPrice}
+								style="font-size: 12px; color: #000000; text-decoration: line-through;">KRW ${product.productPrice}
 							</span>
 							<br>
 							<span style="font-size: 12px; color: #555555;">할인 금액 :
@@ -151,37 +163,40 @@
 							<span style="font-size: 12px; color: #ff0000;">
 								${product.productDisRate}% SALE</span>
 						</c:if>
-					</li>
+						</div>
+					</div>
 				</c:forEach>
 				<!-- 
 					</ul>
  -->
 			</div>
+			<div class="page">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=1"
+					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=1&sortStandard="
 					title="${pager.startNum-1}"><</a></li>
 
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.startNum-1}">PREV</a></li>
+					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.startNum-1}&sortStandard=">PREV</a></li>
 
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}">${i}</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}&sortStandard=">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.lastNum%5 eq 0}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}&sortStandard=">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=">></a></li>
 				</c:if>
 				<c:if test="${pager.lastNum%5 ne 0}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}&sortStandard=">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=">></a></li>
 				</c:if>
 			</ul>
+			</div>
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
