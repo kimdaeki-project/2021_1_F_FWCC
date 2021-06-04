@@ -135,7 +135,7 @@
 					</td>
 				</tr>
 				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
-					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">전화번호 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
 					<td style="padding:1%;">
 						<input type="text" id="buyerPhone1" value='<c:out value="${orderAddr.addrPhone1}"></c:out>' readonly="readonly"> 
 						- <input type="text" id="buyerPhone2" value='<c:out value="${orderAddr.addrPhone2}"></c:out>' readonly="readonly"> 
@@ -183,7 +183,7 @@
 					</td>
 				</tr>
 				<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
-					<td style="padding:1%;">휴대전화 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
+					<td style="padding:1%;">전화번호 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt=""></td>
 					<td style="padding:1%;">
 						<input type="text" id="reccall1" value='<c:out value="${recentAddr.addrPhone1}"></c:out>' readonly="readonly"> 
 						- <input type="text" id="reccall2" value='<c:out value="${recentAddr.addrPhone2}"></c:out>' readonly="readonly"> 
@@ -288,7 +288,7 @@
 	</div>
 	
 	<div style="display:none; position: fixed; top:10%; left:30%; max-width:45%; height: 65%;" id="forAddAddress" class="modal">
-		<div id="addressChaper1" style="margin:2%; width:96%;">
+		<div id="addressChapter1" style="margin:2%; width:96%; display:contents;">
 			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
 				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
 					<tr>
@@ -322,7 +322,7 @@
 							수령인
 						</th>
 						<th>
-							휴대전화
+							전화번호
 						</th>
 						<th>
 							주소
@@ -332,7 +332,7 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="settingAddressList">
 					<c:if test="${addrList eq null}">
 						<tr>
 							<td colspan="6" style="text-align: center;">
@@ -360,7 +360,8 @@
 							<td>
 								<button class="addressAdapt"
 										data-addrNum='<c:out value="${item.addrNum}"></c:out>'>적용</button>
-								<br><button class="addressRepareForm">수정</button>
+								<br><button class="addressRepareForm"
+										data-addrNum='<c:out value="${item.addrNum}"></c:out>'>수정</button>
 							</td>		
 						</tr>
 					</c:forEach>
@@ -370,7 +371,7 @@
 			<button id="addressAddButton">배송지등록</button>
 		</div>
 		
-		<div id="addressChaper2" style="margin:2%; width:96%; display:none;">
+		<div id="addressChapter2" style="margin:2%; width:96%; display:none;">
 			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
 				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
 					<tr>
@@ -393,14 +394,54 @@
 			</table>
 			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
 				<tbody>
-				
+					<tr>
+						<td>
+							배송지명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
+						</td>
+						<td>
+							<input type="text" id="insertAddressTitle">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							성명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
+						</td>
+						<td>
+							<input type="text" id="insertAddrRecipient">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
+						</td>
+						<td>
+							<input type="text" id="sample2_postcode" placeholder="우편번호">
+							<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+							<input type="text" id="sample2_address" placeholder="주소"><br>
+							<input type="text" id="sample2_detailAddress" placeholder="상세주소">
+							<input type="text" id="sample2_extraAddress" placeholder="참고항목">
+							
+							<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+							<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							전화번호 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
+						</td>
+						<td>
+							<input type="text" id="insertAddrPhone1"> - <input type="text" id="insertAddrPhone2"> - <input type="text" id="insertAddrPhone3">
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<button id="AddThisAddress">등록</button>
 			<button id="cancleAddAddress">취소</button>
 		</div>
 			
-		<div id="addressChaper3" style="margin:2%; width:96%; display:none;">
+		<div id="addressChapter3" style="margin:2%; width:96%; display:none;">
 			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
 				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
 					<tr>
@@ -429,7 +470,7 @@
 				</tbody>
 			</table>
 			<button id="repareAddress">수정</button>
-			<button>취소</button>
+			<button id="cancleRepareAddress">취소</button>
 		</div>
 	</div>
 	

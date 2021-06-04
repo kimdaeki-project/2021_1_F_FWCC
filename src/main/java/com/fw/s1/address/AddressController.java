@@ -41,7 +41,7 @@ public class AddressController {
 	
 	@ResponseBody
 	@GetMapping("deleteSelect")
-	public String deleteAddress(long[] addrNums, Authentication authentication)throws Exception{
+	public Long deleteAddress(long[] addrNums, Authentication authentication)throws Exception{
 		List<AddressVO> addressVOs = new ArrayList<>();
 		MemberVO memberVO = new MemberVO();
 		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
@@ -54,31 +54,37 @@ public class AddressController {
 			addressVOs.add(addressVO);
 		}
 		
-		Long result = addressService.deleteSelect(addressVOs);
-		List<AddressVO> addressVOs2 = new ArrayList<>();
+		return addressService.deleteSelect(addressVOs);
+	}
+	
+	@ResponseBody
+	@GetMapping("getAddressList")
+	public String[] getAddressList(Authentication authentication)throws Exception{
+		MemberVO memberVO = new MemberVO();
+		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		memberVO.setUsername("admin");
+		List<AddressVO> list = addressService.getAddressList(memberVO);
+		int length = list.size();
 		
-		if(result<1) {
-			return "default";
+		if(length==0) {
+			String[] def = {""};
+			return def;
 		}
-		result = 0L;
 		
-		addressVOs2 = addressService.getAddressList(memberVO);
-		List<AddressVO> addressVOs3 = new ArrayList<>();
-		String[] str = new String[addressVOs2.size()-1];
+		String[] results = new String[length-1];
 		
-		for(AddressVO addressVO : addressVOs2) {
+		int temp = 0;
+		Gson gson = new Gson();
+		for(int i = 0 ; i < length; i++) {
+			AddressVO addressVO = list.get(i);
 			if(!addressVO.getOrderAddr()) {
-				addressVOs3.add(addressVO);
-				result++;			
+				addressVO.concatAddress();
+				results[temp+i] = gson.toJson(addressVO);
+			}else {
+				temp=-1;
 			}
 		}
 		
-		if(result<1) {
-			return "none";
-		}
-		
-		String json = "";
-		
-		return json;
+		return results;
 	}
 }
