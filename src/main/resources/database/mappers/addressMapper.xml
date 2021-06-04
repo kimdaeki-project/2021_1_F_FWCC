@@ -6,4 +6,12 @@
   <select id="getAddressList" parameterType="MemberVO" resultType="AddressVO">
   	select * from address where username=#{username}
   </select>
+  <select id="getSelectOne" parameterType="AddressVO" resultType="AddressVO">
+  	select * from address where username=#{username} and addrNum = #{addrNum}
+  </select>
+  <delete id="deleteSelect" parameterType="java.util.List">
+  	<foreach collection="list" item="item" separator=";">
+  		delete from address where username=#{item.username} and addrNum=#{item.addrNum}
+  	</foreach>
+  </delete>
 </mapper>

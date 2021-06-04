@@ -28,6 +28,7 @@ import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.member.MemberService;
 import com.fw.s1.member.MemberVO;
 import com.fw.s1.product.ProductVO;
+import com.google.gson.Gson;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -119,13 +120,13 @@ public class OrderController {
 				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
 			}
 		}
+
 		
 		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
 	}
 	
-	//쿠폰 사용작업 필요
 	//주소 추가작업 필요
 	@PostMapping("orderform")
 	public void getPurchase(long[] cartNums, Authentication authentication, Model model)throws Exception {
@@ -175,6 +176,7 @@ public class OrderController {
 		
 		for(AddressVO addressVO : addresslist) {
 			addressVO.phoneSeperator();
+			addressVO.concatAddress();
 			if(addressVO.getOrderAddr()) {
 				orderAddr = addressVO;
 			}else if(addressVO.getRecentUse()){

@@ -19,6 +19,7 @@
 	</resultMap>
 
 	<select id="getCouponList" parameterType="MemberVO" resultMap="getCouponDetails">
-		select c.*, cs.* from coupon c inner join couponsp cs on c.cuSpNum=cs.cuSpNum where c.username=#{username}
+		select c.*, cs.* from coupon c inner join couponsp cs on c.cuSpNum=cs.cuSpNum 
+		where c.username=#{username} and useCheck=0
 	</select>
 </mapper>

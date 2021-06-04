@@ -16,4 +16,12 @@ public class AddressService {
 	public List<AddressVO> getAddressList(MemberVO memberVO)throws Exception{
 		return addressMapper.getAddressList(memberVO);
 	}
+	
+	public AddressVO getSelectOne(AddressVO addressVO)throws Exception{
+		return addressMapper.getSelectOne(addressVO);
+	}
+	
+	public Long deleteSelect(List<AddressVO> addressVOs)throws Exception{
+		return addressMapper.deleteSelect(addressVOs);
+	}
 }

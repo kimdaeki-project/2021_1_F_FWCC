@@ -53,7 +53,7 @@
 				<c:forEach items="${items}" var="item">
 					<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 						<td style="padding:1%;">
-							<img alt="" src="${pageContext.request.contextPath}/images/${item.productVO.productTitle}/${item.productFileVO.fileName}"
+							<img alt="" src="${pageContext.request.contextPath}/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
 								width="100px" height="100px">
 						</td>
 						<td style="text-align: left; padding:1% 3%;">
@@ -213,7 +213,7 @@
 			<tbody>
 				<tr style="border-bottom: 2px rgba(128,128,128, 0.5) solid; font-size:1.6rem;">
 					<td style="padding: 3%;"><strong>KRW <span><c:out value="${totalprice}"></c:out></span></strong></td>
-					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice">0</span></strong></td>
+					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice"><c:out value='0'></c:out></span></strong></td>
 					<td style="padding: 3%;"><strong>= KRW <span id="endprice"><c:out value="${totalprice}"></c:out></span></strong></td>
 				</tr>
 			</tbody>
@@ -254,12 +254,14 @@
 		</table>
 		<div style="text-align: right; margin-top: 4%;">
 			<strong>최종결제 금액</strong>
-			<p><strong><span style="font-size:1.8rem;"><c:out value="${totalprice}"></c:out></span></strong></p>
+			<p><strong><span style="font-size:1.8rem;" id="forUserPrice"><c:out value="${totalprice}"></c:out></span></strong></p>
 			<input type="checkbox" id="agreepayment">
 			<span>결제정보를 확인하였으며, 구매진행에 동의합니다.</span><br>
 			<button id="purchasebutton"
 				data-name="${name}"
-				data-orderPrice="${totalprice}">
+				data-originTotPrice="${totalprice}"
+				data-cuSale="<c:out value='0'></c:out>"
+				data-mileSp='<c:out value="0"></c:out>'>
 				PAYMENT
 			</button>
 		</div>
@@ -285,20 +287,211 @@
 		</div>
 	</div>
 	
-	<div style="display:none; position: fixed; top:15%; left:35%; width:35%; height:65%;" id="forAddAddress" class="modal">
-		<div style="margin:10%; width:80%;">
-			<table>
-				<c:forEach items="${addressList}" var="item">
-				
-				</c:forEach>
+	<div style="display:none; position: fixed; top:10%; left:30%; max-width:45%; height: 65%;" id="forAddAddress" class="modal">
+		<div id="addressChaper1" style="margin:2%; width:96%;">
+			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
+				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
+					<tr>
+						<th style="padding:2%;">
+							배송주소록 유의사항
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding:3%;">
+							<ul style="padding:0; list-style: none;">
+								<li>
+									 - 배송 주소록은 최대 10개까지 등록할 수 있습니다.
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
 			</table>
+			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
+				<thead>
+					<tr>
+						<th>
+							<input type="checkbox" id="addressAllCheck">
+						</th>
+						<th>
+							배송지명
+						</th>
+						<th>
+							수령인
+						</th>
+						<th>
+							휴대전화
+						</th>
+						<th>
+							주소
+						</th>
+						<th>
+							배송지 관리
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${addrList eq null}">
+						<tr>
+							<td colspan="6" style="text-align: center;">
+								등록된 주소가 없습니다.
+							</td>
+						</tr>
+					</c:if>
+					<c:forEach items='${addrList}' var="item">
+						<tr data-addrNum="${item.addrNum}">
+							<td>
+								<input type="checkbox" class="addressSelect" data-addrNum='<c:out value="${item.addrNum}"></c:out>'>
+							</td>
+							<td>
+								<c:out value="${item.addrName}"></c:out>
+							</td>
+							<td>
+								<c:out value="${item.recipient}"></c:out>
+							</td>
+							<td>
+								<c:out value="${item.addrPhone}"></c:out>
+							</td>
+							<td>
+								<c:out value="${item.fullAddress}"></c:out>
+							</td>
+							<td>
+								<button class="addressAdapt"
+										data-addrNum='<c:out value="${item.addrNum}"></c:out>'>적용</button>
+								<br><button class="addressRepareForm">수정</button>
+							</td>		
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<button id="selectAddressDelete">선택 주소록 삭제</button>
+			<button id="addressAddButton">배송지등록</button>
+		</div>
+		
+		<div id="addressChaper2" style="margin:2%; width:96%; display:none;">
+			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
+				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
+					<tr>
+						<th style="padding:2%;">
+							배송주소록 유의사항
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding:3%;">
+							<ul style="padding:0; list-style: none;">
+								<li>
+									 - 배송 주소록은 최대 10개까지 등록할 수 있습니다.
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
+				<tbody>
+				
+				</tbody>
+			</table>
+			<button id="AddThisAddress">등록</button>
+			<button id="cancleAddAddress">취소</button>
+		</div>
+			
+		<div id="addressChaper3" style="margin:2%; width:96%; display:none;">
+			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
+				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
+					<tr>
+						<th style="padding:2%;">
+							배송주소록 유의사항
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding:3%;">
+							<ul style="padding:0; list-style: none;">
+								<li>
+									 - 배송 주소록은 최대 10개까지 등록할 수 있습니다.
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
+				<tbody>
+					<tr>
+					
+					</tr>
+				</tbody>
+			</table>
+			<button id="repareAddress">수정</button>
+			<button>취소</button>
 		</div>
 	</div>
 	
-	<div style="display:none; position: fixed; top:15%; left:35%; width:35%; height:65%;" id="forAddCoupon" class="modal">
-		<c:forEach items="${cuList}" var="item">
-		
-		</c:forEach>
+	<div style="display:none; position: fixed; top:15%; left:30%; max-width:45%; height: 65%;" id="forAddCoupon" class="modal">
+		<div style="margin:2%; width:96%;">
+			<table style="width:100%; border: 1px rgba(128,128,128,0.5) solid;">
+				<thead>
+					<tr>
+						<th style="padding:2%; border-bottom:1px rgba(128,128,128,0.25) solid;">쿠폰 사용에 따른 주의사항</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding:2%;">
+							<ul style="list-style: none; padding:0;">
+								<li>- 사용 가능한 쿠폰만 보여지게 됩니다.</li>
+								<li>- 쿠폰은 회원등급 할인 이후에 적용되므로,</li>
+								<li>&ensp;현재 페이지에서 보여지는 판매가와 실제 적용되는 금액과 다를 수 있습니다.</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:60%;">
+				<thead>
+					<tr>
+						<th style="text-align: center; padding:3%;">
+							쿠폰 할인금액
+						</th>
+					</tr>
+					<tr>
+						<th style="text-align: center; padding:2%;">
+							<span style="font-size: 2rem;">
+								KRW <span id="cuSalePrice1" style="font-size: 2.5rem;"><c:out value="0"></c:out></span>
+							</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: center; padding:3%;">
+							- <select id="couponSelector">
+								<option value="1" data-disRate="0" selected="selected">선택하세요.</option>
+								<c:forEach items="${cuList}" var="item">
+									<option value="${item.cuNum}" data-disRate="<c:out value='${item.couponspVO.disRate}'></c:out>">
+										<c:out value="${item.couponspVO.cuName}"></c:out>
+									</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right; padding:2%;">
+							<strong>
+								= 총 쿠폰 할인 금액 :&ensp;KRW&ensp;
+								<span id="cuSalePrice2" style="font-size: 1.8rem;"><c:out value="0"></c:out></span>
+							</strong>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	
 	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
