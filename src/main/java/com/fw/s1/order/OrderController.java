@@ -200,4 +200,9 @@ public class OrderController {
 		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
 	}
+	
+	@PostMapping("orderComplete")
+	public void orderComplete(Authentication authentication)throws Exception{
+		
+	}
 }

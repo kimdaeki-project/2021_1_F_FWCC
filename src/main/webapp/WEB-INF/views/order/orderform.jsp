@@ -52,7 +52,11 @@
 			</thead>
 			<tbody style="text-align: center; border-bottom: 1px gray solid;">
 				<c:forEach items="${items}" var="item">
-					<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+					<tr class="productDataList"
+						data-productNum='<c:out value="${item.productNum}"></c:out>'
+						data-pInfoNum='<c:out value="${item.pInfoNum}"></c:out>'
+						data-productCount='<c:out value="${item.productCount}"></c:out>'
+						style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 						<td style="padding:1%;">
 							<img alt="" src="${pageContext.request.contextPath}/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
 								width="100px" height="100px">
@@ -262,7 +266,9 @@
 				data-name="${name}"
 				data-originTotPrice="${totalprice}"
 				data-cuSale="<c:out value='0'></c:out>"
-				data-mileSp='<c:out value="0"></c:out>'>
+				data-mileSp='<c:out value="0"></c:out>'
+				data-cuNum="<c:out value='1'></c:out>"
+				data-changedMile='<c:out value="${totalMileage}"></c:out>'>
 				PAYMENT
 			</button>
 		</div>
@@ -288,7 +294,7 @@
 		</div>
 	</div>
 	
-	<div style="display:none; position: fixed; top:10%; left:30%; max-width:45%; height: 65%;" id="forAddAddress" class="modal">
+	<div style="display:none; position: fixed; top:10%; left:15%; max-width:70%; max-height: 75%;" id="forAddAddress" class="modal">
 		<div id="addressChapter1" style="margin:2%; width:96%; display:contents;">
 			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
 				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
@@ -452,7 +458,7 @@
 		</div>
 	</div>
 	
-	<div style="display:none; position: fixed; top:15%; left:30%; max-width:45%; height: 65%;" id="forAddCoupon" class="modal">
+	<div style="display:none; position: fixed; top:15%; left:30%; max-width:45%; max-height: 65%;" id="forAddCoupon" class="modal">
 		<div style="margin:2%; width:96%;">
 			<table style="width:100%; border: 1px rgba(128,128,128,0.5) solid;">
 				<thead>
@@ -501,7 +507,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="text-align: right; padding:2%;">
+						<td style="text-align: right; padding:2%; border-top: 1px rgba(128,128,128,0.5) solid;">
 							<strong>
 								= 총 쿠폰 할인 금액 :&ensp;KRW&ensp;
 								<span id="cuSalePrice2" style="font-size: 1.8rem;"><c:out value="0"></c:out></span>
