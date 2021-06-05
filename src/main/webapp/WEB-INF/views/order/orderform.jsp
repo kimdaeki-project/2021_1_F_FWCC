@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -333,7 +334,7 @@
 					</tr>
 				</thead>
 				<tbody id="settingAddressList">
-					<c:if test="${addrList eq null}">
+					<c:if test="${fn:length(addrList) eq 0}">
 						<tr>
 							<td colspan="6" style="text-align: center;">
 								등록된 주소가 없습니다.
@@ -367,8 +368,10 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<button id="selectAddressDelete">선택 주소록 삭제</button>
-			<button id="addressAddButton">배송지등록</button>
+			<div style="margin-top:1%; text-align: center;">
+				<button id="selectAddressDelete" style="margin-right:1.5%;">선택 주소록 삭제</button>
+				<button id="addressAddButton">배송지등록</button>
+			</div>
 		</div>
 		
 		<div id="addressChapter2" style="margin:2%; width:96%; display:none;">
@@ -393,33 +396,36 @@
 				</tbody>
 			</table>
 			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
+				<colgroup>
+					<col width="20%">
+					<col>
+				</colgroup>
 				<tbody>
 					<tr>
-						<td>
+						<td style="padding:1%;">
 							배송지명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
 						</td>
-						<td>
+						<td style="padding:1%;">
 							<input type="text" id="insertAddressTitle">
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td style="padding:1%;">
 							성명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
 						</td>
-						<td>
+						<td style="padding:1%;">
 							<input type="text" id="insertAddrRecipient">
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td style="padding:1%;">
 							주소 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
 						</td>
-						<td>
-							<input type="text" id="sample2_postcode" placeholder="우편번호">
+						<td style="padding:1%;">
+							<input type="text" readonly="readonly" id="sample2_postcode" placeholder="우편번호" style="width:25%;">
 							<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample2_address" placeholder="주소"><br>
-							<input type="text" id="sample2_detailAddress" placeholder="상세주소">
-							<input type="text" id="sample2_extraAddress" placeholder="참고항목">
+							<input type="text" readonly="readonly" id="sample2_address" style="width:65%" placeholder="주소"><br>
+							<input type="text" id="sample2_detailAddress" style="width:65%" placeholder="상세주소">
 							
 							<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 							<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -428,49 +434,21 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td style="padding:1%;">
 							전화번호 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="">
 						</td>
-						<td>
-							<input type="text" id="insertAddrPhone1"> - <input type="text" id="insertAddrPhone2"> - <input type="text" id="insertAddrPhone3">
+						<td style="padding:1%;">
+							<input type="text" style="width:25%;" id="insertAddrPhone1"> 
+							- <input type="text" style="width:25%;" id="insertAddrPhone2"> 
+							- <input type="text" style="width:25%;" id="insertAddrPhone3">
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<button id="AddThisAddress">등록</button>
-			<button id="cancleAddAddress">취소</button>
-		</div>
-			
-		<div id="addressChapter3" style="margin:2%; width:96%; display:none;">
-			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
-				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">
-					<tr>
-						<th style="padding:2%;">
-							배송주소록 유의사항
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td style="padding:3%;">
-							<ul style="padding:0; list-style: none;">
-								<li>
-									 - 배송 주소록은 최대 10개까지 등록할 수 있습니다.
-								</li>
-							</ul>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<table style="width:100%; border: 1px black solid; margin-top: 2%; height:50%;">
-				<tbody>
-					<tr>
-					
-					</tr>
-				</tbody>
-			</table>
-			<button id="repareAddress">수정</button>
-			<button id="cancleRepareAddress">취소</button>
+			<div style="margin-top: 1%; text-align: right;">
+				<button id="addThisAddress" data-role="edit" data-addrNum="" style="margin-right:1%;"></button>
+				<button id="cancleAddAddress">취소</button>
+			</div>
 		</div>
 	</div>
 	

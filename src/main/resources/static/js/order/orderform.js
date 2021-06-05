@@ -101,7 +101,7 @@ $("#selectAddressDelete").click(function(event){
 		success:function(result){
 			if(result>0){
 				$.get({
-					url:"getAddressList",
+					url:"/address/getAddressList",
 					success:function(result){
 						if(result[0]==""){
 							let nothingthere = "<tr><td colspan='6' style='text-align: center;'>등록된 주소가 없습니다.</td></tr>";
@@ -114,7 +114,7 @@ $("#selectAddressDelete").click(function(event){
 								
 								let trform = '<tr data-addrNum="'+data.addrNum+'"></tr>';
 								$("#settingAddressList").append(trform);
-								let target = $("#settingAddressList").find('tr[data-addrNum="'+data.addrNum+']');
+								let target = $("#settingAddressList").find('tr[data-addrNum="'+data.addrNum+'"]');
 								
 								let tdform = '<td><input type="checkbox" class="addressSelect" data-addrNum="'+data.addrNum+'"></td>';
 								target.append(tdform);
@@ -144,7 +144,7 @@ $("#selectAddressDelete").click(function(event){
 	});
 });
 
-$(".addressAdapt").click(function(){
+$("#addressChapter1").on("click",".addressAdapt", function(){
 	const addrNum = $(this).attr("data-addrNum");
 	
 	$.get({
@@ -162,8 +162,8 @@ $(".addressAdapt").click(function(){
 			}else{
 				let address = JSON.parse(result);
 				$("#recZipcode").val(address.zipCode);
-				$("#recZipcode").val(address.basicAddr);
-				$("#recZipcode").val(address.detailAddr);
+				$("#recBasic").val(address.basicAddr);
+				$("#recDetail").val(address.detailAddr);
 				$("#recPeople").val(address.recipient);
 				$("#reccall1").val(address.addrPhone1);
 				$("#reccall2").val(address.addrPhone2);
@@ -177,7 +177,65 @@ $(".addressAdapt").click(function(){
 $("#addressAddButton").click(function(event){
 	event.preventDefault();
 	
+	$("#insertAddressTitle").val("");
+	$("#insertAddrRecipient").val('');
+	$("#sample2_postcode").val('');
+	$("#sample2_address").val('');
+	$("#sample2_detailAddress").val('');
+	$("#insertAddrPhone1").val('');
+	$("#insertAddrPhone2").val('');
+	$("#insertAddrPhone3").val('');
+	
 	$("#addressChapter1").css("display","none");
+	$("#addThisAddress").attr("data-role", "add");
+	$("#addThisAddress").empty();
+	$("#addThisAddress").text("등록");
+	$("#addressChapter2").css("display","contents");
+});
+
+$("#addressChapter1").on("click",".addressRepareForm", function(event){
+	event.preventDefault();
+	const addrNum = $(this).attr("data-addrNum");
+	let checking = true;
+	
+	$.get({
+		url:"/address/getSelectOne",
+		data:{
+			addrNum:addrNum
+		},
+		success:function(data){
+			if(data==""){
+				swal({
+					icon:"error",
+					title:"에러 발생",
+					text:"데이터를 가져오는 도중 문제가 발생하였습니다."
+				});
+				checking=false;
+				return;
+			}else{
+				let addr=JSON.parse(data);
+			
+				$("#insertAddressTitle").val(addr.addrName);
+				$("#insertAddrRecipient").val(addr.recipient);
+				$("#sample2_postcode").val(addr.zipCode);
+				$("#sample2_address").val(addr.basicAddr);
+				$("#sample2_detailAddress").val(addr.detailAddr);
+				$("#insertAddrPhone1").val(addr.addrPhone1);
+				$("#insertAddrPhone2").val(addr.addrPhone2);
+				$("#insertAddrPhone3").val(addr.addrPhone3);
+			}
+		}
+	});
+	
+	if(!checking){
+		return;
+	}
+	
+	$("#addressChapter1").css("display","none");
+	$("#addThisAddress").attr("data-role", "edit");
+	$("#addThisAddress").empty();
+	$("#addThisAddress").text("수정");
+	$("#addThisAddress").attr("data-addrNum", addrNum);
 	$("#addressChapter2").css("display","contents");
 });
 
@@ -188,11 +246,163 @@ $("#cancleAddAddress").click(function(event){
 	$("#addressChapter1").css("display","contents");
 });
 
-$("#cancleRepareAddress").click(function(event){
+$("#addThisAddress").click(function(event){
 	event.preventDefault();
 	
-	$("#addressChapter3").css("display", "none");
-	$("#addressChapter1").css("display", "contents");
+	let error = false;
+	
+	const addrNum = $(this).attr("data-addrNum");
+	const addrName = $("#insertAddressTitle").val();
+	const recipient = $("#insertAddrRecipient").val();
+	const zipCode = $("#sample2_postcode").val();
+	const basicAddr = $("#sample2_address").val();
+	const detailAddr = $("#sample2_detailAddress").val();
+	const addrPhone1 = $("#insertAddrPhone1").val();
+	const addrPhone2 = $("#insertAddrPhone2").val();
+	const addrPhone3 = $("#insertAddrPhone3").val();
+	const addrPhone = addrPhone1+"-"+addrPhone2+"-"+addrPhone3;
+	
+	
+	if($(this).attr("data-role")=='edit'){
+		$.get({
+			url:"/address/updateAddress",
+			data:{
+				addrNum:addrNum,
+				addrName:addrName,
+				recipient: recipient,
+				zipCode: zipCode,
+				basicAddr:basicAddr,
+				detailAddr:detailAddr,
+				addrPhone:addrPhone
+			},
+			success:function(data){
+				if(data>0){
+					return;
+				}else{
+					swal({
+						icon:"error",
+						title:"에러발생",
+						text:"수정사항 적용에서 서버오류가 발생하였습니다."
+					});
+					error=true;
+					return;
+				}
+			}
+		});
+	}else{
+		$.get({
+			url:"/address/checkCount",
+			success:function(data){
+				if(data>10){
+					swal({
+						icon:"warning",
+						title:"등록 제한",
+						text:"주소는 10개까지 등록할 수 있습니다."
+					});
+					error=true;
+					return;
+				}else if(data==null){
+					swal({
+						icon:"error",
+						title:"에러발생",
+						text:"데이터를 가져오는 도중 에러가 발생하였습니다."
+					});
+					error=true;
+					return;
+				}else{
+					$.get({
+						url:"/address/setAddress",
+						data:{
+							addrName:addrName,
+							recipient: recipient,
+							zipCode: zipCode,
+							basicAddr:basicAddr,
+							detailAddr:detailAddr,
+							addrPhone:addrPhone
+						},
+						success:function(data){
+							if(data>0){
+								return;
+							}else{
+								swal({
+									icon:"error",
+									title:"에러발생",
+									text:"주소를 추가하는 과정에서 서버오류가 발생하였습니다."
+								});
+								error=true;
+								return;
+							}
+						}
+					});
+				}
+			}
+		});
+	}
+	
+	if(error){
+		return;
+	}else{
+		$.get({
+			url:"/address/getSelectRecent",
+			success:function(data){
+				if(data==''){
+					swal({
+						icon:"error",
+						title:"에러발생",
+						text:"서버와 통신이 실패되어 주소 갱신에 실패하였습니다."
+					});
+					return;
+				}else{
+					let addr = JSON.parse(data);
+					
+					$("#insertAddressTitle").val(addr.addrName);
+					$("#insertAddrRecipient").val(addr.recipient);
+					$("#sample2_postcode").val(addr.zipCode);
+					$("#sample2_address").val(addr.basicAddr);
+					$("#sample2_detailAddress").val(addr.detailAddr);
+					$("#insertAddrPhone1").val(addr.addrPhone1);
+					$("#insertAddrPhone2").val(addr.addrPhone2);
+					$("#insertAddrPhone3").val(addr.addrPhone3);
+				}
+			}
+		});
+	}
+	
+	$.get({
+		url:"/address/getAddressList",
+		success:function(result){
+			if(result[0]==""){
+				let nothingthere = "<tr><td colspan='6' style='text-align: center;'>등록된 주소가 없습니다.</td></tr>";
+				$("#settingAddressList").empty();
+				$("#settingAddressList").append(nothingthere);
+			}else{
+				$("#settingAddressList").empty();
+				for(let datas of result){
+					let data = JSON.parse(datas);
+					let trform = '<tr data-addrNum="'+data.addrNum+'"></tr>';
+					$("#settingAddressList").append(trform);
+					let target = $("#settingAddressList").find('tr[data-addrNum="'+data.addrNum+'"]');
+					
+					let tdform = '<td><input type="checkbox" class="addressSelect" data-addrNum="'+data.addrNum+'"></td>';
+					target.append(tdform);
+					tdform = '<td>'+data.addrName+'</td>';
+					target.append(tdform);
+					tdform = '<td>'+data.recipient+'</td>';
+					target.append(tdform);
+					tdform = '<td>'+data.addrPhone+'</td>';
+					target.append(tdform);
+					tdform = '<td>'+data.fullAddress+'</td>';
+					target.append(tdform);
+					tdform = '<td><button class="addressAdapt" data-addrNum='+data.addrNum+'>적용</button>'
+							+'<br><button class="addressRepareForm" data-addrNum='+data.addrNum+'>수정</button></td>';
+					target.append(tdform);
+				}
+			}
+		}
+	});
+	
+	$("#addressChapter2").css("display","none");
+	$("#addressChapter1").css("display","contents");
 });
 
 $("#purchasebutton").click(function(event){
@@ -284,10 +494,9 @@ $("#purchasebutton").click(function(event){
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample2_extraAddress").value = extraAddr;
                 
                 } else {
-                    document.getElementById("sample2_extraAddress").value = '';
+
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.

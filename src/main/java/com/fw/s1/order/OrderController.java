@@ -194,7 +194,7 @@ public class OrderController {
 		model.addAttribute("recentAddr", recentAddr);
 		model.addAttribute("orderAddr", orderAddr);
 		model.addAttribute("orderDetail", memberVO);
-		model.addAttribute("addressList", addrList);
+		model.addAttribute("addrList", addrList);
 		model.addAttribute("totalMileage", totalMileage);
 		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("items", list);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,12 +32,10 @@ public class AddressController {
 		if(addressVO==null) {
 			return "";
 		}
-		
 		addressVO.phoneSeperator();
 		Gson gson = new Gson();
-		String result = gson.toJson(addressVO);
 		
-		return result;
+		return gson.toJson(addressVO);
 	}
 	
 	@ResponseBody
@@ -86,5 +85,59 @@ public class AddressController {
 		}
 		
 		return results;
+	}
+	
+	@ResponseBody
+	@GetMapping("updateAddress")
+	@Transactional(rollbackFor = Exception.class)
+	public Long updateAddress(AddressVO addressVO, Authentication authentication)throws Exception{
+		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		addressVO.setUsername("admin");
+		Long result = addressService.beforeAddreess(addressVO);
+		
+		if(result<1) {
+			return result;
+		}
+		
+		result = addressService.updateAddress(addressVO);
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("setAddress")
+	@Transactional(rollbackFor = Exception.class)
+	public Long setAddress(AddressVO addressVO, Authentication authentication)throws Exception{
+		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		addressVO.setUsername("admin");
+		addressService.beforeAddreess(addressVO);
+		
+		return addressService.setAddress(addressVO);
+	}
+	
+	@ResponseBody
+	@GetMapping("getSelectRecent")
+	public String getSelectRecent(Authentication authentication)throws Exception{
+		AddressVO addressVO = new AddressVO();
+		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		addressVO.setUsername("admin");
+		
+		Gson gson = new Gson();
+		addressVO = addressService.getSelectRecent(addressVO);
+		
+		if(addressVO==null) {
+			return "";
+		}
+		addressVO.phoneSeperator();
+		
+		return gson.toJson(addressVO);
+	}
+	
+	@ResponseBody
+	@GetMapping("checkCount")
+	public Long checkCount(Authentication authentication)throws Exception{
+		AddressVO addressVO = new AddressVO();
+		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		addressVO.setUsername("admin");
+		return addressService.checkCount(addressVO);
 	}
 }
