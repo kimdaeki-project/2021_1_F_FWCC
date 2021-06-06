@@ -8,5 +8,7 @@
  		insert into orderlist(orderNum, totPrice, spPrice, cuNum, username, destination, orderDate, orderStatem, orderMessage, orderName)
  		values(#{orderNum}, #{totPrice}, #{spPrice}, #{cuNum}, #{username}, #{destination}, sysdata(), 1, #{orderMessage}, #{orderName})
  	</insert>
-	
+	<select id="getOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where username=#{username} and orderNum=#{orderNum}
+	</select>
  </mapper>

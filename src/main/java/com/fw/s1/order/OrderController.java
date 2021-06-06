@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -35,7 +36,6 @@ import com.fw.s1.product.ProductService;
 import com.fw.s1.product.ProductVO;
 import com.fw.s1.purchase.PurchaseService;
 import com.fw.s1.purchase.PurchaseVO;
-import com.google.gson.Gson;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -66,8 +66,8 @@ public class OrderController {
 	
 	private IamportClient api;
 	
-	public OrderController(){
-		this.api = new IamportClient("imp_apikey", "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f");
+	public OrderController() {
+		this.api = new IamportClient("3281578796108293", "mgb5mvWKIMTfvM2vocwfrtBGafLXV9pipAnM6jwO6q4Cc77BjERL7srhHdfCmFUMgizmC6bJwflJntkH");
 	}
 	
 	//결제를 위한 메서드, 결제 검증을 위해 필요하다.
@@ -321,5 +321,19 @@ public class OrderController {
 			cartVOs.add(cartVO);
 		}
 		cartService.deleteItem(cartVOs);
+	}
+	
+	@GetMapping("orderResult")
+	public void orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model, HttpServletResponse response)throws Exception{
+		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		orderlistVO.setUsername("admin");
+		orderlistVO = orderService.getOrder(orderlistVO);
+		
+		//검색결과가 없기 때문에 다른 곳으로 redirect 시킨다.
+		if(orderlistVO == null) {
+			response.sendRedirect("/");
+		}
+		
+		model.addAttribute("order", orderlistVO);
 	}
 }

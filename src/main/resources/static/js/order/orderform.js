@@ -1,7 +1,7 @@
 //시작하자마자 아임포트 설정이 될 수 있도록 처리
 $(document).ready(function(){
 	var IMP = window.IMP;
-	IMP.init('iamport');
+	IMP.init('imp27607634');
 });
 
 //쿠폰을 골랐다면 그만큼의 값이 변하도록 해주어야 한다.
@@ -528,6 +528,15 @@ $("#purchasebutton").click(function(event){
 		cartNums.push(Number($(this).attr("data-cartNum")));
 	});
 	
+	let reg = new RegExp("[0-9]{4,5}");
+	if(!reg.test($("#recZipcode").val())){
+		swal({
+			icon:"warning",
+			title:"필수 입력사항 누락",
+			text:"주소를 등록해주세요."
+		});
+		return;
+	}
 	
 	IMP.request_pay({
 	    pg : 'html5_inicis',
@@ -543,45 +552,44 @@ $("#purchasebutton").click(function(event){
 	}, function(rsp) {
 		$.ajax({
 			type:"post",
-			url:"/order/vertify/"+rsp.imp_uid
-		}).done(function(data){
-			if(data.success&&data.response.amount==amount){
-				$.post({
-					url:"./orderComplete",
-					traditional:true,
-					data:{
-						cuNum:cuNum,
-						orderNum:merchant_uid,
-						totPrice:totPrice,
-						spPrice:amount,
-						destination:destination,
-						orderMessage:orderMessage,
-						changedMiles:changedMiles,
-						productNums:productNums,
-						pInfoNums:pInfoNums,
-						productCounts:productCounts,
-						finalPrices:finalPrices,
-						orderName:name,
-						cartNums:cartNums
-					},
-					success:function(){
-						
-						
-					},
-					error:function(){
-						swal({
-							icon:"error",
-							title:"통신오류",
-							text:"결제 졀과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
-						});
-					}
-				});
-			}else{
-				swal({
-					icon:"error",
-					title:"결제 실패",
-					text:"결제 도중 문제가 발생하였습니다."
-				});
+			url:"/order/vertify/"+rsp.imp_uid,
+			success:function(data){
+				console.log(rsp);
+				console.log(data);
+				
+				if(rsp.success&&data.response.amount==rsp.amount){
+					$.post({
+						url:"./orderComplete",
+						traditional:true,
+						data:{
+							cuNum:cuNum,
+							orderNum:merchant_uid,
+							totPrice:totPrice,
+							spPrice:amount,
+							destination:destination,
+							orderMessage:orderMessage,
+							changedMiles:changedMiles,
+							productNums:productNums,
+							pInfoNums:pInfoNums,
+							productCounts:productCounts,
+							finalPrices:finalPrices,
+							orderName:name,
+							cartNums:cartNums
+						},
+						success:function(){
+							$("body").append("<form id='sendOrderResult' action='./orderResult'></form>");
+							$("#sendOrderResult").append("<input type='hidden' name='orderNum' value='"+merchant_uid+"'>");
+							$("#sendOrderResult").submit();
+						},
+						error:function(){
+							swal({
+								icon:"error",
+								title:"통신오류",
+								text:"결제 졀과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
+							});
+						}
+					});
+				}
 			}
 		});
 	});

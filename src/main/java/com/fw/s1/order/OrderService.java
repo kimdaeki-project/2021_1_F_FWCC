@@ -12,4 +12,8 @@ public class OrderService {
 	public Long setOrder(OrderlistVO orderlistVO)throws Exception{
 		return orderMapper.setOrder(orderlistVO);
 	}
+	
+	public OrderlistVO getOrder(OrderlistVO orderlistVO)throws Exception{
+		return orderMapper.getOrder(orderlistVO);
+	}
 }

@@ -35,7 +35,8 @@ public class CartController {
 	@GetMapping("deleteCart")
 	public Long deleteCart(Authentication authentication)throws Exception{
 		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		memberVO.setUsername("admin");
 		return cartService.deleteCart(memberVO);
 	}
 	
@@ -46,7 +47,8 @@ public class CartController {
 		for(int i = 0 ; i < length; i++) {
 			CartVO cartVO = new CartVO();
 			cartVO.setCartNum(cartNums.get(i));
-			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			cartVO.setUsername("admin");
 			carts.add(cartVO);
 		}
 		return cartService.deleteItem(carts);
