@@ -8,7 +8,24 @@
 	<select id="getList" parameterType="ProductPager"
 		resultType="ProductVO">
 		select * from
-		(select row_number() over(order by productNum desc) as R, P.* from
+		(select row_number() over(
+		order by 
+		<choose>
+			<when test="sortStandard=='name'">
+				productTitle asc
+			</when>
+			<when test="sortStandard=='lowPrice'">
+				productPrice asc
+			</when>
+			<when test="sortStandard=='highPrice'">
+				productPrice desc
+			</when>
+			<otherwise>
+				productNum desc
+			</otherwise>
+		</choose>
+		
+		) as R, P.* from
 		(select * from product
 		where collab like concat('%',#{collab},'%')
 		and productType like concat('%',#{productType},'%')

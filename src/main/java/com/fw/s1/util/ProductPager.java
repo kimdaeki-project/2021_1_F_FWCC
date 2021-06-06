@@ -14,6 +14,13 @@ public class ProductPager {
 	private long startNum;
 	private long lastNum;
 	
+	public String getSortStandard() {
+		return sortStandard;
+	}
+
+	public void setSortStandard(String sortStandard) {
+		this.sortStandard = sortStandard;
+	}
 	private long totalPage;
 	
 	private String sortStandard;

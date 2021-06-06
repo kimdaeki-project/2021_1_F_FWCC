@@ -124,13 +124,13 @@ clear:both;
 					Total <strong>${totalCount}</strong> items.
 				</p>
 				<div class="sort">
-					<span><a class="sortName" href="#">신상품</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=new">신상품</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="#">상품명</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=name">상품명</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="#">낮은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=lowPrice">낮은가격</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="#">높은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=highPrice">높은가격</a></span>
 				</div>
 			</div>
 

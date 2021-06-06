@@ -11,6 +11,12 @@ CREATE TABLE `fw01`.`product` (
   `productType` VARCHAR(100) NULL,
   PRIMARY KEY (`productNum`));
   
+  ALTER TABLE `fw01`.`product` 
+ADD COLUMN `finalPrice` BIGINT NULL AFTER `productType`,
+ADD COLUMN `productMileage` BIGINT NULL AFTER `finalPrice`,
+CHANGE COLUMN `productPrice` `productPrice` BIGINT NULL DEFAULT NULL ,
+CHANGE COLUMN `productDisRate` `productDisRate` BIGINT NULL DEFAULT 0 ;
+  
 -- product table dummydata
   insert into product(productTitle, productPrice,productContents,collab,productType)
 values('productTitle1',10000,'productContensts1','collaboration','top-short');
