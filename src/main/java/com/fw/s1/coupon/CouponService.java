@@ -16,4 +16,8 @@ public class CouponService {
 	public List<CouponVO> getCouponList(MemberVO memberVO)throws Exception{
 		return couponMapper.getCouponList(memberVO);
 	}
+	
+	public Long useUpdate(CouponVO couponVO)throws Exception{
+		return couponMapper.useCheck(couponVO);
+	}
 }

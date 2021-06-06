@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,13 @@ import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.member.MemberService;
 import com.fw.s1.member.MemberVO;
+import com.fw.s1.mileage.MileageService;
+import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.product.ProductInfoVO;
+import com.fw.s1.product.ProductService;
 import com.fw.s1.product.ProductVO;
+import com.fw.s1.purchase.PurchaseService;
+import com.fw.s1.purchase.PurchaseVO;
 import com.google.gson.Gson;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -47,6 +54,14 @@ public class OrderController {
 	private CouponService couponService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private MileageService mileageService;
+	@Autowired
+	private PurchaseService purchaseService;
+	@Autowired
+	private ProductService productService;
 	
 	
 	private IamportClient api;
@@ -201,8 +216,110 @@ public class OrderController {
 		model.addAttribute("totalprice", totalprice);
 	}
 	
+	@ResponseBody
 	@PostMapping("orderComplete")
-	public void orderComplete(Authentication authentication)throws Exception{
+	@Transactional(rollbackFor = Exception.class)
+	public void orderComplete(Authentication authentication, Long cuNum, String orderNum,
+								Long totPrice, Long spPrice, String destination, String orderMessage,
+								Long[] changedMiles, Long[] productNums, Long[] pInfoNums, Long[] productCounts,
+								Long[] finalPrices, String orderName, Long[] cartNums)throws Exception{
 		
+		if(cuNum!=1) {
+			CouponVO couponVO = new CouponVO();
+			//couponVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			couponVO.setUsername("admin");
+			couponVO.setCuNum(cuNum);
+			if(couponService.useUpdate(couponVO)==0) {
+				throw new Exception();
+			}
+		}
+		
+		OrderlistVO orderlistVO = new OrderlistVO();
+		orderlistVO.setCuNum(cuNum);
+		orderlistVO.setDestination(destination);
+		orderlistVO.setOrderMessage(orderMessage);
+		orderlistVO.setOrderNum(orderNum);
+		orderlistVO.setSpPrice(spPrice);
+		orderlistVO.setTotPrice(totPrice);
+		orderlistVO.setOrderName(orderName);
+		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		orderlistVO.setUsername("admin");
+		if(orderService.setOrder(orderlistVO)==0) {
+			throw new Exception();
+		}
+		
+		List<PurchaseVO> purchaseVOs = new ArrayList<>();
+		int length = productNums.length;
+		for(int i = 0 ; i < length; i++) {
+			PurchaseVO purchaseVO = new PurchaseVO();
+			purchaseVO.setOrderNum(orderNum);
+			purchaseVO.setPInfoNum(pInfoNums[i]);
+			purchaseVO.setProductNum(productNums[i]);
+			purchaseVO.setProductCount(productCounts[i]);
+			purchaseVO.setProPriceSum(finalPrices[i]*productCounts[i]);
+			purchaseVOs.add(purchaseVO);
+		}
+		if(purchaseService.setOrderPurchase(purchaseVOs)==0) {
+			throw new Exception();
+		}
+		
+		MileageVO mileageVO = new MileageVO();
+		//mileageVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		mileageVO.setUsername("admin");
+		//마일리지 최근거 조회해서 가져와야 한다.
+		mileageVO = mileageService.getRecentMileage(mileageVO);
+		
+		if(mileageVO==null) {
+			throw new Exception();
+		}
+		
+		List<MileageVO> mileageVOs = new ArrayList<>();
+		
+		if(changedMiles[0]!=0) {
+			MileageVO mileageVO1 = new MileageVO();
+			mileageVO.setOrderNum(orderNum);
+			mileageVO.setChangedMile(-1*changedMiles[0]);
+			mileageVO.setEnabledMile(mileageVO.getEnabledMile()-1*changedMiles[0]);
+			mileageVO.setUsedMile(mileageVO.getUsedMile()+changedMiles[0]);
+			mileageVO.setMileContents("구매시 사용한 마일리지");
+			BeanUtils.copyProperties(mileageVO, mileageVO1);
+			mileageVOs.add(mileageVO1);
+		}
+		
+		MileageVO mileageVO2 = new MileageVO();
+		mileageVO.setOrderNum(orderNum);
+		mileageVO.setChangedMile(changedMiles[1]);
+		mileageVO.setEnabledMile(mileageVO.getEnabledMile()+changedMiles[1]);
+		mileageVO.setUsedMile(mileageVO.getUsedMile()-changedMiles[1]);
+		mileageVO.setMileContents("구매 후 얻은 마일리지");
+		BeanUtils.copyProperties(mileageVO, mileageVO2);
+		mileageVOs.add(mileageVO2);
+		
+		if(mileageService.setMileAfterOrder(mileageVOs)==0) {
+			throw new Exception();
+		}
+		
+		//productinfo 테이블에서 해당 재고들을 제거해주어야한다.
+		List<ProductInfoVO> productInfoVOs = new ArrayList<>();
+		for(int i = 0 ; i < length; i++) {
+			ProductInfoVO productInfoVO = new ProductInfoVO();
+			productInfoVO.setPInfoNum(pInfoNums[i]);
+			productInfoVO.setProductNum(productNums[i]);
+			productInfoVO.setStock(productCounts[i]);
+			productInfoVOs.add(productInfoVO);
+		}
+		if(productService.updateStock(productInfoVOs)==0) {
+			throw new Exception();
+		}
+		
+		List<CartVO> cartVOs = new ArrayList<>();
+		for(int i = 0 ; i < length; i++) {
+			CartVO cartVO = new CartVO();
+			cartVO.setCartNum(cartNums[i]);
+			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			cartVO.setUsername("admin");
+			cartVOs.add(cartVO);
+		}
+		cartService.deleteItem(cartVOs);
 	}
 }

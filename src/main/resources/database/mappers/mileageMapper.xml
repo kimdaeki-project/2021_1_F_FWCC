@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.fw.s1.mileage.MileageMapper">
+	<select id="getRecentMileage" parameterType="MileageVO" resultType="MileageVO">
+		select * from mileage where mileNum = (select Max(mileNum) from mileage where username = #{username})
+	</select>
+	<insert id="setMileAfterOrder" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			insert into mileage (usedMile, changedMile, username, orderNum, mileContents, enabledMile)
+			values(#{item.usedMile}, #{item.changedMile}, #{item.username}, #{item.orderNum},
+			#{item.mileContents}, #{item.enabledMile})
+		</foreach>
+	</insert>
+</mapper>

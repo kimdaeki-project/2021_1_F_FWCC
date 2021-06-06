@@ -43,4 +43,9 @@
 		delete from product where productNum=#{productNum}
 	</delete>
 	
+	<update id="updateStock" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			update productinfo set stock = stock - #{item.stock} where pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
+		</foreach>
+	</update>
 </mapper>

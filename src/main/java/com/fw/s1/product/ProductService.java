@@ -18,4 +18,8 @@ public class ProductService {
 		System.out.println(list.size());
 		return list;
 	}
+	
+	public Long updateStock(List<ProductInfoVO> list)throws Exception{
+		return productMapper.updateStock(list);
+	}
 }

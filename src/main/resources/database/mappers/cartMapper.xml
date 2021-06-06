@@ -74,7 +74,7 @@
   
   <delete id="deleteItem" parameterType="java.util.List">
   	<foreach collection="list" item="item" separator=";">
-  		delete cart where cartNum=#{item.cartNum}
+  		delete cart where cartNum=#{item.cartNum} and #{item.username}
   	</foreach>
   </delete>
   

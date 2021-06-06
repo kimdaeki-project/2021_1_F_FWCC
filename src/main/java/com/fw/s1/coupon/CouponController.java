@@ -17,11 +17,4 @@ public class CouponController {
 	@Autowired
 	private CouponService couponService;
 	
-	@GetMapping("list")
-	public void getCouponList(Authentication authentication, Model model)throws Exception{
-		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername("admin");
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		model.addAttribute("list", couponService.getCouponList(memberVO));
-	}
 }
