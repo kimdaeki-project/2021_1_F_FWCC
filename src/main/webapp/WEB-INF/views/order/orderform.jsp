@@ -270,7 +270,7 @@
 				data-cuSale="<c:out value='0'></c:out>"
 				data-mileSp='<c:out value="0"></c:out>'
 				data-cuNum="<c:out value='1'></c:out>"
-				data-changedMile='<c:out value="${totalMileage}"></c:out>'>
+				data-changeMile='<c:out value="${totalMileage}"></c:out>'>
 				PAYMENT
 			</button>
 		</div>

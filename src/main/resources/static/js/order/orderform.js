@@ -512,9 +512,9 @@ $("#purchasebutton").click(function(event){
 	const cuNum = Number($("#purchasebutton").attr("data-cuNum"));
 	const destination = "(" + $("#recZipcod").val() + ")" + $("#recBasic").val() + " "+$("#recDetail").val();
 	const orderMessage = $("#orderMessage").val();
-	let changedMiles = new Array();
-	changedMiles.push(Number($("#purchasebutton").attr("data-mileSp")));
-	changedMiles.push(Number($("#purchasebutton").attr("data-changedMile")));
+	let changeMiles = new Array();
+	changeMiles.push(Number($("#purchasebutton").attr("data-mileSp")));
+	changeMiles.push(Number($("#purchasebutton").attr("data-changeMile")));
 	let productNums = new Array();
 	let pInfoNums = new Array();
 	let productCounts = new Array();
@@ -537,7 +537,7 @@ $("#purchasebutton").click(function(event){
 		});
 		return;
 	}
-	
+			
 	IMP.request_pay({
 	    pg : 'html5_inicis',
 	    pay_method : 'card',
@@ -560,19 +560,19 @@ $("#purchasebutton").click(function(event){
 						url:"./orderComplete",
 						traditional:true,
 						data:{
-							cuNum:cuNum,
-							orderNum:merchant_uid,
-							totPrice:totPrice,
-							spPrice:amount,
-							destination:destination,
-							orderMessage:orderMessage,
-							changedMiles:changedMiles,
-							productNums:productNums,
-							pInfoNums:pInfoNums,
-							productCounts:productCounts,
-							finalPrices:finalPrices,
-							orderName:name,
-							cartNums:cartNums
+							cuNum: cuNum,
+							orderNum: merchant_uid,
+							totPrice: totPrice,
+							spPrice: amount,
+							destination: destination,
+							orderMessage: orderMessage,
+							changeMiles: changeMiles,
+							productNums: productNums,
+							pInfoNums: pInfoNums,
+							productCounts: productCounts,
+							finalPrices: finalPrices,
+							orderName: name,
+							cartNums: cartNums
 						},
 						success:function(){
 							$("body").append("<form id='sendOrderResult' action='./orderResult'></form>");

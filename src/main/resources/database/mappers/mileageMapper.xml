@@ -9,8 +9,8 @@
 	</select>
 	<insert id="setMileAfterOrder" parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";">
-			insert into mileage (usedMile, changedMile, username, orderNum, mileContents, enabledMile)
-			values(#{item.usedMile}, #{item.changedMile}, #{item.username}, #{item.orderNum},
+			insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledMile)
+			values(#{item.usedMile}, #{item.changeMile}, #{item.username}, #{item.orderNum},
 			#{item.mileContents}, #{item.enabledMile})
 		</foreach>
 	</insert>

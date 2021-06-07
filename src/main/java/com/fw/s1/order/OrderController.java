@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +39,7 @@ import com.fw.s1.product.ProductService;
 import com.fw.s1.product.ProductVO;
 import com.fw.s1.purchase.PurchaseService;
 import com.fw.s1.purchase.PurchaseVO;
+import com.google.gson.Gson;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -219,11 +223,8 @@ public class OrderController {
 	@ResponseBody
 	@PostMapping("orderComplete")
 	@Transactional(rollbackFor = Exception.class)
-	public void orderComplete(Long cuNum, String orderNum, Long totPrice, Long spPrice, 
-								String destination, String orderMessage, Long[] changedMiles, 
-								Long[] productNums, Long[] pInfoNums, Long[] productCounts,
-								Long[] finalPrices, String orderName, Long[] cartNums,Authentication authentication)throws Exception{
-		
+	public void orderComplete(HttpServletRequest request, Authentication authentication)throws Exception{
+		long cuNum = Long.parseLong(request.getParameter("cuNum"));
 		if(cuNum!=1) {
 			CouponVO couponVO = new CouponVO();
 			//couponVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
@@ -234,6 +235,12 @@ public class OrderController {
 			}
 		}
 		
+		String destination = request.getParameter("destination");
+		String orderMessage = request.getParameter("orderMessage");
+		String orderNum = request.getParameter("orderNum");
+		long spPrice = Long.parseLong(request.getParameter("spPrice"));
+		long totPrice = Long.parseLong(request.getParameter("totPrice"));
+		String orderName = request.getParameter("orderName");
 		OrderlistVO orderlistVO = new OrderlistVO();
 		orderlistVO.setCuNum(cuNum);
 		orderlistVO.setDestination(destination);
@@ -248,8 +255,28 @@ public class OrderController {
 			throw new Exception();
 		}
 		
+		String[] temppInfoNums = request.getParameterValues("pInfoNums");
+		int length = temppInfoNums.length;
+		long[] pInfoNums = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			pInfoNums[i] = Long.parseLong(temppInfoNums[i]);
+		}
+		String[] tempProductNums = request.getParameterValues("productNums");
+		long[] productNums = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			productNums[i] = Long.parseLong(tempProductNums[i]);
+		}
+		String[] tempProductCounts = request.getParameterValues("productCounts");
+		long[] productCounts = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			productCounts[i] = Long.parseLong(tempProductCounts[i]);
+		}
+		String[] tempFinalPrices = request.getParameterValues("finalPrices");
+		long[] finalPrices = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			finalPrices[i] = Long.parseLong(tempFinalPrices[i]);
+		}
 		List<PurchaseVO> purchaseVOs = new ArrayList<>();
-		int length = productNums.length;
 		for(int i = 0 ; i < length; i++) {
 			PurchaseVO purchaseVO = new PurchaseVO();
 			purchaseVO.setOrderNum(orderNum);
@@ -266,21 +293,24 @@ public class OrderController {
 		MileageVO mileageVO = new MileageVO();
 		//mileageVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		mileageVO.setUsername("admin");
-		//마일리지 최근거 조회해서 가져와야 한다.
 		mileageVO = mileageService.getRecentMileage(mileageVO);
 		
 		if(mileageVO==null) {
 			throw new Exception();
 		}
 		
+		String[] tempChangeMiles = request.getParameterValues("changeMiles");
+		long[] changeMiles = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			changeMiles[i] = Long.parseLong(tempChangeMiles[i]);
+		}
 		List<MileageVO> mileageVOs = new ArrayList<>();
-		
-		if(changedMiles[0]!=0) {
+		if(changeMiles[0]!=0) {
 			MileageVO mileageVO1 = new MileageVO();
 			mileageVO.setOrderNum(orderNum);
-			mileageVO.setChangedMile(-1*changedMiles[0]);
-			mileageVO.setEnabledMile(mileageVO.getEnabledMile()-1*changedMiles[0]);
-			mileageVO.setUsedMile(mileageVO.getUsedMile()+changedMiles[0]);
+			mileageVO.setChangeMile(-1*changeMiles[0]);
+			mileageVO.setEnabledMile(mileageVO.getEnabledMile()-1*changeMiles[0]);
+			mileageVO.setUsedMile(mileageVO.getUsedMile()+changeMiles[0]);
 			mileageVO.setMileContents("구매시 사용한 마일리지");
 			BeanUtils.copyProperties(mileageVO, mileageVO1);
 			mileageVOs.add(mileageVO1);
@@ -288,9 +318,9 @@ public class OrderController {
 		
 		MileageVO mileageVO2 = new MileageVO();
 		mileageVO.setOrderNum(orderNum);
-		mileageVO.setChangedMile(changedMiles[1]);
-		mileageVO.setEnabledMile(mileageVO.getEnabledMile()+changedMiles[1]);
-		mileageVO.setUsedMile(mileageVO.getUsedMile()-changedMiles[1]);
+		mileageVO.setChangeMile(changeMiles[1]);
+		mileageVO.setEnabledMile(mileageVO.getEnabledMile()+changeMiles[1]);
+		mileageVO.setUsedMile(mileageVO.getUsedMile()-changeMiles[1]);
 		mileageVO.setMileContents("구매 후 얻은 마일리지");
 		BeanUtils.copyProperties(mileageVO, mileageVO2);
 		mileageVOs.add(mileageVO2);
@@ -312,6 +342,11 @@ public class OrderController {
 			throw new Exception();
 		}
 		
+		String[] tempCartNums = request.getParameterValues("cartNums");
+		long[] cartNums = new long[length];
+		for(int i = 0 ; i < length; i++) {
+			cartNums[i] = Long.parseLong(tempCartNums[i]);
+		}
 		List<CartVO> cartVOs = new ArrayList<>();
 		for(int i = 0 ; i < length; i++) {
 			CartVO cartVO = new CartVO();

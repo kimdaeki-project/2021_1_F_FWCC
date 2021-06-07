@@ -7,7 +7,7 @@ public class MileageVO {
 
 	private Long mileNum;
 	private Long usedMile;
-	private Long changedMile;
+	private Long changeMile;
 	private String username;
 	private String orderNum;
 	private String mileContents;

@@ -18,6 +18,6 @@ public class CouponService {
 	}
 	
 	public Long useUpdate(CouponVO couponVO)throws Exception{
-		return couponMapper.useCheck(couponVO);
+		return couponMapper.useUpdate(couponVO);
 	}
 }

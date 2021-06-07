@@ -5,8 +5,8 @@
   
  <mapper namespace="com.fw.s1.order.OrderMapper">
  	<insert id="setOrder" parameterType="OrderlistVO">
- 		insert into orderlist(orderNum, totPrice, spPrice, cuNum, username, destination, orderDate, orderStatem, orderMessage, orderName)
- 		values(#{orderNum}, #{totPrice}, #{spPrice}, #{cuNum}, #{username}, #{destination}, sysdata(), 1, #{orderMessage}, #{orderName})
+ 		insert into orderlist(orderNum, totPrice, spPrice, cuNum, username, destination, orderDate, orderState, orderMessage, orderName)
+ 		values(#{orderNum}, #{totPrice}, #{spPrice}, #{cuNum}, #{username}, #{destination}, sysdate(), 1, #{orderMessage}, #{orderName})
  	</insert>
 	<select id="getOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
 		select * from orderlist where username=#{username} and orderNum=#{orderNum}

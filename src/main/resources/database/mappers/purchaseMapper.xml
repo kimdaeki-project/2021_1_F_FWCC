@@ -5,9 +5,10 @@
     
 <mapper namespace="com.fw.s1.purchase.PurchaseMapper">
 	<insert id="setOrderPurchase" parameterType="java.util.List">
-		<foreach collection="list" item="item" separator=";">
-			insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)
-			values(#{item.productNum}, #{item.pInfoNum}, #{item.orderNum}, #{item.productCount}, #{item.proPriceSum})
+	insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)
+	values
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			#{item.productNum}, #{item.pInfoNum}, "${item.orderNum}", #{item.productCount}, #{item.proPriceSum}
 		</foreach>
 	</insert>
 </mapper>
