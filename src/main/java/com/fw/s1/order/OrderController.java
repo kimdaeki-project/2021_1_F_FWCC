@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,7 +37,6 @@ import com.fw.s1.product.ProductService;
 import com.fw.s1.product.ProductVO;
 import com.fw.s1.purchase.PurchaseService;
 import com.fw.s1.purchase.PurchaseVO;
-import com.google.gson.Gson;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -309,7 +306,7 @@ public class OrderController {
 			MileageVO mileageVO1 = new MileageVO();
 			mileageVO.setOrderNum(orderNum);
 			mileageVO.setChangeMile(-1*changeMiles[0]);
-			mileageVO.setEnabledMile(mileageVO.getEnabledMile()-1*changeMiles[0]);
+			mileageVO.setEnabledMile(mileageVO.getEnabledMile()-changeMiles[0]);
 			mileageVO.setUsedMile(mileageVO.getUsedMile()+changeMiles[0]);
 			mileageVO.setMileContents("구매시 사용한 마일리지");
 			BeanUtils.copyProperties(mileageVO, mileageVO1);
@@ -320,7 +317,6 @@ public class OrderController {
 		mileageVO.setOrderNum(orderNum);
 		mileageVO.setChangeMile(changeMiles[1]);
 		mileageVO.setEnabledMile(mileageVO.getEnabledMile()+changeMiles[1]);
-		mileageVO.setUsedMile(mileageVO.getUsedMile()-changeMiles[1]);
 		mileageVO.setMileContents("구매 후 얻은 마일리지");
 		BeanUtils.copyProperties(mileageVO, mileageVO2);
 		mileageVOs.add(mileageVO2);
@@ -359,16 +355,16 @@ public class OrderController {
 	}
 	
 	@GetMapping("orderResult")
-	public void orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model, HttpServletResponse response)throws Exception{
+	public String orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model)throws Exception{
 		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		orderlistVO.setUsername("admin");
 		orderlistVO = orderService.getOrder(orderlistVO);
 		
-		//검색결과가 없기 때문에 다른 곳으로 redirect 시킨다.
 		if(orderlistVO == null) {
-			response.sendRedirect("/");
+			return "/";
 		}
 		
 		model.addAttribute("order", orderlistVO);
+		return "/order/orderResult";
 	}
 }
