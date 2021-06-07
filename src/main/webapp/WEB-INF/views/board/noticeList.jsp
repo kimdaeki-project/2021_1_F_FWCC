@@ -77,19 +77,19 @@ a:hover {
 	</div>
 	
 	<div style="margin: 40px 0 40px;">
-	  <ul class="pagination pagination-sm" style=" justify-content: center;">
+	  <ul class="pagination" style=" justify-content: center;">
 	  
 	  	
-	    <li class="page-item"><a  href="#" title="${pager.startNum-1}">&lt; </a></li>
+	    <li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}">&lt</a></li>
 	   
 	   
 	   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 	   
-	    <li class="page-item"><a  href="#" title="${i}">${i}</a></li>
+	    <li class="page-item"><a class="page-link p" href="#" title="${i}">${i}</a></li>
 	   </c:forEach>
 	   
 	    
-	    <li class="page-item"><a href="#" title="${pager.lastNum+1}">&gt; </a></li>
+	   <li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum}">&gt</a></li>
 	    
 	  </ul>
 	 </div> 

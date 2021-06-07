@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fw.s1.board.notice.NoticeService;
+import com.fw.s1.board.BoardFileVO;
 import com.fw.s1.board.BoardVO;
+import com.fw.s1.member.MemberVO;
 import com.fw.s1.util.Pager;
 
 @Controller
@@ -25,19 +27,20 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	
+	
 	// /notice/fileDown
-		@GetMapping("fileDown")
-		public ModelAndView fileDown(String fileName, String oriName)throws Exception{
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("fileName", fileName);
-			mv.addObject("oriName", oriName);
-			mv.addObject("filePath", "/upload/notice/");
-			
-			// view의 이름은 Bean의 이름과 일치
-			mv.setViewName("down");
-			//  /fileDown.html
-			return mv;
-		}
+	@GetMapping("fileDown")
+	public ModelAndView fileDown(String fileName, String oriName)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("fileName", fileName);
+		mv.addObject("oriName", oriName);
+		mv.addObject("filePath", "/upload/notice/");
+		
+		// view의 이름은 Bean의 이름과 일치
+		mv.setViewName("down");
+		//  /fileDown.html
+		return mv;
+	}
 		
 		// /notice/list
 		@GetMapping("list")

@@ -99,11 +99,9 @@
 	</tbody>
 	</table>
 	<div style="text-align:center;">${vo.contents}</div>
-	<h3>파일 다운로드</h3>
-	<form action="fileDown" method="get">
-		<input type="hidden" name="files" value="${fileName}">
-		<input type="submit" value="다운로드">
-	</form>
+	<c:forEach items="${vo.files}" var="fileVO" >
+	<a href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a>
+	</c:forEach>
 	</div>
 	</div>
 	</div>
