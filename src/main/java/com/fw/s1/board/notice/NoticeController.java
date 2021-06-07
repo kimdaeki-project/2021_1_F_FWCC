@@ -61,20 +61,20 @@ public class NoticeController {
 		@GetMapping("insert")
 		public String setInsert(Model model)throws Exception{
 			model.addAttribute("vo", new BoardVO());
-			model.addAttribute("action", "noticeInsert");
+			model.addAttribute("action", "insert");
 			return "board/noticeInsert";
 		}
 		
 		@PostMapping("insert")
 		public String setInsert(BoardVO boardVO, MultipartFile [] files)throws Exception{
-			System.out.println(files.length);
-			for(MultipartFile f : files) {
-				System.out.println(f.getOriginalFilename());
-			}
+//			System.out.println(files.length);
+//			for(MultipartFile f : files) {
+//				System.out.println(f.getOriginalFilename());
+//			}
 			
 			int result = noticeService.setInsert(boardVO, files);
 			
-			return "redirect:./noticeList";
+			return "redirect:./list";
 		}
 		
 		@GetMapping("update")

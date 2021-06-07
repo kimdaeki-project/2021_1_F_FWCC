@@ -2,11 +2,15 @@
  * 
  */
 
+$("#alert").click(function(){
+	alert("dd");
+	console.log("hi");
+});
+
 $("#btn").click(function(){
 /*	let writer = $("#writer").val() != "";
 	let title = $("#title").val().length != 0;
 	let contents = $("#contents").val().length !=0 ;*/
-	
 	let result = true;
 	
 	$(".myCheck").each(function(s1, s2){

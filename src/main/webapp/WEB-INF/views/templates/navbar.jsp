@@ -95,7 +95,7 @@
 			<li id="navbar-columnlist">
 				<a href="#">Community</a>
 				<ul id="navbar-rightul">
-					<li><a href="#">Notice</a></li>
+					<li><a href="${pageContext.request.contextPath}/notice/list">Notice</a></li>
 					<li><a href="#">Stockist</a></li>
 					<li><a href="#">Q&A</a></li>
 					<li><a href="#">Review</a></li>

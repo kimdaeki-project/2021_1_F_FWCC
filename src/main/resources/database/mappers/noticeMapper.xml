@@ -63,7 +63,8 @@
    		</update>
    		
    		<insert id="setInsert" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			insert into notice values(#{num}, #{title}, #{writer},#{contents}, now(), 0)
+   			insert into notice (title,writer,contents,regDate,hit)
+   			values(#{title}, #{writer},#{contents}, now(), 0)
    		</insert>
    		
    		<insert id="setFileInsert" parameterType="BoardFileVO">
