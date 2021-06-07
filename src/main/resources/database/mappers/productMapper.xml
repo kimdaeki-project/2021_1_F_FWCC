@@ -39,8 +39,7 @@
 		(productTitle,
 		productPrice,productContents,collab,productType)
 		values
-		(#{productTitle},
-		#{productPrice},#{productContents},#{collab},#{productType})
+		(#{productTitle},#{productPrice},#{productContents},#{collab},#{productType})
 	</insert>
 
 	<select id="getSelect" parameterType="ProductVO"

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.util.ProductPager;
 
@@ -29,5 +31,20 @@ public class ProductController {
 		model.addAttribute("division", division);
 		model.addAttribute("pager", productPager);
 		return "/product/productList";
+	}
+	
+	@GetMapping(value="insert")
+	public String setInsert()throws Exception{
+		return "/product/productInsert";
+	}
+	
+	@PostMapping(value="insert")
+	public void  setInsert(ProductVO productVO, MultipartFile [] files)throws Exception{
+		System.out.println(productVO.getProductTitle());
+		System.out.println(productVO.getCollab());
+		System.out.println(productVO.getProductType());
+		System.out.println(productVO.getProductPrice());
+		System.out.println(productVO.getProductContents());
+		
 	}
 }
