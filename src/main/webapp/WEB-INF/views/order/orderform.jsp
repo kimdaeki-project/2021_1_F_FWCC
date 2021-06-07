@@ -57,7 +57,7 @@
 						data-pInfoNum='<c:out value="${item.PInfoNum}"></c:out>'
 						data-finalPrice='<c:out value="${item.finalPrice}"></c:out>'
 						data-productCount='<c:out value="${item.productCount}"></c:out>'
-						data-cartNums='<c:out value="${item.cartNum}"></c:out>'
+						data-cartNum='<c:out value="${item.cartNum}"></c:out>'
 						style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 						<td style="padding:1%;">
 							<img alt="" src="${pageContext.request.contextPath}/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"

@@ -7,8 +7,8 @@
 	<insert id="setOrderPurchase" parameterType="java.util.List">
 	insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)
 	values
-		<foreach collection="list" item="item" separator="," open="(" close=")">
-			#{item.productNum}, #{item.pInfoNum}, #{item.orderNum}, #{item.productCount}, #{item.proPriceSum}
+		<foreach collection="list" item="item" separator=",">
+			(#{item.productNum}, #{item.pInfoNum}, #{item.orderNum}, #{item.productCount}, #{item.proPriceSum})
 		</foreach>
 	</insert>
 </mapper>

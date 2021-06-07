@@ -8,9 +8,10 @@
 		select * from mileage where mileNum = (select Max(mileNum) from mileage where username = #{username})
 	</select>
 	<insert id="setMileAfterOrder" parameterType="java.util.List">
-		<foreach collection="list" item="item" separator=";">
-			insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledMile)
-			values(#{item.usedMile}, #{item.changeMile}, #{item.username}, #{item.orderNum},
+		insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledMile)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.usedMile}, #{item.changeMile}, #{item.username}, #{item.orderNum},
 			#{item.mileContents}, #{item.enabledMile})
 		</foreach>
 	</insert>

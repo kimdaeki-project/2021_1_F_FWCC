@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class PurchaseService {
 
 	@Autowired
-	private PurchaseService purchaseService;
+	private PurchaseMapper purchaseMapper;
 	
 	public Long setOrderPurchase(List<PurchaseVO> list)throws Exception{
-		return purchaseService.setOrderPurchase(list);
+		return purchaseMapper.setOrderPurchase(list);
 	}
 }

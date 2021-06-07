@@ -555,38 +555,45 @@ $("#purchasebutton").click(function(event){
 				type:"post",
 				url:"/order/vertify/"+rsp.imp_uid,
 				success:function(data){
-					console.log(data);
-					$.post({
-						url:"./orderComplete",
-						traditional:true,
-						data:{
-							cuNum: cuNum,
-							orderNum: merchant_uid,
-							totPrice: totPrice,
-							spPrice: amount,
-							destination: destination,
-							orderMessage: orderMessage,
-							changeMiles: changeMiles,
-							productNums: productNums,
-							pInfoNums: pInfoNums,
-							productCounts: productCounts,
-							finalPrices: finalPrices,
-							orderName: name,
-							cartNums: cartNums
-						},
-						success:function(){
-							$("body").append("<form id='sendOrderResult' action='./orderResult'></form>");
-							$("#sendOrderResult").append("<input type='hidden' name='orderNum' value='"+merchant_uid+"'>");
-							$("#sendOrderResult").submit();
-						},
-						error:function(){
-							swal({
-								icon:"error",
-								title:"통신오류",
-								text:"결제 결과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
-							});
-						}
-					});
+					if(data.response.amount == rsp.paid_amount){
+						$.post({
+							url:"./orderComplete",
+							traditional:true,
+							data:{
+								cuNum: cuNum,
+								orderNum: merchant_uid,
+								totPrice: totPrice,
+								spPrice: amount,
+								destination: destination,
+								orderMessage: orderMessage,
+								changeMiles: changeMiles,
+								productNums: productNums,
+								pInfoNums: pInfoNums,
+								productCounts: productCounts,
+								finalPrices: finalPrices,
+								orderName: name,
+								cartNums: cartNums
+							},
+							success:function(){
+								$("body").append("<form id='sendOrderResult' action='./orderResult'></form>");
+								$("#sendOrderResult").append("<input type='hidden' name='orderNum' value='"+merchant_uid+"'>");
+								$("#sendOrderResult").submit();
+							},
+							error:function(){
+								swal({
+									icon:"error",
+									title:"통신오류",
+									text:"결제 결과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
+								});
+							}
+						});
+					}else{
+						swal({
+							icon:"error",
+							title:"결제오류",
+							text:"결제해야할 금액과 결제된 금액이 다릅니다."
+						});
+					}
 				}
 			});
 		}else{
