@@ -115,9 +115,37 @@ $(".joinBtn").click(function(){
 	phone2 = $("#phone2").val();
 	phone = phone0+"-"+phone1+"-"+phone2;
 	email = $("#emailT").val();
-	let birth = $("#birth_year").val()+$("#birth_month").val()+$("#birth_day").val();
+	let birth = $("#birth_year").val()+"-"+$("#birth_month").val()+"-"+$("#birth_day").val();
 	smsAgree = $("#is_sms0").prop("checked");
 	emailAgree = $("#is_news_mail0").prop("checked");
+	// -----------------------------------------------
+	/*$("#usernameF").value(username);
+	$("#passwordF").value(password);
+	$("#nameF").value(name);
+	$("#phoneF").value(phone);
+	$("#zipCode").value(zipCode);
+	$("#phoneF").value(phone);
+	$("#emailF").value(email);
+	$("#birthF").value(phone0+"-"+phone1+"-"+phone2);
+	$("#smsAgreeF").value(smsAgree);
+	$("#emailAgreeF").value(emailAgree);*/
+	$.ajax({
+		method:"POST",
+		url:"./memberJoin",
+		data:{
+			username:username,
+			password:password,
+			name:name,
+			phone:phone,
+			email:email,
+			birth:birth,
+			smsAgree:smsAgree,
+			emailAgree:emailAgree
+		},
+		success:function(){
+			
+		} // --- memberJoin success END ---
+	}); // --- ajax END ---
 });
 
 

@@ -30,7 +30,7 @@ public class MemberVO implements UserDetails{
 	private String phone;
 	@Email
 	private String email;
-	private Date birth;
+	private String birth;
 	private boolean smsAgree;
 	private boolean emailAgree;
 	private boolean enabled;

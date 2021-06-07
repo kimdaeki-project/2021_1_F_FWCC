@@ -333,7 +333,7 @@
 		</div>
 	</div>
 	
-	<div hidden="">
+	<%-- <div>
 		<form:form modelAttribute="memberVO" action="./memberJoin" method="POST">
 			<form:input id="usernameF" path="username"/>
 			<form:password id="passwordF" path="password"/>
@@ -343,8 +343,9 @@
 			<form:input id="birthF" path="birth"/>
 			<form:checkbox id="smsAgreeF" path="smsAgree"/>
 			<form:checkbox id="emailAgreeF" path="emailAgree"/>
+			<form:button id="formBtn" class="btn btn-light" onclick="alert('클릭!');"/>
 		</form:form>
-	</div>
+	</div> --%>
 
 	<!-- footer START -->
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
@@ -352,6 +353,6 @@
 <!-- External JS -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Custom JS -->
-<script type="text/javascript" src="/js/member/memberJoin.js"></script>	
+<script type="text/javascript" src="/js/member/memberJoin.js"></script>
 </body>
 </html>

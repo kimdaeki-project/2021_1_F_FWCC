@@ -25,14 +25,14 @@ public class MemberController {
 	
 	@PostMapping("memberJoin")
 	public void setJoin(@Valid MemberVO memberVO) throws Exception {
-		System.out.println(memberVO.getUsername());
-		System.out.println(memberVO.getPassword());
-		System.out.println(memberVO.getName());
-		System.out.println(memberVO.getPhone());
-		System.out.println(memberVO.getEmail());
-		System.out.println(memberVO.getBirth());
-		System.out.println(memberVO.isSmsAgree());
-		System.out.println(memberVO.isEmailAgree());
+		System.out.println("username : "+memberVO.getUsername());
+		System.out.println("password : "+memberVO.getPassword());
+		System.out.println("name : "+memberVO.getName());
+		System.out.println("phone : "+memberVO.getPhone());
+		System.out.println("email : "+memberVO.getEmail());
+		System.out.println("birth : "+memberVO.getBirth());
+		System.out.println("smsAgree : "+memberVO.isSmsAgree());
+		System.out.println("emailAgree : "+memberVO.isEmailAgree());
 	}
 	
 	@PostMapping("usernameCheck")
