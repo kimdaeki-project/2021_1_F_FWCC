@@ -7,7 +7,7 @@
 	prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"
 %>
-<%@ taglib prefix="form"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -334,16 +334,16 @@
 	</div>
 	
 	<div hidden="">
-		<form action="./memberJoin" method="POST">
-			<input id="usernameF" type="text" name="username">
-			<input id="passwordF" type="password" name="password">
-			<input id="nameF" type="text" name="name">
-			<input id="phoneF" type="text" name="phone">
-			<input id="emailF" type="email" name="email">
-			<input id="birthF" type="date" name="birth">
-			<input id="smsAgreeF" type="checkbox" name="smsAgree">
-			<input id="emailAgreeF" type="checkbox" name="emailAgree">
-		</form>
+		<form:form modelAttribute="memberVO" action="./memberJoin" method="POST">
+			<form:input id="usernameF" path="username"/>
+			<form:password id="passwordF" path="password"/>
+			<form:input id="nameF" path="name"/>
+			<form:input id="phoneF" path="phone"/>
+			<form:input id="emailF" path="email"/>
+			<form:input id="birthF" path="birth"/>
+			<form:checkbox id="smsAgreeF" path="smsAgree"/>
+			<form:checkbox id="emailAgreeF" path="emailAgree"/>
+		</form:form>
 	</div>
 
 	<!-- footer START -->
