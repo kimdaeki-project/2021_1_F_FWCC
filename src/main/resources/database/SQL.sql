@@ -108,6 +108,9 @@ CREATE TABLE `fw01`.`member` (
   `enabled` BIT NOT NULL,		-- 0: 비활성화
   PRIMARY KEY (`username`));
   
+ALTER TABLE `fw01`.`member` 
+CHANGE COLUMN `birth` `birth` VARCHAR(100) NOT NULL ;
+  
 -- insert dummy data
 insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
 values('username1', 'password1', 'name1', 'phone1', 'email1', curdate(), true, true, true);
