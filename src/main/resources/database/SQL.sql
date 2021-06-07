@@ -292,6 +292,7 @@ CREATE TABLE `fw01`.`orderlist` (
 	`orderDate` DATETIME NOT NULL,
 	`orderState` BIGINT NOT NULL default '1',
 	`orderMessage` TEXT NOT NULL,
+	`orderName` VARCHAR(200),
 	PRIMARY KEY (`orderNum`) USING BTREE,
 	INDEX `OD_CN_FK` (`cuNum`) USING BTREE,
 	INDEX `OD_UN_FK` (`username`) USING BTREE,
@@ -342,7 +343,7 @@ VALUES(0, 1, 2, '234-234', 1, 10000);
 CREATE TABLE `fw01`.`mileage` (
 	`mileNum` BIGINT NOT NULL AUTO_INCREMENT,
 	`usedMile` BIGINT NOT NULL,
-	`unableMile` BIGINT NOT NULL,
+	`changeMile` BIGINT NOT NULL,
 	`username` VARCHAR(100) NOT NULL,
 	`orderNum` VARCHAR(100) NOT NULL,
 	`mileContents` VARCHAR(100) NOT NULL,
