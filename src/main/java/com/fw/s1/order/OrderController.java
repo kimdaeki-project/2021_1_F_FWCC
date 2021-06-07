@@ -73,8 +73,8 @@ public class OrderController {
 	//결제를 위한 메서드, 결제 검증을 위해 필요하다.
 	@ResponseBody
 	@PostMapping("vertify/{imp_uid}")
-	public IamportResponse<Payment> getVertify(Model model, Locale locale, 
-												HttpSession httpSession, @PathVariable(value="imp_uid")String imp_uid)
+	public IamportResponse<Payment> getVertify(Model model, Locale locale, HttpSession httpSession, 
+													@PathVariable(value="imp_uid")String imp_uid)
 																		throws IamportResponseException, IOException {
 		return api.paymentByImpUid(imp_uid);
 	}
@@ -219,10 +219,10 @@ public class OrderController {
 	@ResponseBody
 	@PostMapping("orderComplete")
 	@Transactional(rollbackFor = Exception.class)
-	public void orderComplete(Authentication authentication, Long cuNum, String orderNum,
-								Long totPrice, Long spPrice, String destination, String orderMessage,
-								Long[] changedMiles, Long[] productNums, Long[] pInfoNums, Long[] productCounts,
-								Long[] finalPrices, String orderName, Long[] cartNums)throws Exception{
+	public void orderComplete(Long cuNum, String orderNum, Long totPrice, Long spPrice, 
+								String destination, String orderMessage, Long[] changedMiles, 
+								Long[] productNums, Long[] pInfoNums, Long[] productCounts,
+								Long[] finalPrices, String orderName, Long[] cartNums,Authentication authentication)throws Exception{
 		
 		if(cuNum!=1) {
 			CouponVO couponVO = new CouponVO();

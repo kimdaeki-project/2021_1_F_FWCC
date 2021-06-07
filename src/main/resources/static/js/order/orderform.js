@@ -550,14 +550,12 @@ $("#purchasebutton").click(function(event){
 	    buyer_addr : buyeraddr,
 	    buyer_postcode : buyerpostcode
 	}, function(rsp) {
-		$.ajax({
-			type:"post",
-			url:"/order/vertify/"+rsp.imp_uid,
-			success:function(data){
-				console.log(rsp);
-				console.log(data);
-				
-				if(rsp.success&&data.response.amount==rsp.amount){
+		if(rsp.success){
+			$.ajax({
+				type:"post",
+				url:"/order/vertify/"+rsp.imp_uid,
+				success:function(data){
+					console.log(data);
 					$.post({
 						url:"./orderComplete",
 						traditional:true,
@@ -585,13 +583,19 @@ $("#purchasebutton").click(function(event){
 							swal({
 								icon:"error",
 								title:"통신오류",
-								text:"결제 졀과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
+								text:"결제 결과를 저장하는 도중 에러가 발생하였습니다. 자정에 자동 환불됩니다."
 							});
 						}
 					});
 				}
-			}
-		});
+			});
+		}else{
+			swal({
+				icon:"error",
+				title:"결제오류",
+				text:"결제 도중 문제가 발생하였습니다."
+			});
+		}
 	});
 });
 
