@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.likebutton{
+	text-decoration: none; 
+	color: gray; 
+	border: gray 2px outset; 
+	background-color: white; 
+	padding:1px 6px;
+}
+
+#container{
+	margin:10% 8% 5% 8%; 
+	text-align: center;
+}
+
+#mainTag{
+	letter-spacing: 0.15rem; 
+	margin-bottom: 5%;
+}
+
+.textleft{
+	text-align: left;
+}
+
+.table{
+	width:100%;
+}
+
+.bottom1{
+	margin-bottom:1%;
+}
+
+.checkbox{
+	transform: scale(1.25);
+}
+
+.wid12{
+	width:12%;
+}
+
+.wid14{
+	width:14%;
+}
+
+.wid8{
+	width:8%;
+}
+
+.bd100{
+	border-bottom: 1px gray solid;
+}
+
+.bt100{
+	border-top: 1px gray solid;
+}
+
+.bd50{
+	border-bottom: 1px rgba(128,128,128,0.5) solid;
+}
+
+.thumbnail{
+	padding:1% 0; 
+	width:15%;
+}
+
+.tdp1{
+	padding:1%;
+}
+
+.list{
+	list-style: none; 
+	padding-left: 0;
+}

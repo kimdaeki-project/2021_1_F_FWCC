@@ -31,7 +31,7 @@
  		values(#{orderNum}, #{totPrice}, #{spPrice}, #{cuNum}, #{username}, #{destination}, sysdate(), 1, #{orderMessage}, #{orderName})
  	</insert>
 	<select id="getOrder" parameterType="OrderlistVO" resultMap="orderAndMileage">
-		select * from orderlist o inner join milaege m on o.orderNum=m.orderNum
+		select * from orderlist o inner join mileage m on o.orderNum = m.orderNum
 		where o.username=#{username} and m.mileNum = (select max(mileNum) from mileage where orderNum=#{orderNum})
 	</select>
  </mapper>

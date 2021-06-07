@@ -182,7 +182,7 @@ public class OrderController {
 		}
 		
 		if(count>0) {
-			name+=" 외"+count+"벌	";
+			name+=" 외 "+count+"벌	";
 		}
 		
 		List<AddressVO> addresslist = addressService.getAddressList(memberVO);

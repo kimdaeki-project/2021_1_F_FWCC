@@ -5,6 +5,7 @@
 <html>
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/order/basket.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -13,52 +14,52 @@
 		<c:param name="isCommon" value="true"></c:param>
 	</c:import>
 	<h1></h1>
-	<div style="margin:10% 8% 5% 8%; text-align: center;">
-		<h2 style="letter-spacing: 0.15rem; margin-bottom: 5%">CART</h2>
+	<div id="container">
+		<h2 id="mainTag">CART</h2>
 		<c:if test="${items ne null}">
-			<div style="text-align: left;">
+			<div class="textleft">
 				<strong>일반상품(<c:out value="${cartCount}"></c:out>)</strong>
 			</div>
-			<table style="width:100%; margin-bottom:1%;">
-				<thead style="border-bottom: 1px gray solid;">
+			<table class="table bottom1">
+				<thead class="bd100">
 					<tr>
 						<th>
-							<input style="transform: scale(1.25);" type="checkbox" id="allcheck"/>
+							<input class="checkbox" type="checkbox" id="allcheck"/>
 						</th>
-						<th style="padding:1% 0; width:15%;">
+						<th class="thumbnail">
 							THUMB
 						</th>
 						<th>
 							PRODUCT
 						</th>
-						<th style="width:12%;">
+						<th class="wid12">
 							PRICE
 						</th>
-						<th style="width:8%;">
+						<th class="wid8">
 							QUANTITY
 						</th>
-						<th style="width:8%;">
+						<th class="wid8">
 							MILEAGE
 						</th>
-						<th style="width:8%;">
+						<th class="wid8">
 							DELIVERY
 						</th>
-						<th style="width:8%;">
+						<th class="wid8">
 							CHARGE
 						</th>
-						<th style="width:14%;">
+						<th class="wid14">
 							TOTAL
 						</th>
-						<th style="width:8%;">
+						<th class="wid8">
 							SELECT
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${items}" var="item">
-						<tr style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
+						<tr class="bd50">
 							<td>
-								<input style="transform: scale(1.25);" type="checkbox" class="selectcheck" 
+								<input type="checkbox" class="selectcheck checkbox" 
 										data-cartNum='<c:out value="${item.cartNum}"></c:out>'
 										name="checklist">
 							</td>
@@ -109,10 +110,10 @@
 					</c:forEach>
 				</tbody>
 				<tfoot>
-					<tr style="border-top: 1px gray solid; border-bottom: 1px gray solid;">
+					<tr class="bd100 bt100">
 						<td colspan="10">
 							<br>
-							<div style="display: flex; justify-content: space-between; width:100%;">
+							<div style="display: flex; justify-content: space-between;" class="table">
 								<div>
 									[기본배송]
 								</div>
@@ -124,7 +125,7 @@
 							<br>
 						</td>
 					</tr>
-					<tr style="border-bottom:1px rgba(128,128,128,0.5) solid">
+					<tr class="bd50">
 						<td colspan="10" style="text-align: left;">
 							<span>할인 적용 금액은 주문서작성의 결제예정금액에서 확인가능합니다.</span>
 						<td>
@@ -137,7 +138,7 @@
 				<span>장바구니가 비어 있습니다.</span>
 			</div>
 		</c:if>
-		<div style="display:flex; width:100%; justify-content: space-between;">
+		<div style="display:flex; justify-content: space-between;" class='table'>
 			<div>
 				<span>선택상품을 </span><button id="selectcartremove">삭제하기</button>
 			</div>
@@ -145,7 +146,7 @@
 				<button id="allcartremove">장바구니 비우기</button>
 			</div>
 		</div>
-		<div style="margin-top: 3%; display: flex; width:100%; justify-content: space-between;">
+		<div style="margin-top: 3%; display: flex; justify-content: space-between;"  class='table'>
 			<div style="padding:1% 4.25%">
 			</div>
 			<div>
@@ -153,13 +154,13 @@
 				<button id="buyselects">ORDER SELECT</button>
 			</div>
 			<div>
-				<a href="/" style="text-decoration: none; color: gray; border: gray 2px outset; background-color: white; padding:1px 6px;">GO SHOPPING</a>
+				<a class="likebutton" href="/">GO SHOPPING</a>
 			</div>
 		</div>
-		<div style="text-align: left; font-size: 0.75rem; margin-top:3%;">
+		<div style=" font-size: 0.75rem; margin-top:3%;" class="textleft">
 			<strong><span>이용안내</span></strong><br><br>
 			<strong><span>장바구니 이용안내</span></strong>
-			<ol style="list-style: none; padding-left: 0;">
+			<ol class="list">
 				<li>해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별로 따로 결제해 주시기 바랍니다.</li>
 			    <li>해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.</li>
 			    <li>선택하신 상품의 수량을 변경하시려면 수량변경 후 [변경] 버튼을 누르시면 됩니다.</li>
