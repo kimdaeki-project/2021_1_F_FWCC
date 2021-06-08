@@ -21,7 +21,7 @@
 			</div>
 			<div>
 				<table class="table"
-					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; margin: 20px 10px;">
+					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5;">
 					<tbody>
 						<tr>
 							<th scope="row"
@@ -75,8 +75,18 @@
 						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a>
 				</c:forEach>
 			</div>
-			<div>${cm.writer}</div>
-			<div class="container">
+			<table class="table"
+					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; ">
+					<tbody>
+
+					<tr>
+					<td><div>${cm.writer} ${cm.regDate} </div>
+						<div>${cm.contents}</div></td>
+					</tr>
+
+					</tbody>
+			</table>
+			<div>
 				<form id="frm" action="./commentInsert" method="post">
 					<div class="form-group">
 						<label for="writer">Writer:</label> <input type="text"
@@ -84,7 +94,7 @@
 					</div>
 					<div class="form-group">
 						<label for="num">num:</label> <input type="number"
-							class="form-control myCheck" id="num" name="num">
+							class="form-control myCheck" id="num" name="num" value="${vo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
