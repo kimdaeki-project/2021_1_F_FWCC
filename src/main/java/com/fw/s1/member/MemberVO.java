@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fw.s1.address.AddressVO;
 
+import com.fw.s1.mileage.MileageVO;
+
 import lombok.Data;
 
 @Data
@@ -45,7 +47,11 @@ public class MemberVO implements UserDetails{
 	private String basicAddr;
 	private String detailAddr;
 	
-	
+	private String email1;
+	private String email2;
+	private String email3;
+	private MileageVO mileageVO;
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -80,4 +86,10 @@ public class MemberVO implements UserDetails{
 		return this.enabled;
 	}
 
+	public void emailSeperator() {
+		String[] templist = this.email.split("[@\\.]");
+		this.email1 = templist[0];
+		this.email2 = templist[1];
+		this.email3 = templist[2];
+	}
 }

@@ -26,4 +26,8 @@ public class ProductService {
 	public long getTotalCount(ProductPager productPager) throws Exception{
 		return productMapper.getTotalCount(productPager);
 	}
+	
+	public Long updateStock(List<ProductInfoVO> list)throws Exception{
+		return productMapper.updateStock(list);
+	}
 }

@@ -11,6 +11,7 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: 0.85rem;
+	z-index: 100;
 }
 
 #navbar:hover{
@@ -26,11 +27,11 @@
 }
 
 #navbar-left{
-	width:57.5%;
+	width:55%;
 }
 
 #navbar-right{
-	width:42.5%;
+	width:45%;
 }
 
 #navbar-left>ul>li{
@@ -42,7 +43,7 @@
 
 #navbar-right>ul>li{
 	float: right;
-	padding: 0 2%;
+	padding: 0 1.75%;
 	position:relative;
 	height:100%;
 }
@@ -161,3 +162,13 @@
 	margin-right: 3%;
 }
 
+#footer-upper{
+	position: fixed;
+	bottom: 7%;
+	right: 3%;
+}
+
+#footer-upper>a>i{
+	transform:scale(2);
+	color: rgba(128,128,128,0.5);
+}

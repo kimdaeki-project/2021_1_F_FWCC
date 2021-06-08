@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav id="navbar" style="z-index: 10000;">
+<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>
+<nav id="navbar">
 	<div id="navbar-left">
 		<ul>
 			<li>
@@ -101,6 +102,11 @@
 					<li><a href="#">Review</a></li>
 				</ul>
 			</li>
+			
+			<li>
+				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_black">AdminPage</a>
+			</li>
+			
 		</ul>
 	</div>
 </nav>

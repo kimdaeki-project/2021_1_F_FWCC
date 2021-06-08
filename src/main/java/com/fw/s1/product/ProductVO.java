@@ -17,7 +17,8 @@ public class ProductVO {
 	private String productType;
 	private Long finalPrice;
 	private Long productMileage;
-	private Long productSaleable;
+
+	private Boolean productSaleable;
 	
 //	private List<ProductFileVO> files;
 //	private List<ProductInfoVO> infos;

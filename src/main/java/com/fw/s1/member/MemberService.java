@@ -49,7 +49,7 @@ public class MemberService {
 		addressVO.setZipCode(memberVO.getZipCode());
 		addressVO.setBasicAddr(memberVO.getBasicAddr());
 		addressVO.setDetailAddr(memberVO.getDetailAddr());
-		result = addressService.setAddress(addressVO);
+		result = addressService.setJoinAddress(addressVO);
 	
 		if(result<1) {
 			throw new Exception();
@@ -95,5 +95,8 @@ public class MemberService {
 //		return result;
 //	}
 	
-	
+	public MemberVO getUsernameandemail(MemberVO memberVO)throws Exception{
+		return memberMapper.getUsernameandemail(memberVO);
+	}
+
 }

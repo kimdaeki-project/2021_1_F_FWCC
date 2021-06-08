@@ -2,6 +2,8 @@ package com.fw.s1.order;
 
 import java.sql.Date;
 
+import com.fw.s1.mileage.MileageVO;
+
 import lombok.Data;
 
 @Data
@@ -14,4 +16,9 @@ public class OrderlistVO {
 	private String username;
 	private String destination;
 	private Date orderDate;
+	private Long orderState;
+	private String orderMessage;
+	private String orderName;
+	
+	private MileageVO mileageVO;
 }

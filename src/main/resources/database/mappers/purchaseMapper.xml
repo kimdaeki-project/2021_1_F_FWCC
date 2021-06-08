@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.fw.s1.purchase.PurchaseMapper">
+	<insert id="setOrderPurchase" parameterType="java.util.List">
+	insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)
+	values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.productNum}, #{item.pInfoNum}, #{item.orderNum}, #{item.productCount}, #{item.proPriceSum})
+		</foreach>
+	</insert>
+</mapper>

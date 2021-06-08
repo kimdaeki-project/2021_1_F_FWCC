@@ -49,7 +49,18 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+	var msg="${msg}";
+	
+	if(msg!=''){
+		swal({
+			icon:"info",
+			title:"INFO",
+			text:msg
+		});
+	}
+</script>
 </body>
 </html>

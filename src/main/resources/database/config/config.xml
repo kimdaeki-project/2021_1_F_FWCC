@@ -12,6 +12,7 @@
 		<typeAlias type="com.fw.s1.product.ProductInfoVO"
 			alias="ProductInfoVO" />
 			<typeAlias type="com.fw.s1.util.ProductPager" alias="ProductPager"/>
+
 		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
 		<typeAlias type="com.fw.s1.order.OrderlistVO" alias="OrderlistVO"/>
 		<typeAlias type="com.fw.s1.purchase.PurchaseVO" alias="PurchaseVO"/>
@@ -23,6 +24,7 @@
   		<typeAlias type="com.fw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
   		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
   		<typeAlias type="com.fw.s1.address.AddressVO" alias="AddressVO"/>
+  		<typeAlias type="com.fw.s1.mileage.MileageVO" alias="MileageVO"/>
   		<typeAlias type="com.fw.s1.util.Pager" alias="Pager"/>
 	</typeAliases>
 </configuration>
