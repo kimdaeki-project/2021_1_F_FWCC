@@ -28,9 +28,9 @@ class ProductMapperTest {
 		List<ProductVO> list = productMapper.getList(productPager);
 		System.out.println(list.size());
 		for(ProductVO vo:list) {
-			if(vo.getProductSaleable()!=1) {
-				System.out.println(vo.getProductTitle());
-			}
+//			if(vo.getProductSaleable()!=1) {
+//				System.out.println(vo.getProductTitle());
+//			}
 		}
 		assertNotNull(list);
 	}
@@ -114,7 +114,7 @@ class ProductMapperTest {
 //		}
 		for(ProductVO vo:list) {
 			int rand = rm.nextInt(2);
-			vo.setProductSaleable((long)rand);
+//			vo.setProductSaleable((long)rand);
 			int result = productMapper.setUpdate(vo);
 			totalResult += result;
 			if(totalResult%10==0) {
