@@ -4,13 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fw.s1.util.ProductPager;
+
 @Mapper
 public interface ProductMapper {
 	
-	public List<ProductVO> getList(ProductVO productVO) throws Exception;
+	public Long getTotalCount(ProductPager productPager) throws Exception;
+	public List<ProductVO> getList(ProductPager productPager) throws Exception;
 	public ProductVO getSelect(ProductVO productVO) throws Exception;
 	public int setInsert(ProductVO productVO) throws Exception;
 	public int setUpdate(ProductVO productVO) throws Exception;
 	public int setDelete(ProductVO productVO) throws Exception;
+	
 
 }

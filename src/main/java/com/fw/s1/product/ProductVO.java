@@ -11,11 +11,15 @@ public class ProductVO {
 	private String productTitle;
 	private Long productPrice;
 	private Long productDisRate;
+	private String summary;
 	private String productContents;
 	private String collab;
 	private String productType;
+	private Long finalPrice;
+	private Long productMileage;
+	private Long productSaleable;
 	
-	private List<ProductFileVO> files;
-	private List<ProductInfoVO> infos;
+//	private List<ProductFileVO> files;
+//	private List<ProductInfoVO> infos;
 	
 }

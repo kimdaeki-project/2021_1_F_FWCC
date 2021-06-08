@@ -5,22 +5,45 @@
 
 <mapper namespace="com.fw.s1.product.ProductMapper">
 
-	<select id="getList" parameterType="ProductVO" resultType="ProductVO">
-		select * from product
-		where
-		collab like concat('%',#{collab},'%')
-		and
-		productType like concat('%',#{productType},'%')
-		order by productNum desc
+	<select id="getList" parameterType="ProductPager"
+		resultType="ProductVO">
+		select * from
+		(select row_number() over(
+		order by 
+		<choose>
+			<when test="sortStandard=='name'">
+				productTitle asc
+			</when>
+			<when test="sortStandard=='lowPrice'">
+				productPrice asc
+			</when>
+			<when test="sortStandard=='highPrice'">
+				productPrice desc
+			</when>
+			<otherwise>
+				productNum desc
+			</otherwise>
+		</choose>
+		
+		) as R, P.* from
+		(select * from product
+		where productSaleable = 1
+		and collab like concat('%',#{collab},'%')
+		and productType like concat('%',#{productType},'%')
+		<if test="sale">
+		and productDisRate > 0
+		</if>
+		) as P
+		) as RP
+		where R between #{startRow} and #{lastRow}
 	</select>
 
 	<insert id="setInsert" parameterType="ProductVO">
 		insert into product
 		(productTitle,
-		productPrice,productContents,collab,productType)
+		productPrice,productContents,collab,productType,finalPrice,productMileage,productSaleable)
 		values
-		(#{productTitle},
-		#{productPrice},#{productContents},#{collab},#{productType})
+		(#{productTitle},#{productPrice},#{productContents},#{collab},#{productType},#{finalPrice},#{productMileages},#{productSaleable})
 	</insert>
 
 	<select id="getSelect" parameterType="ProductVO"
@@ -33,14 +56,32 @@
 		productTitle=#{productTitle},
 		productPrice=#{productPrice},
 		productContents=#{productContents},
+		productDisRate=#{productDisRate},
 		collab=#{collab},
-		productType=#{productType}
+		productType=#{productType},
+		finalPrice=#{finalPrice},
+		productMileage=#{productMileage},
+		productSaleable=#{productSaleable}
 		where
 		productNum=#{productNum}
 	</update>
-	
+
 	<delete id="setDelete" parameterType="ProductVO">
-		delete from product where productNum=#{productNum}
+		delete from product where
+		productNum=#{productNum}
 	</delete>
-	
+
+	<select id="getTotalCount" parameterType="ProductPager"
+		resultType="java.lang.Long">
+		select count(productNum) from product
+		where productSaleable = 1
+		and collab like
+		concat('%',#{collab},'%')
+		and productType like
+		concat('%',#{productType},'%')
+		<if test="sale">
+		and productDisRate > 0
+		</if>
+	</select>
+
 </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav id="navbar">
+<nav id="navbar" style="z-index: 10000;">
 	<div id="navbar-left">
 		<ul>
 			<li>
@@ -14,21 +14,21 @@
 					</c:if>
 				</a>
 			</li>
-			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=productList">All (New arrival)</a></li>
-			<li id="navbar-rowlist"><a href="#">Top</a>
+			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=All&division=New arrival&sortStandard=&sale=false">All (New arrival)</a></li>
+			<li id="navbar-rowlist"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top&name=TOP&division=&sortStandard=&sale=false">Top</a>
 				<ul id="navbar-leftul">
-					<li><a href="#">TOP (long)</a></li>
-					<li><a href="#">TOP (short)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-long&name=TOP&division=long&sortStandard=&sale=false">TOP (long)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=top-short&name=TOP&division=short&sortStandard=&sale=false">TOP (short)</a></li>
 				</ul>
 			</li>
-			<li id="navbar-rowlist"><a href="#">Bottom</a>
+			<li id="navbar-rowlist"><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom&name=BOTTOM&division=&sortStandard=&sale=false">Bottom</a>
 				<ul id="navbar-leftul">
-					<li><a href="#">BOTTOM (long)</a></li>
-					<li><a href="#">BOTTOM (short)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-long&name=BOTTOM&division=long&sortStandard=&sale=false">BOTTOM (long)</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=bottom-short&name=BOTTOM&division=short&sortStandard=&sale=false">BOTTOM (short)</a></li>
 				</ul>
 			</li>
 			<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=4">Acc</a></li> -->
-			<li><a href="#">Sale</a></li>
+			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=sale&division=&sortStandard=&sale=true">Sale</a></li>
 			<li id="navbar-columnlist"><a href="#">Collaboration</a>
 				<ul id="navbar-colaul">
 					<li><a href="#">10th Anniversary Collection</a></li>
