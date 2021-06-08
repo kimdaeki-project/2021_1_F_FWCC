@@ -10,12 +10,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
 
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
 
 @Service
-public class MemberService implements UserDetailsService {
+public class MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
@@ -61,14 +62,29 @@ public class MemberService implements UserDetailsService {
 		return memberMapper.getUsernameCheck(memberVO);
 	}
 	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername(username);
-		
-		return memberVO;
-	}
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		MemberVO memberVO = new MemberVO();
+//		memberVO.setUsername(username);
+//		
+//		return memberVO;
+//	}
 	
+//	Custom Validation ==============================================================
+	public boolean usernameCheckError(MemberVO memberVO, Errors errors) throws Exception {
+		boolean result = false;
+		// 기본 제공 검증 결과 담기
+		result = errors.hasErrors();
+		
+		// 1. username 중복 여부
+		
+		// 2. passowrd 일치 여부
+		
+		// 3. admin, administrator ID 안되게
+		
+
+		return result;
+	}
 	
 	
 }
