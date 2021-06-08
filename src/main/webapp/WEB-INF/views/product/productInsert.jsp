@@ -21,9 +21,6 @@ padding: 85px 34px 0px;
 	margin: 0 auto;
 	min-height: 480px;
 }
-#detail{
-z-index: 0;
-}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -44,14 +41,14 @@ input[type="number"]::-webkit-inner-spin-button {
 <input type="number" name="productPrice">
 <h4>콜라보레이션구분</h4>
 <select name="collab">
-<option>콜라보레이션여부</option>
-<option>콜라보레이션 안함</option>
-<option>콜라보레이션 이름</option>
+<option value="default">콜라보레이션여부</option>
+<option value="none">콜라보레이션 안함</option>
+<option value="name1">콜라보레이션 이름</option>
 </select>
 <h4>제품 구분</h4>
 <select name="productType">
-<option>상의</option>
-<option>하의</option>
+<option value="top">상의</option>
+<option value="bottom">하의</option>
 </select>
 <h4>제품 세부 구분</h4>
 <select name="productType">
@@ -59,33 +56,28 @@ input[type="number"]::-webkit-inner-spin-button {
 <option>short</option>
 </select>
 <h4>썸네일</h4>
-
 <div class="image-container">
     <img style="width: 500px;" id="preview-image">
-    <input style="display: block;" type="file" id="input-image">
+    <input style="display: block;" type="file" id="input-image" name="files">
 </div>
-
-<input type="file" class="form-control-file border">
 <h4>제품 요약</h4>
-<textarea  style="resize: none;" id="summary" class="myCheck" name="productContents"></textarea>
+<textarea  style="resize: none;" id="summary" class="myCheck" name="summary"></textarea>
 <h4>사이즈</h4>
 <input type="checkbox" name="size" value="S">S
 <input type="checkbox" name="size" value="M">M
 <input type="checkbox" name="size" value="L">L
 <input type="checkbox" name="size" value="XL">XL
 <input type="checkbox" name="size" value="2XL">2XL
-<!-- 
-<h4>제품 상세 이미지</h4>
-<textarea name="productContents" style="resize: none;" id="detail" class="myCheck"></textarea>
- -->
-<h4></h4>
+<h4>상세 내용</h4>
+<textarea name="productContents" style="resize: none;" id="summernote"></textarea>
+ 
 <button>올리기</button>
 </form>
 </div>
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 <script type="text/javascript">
 
-$("#detail").summernote({
+$("#summernote").summernote({
 	height:500,
 	placeholder:'write here...',
 	callbacks :{
@@ -97,8 +89,8 @@ $("#detail").summernote({
 		}
 	}// callback
 });
-
-function readImage(input) {
+/* 
+ function readImage(input) {
 
     // 인풋 태그에 파일이 있는 경우
     if(input.files && input.files[0]) {
@@ -124,6 +116,7 @@ const inputImage = document.getElementById("input-image")
 inputImage.addEventListener("change", e => {
     readImage(e.target)
 })
+*/
 </script>
 </body>
 </html>

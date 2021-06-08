@@ -24,12 +24,29 @@ public class ProductPager {
 	private long totalPage;
 	
 	private String sortStandard;
+	private boolean sale;
 	
 	
 	
 	
 	
 	
+	
+	
+	
+	
+	
+
+
+
+	public boolean isSale() {
+		return sale;
+	}
+
+	public void setSale(boolean sale) {
+		this.sale = sale;
+	}
+
 	//	============================================================== 코드 재확인 후 실행
 	public void makeRow() {
 		long startRow = (this.getCurPage()*perPage) - (perPage-1);

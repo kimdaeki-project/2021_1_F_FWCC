@@ -18,12 +18,21 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
-//	@Test
+	@Test
 	void getListTest() throws Exception {
-		ProductVO vo = new ProductVO();
-//		List<ProductVO> list = productMapper.getList(vo);
-//		System.out.println(list.size());
-//		assertNotNull(list);
+		ProductPager productPager = new ProductPager();
+		long num = productMapper.getTotalCount(productPager);
+		productPager.setStartRow(0);
+		productPager.setLastRow(num);
+		
+		List<ProductVO> list = productMapper.getList(productPager);
+		System.out.println(list.size());
+		for(ProductVO vo:list) {
+			if(vo.getProductSaleable()!=1) {
+				System.out.println(vo.getProductTitle());
+			}
+		}
+		assertNotNull(list);
 	}
 	
 //	@Test
@@ -72,35 +81,44 @@ class ProductMapperTest {
 		assertNotEquals(0, list);
 	}
 	
-	@Test
+//	@Test
 	void setUpdateTest() throws Exception {
 		ProductPager productPager = new ProductPager();
 		long num = productMapper.getTotalCount(productPager);
 		productPager.setStartRow(0);
 		productPager.setLastRow(num);
 		int totalResult=0;
-		Random rm = new Random();
 		List<ProductVO> list = productMapper.getList(productPager);
+		Random rm = new Random();
+//		for(ProductVO vo:list) {
+//			vo.setProductDisRate((long)((rm.nextInt(11))*5));
+//			long price = vo.getProductPrice();
+//			long rate = vo.getProductDisRate();
+//			rate = (100-rate);
+//			long fPrice = ((price*rate)/10000)*100;
+//			
+//			long mileage = price/2000*100;
+//			vo.setFinalPrice(fPrice);
+//			vo.setProductMileage(mileage);
+//			
+//			
+//			int result = productMapper.setUpdate(vo);
+//			totalResult += result;
+//			if(totalResult%10==0) {
+//				System.out.println("===================================");
+//				System.out.println("price : "+price);
+//				System.out.println("rate : "+(100-rate));
+//				System.out.println("finalPrice : "+fPrice);
+//				System.out.println("===================================");
+//			}
+//		}
 		for(ProductVO vo:list) {
-			vo.setProductDisRate((long)((rm.nextInt(11))*5));
-			long price = vo.getProductPrice();
-			long rate = vo.getProductDisRate();
-			rate = (100-rate);
-			long fPrice = ((price*rate)/10000)*100;
-			
-			long mileage = price/2000*100;
-			vo.setFinalPrice(fPrice);
-			vo.setProductMileage(mileage);
-			
-			
+			int rand = rm.nextInt(2);
+			vo.setProductSaleable((long)rand);
 			int result = productMapper.setUpdate(vo);
 			totalResult += result;
 			if(totalResult%10==0) {
-				System.out.println("===================================");
-				System.out.println("price : "+price);
-				System.out.println("rate : "+(100-rate));
-				System.out.println("finalPrice : "+fPrice);
-				System.out.println("===================================");
+				System.out.println(totalResult);
 			}
 		}
 		System.out.println(totalResult);

@@ -113,9 +113,9 @@ clear:both;
 			<c:if test="${name ne 'All'}">
 				<div style="text-align: center;">
 					<span><a class="selBtn"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long&sortStandard=">long</a><a
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long&sortStandard=&sale=${sale}">long</a><a
 						class="selBtn"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=">short</a></span>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=&sale=${sale}">short</a></span>
 				</div>
 			</c:if>
 
@@ -124,13 +124,13 @@ clear:both;
 					Total <strong>${totalCount}</strong> items.
 				</p>
 				<div class="sort">
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=new">신상품</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=new&sale=${sale}">신상품</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=name">상품명</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=name&sale=${sale}">상품명</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=lowPrice">낮은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=lowPrice&sale=${sale}">낮은가격</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=short&sortStandard=highPrice">높은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=highPrice&sale=${sale}">높은가격</a></span>
 				</div>
 			</div>
 
@@ -173,27 +173,27 @@ clear:both;
 			<div class="page">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=1&sortStandard="
+					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=1&sortStandard=${sortStandard}&sale=${sale}"
 					title="${pager.startNum-1}"><</a></li>
 
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.startNum-1}&sortStandard=">PREV</a></li>
+					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-short&name=${name}&division=${division}&curPage=${pager.startNum-1}&sortStandard=${sortStandard}&sale=${sale}">PREV</a></li>
 
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}&sortStandard=">${i}</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}&sortStandard=${sortStandard}&sale=${sale}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.lastNum%5 eq 0}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}&sortStandard=">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
 				</c:if>
 				<c:if test="${pager.lastNum%5 ne 0}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}&sortStandard=">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
 				</c:if>
 			</ul>
 			</div>

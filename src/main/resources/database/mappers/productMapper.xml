@@ -27,8 +27,12 @@
 		
 		) as R, P.* from
 		(select * from product
-		where collab like concat('%',#{collab},'%')
+		where productSaleable = 1
+		and collab like concat('%',#{collab},'%')
 		and productType like concat('%',#{productType},'%')
+		<if test="sale">
+		and productDisRate > 0
+		</if>
 		) as P
 		) as RP
 		where R between #{startRow} and #{lastRow}
@@ -56,7 +60,8 @@
 		collab=#{collab},
 		productType=#{productType},
 		finalPrice=#{finalPrice},
-		productMileage=#{productMileage}
+		productMileage=#{productMileage},
+		productSaleable=#{productSaleable}
 		where
 		productNum=#{productNum}
 	</update>
@@ -69,10 +74,14 @@
 	<select id="getTotalCount" parameterType="ProductPager"
 		resultType="java.lang.Long">
 		select count(productNum) from product
-		where collab like
+		where productSaleable = 1
+		and collab like
 		concat('%',#{collab},'%')
 		and productType like
 		concat('%',#{productType},'%')
+		<if test="sale">
+		and productDisRate > 0
+		</if>
 	</select>
 
 </mapper>

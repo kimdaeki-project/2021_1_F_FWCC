@@ -18,6 +18,8 @@ CHANGE COLUMN `productPrice` `productPrice` BIGINT NULL DEFAULT NULL ,
 CHANGE COLUMN `productDisRate` `productDisRate` BIGINT NULL DEFAULT 0 ;
 ALTER TABLE fw01.product 
 ADD COLUMN productSaleable BIT NULL DEFAULT 0 AFTER productMileage;
+ALTER TABLE fw01.product 
+ADD COLUMN summary LONGTEXT NULL AFTER productDisRate;
   
 -- product table dummydata
   insert into product(productTitle, productPrice,productContents,collab,productType)
