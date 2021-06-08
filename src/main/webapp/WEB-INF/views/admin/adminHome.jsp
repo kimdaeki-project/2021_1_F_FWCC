@@ -12,10 +12,10 @@
 <c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp'></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 
-<div style="margin:7% 5% 4% 23%; text-align: center; background-color: #607d8b; box-shadow: 1rem 1rem black;">
+<div style="margin:7% 5% 4% 23%; text-align: center;">
 	<h1 style="margin-top: 13%; padding:3%; padding-top:5%;">Admin HomePage</h1>
 	<ul style="width:100%; list-style: none; padding-left: 0; margin-top:2%;">
-		<li style="background-color: #d4e157; width:22%; float: left; padding:3%; margin:0 5% 0 7%; display:block; border-radius: 1rem;">
+		<li style="width:22%; float: left; padding:3%; margin:0 5% 0 7%; display:block; border-radius: 1rem;  background-color: #607d8b; box-shadow: 1rem 1rem black;">
 			<h2>상품관리</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
@@ -29,7 +29,7 @@
 				</li>
 			</ul>
 		</li>
-		<li style="background-color: #ffc107; width:22%; float: left; padding:3%; margin:0 5%; display:block; border-radius: 1rem;">
+		<li style="width:22%; float: left; padding:3%; margin:0 5%; display:block; border-radius: 1rem;  background-color: #607d8b; box-shadow: 1rem 1rem black;">
 			<h2>판매현황</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
@@ -43,7 +43,7 @@
 				</li>
 			</ul>
 		</li>
-		<li style="background-color: #f48fb1; width:22%; float: left; padding:3%; margin:0 5%; display:block; border-radius: 1rem;">
+		<li style="width:22%; float: left; padding:3%; margin:0 5%; display:block; border-radius: 1rem; background-color: #607d8b; box-shadow: 1rem 1rem black;">
 			<h2>쿠폰관리</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
