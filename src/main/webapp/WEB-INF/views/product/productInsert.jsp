@@ -21,6 +21,14 @@ padding: 85px 34px 0px;
 	margin: 0 auto;
 	min-height: 480px;
 }
+#detail{
+z-index: 0;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 </style>
 <title>Product Insert</title>
 </head>
@@ -33,7 +41,7 @@ padding: 85px 34px 0px;
 <h4>제품 이름</h4>
 <input type="text" name="productTitle">
 <h4>제품 가격</h4>
-<input type="text" name="productPrice">
+<input type="number" name="productPrice">
 <h4>콜라보레이션구분</h4>
 <select name="collab">
 <option>콜라보레이션여부</option>
@@ -50,25 +58,34 @@ padding: 85px 34px 0px;
 <option>long</option>
 <option>short</option>
 </select>
-<!-- 
 <h4>썸네일</h4>
+
+<div class="image-container">
+    <img style="width: 500px;" id="preview-image">
+    <input style="display: block;" type="file" id="input-image">
+</div>
+
 <input type="file" class="form-control-file border">
- -->
 <h4>제품 요약</h4>
 <textarea  style="resize: none;" id="summary" class="myCheck" name="productContents"></textarea>
+<h4>사이즈</h4>
+<input type="checkbox" name="size" value="S">S
+<input type="checkbox" name="size" value="M">M
+<input type="checkbox" name="size" value="L">L
+<input type="checkbox" name="size" value="XL">XL
+<input type="checkbox" name="size" value="2XL">2XL
 <!-- 
 <h4>제품 상세 이미지</h4>
-<textarea name="contents" style="resize: none;" id="contents" class="myCheck"></textarea>
-<h4></h4>
-<input type="file" class="form-control-file border">
-<input type="file" class="form-control-file border">
+<textarea name="productContents" style="resize: none;" id="detail" class="myCheck"></textarea>
  -->
+<h4></h4>
 <button>올리기</button>
 </form>
 </div>
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 <script type="text/javascript">
-$("#contents").summernote({
+
+$("#detail").summernote({
 	height:500,
 	placeholder:'write here...',
 	callbacks :{
@@ -80,6 +97,33 @@ $("#contents").summernote({
 		}
 	}// callback
 });
+
+function readImage(input) {
+
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+
+        // 이미지 파일인지 검사 (생략)
+
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementById("preview-image")
+            previewImage.src = e.target.result
+        }
+
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+    }
+}
+
+// input file에 change 이벤트 부여
+const inputImage = document.getElementById("input-image")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+})
 </script>
 </body>
 </html>

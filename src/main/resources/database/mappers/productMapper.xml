@@ -37,9 +37,9 @@
 	<insert id="setInsert" parameterType="ProductVO">
 		insert into product
 		(productTitle,
-		productPrice,productContents,collab,productType)
+		productPrice,productContents,collab,productType,finalPrice,productMileage,productSaleable)
 		values
-		(#{productTitle},#{productPrice},#{productContents},#{collab},#{productType})
+		(#{productTitle},#{productPrice},#{productContents},#{collab},#{productType},#{finalPrice},#{productMileages},#{productSaleable})
 	</insert>
 
 	<select id="getSelect" parameterType="ProductVO"
