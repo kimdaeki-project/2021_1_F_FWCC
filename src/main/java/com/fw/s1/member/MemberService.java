@@ -58,8 +58,18 @@ public class MemberService {
 		return result;
 	}
 	
-	public MemberVO getUsernameCheck(MemberVO memberVO) throws Exception {
-		return memberMapper.getUsernameCheck(memberVO);
+	public int getUsernameCheck(MemberVO memberVO) throws Exception {
+		int result = 0;
+		String username = memberVO.getUsername();
+		memberVO = memberMapper.getUsernameCheck(memberVO);
+		if(memberVO !=null) {
+			String checkName = memberVO.getUsername();
+			if(username.equals(checkName)) {
+				result = 1;
+			}			
+		}
+					
+		return result;
 	}
 	
 //	@Override
@@ -71,20 +81,20 @@ public class MemberService {
 //	}
 	
 //	Custom Validation ==============================================================
-	public boolean usernameCheckError(MemberVO memberVO, Errors errors) throws Exception {
-		boolean result = false;
-		// 기본 제공 검증 결과 담기
-		result = errors.hasErrors();
-		
-		// 1. username 중복 여부
-		
-		// 2. passowrd 일치 여부
-		
-		// 3. admin, administrator ID 안되게
-		
-
-		return result;
-	}
+//	public boolean usernameCheckError(MemberVO memberVO, Errors errors) throws Exception {
+//		boolean result = false;
+//		// 기본 제공 검증 결과 담기
+//		result = errors.hasErrors();
+//		
+//		// 1. username 중복 여부
+//		
+//		// 2. passowrd 일치 여부
+//		
+//		// 3. admin, administrator ID 안되게
+//		
+//
+//		return result;
+//	}
 	
 	
 }

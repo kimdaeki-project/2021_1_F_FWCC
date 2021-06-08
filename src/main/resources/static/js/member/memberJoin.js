@@ -104,8 +104,13 @@ $("#usernameCheck").click(function(){
 		method:"POST",
 		url:"./usernameCheck",
 		data:{username:username},
-		success:function(){
-			
+		success:function(result){
+			result = result.trim();
+			if(result != 0){
+				alert("중복된 ID");
+			}else {
+				alert("사용가능 ID")
+			}
 		}
 	}); 
 });

@@ -30,7 +30,9 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		int result = memberService.setJoin(memberVO);
 		if(errors.hasErrors()) {
-			result = 0;
+			System.out.println("=================================");
+			System.out.println("errors : "+errors);
+			System.out.println("=================================");
 		}
 		
 		mv.addObject("result", result);
@@ -39,7 +41,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("usernameCheck")
-	public void getUsernameCheck(MemberVO memberVO) throws Exception {		
-		memberVO = memberService.getUsernameCheck(memberVO);
+	public ModelAndView getUsernameCheck(MemberVO memberVO) throws Exception {		
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.getUsernameCheck(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 }
