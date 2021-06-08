@@ -68,7 +68,6 @@ public class MemberService {
 				result = 1;
 			}			
 		}
-					
 		return result;
 	}
 	

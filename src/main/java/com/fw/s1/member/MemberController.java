@@ -48,4 +48,5 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
 }

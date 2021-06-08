@@ -82,6 +82,16 @@ $(".eraser").focus(function(){
 	$(this).val("");
 });
 
+$(".eraser").each(function(){	
+	$(this).blur(function(){
+		let eraser = $(this).val();
+		if(eraser.length == 0){
+			$(this).next().html("필수입력사항 입니다");
+		}
+	});
+});
+
+
 // MemberVO init =======================================
 let username = "";
 let password = "";
@@ -104,7 +114,7 @@ let emailAgree = "";
 
 // ID 중복 체크 ===========================================================
 $("#usernameCheck").click(function(){
-	$(".error").html("");
+	$(".errorUsername").html("");
 	username = $("#usernameT").val();
 	$.ajax({
 		method:"POST",
@@ -123,10 +133,40 @@ $("#usernameCheck").click(function(){
 	}); 
 });
 
+// password 비어있으면 passwordCheck 비우기 ===================
+$("#passwordT").blur(function(){
+	password = $(this).val();
+	let pwLength = password.length;
+	if(pwLength == 0) {
+		$("#passwordCheckT").val("");
+	} else if(pwLength <4) {
+		$("#passwordError").html("비밀번호는 4자리 이상이어야 합니다");
+	} else if(pwLength > 4) {
+		$("#passwordError").html("");
+	} else if(pwLength > 16) {
+		$("#passwordError").html("비밀번호는 16자리 이하이어야 합니다");
+	}
+});
 
-// table -> form ==========================================================
+// passwordCheck =============================================
+$("#passwordCheckT").blur(function(){
+	$(".errorPassword").each(function(){
+		$(this).html("");
+	});
+	password = $("#passwordT").val();
+	passwordCheck = $("#passwordCheckT").val();
+	if(password == passwordCheck){
+		$("#pwCheckSuccess").html("비밀번호가 일치합니다");
+	}else {
+		$("#pwCheckError").html("비밀번호가 일치하지 않습니다");
+	}
+});
+
+
+// setJoin ==========================================================
 $(".joinBtn").click(function(){
 	username = $("#usernameT").val();
+	username = username.toLowerCase();
 	password = $("#passwordT").val();
 	passwordCheck = $("#passwordCheckT").val();
 	name = $("#nameT").val();

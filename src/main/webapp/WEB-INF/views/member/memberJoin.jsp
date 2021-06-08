@@ -70,11 +70,10 @@
 							type="text"
 							value="test"
 						/>
+						<span id="usernameError" class="errorUsername error1"></span>
+						<span id="usernameSuccess" class="errorUsername"></span>	
 						 <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)
 						<a role="button" style="margin-left: 50px;" id="usernameCheck" class="btn btn-sm">중복확인</a>
-						<br>
-						<span id="usernameError" class="error error1"></span>
-						<span id="usernameSuccess" class="error"></span>	
 						</td>
 					</tr>
 					<tr>
@@ -90,7 +89,10 @@
 							minlength="4"
 							maxlength="16"
 							value="test"
-						/> (영문 대소문자/숫자 4자~16자)</td>
+						/>
+						<span id="passwordError" class="errorPassword error1"></span>
+						(영문 대소문자/숫자/특수기호 4자~16자)
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">비밀번호 확인 <img
@@ -105,7 +107,11 @@
 							minlength="4"
 							maxlength="16"
 							value="test"
-						/> <span id="passwordCheckMsg"></span></td>
+						/> 						
+						<span id="pwCheckError" class="errorPassword error1"></span>
+						<span id="pwCheckSuccess" class="errorPassword"></span>
+						<span id="passwordCheckMsg"></span>
+						</td>
 					</tr>
 					<tr>
 						<th
