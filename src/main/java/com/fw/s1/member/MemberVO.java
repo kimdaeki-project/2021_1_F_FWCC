@@ -29,13 +29,8 @@ public class MemberVO implements UserDetails{
 	private String passwordCheck;
 	@NotEmpty
 	private String name;
+	@Length(min = 3)
 	private String phone;
-	
-	private String phone0;
-	@NotEmpty
-	private String phone1;
-	@NotEmpty
-	private String phone2;
 	
 	@Email
 	private String email;

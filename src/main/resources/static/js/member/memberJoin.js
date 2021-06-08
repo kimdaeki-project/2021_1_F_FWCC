@@ -98,7 +98,17 @@ let smsAgree = "";
 let emailAgree = "";
 
 // ID 중복 체크 ===========================================================
-
+$("#usernameCheck").click(function(){
+	username = $("#usernameT").val();
+	$.ajax({
+		method:"POST",
+		url:"./usernameCheck",
+		data:{username:username},
+		success:function(){
+			
+		}
+	}); 
+});
 
 
 // table -> form ==========================================================
@@ -118,17 +128,6 @@ $(".joinBtn").click(function(){
 	let birth = $("#birth_year").val()+"-"+$("#birth_month").val()+"-"+$("#birth_day").val();
 	smsAgree = $("#is_sms0").prop("checked");
 	emailAgree = $("#is_news_mail0").prop("checked");
-	// -----------------------------------------------
-	/*$("#usernameF").value(username);
-	$("#passwordF").value(password);
-	$("#nameF").value(name);
-	$("#phoneF").value(phone);
-	$("#zipCode").value(zipCode);
-	$("#phoneF").value(phone);
-	$("#emailF").value(email);
-	$("#birthF").value(phone0+"-"+phone1+"-"+phone2);
-	$("#smsAgreeF").value(smsAgree);
-	$("#emailAgreeF").value(emailAgree);*/
 	$.ajax({
 		method:"POST",
 		url:"./memberJoin",
@@ -140,11 +139,21 @@ $(".joinBtn").click(function(){
 			email:email,
 			birth:birth,
 			smsAgree:smsAgree,
-			emailAgree:emailAgree
+			emailAgree:emailAgree,
+			zipCode:zipCode,
+			basicAddr:basicAddr,
+			detailAddr:detailAddr
 		},
-		success:function(){
+		success:function(result){
+			result = result.trim();
+			if(result != 0 ){
+				alert("회원가입 성공");
+				location.href="/";
+			}
+		}, // --- memberJoin success END ---
+		error:function(){
 			
-		} // --- memberJoin success END ---
+		} // --- memberJoin error END ---
 	}); // --- ajax END ---
 });
 

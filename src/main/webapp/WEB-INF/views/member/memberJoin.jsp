@@ -20,7 +20,11 @@
 	rel="stylesheet"
 	href="/css/member/memberJoin.css"
 >
-
+<style type="text/css">
+	.error1 {
+		color: red;
+	}
+</style>
 <meta charset="UTF-8">
 <title>FWCC-memberJoin</title>
 </head>
@@ -64,8 +68,12 @@
 							class="inputTypeText"
 							placeholder=""
 							type="text"
-						/> <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)
-						<a role="button" style="margin-left: 50px;" class="btn btn-sm">중복확인</a>
+							value="test"
+						/>
+						 <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)
+						<a role="button" style="margin-left: 50px;" id="usernameCheck" class="btn btn-sm">중복확인</a>
+						<br>
+						<span hidden="" id="usernameError"></span>		
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +87,7 @@
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
-							value=""
+							value="test"
 						/> (영문 대소문자/숫자 4자~16자)</td>
 					</tr>
 					<tr>
@@ -93,7 +101,7 @@
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
-							value=""
+							value="test"
 						/> <span id="passwordCheckMsg"></span></td>
 					</tr>
 					<tr>
@@ -110,7 +118,7 @@
 								class="ec-member-name"
 								placeholder=""
 								maxlength="30"
-								value=""
+								value="test"
 								type="text"
 							/></span> <span
 							id="under14Msg"
@@ -130,7 +138,7 @@
 							placeholder=""
 							readonly="readonly"
 							maxlength="14"
-							value=""
+							value="05670"
 							size="10"
 							type="text"
 						/> <a
@@ -146,7 +154,7 @@
 							class="inputTypeText"
 							placeholder=""
 							readonly="readonly"
-							value=""
+							value="서울 송파구 가락로 192 (송파동, 2차한양아파트)"
 							size="50"
 							type="text"
 						/> 기본주소<br /> 
@@ -156,7 +164,7 @@
 							path="detailAddr"
 							class="inputTypeText"
 							placeholder=""
-							value=""
+							value="29동 405호"
 							size="50"
 							type="text"
 						/> 나머지주소</td>
@@ -167,27 +175,27 @@
 							class=""
 							alt="필수"
 						/></th>
-						<td><form:select
+						<td><select
 							id="phone0"
-							path="phone0"
+							name="phone0"
 						>
-								<form:option value="010" items="010"/>
-								<form:option value="011" items="011"/>
-								<form:option value="016" items="016"/>
-								<form:option value="017" items="017"/>
-								<form:option value="018" items="018"/>
-								<form:option value="019" items="019"/>
-						</form:select>-<form:input
+								<option value="010" label="010"/>
+								<option value="011" label="011"/>
+								<option value="016" label="016"/>
+								<option value="017" label="017"/>
+								<option value="018" label="018"/>
+								<option value="019" label="019"/>
+						</select>-<input
 							id="phone1"
-							path="phone1"
+							name="phone1"
 							maxlength="4"
-							value=""
+							value="1111"
 							type="text"
-						/>-<form:input
+						/>-<input
 							id="phone2"
-							path="phone2"
+							name="phone2"
 							maxlength="4"
-							value=""
+							value="1111"
 							type="text"
 						/></td>
 					</tr>
@@ -199,8 +207,8 @@
 						<td><form:input
 							id="emailT"
 							path="email"
-							value=""
-							type="email"
+							value="test@gmail.com"
+							type="text"
 							size="30"
 						/> <span id="emailMsg"></span></td>
 					</tr>
@@ -332,20 +340,6 @@
 		</div>
 		</form:form>
 	</div>
-	
-	<%-- <div>
-		<form:form modelAttribute="memberVO" action="./memberJoin" method="POST">
-			<form:input id="usernameF" path="username"/>
-			<form:password id="passwordF" path="password"/>
-			<form:input id="nameF" path="name"/>
-			<form:input id="phoneF" path="phone"/>
-			<form:input id="emailF" path="email"/>
-			<form:input id="birthF" path="birth"/>
-			<form:checkbox id="smsAgreeF" path="smsAgree"/>
-			<form:checkbox id="emailAgreeF" path="emailAgree"/>
-			<form:button id="formBtn" class="btn btn-light" onclick="alert('클릭!');"/>
-		</form:form>
-	</div> --%>
 
 	<!-- footer START -->
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
