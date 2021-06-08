@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.board.notice.NoticeMapper;
+import com.fw.s1.board.BoardCommentVO;
 import com.fw.s1.board.BoardFileVO;
 import com.fw.s1.board.BoardService;
 import com.fw.s1.board.BoardVO;
@@ -58,6 +59,30 @@ public class NoticeService implements BoardService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int commentInsert(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.commentInsert(boardCommentVO);
+	}
+
+	@Override
+	public BoardCommentVO commentList(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.commentList(boardCommentVO);
+	}
+
+	@Override
+	public int commentUpdate(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.commentUpdate(boardCommentVO);
+	}
+
+	@Override
+	public int commentDelete(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.commentDelete(boardCommentVO);
 	}
 
 	@Override

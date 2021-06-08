@@ -21,4 +21,12 @@ public interface BoardMapper {
 		public int setHitUpdate(BoardVO boardVO)throws Exception;
 		//Delete
 		public int setDelete(BoardVO boardVO)throws Exception;
+		//commentInsert
+		public int commentInsert(BoardCommentVO boardCommentVO)throws Exception;
+		//commentList
+		public BoardCommentVO commentList(BoardCommentVO boardCommentVO)throws Exception;
+		//commentUpdate
+		public int commentUpdate(BoardCommentVO boardCommentVO)throws Exception;
+		//commentDelete
+		public int commentDelete(BoardCommentVO boardCommentVO)throws Exception;
 }

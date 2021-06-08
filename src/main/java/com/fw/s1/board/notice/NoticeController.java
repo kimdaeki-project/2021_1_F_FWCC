@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fw.s1.board.BoardCommentVO;
 import com.fw.s1.board.BoardFileVO;
 import com.fw.s1.board.BoardVO;
 import com.fw.s1.member.MemberVO;
@@ -26,6 +27,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	//comment
 	
 	
 	// /notice/fileDown
@@ -49,15 +51,17 @@ public class NoticeController {
 			model.addAttribute("list", ar);
 			model.addAttribute("pager", pager);
 
-			return "board/noticeList";
+			return "board/notice/noticeList";
 		}
 		
 		@GetMapping("select")
-		public ModelAndView getSelect(BoardVO boardVO)throws Exception{
+		public ModelAndView getSelect(BoardVO boardVO,BoardCommentVO boardCommentVO)throws Exception{
 			ModelAndView mv = new ModelAndView();
+			boardCommentVO = noticeService.commentList(boardCommentVO);
+			mv.addObject("cm",boardCommentVO);
 			boardVO = noticeService.getSelect(boardVO);
 			mv.addObject("vo", boardVO);
-			mv.setViewName("board/noticeSelect");
+			mv.setViewName("board/notice/noticeSelect");
 			return mv;
 		}
 		
@@ -65,7 +69,7 @@ public class NoticeController {
 		public String setInsert(Model model)throws Exception{
 			model.addAttribute("vo", new BoardVO());
 			model.addAttribute("action", "insert");
-			return "board/noticeInsert";
+			return "board/notice/noticeInsert";
 		}
 		
 		@PostMapping("insert")
@@ -85,7 +89,7 @@ public class NoticeController {
 			boardVO = noticeService.getSelect(boardVO);
 			model.addAttribute("vo", boardVO);
 			model.addAttribute("action", "update");
-			return "board/form";
+			return "board/notice/form";
 			
 		}
 		
@@ -102,6 +106,12 @@ public class NoticeController {
 			
 			int result = noticeService.setDelete(boardVO);
 			
+			return "redirect:./list";
+		}
+		
+		@PostMapping("commentInsert")
+		public String commentInsert(BoardCommentVO boardCommentVO)throws Exception{
+			int result = noticeService.commentInsert(boardCommentVO);
 			return "redirect:./list";
 		}
 }
