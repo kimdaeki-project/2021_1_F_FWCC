@@ -7,25 +7,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="/WEB-INF/views/templates/headStatics.jsp"></c:import>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
 </head>
+<style>
+a:hover {
+  text-decorationd: underline;
+}
+
+.pagination a { 
+    font-weight:bold; 
+    color: black; 
+    float: left; 
+    padding: 10px 16px; 
+    text-decoration: none; 
+} 
+.pagination a.active {     
+    text-decoration:underline ; 
+} 
+.pagination a:hover:not(.active) { 
+    text-decoration:underline ; 
+    border-radius:15px; 
+} 
+
+</style>
 <body>
-<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
+		<c:param name="isCommon" value="true"></c:param>
+	</c:import>
 <div id="container">
-<div id="contents">
+<div style="padding: 68px 34px 0;">
 <div class="container">
-	<div class="title" style="margin: 60px 0 40px;">
-			<h2><font color>Notice</font></h2>
-	</div>	
-		<table class="table">
-			<thead class="xans-element">
+	<div class="title" style="margin: 60px 0 40px; text-align:center;">
+			<p>Notice</p>
+	</div>		
+		<table class="table" style="border-collapse: separate;
+	  border-spacing: 1px;
+	  text-align: left;
+	  line-height: 1.5;
+	  margin : 20px 10px;">
+			<thead >
 				<tr>
-					<th>NO</th>
-					<th>SUBJECT</th>
-					<th>WRITER</th>
-					<th>DATE</th>
-					<th>HIT</th>
+					<th style="width: 100px;">NO</th>
+					<th style="width: 600px;">SUBJECT</th>
+					<th style="width: 100px; text-align:center;">WRITER</th>
+					<th style="width: 100px; text-align:center;">DATE</th>
+					<th style="width: 100px; text-align:center;">HIT</th>
 				</tr>
 			</thead>
 			
@@ -33,16 +59,16 @@
 			<c:forEach items="${list}" var="dto" >
 				<tr>
 					<td>${dto.num}</td>
-					<td><a href="./select?num=${dto.num}">
+					<td><a style="color:black;" href="./select?num=${dto.num}">
 					
 					<c:catch>
 					<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
 					</c:catch>
 					${dto.title}
 					</a></td>
-					<td>${dto.writer}</td>
-					<td>${dto.regDate}</td>
-					<td>${dto.hit}</td>
+					<td style="text-align:center;">${dto.writer}</td>
+					<td style="text-align:center;">${dto.regDate}</td>
+					<td style="text-align:center;">${dto.hit}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -54,9 +80,7 @@
 	  <ul class="pagination" style=" justify-content: center;">
 	  
 	  	
-	    <li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}"><span class="material-icons">
-keyboard_arrow_left
-</span></a></li>
+	    <li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}">&lt</a></li>
 	   
 	   
 	   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
@@ -65,9 +89,7 @@ keyboard_arrow_left
 	   </c:forEach>
 	   
 	    
-	    <li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum+1}"><span class="material-icons">
-keyboard_arrow_right
-</span></a></li>
+	   <li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum}">&gt</a></li>
 	    
 	  </ul>
 	 </div> 
@@ -104,12 +126,12 @@ keyboard_arrow_right
 		$("#curPage").val(curPage);
 		let search= '${pager.search}';
 		$("#frm").submit();
-
-		
 	});
 </script> 
 
 </div>
 </div>
+	<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
+
 </body>
 </html>

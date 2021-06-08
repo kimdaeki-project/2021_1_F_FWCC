@@ -63,7 +63,8 @@
    		</update>
    		
    		<insert id="setInsert" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			insert into notice values(#{num}, #{title}, #{writer},#{contents}, now(), 0)
+   			insert into notice (title,writer,contents,regDate,hit)
+   			values(#{title}, #{writer},#{contents}, now(), 0)
    		</insert>
    		
    		<insert id="setFileInsert" parameterType="BoardFileVO">
@@ -77,6 +78,23 @@
    		
    		<delete id="setDelete" parameterType="BoardVO">
    			delete from notice where num=#{num}
+   		</delete>
+   		
+   		<insert id="commentInsert" parameterType="BoardCommentVO">
+   			insert into noticeComment (writer, regDate, contents, num)
+   			values (#{writer}, now(), #{contents}, #{num})
+   		</insert>
+   		
+   		<select id="commentList" parameterType="BoardCommentVO" resultType="BoardCommentVO">
+			select * from noticeComment where num=#{num}
+   		</select>
+   		
+   		<update id="commentUpdate" parameterType="BoardCommentVO">
+   			update noticeComment set writer=#{writer}, regDate=#{regDate}, contents=#{contents}, num=#{num} where commentNum=#{commentNum}
+   		</update>
+   		
+   		<delete id="commentDelete" parameterType="BoardCommentVO">
+   			delete from noticeComment where commentNum=#{commentNum}
    		</delete>
    
    </mapper>

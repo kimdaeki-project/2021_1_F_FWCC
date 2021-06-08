@@ -19,6 +19,7 @@
 		<typeAlias type="com.fw.s1.coupon.CouponspVO" alias="CouponspVO"/>
 		<typeAlias type="com.fw.s1.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.fw.s1.board.BoardFileVO" alias="BoardFileVO"/>
+		<typeAlias type="com.fw.s1.board.BoardCommentVO" alias="BoardCommentVO"/>
   		<typeAlias type="com.fw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
   		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
   		<typeAlias type="com.fw.s1.address.AddressVO" alias="AddressVO"/>
