@@ -14,11 +14,11 @@
 			<result column="productTitle" property="productTitle"/>
 			<result column="productPrice" property="productPrice"/>
 			<result column="productDisRate" property="productDisRate"/>
-			<result column="productContents" property="productContents"/>
 			<result column="productType" property="productType"/>
 			<result column="collab" property="collab"/>
 			<result column="finalPrice" property="finalPrice"/>
 			<result column="productMileage" property="productMileage"/>
+			<result column="productSaleable" property="productSaleable"/>
 		</association>
 		<association property="productInfoVO" javaType="ProductInfoVO">
 			<id column="pInfoNum" property="pInfoNum"/>
@@ -70,6 +70,12 @@
   
   <update id="updateCount" parameterType="CartVO">
   	update cart set productCount = #{productCount} where cartNum=#{cartNum} and username = #{username}
+  </update>
+  
+  <update id="updateCountList" parameterType="java.util.List">
+  	<foreach collection="list" item="item" separator=";">
+  		update cart set productCount=#{item.productCount} where cartNum=#{item.cartNum} and username=#{item.username}
+  	</foreach>
   </update>
   
   <delete id="deleteItem" parameterType="java.util.List">

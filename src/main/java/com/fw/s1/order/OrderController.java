@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
@@ -119,34 +119,75 @@ public class OrderController {
 	}
 	
 	@GetMapping("basket")
-	public void getCartList(Authentication authentication, Model model) throws Exception{
+	public String getCartList(Authentication authentication, Model model, RedirectAttributes redirectAttributes) throws Exception{
+		String msg = "";
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("admin");
 		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		List<CartVO> list = cartService.getCartList(memberVO);
-		long cartCount = list.size();
+		List<CartVO> getlist = cartService.getCartList(memberVO);
+		List<CartVO> deleteList = new ArrayList<>();
+		List<CartVO> updatelist = new ArrayList<>();
+		List<CartVO> list = new ArrayList<>();
+		long cartCount = getlist.size();
 		
 		long totalprice = 0;
-		for(CartVO cartVO : list) {
-			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
+		for(CartVO cartVO : getlist) {
 			ProductVO productVO = cartVO.getProductVO();
+			ProductInfoVO productInfoVO = cartVO.getProductInfoVO();
+			if(!productVO.getProductSaleable()||productInfoVO.getStock()<=0) {
+				deleteList.add(cartVO);
+				continue;
+			}else if(cartVO.getProductCount()>productInfoVO.getStock()) {
+				cartVO.setProductCount(productInfoVO.getStock());
+				updatelist.add(cartVO);
+			}
+			
+			totalprice+=cartVO.getProductCount()*cartVO.getProductVO().getProductPrice();
 			if(productVO.getProductDisRate()>0) {
 				long cal = (((100-productVO.getProductDisRate())*productVO.getProductPrice()/100)/100)*100;
 				cartVO.setFinalPrice(cal*cartVO.getProductCount());
 				totalprice -= (productVO.getProductPrice()-cal)*cartVO.getProductCount();
 			}
+			list.add(cartVO);
 		}
-
+			
+		if(updatelist.size()>0) {
+			msg="몇몇 상품의 재고가 부족합니다.";
+			if(cartService.updateCountList(list)==0) {
+				msg = "서버와의 통신이 불안정합니다.";
+				redirectAttributes.addFlashAttribute("msg", msg);
+				return "redirect:/";
+			}
+		}
 		
+		if(deleteList.size()>0) {
+			if(msg.equals("몇몇 상품의 재고가 부족합니다.")) {
+				msg = "구입이 불가능 한 상품이 제거되고, 부족한 재고의 상품의 개수가 변경되었습니다.";
+			}else {
+				msg = "구입이 불가능한 상품이 자동으로 제거되었습니다.";
+			}
+			if(cartService.deleteItem(deleteList)==0) {
+				msg = "서버와의 통신이 불안정합니다.";
+				redirectAttributes.addFlashAttribute("msg", msg);
+				return "redirect:/";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
 		model.addAttribute("cartCount", cartCount);
 		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
+		return "/order/basket";
 	}
 	
 	//주소 추가작업 필요
 	@PostMapping("orderform")
-	public void getPurchase(long[] cartNums, Authentication authentication, Model model)throws Exception {
+	public String getPurchase(long[] cartNums, Authentication authentication, Model model, RedirectAttributes redirectAttributes)throws Exception {
+		String msg = "";
+		List<CartVO> clist = new ArrayList<>();
 		List<CartVO> list = new ArrayList<>();
+		List<CartVO> dlist = new ArrayList<>();
+		List<CartVO> updatelist = new ArrayList<>();
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("admin");
 		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
@@ -158,10 +199,46 @@ public class OrderController {
 			cartVO.setCartNum(cartNum);
 			cartVO.setUsername("admin");
 			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-			list.add(cartVO);
+			clist.add(cartVO);
 		}
 		
-		list = cartService.getCartSelectList(list);
+		clist = cartService.getCartSelectList(clist);
+		
+		for(CartVO cartVO : clist) {
+			ProductVO productVO = cartVO.getProductVO();
+			ProductInfoVO productInfoVO = cartVO.getProductInfoVO();
+			if(!productVO.getProductSaleable()||productInfoVO.getStock()<=0) {
+				dlist.add(cartVO);
+			}else {
+				list.add(cartVO);
+				if(cartVO.getProductCount()>productInfoVO.getStock()) {
+					updatelist.add(cartVO);
+				}
+			}
+		}
+		
+		if(updatelist.size()>0) {
+			msg="몇몇 상품의 재고가 부족합니다.";
+			if(cartService.updateCountList(list)==0) {
+				msg = "서버와의 통신이 불안정합니다.";
+				redirectAttributes.addFlashAttribute("msg", msg);
+				return "redirect:/";
+			}
+		}
+		
+		if(dlist.size()>0) {
+			if(msg.equals("몇몇 상품의 재고가 부족합니다.")) {
+				msg = "구입이 불가능 한 상품이 제거되고, 부족한 재고의 상품의 개수가 변경되었습니다.";
+			}else {
+				msg = "구입이 불가능한 상품이 자동으로 제거되었습니다.";
+			}
+			if(cartService.deleteItem(dlist)==0) {
+				msg = "서버와의 통신이 불안정합니다.";
+				redirectAttributes.addFlashAttribute("msg", msg);
+				return "redirect:/";
+			}
+		}
+		
 		long orderCount = list.size();
 		
 		long totalprice=0;
@@ -182,7 +259,7 @@ public class OrderController {
 		}
 		
 		if(count>0) {
-			name+=" 외 "+count+"벌	";
+			name+=" 외 "+count+"벌";
 		}
 		
 		List<AddressVO> addresslist = addressService.getAddressList(memberVO);
@@ -215,6 +292,9 @@ public class OrderController {
 		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("items", list);
 		model.addAttribute("totalprice", totalprice);
+		model.addAttribute("msg", msg);
+		
+		return "/order/orderform";
 	}
 	
 	@ResponseBody
@@ -355,13 +435,14 @@ public class OrderController {
 	}
 	
 	@GetMapping("orderResult")
-	public String orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model)throws Exception{
+	public String orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model, RedirectAttributes redirectAttributes)throws Exception{
 		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		orderlistVO.setUsername("admin");
 		orderlistVO = orderService.getOrder(orderlistVO);
 		
 		if(orderlistVO == null) {
-			return "/";
+			redirectAttributes.addFlashAttribute("msg", "결제정보를 조회할 수 없습니다.");
+			return "redirect:/";
 		}
 		
 		model.addAttribute("order", orderlistVO);

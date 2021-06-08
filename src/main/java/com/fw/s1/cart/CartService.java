@@ -37,6 +37,10 @@ public class CartService {
 		return cartMapper.updateCount(cartVO);
 	}
 	
+	public Long updateCountList(List<CartVO> list)throws Exception{
+		return cartMapper.updateCountList(list);
+	}
+	
 	public Long deleteItem(List<CartVO> list)throws Exception{
 		return cartMapper.deleteItem(list);
 	}

@@ -21,6 +21,8 @@ public interface CartMapper {
 	public Long setCart(CartVO cartVO)throws Exception;
 	//카트에 들어있는 항목의 개수 변경
 	public Long updateCount(CartVO cartVO)throws Exception;
+	//재고보다 더 많았던 카트의 항목들 수정
+	public Long updateCountList(List<CartVO> list)throws Exception;
 	//카트에 들어있는 항목 제거
 	public Long deleteItem(List<CartVO> list)throws Exception;
 	//카트에 있는 모든 항목 제거

@@ -176,7 +176,7 @@
 	<script>
 		var msg = "${msg}";
 		
-		if(msg=="재고보다 선택한 수량이 더 많습니다."){
+		if(msg!=""){
 			swal({
 				icon:"info",
 				title:"INFO",

@@ -526,5 +526,16 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/order/orderform.js"></script>
+	<script type="text/javascript">
+		var msg="${msg}";
+		
+		if(msg!=""){
+			swal({
+				icon:"info",
+				title:"INFO",
+				text:msg
+			});
+		}
+	</script>
 </body>
 </html>

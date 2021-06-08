@@ -60,11 +60,12 @@
 
 .thumbnail{
 	padding:1% 0; 
-	width:15%;
+	width:12%;
 }
 
 .tdp1{
 	padding:1%;
+	vertical-align: middle;
 }
 
 .list{

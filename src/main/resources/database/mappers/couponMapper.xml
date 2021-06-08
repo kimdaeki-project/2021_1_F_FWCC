@@ -23,6 +23,10 @@
 		where c.username=#{username} and useCheck=0
 	</select>
 	
+	<select id="getCouponspList" resultType="CouponspVO">
+		select * from couponsp
+	</select>
+	
 	<update id="useUpdate" parameterType="CouponVO">
 		update coupon set useCheck=1 where username=#{username} and cuNum=#{cuNum}
 	</update>
