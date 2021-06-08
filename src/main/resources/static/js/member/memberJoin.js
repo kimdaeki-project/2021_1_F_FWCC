@@ -112,6 +112,7 @@ let birth = "";
 let smsAgree = "";
 let emailAgree = "";
 
+
 // ID 중복 체크 ===========================================================
 $("#usernameCheck").click(function(){
 	$(".errorUsername").html("");
