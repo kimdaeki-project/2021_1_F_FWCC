@@ -1,25 +1,6 @@
 /**
  * 
  */
-
-// 전체 동의 checkbox ==============================
-$("#sAgreeAllChecked").click(function(){
-	let checked = $(this).prop("checked");
-		$(".ec-base-chk").prop("checked", checked);
-});
-
-// 체크 하나 빠지면 전체동의 변동 ==================
-$(".ec-base-chk").click(function(){
-	$(this).each(function(){
-		let result = true;
-		let check = $(this).prop("checked");
-		if(!check){
-			result = false;
-		}
-		$("#sAgreeAllChecked").prop("checked", result);
-	});
-});
-
 // 주소 API ======================================
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function execDaumPostcode() {
@@ -77,6 +58,30 @@ $(".ec-base-chk").click(function(){
         }).open();
     }
     
+
+// 전체 동의 checkbox ==============================
+$("#sAgreeAllChecked").click(function(){
+	let checked = $(this).prop("checked");
+		$(".ec-base-chk").prop("checked", checked);
+});
+
+// 체크 하나 빠지면 전체동의 변동 ==================
+$(".ec-base-chk").click(function(){
+	$(this).each(function(){
+		let result = true;
+		let check = $(this).prop("checked");
+		if(!check){
+			result = false;
+		}
+		$("#sAgreeAllChecked").prop("checked", result);
+	});
+});
+
+// input 커서 집어넣으면 값 초기화 ============================
+$(".eraser").focus(function(){
+	$(this).val("");
+});
+
 // MemberVO init =======================================
 let username = "";
 let password = "";
@@ -99,6 +104,7 @@ let emailAgree = "";
 
 // ID 중복 체크 ===========================================================
 $("#usernameCheck").click(function(){
+	$(".error").html("");
 	username = $("#usernameT").val();
 	$.ajax({
 		method:"POST",
@@ -107,9 +113,11 @@ $("#usernameCheck").click(function(){
 		success:function(result){
 			result = result.trim();
 			if(result != 0){
-				alert("중복된 ID");
+				// 중복됐을때
+				$("#usernameError").html("중복된 ID입니다");
 			}else {
-				alert("사용가능 ID")
+				// 사용가능할때
+				$("#usernameSuccess").html("사용가능한 ID입니다");
 			}
 		}
 	}); 

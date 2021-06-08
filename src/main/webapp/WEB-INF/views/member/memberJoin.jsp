@@ -65,7 +65,7 @@
 						<td><form:input
 							id="usernameT"
 							path="username"
-							class="inputTypeText"
+							class="inputTypeText eraser"
 							placeholder=""
 							type="text"
 							value="test"
@@ -73,7 +73,8 @@
 						 <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자)
 						<a role="button" style="margin-left: 50px;" id="usernameCheck" class="btn btn-sm">중복확인</a>
 						<br>
-						<span hidden="" id="usernameError"></span>		
+						<span id="usernameError" class="error error1"></span>
+						<span id="usernameSuccess" class="error"></span>	
 						</td>
 					</tr>
 					<tr>
@@ -84,6 +85,7 @@
 						<td><form:password
 							id="passwordT"
 							path="password"
+							class="eraser"
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
@@ -98,6 +100,7 @@
 						<td><form:password
 							id="passwordCheckT"
 							path="passwordCheck"
+							class="eraser"
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
@@ -115,7 +118,7 @@
 						<td><span id="nameContents"><form:input
 								id="nameT"
 								path="name"
-								class="ec-member-name"
+								class="ec-member-name eraser"
 								placeholder=""
 								maxlength="30"
 								value="test"
@@ -178,6 +181,7 @@
 						<td><select
 							id="phone0"
 							name="phone0"
+							class="eraser"
 						>
 								<option value="010" label="010"/>
 								<option value="011" label="011"/>
@@ -188,12 +192,14 @@
 						</select>-<input
 							id="phone1"
 							name="phone1"
+							class="eraser"
 							maxlength="4"
 							value="1111"
 							type="text"
 						/>-<input
 							id="phone2"
 							name="phone2"
+							class="eraser"
 							maxlength="4"
 							value="1111"
 							type="text"
@@ -207,6 +213,7 @@
 						<td><form:input
 							id="emailT"
 							path="email"
+							class="eraser"
 							value="test@gmail.com"
 							type="text"
 							size="30"
