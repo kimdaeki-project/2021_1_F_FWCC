@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<ul style="position:absolute; top:0; left=0; height:100%; width:18%; background-color: rgba(128,128,128,0.6); list-style: none; padding:0; text-align: center; z-index:200;">
+<ul style="list-style: none; padding:0; position:sticky; top:0;">
 	<li style="padding:12% 14%;">
 		<a href="${pageContext.request.contextPath}/admin/adminHome">
 			<img alt="" src="${pageContext.request.contextPath}/images/logo_b.png" style="margin:1.5% 3%; transform:scale(1.2);">
@@ -26,4 +26,4 @@
 			<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/transmitCoupon">쿠폰전송</a></li>
 		</ul>
 	</li>
-</ul>
+</ul>	
