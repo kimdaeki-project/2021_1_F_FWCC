@@ -31,6 +31,7 @@
 
 	<!-- contents START -->
 	<div class="container">
+		<form:form modelAttribute="memberVO" action="./memberJoin" method="POST">
 		<div class="titleArea">
 			<h2>JOIN US</h2>
 		</div>
@@ -57,9 +58,9 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><input
+						<td><form:input
 							id="usernameT"
-							name="username"
+							path="username"
 							class="inputTypeText"
 							placeholder=""
 							type="text"
@@ -72,14 +73,13 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><input
+						<td><form:password
 							id="passwordT"
-							name="password"
+							path="password"
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
 							value=""
-							type="password"
 						/> (영문 대소문자/숫자 4자~16자)</td>
 					</tr>
 					<tr>
@@ -87,14 +87,13 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><input
+						<td><form:password
 							id="passwordCheckT"
-							name="passwordCheck"
+							path="passwordCheck"
 							autocomplete="off"
 							minlength="4"
 							maxlength="16"
 							value=""
-							type="password"
 						/> <span id="passwordCheckMsg"></span></td>
 					</tr>
 					<tr>
@@ -105,9 +104,9 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><span id="nameContents"><input
+						<td><span id="nameContents"><form:input
 								id="nameT"
-								name="name"
+								path="name"
 								class="ec-member-name"
 								placeholder=""
 								maxlength="30"
@@ -124,9 +123,9 @@
 							class=""
 							alt="필수"
 						/></th>
-						<td><input
+						<td><form:input
 							id="zipCodeT"
-							name="zipCode"
+							path="zipCode"
 							class="inputTypeText"
 							placeholder=""
 							readonly="readonly"
@@ -141,9 +140,9 @@
 						><img
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_zipcode.gif"
 								alt="우편번호"
-							/></a><br /> <input
+							/></a><br /> <form:input
 							id="basicAddrT"
-							name="basicAddr"
+							path="basicAddr"
 							class="inputTypeText"
 							placeholder=""
 							readonly="readonly"
@@ -152,9 +151,9 @@
 							type="text"
 						/> 기본주소<br /> 
 						<span id="guide" style="color:#999;display:none"></span>
-						<input
+						<form:input
 							id="detailAddrT"
-							name="detailAddr"
+							path="detailAddr"
 							class="inputTypeText"
 							placeholder=""
 							value=""
@@ -168,25 +167,25 @@
 							class=""
 							alt="필수"
 						/></th>
-						<td><select
+						<td><form:select
 							id="phone0"
-							name="phone[]"
+							path="phone0"
 						>
-								<option value="010">010</option>
-								<option value="011">011</option>
-								<option value="016">016</option>
-								<option value="017">017</option>
-								<option value="018">018</option>
-								<option value="019">019</option>
-						</select>-<input
+								<form:option value="010" items="010"/>
+								<form:option value="011" items="011"/>
+								<form:option value="016" items="016"/>
+								<form:option value="017" items="017"/>
+								<form:option value="018" items="018"/>
+								<form:option value="019" items="019"/>
+						</form:select>-<form:input
 							id="phone1"
-							name="phone[]"
+							path="phone1"
 							maxlength="4"
 							value=""
 							type="text"
-						/>-<input
+						/>-<form:input
 							id="phone2"
-							name="phone[]"
+							path="phone2"
 							maxlength="4"
 							value=""
 							type="text"
@@ -197,11 +196,11 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><input
+						<td><form:input
 							id="emailT"
-							name="email"
+							path="email"
 							value=""
-							type="text"
+							type="email"
 							size="30"
 						/> <span id="emailMsg"></span></td>
 					</tr>
@@ -326,11 +325,12 @@
 		</div>
 		<br /> <br />
 		<div class="ec-base-button txtBtn">
-			<a
+			<a	role="button"
 				href="#"
 				class="black big joinBtn"
 			>JOIN US</a>
 		</div>
+		</form:form>
 	</div>
 	
 	<%-- <div>

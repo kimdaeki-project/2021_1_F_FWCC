@@ -1,6 +1,5 @@
 package com.fw.s1.member;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,9 +8,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fw.s1.address.AddressVO;
 
 import lombok.Data;
 
@@ -24,10 +26,17 @@ public class MemberVO implements UserDetails{
 	@NotEmpty
 	@Length(min = 4, max = 16)
 	private String password;
+	private String passwordCheck;
 	@NotEmpty
 	private String name;
-	@NotEmpty
 	private String phone;
+	
+	private String phone0;
+	@NotEmpty
+	private String phone1;
+	@NotEmpty
+	private String phone2;
+	
 	@Email
 	private String email;
 	private String birth;
@@ -36,7 +45,13 @@ public class MemberVO implements UserDetails{
 	private boolean enabled;
 	
 	private List<RoleVO> roles;
-
+	
+	private String zipCode;
+	private String basicAddr;
+	private String detailAddr;
+	
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

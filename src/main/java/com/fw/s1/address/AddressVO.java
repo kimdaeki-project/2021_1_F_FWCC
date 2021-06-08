@@ -1,5 +1,7 @@
 package com.fw.s1.address;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data

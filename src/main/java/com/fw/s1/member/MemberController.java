@@ -28,11 +28,17 @@ public class MemberController {
 		System.out.println("username : "+memberVO.getUsername());
 		System.out.println("password : "+memberVO.getPassword());
 		System.out.println("name : "+memberVO.getName());
+		System.out.println("phone0 : "+memberVO.getPhone0());
+		System.out.println("phone1 : "+memberVO.getPhone1());
+		System.out.println("phone2 : "+memberVO.getPhone2());
 		System.out.println("phone : "+memberVO.getPhone());
 		System.out.println("email : "+memberVO.getEmail());
 		System.out.println("birth : "+memberVO.getBirth());
 		System.out.println("smsAgree : "+memberVO.isSmsAgree());
 		System.out.println("emailAgree : "+memberVO.isEmailAgree());
+		System.out.println("zipCode : "+memberVO.getZipCode());
+		System.out.println("basicAddr : "+memberVO.getBasicAddr());
+		System.out.println("detailAddr : "+memberVO.getDetailAddr());
 	}
 	
 	@PostMapping("usernameCheck")
