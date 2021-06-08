@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.fw.s1.address.AddressMapper">
+	<insert id="setAddress" parameterType="AddressVO">
+		insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+		values(0, #{username}, "미지정", #{recipient}, #{addrPhone}, #{zipCode}, #{basicAddr}, #{detailAddr}, false, false)
+	</insert>
+</mapper>
