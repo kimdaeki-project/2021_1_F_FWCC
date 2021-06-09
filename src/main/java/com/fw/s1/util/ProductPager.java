@@ -14,6 +14,10 @@ public class ProductPager {
 	private long startNum;
 	private long lastNum;
 	
+	private boolean pre; //previous 이전 block이 있으면 true 없으면 false
+	private boolean next; //next 다음 block이 있으면 true 없으면 false
+	
+	
 	public String getSortStandard() {
 		return sortStandard;
 	}
@@ -38,6 +42,22 @@ public class ProductPager {
 	
 
 
+
+	public boolean isPre() {
+		return pre;
+	}
+
+	public void setPre(boolean pre) {
+		this.pre = pre;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 
 	public boolean isSale() {
 		return sale;
@@ -79,14 +99,57 @@ public class ProductPager {
 			lastNum=totalPage;
 		}
 		
-		this.setTotalPage(totalPage);
-		if(this.curPage>totalPage) {
-			this.curPage=totalPage;
+		if(curBlock != 1) {
+			this.setPre(true);
 		}
+		if(curBlock != totalBlock) {
+			this.setNext(true);
+		}
+		
 		this.setStartNum(startNum);
 		this.setLastNum(lastNum);
 		
 	}
+	
+	/*
+	 * public void makeNum(long totalCount) {
+		long totalPage = totalCount/perPage;
+		if(totalCount%perPage!=0) {
+			totalPage++;
+		}
+		
+		long totalBlock = totalPage/perBlock;
+		if(totalPage%perBlock!=0) {
+			totalBlock++;
+		}
+		
+		long curBlock=this.getCurPage()/5;
+		if(this.getCurPage()%5!=0) {
+			curBlock++;
+		}
+		
+		long startNum=(curBlock*perBlock)-(perBlock-1);
+		long lastNum=curBlock*perBlock;
+		
+		if(curBlock == totalBlock) {
+			lastNum=totalPage;
+		}
+		
+		if(curBlock != 1) {
+			this.setPre(true);
+		}
+		if(curBlock != totalBlock) {
+			this.setNext(true);
+		}
+		
+		this.setStartNum(startNum);
+		this.setLastNum(lastNum);
+		
+	}
+	 * */
+	
+	
+	
 // ============================================================ 코드 재확인 후 실행
 
 	
