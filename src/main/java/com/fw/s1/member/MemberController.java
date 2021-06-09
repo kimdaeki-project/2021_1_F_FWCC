@@ -18,7 +18,11 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
+	
+	@GetMapping("memberLogin")
+	public void getLogin() throws Exception {
+		
+	}
 	
 	@GetMapping("memberJoin")
 	public void setJoin(Model model) throws Exception {
