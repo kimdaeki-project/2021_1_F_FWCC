@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.s1.admin.AdminMapper">
+	<select id="saleDay" parameterType="java.lang.String" resultType="AdminVO">
+		select * from admin where adminDate = #{param}
+	</select>
+	
+	<select id="saleDays" parameterType="java.util.HashMap" resultType="AdminVO">
+		select * from admin where adminDate between #{start} and #{end}
+	</select>
+
+	<insert id="insertAdmin" parameterType="java.util.List">
+		insert into(adminDate, productNum, sellCount, productType, collab)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.adminDate}, #{item.productNum}, #{item.sellCount}, #{item.productType}, #{item.collab})
+		</foreach>
+	</insert>
+</mapper>

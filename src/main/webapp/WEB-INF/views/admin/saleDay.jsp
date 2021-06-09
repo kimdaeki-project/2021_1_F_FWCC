@@ -5,6 +5,8 @@
 <html style="height:100%;">
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.0.3/billboard.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.0.3/billboard.pkgd.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -12,23 +14,11 @@
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>	
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>	
 <div style="display:flex; place-content:center;">
-	<div style="margin:11% 0 13% 0; width:40%; height:50%; border-radius: 1rem;  background-color: #607d8b;">
-		<fieldset style="padding:5%;">
-			<legend style="padding-top:10%; text-align: center;">쿠폰 등록</legend>
-			<form action="./setCouponsp" method="post" style="padding: 3% 10%;">
-				<label style="display:block;">쿠폰이름
-					<input type="text" name="cuName">
-				</label>
-				<label style="display:block;">할인률
-					<input type="number" name="disRate" value="10" min="0" max="100">
-				</label>
-			</form>	
-			<div style="position:relative; right:0;">
-				<button style="display:block;">쿠폰 등록</button>
-			</div>
-		</fieldset>
+	<div id="chart">
+	
 	</div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/saleDay.js"></script>
 </body>
 </html>

@@ -8,16 +8,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body style="height:100%;">
-<div style="width: 100%; height:100%; display: grid; grid-template-columns: 18% 82%; grid-template-rows:11% auto;">
-	<div style="z-index:100; background-color: #1C2E36; font-size:1.7rem; color:white;">
-		<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
-	</div>
-	<div style="grid-row:1/3; background-color: rgba(128,128,128,0.6); text-align: center; z-index:200;">
-		<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-	</div>
+<body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
+<div>
 	<div>
-	
+		<table>
+			<thead>
+				<tr>
+					<th>쿠폰 번호</th>
+					<th>쿠폰 이름</th>
+					<th>할인률</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${cuspList}" var="item">
+					<tr>
+						<td>
+							<c:out value='${item.cuSpNum}'></c:out>
+						</td>
+						<td>
+							<c:out value='${item.cuName}'></c:out>
+						</td>
+						<td>
+							<c:out value='${item.disRate}'></c:out>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>

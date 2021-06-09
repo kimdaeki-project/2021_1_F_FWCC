@@ -13,6 +13,7 @@
 			alias="ProductInfoVO" />
 			<typeAlias type="com.fw.s1.util.ProductPager" alias="ProductPager"/>
 
+		<typeAlias type="com.fw.s1.admin.AdminVO" alias="AdminVO"/>
 		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
 		<typeAlias type="com.fw.s1.order.OrderlistVO" alias="OrderlistVO"/>
 		<typeAlias type="com.fw.s1.purchase.PurchaseVO" alias="PurchaseVO"/>
