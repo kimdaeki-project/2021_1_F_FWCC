@@ -4,6 +4,32 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.fw.s1.member.MemberMapper">
+
+	<select id="getLogin" parameterType="MemberVO" resultMap="result">
+		select M.*, R.* from member M
+		inner join memberRole MR
+		on M.username = MR.username
+		inner join role R
+		on MR.id = R.id
+		where M.username = #{username}
+	</select>
+	<resultMap type="MemberVO" id="result">
+		<id column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="birth" property="birth"/>
+		<result column="smsAgree" property="smsAgree"/>
+		<result column="emailAgree" property="emailAgree"/>
+		<result column="enabled" property="enabled"/>
+		<collection property="roles" javaType="java.util.List" ofType="RoleVO">
+			<id column="id" property="id"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+	</resultMap>
+
+
 	<insert id="setJoin" parameterType="MemberVO">
 		insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)
 		values(#{username}, #{password}, #{name}, #{phone}, #{email}, #{birth}, #{smsAgree}, #{emailAgree}, #{enabled})
