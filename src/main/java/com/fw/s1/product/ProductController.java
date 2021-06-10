@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -78,16 +79,14 @@ public class ProductController {
 	
 	
 	@PostMapping(value="summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile file)throws Exception{
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public String setSummerFileUpload(MultipartFile file)throws Exception{
 		System.out.println("summerfileUpload");
 		System.out.println(file.getOriginalFilename());
 		String fileName = productService.setSummerFileUpload(file);
 		fileName="/images/product/test/"+fileName;
-		mv.addObject("result", fileName);
-		mv.setViewName("common/ajaxResult");
 		
-		return mv;
+		return fileName;
 	}
 	
 	

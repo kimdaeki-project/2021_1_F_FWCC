@@ -40,11 +40,7 @@ function uploadFile(files){
 		processData:false,
 		contentType:false,
 		success: function(result){
-			fileName=result.trim();
-			console.log(fileName);		
-			fileName=result.trim();
-            let node = '<img class="formoveimg" alt="" src="'+fileName+'">';
-            $("#contents").summernote('pasteHTML', node);		
+            $("#contents").summernote('insertImage', result);		
 			//$("#contents").summernote('insertImage',fileName);
 		}
 	});
