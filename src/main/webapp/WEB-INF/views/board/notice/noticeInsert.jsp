@@ -73,7 +73,7 @@ $(document).ready(function() {
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/boardInsert.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/fileAdd.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/summerFile.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/summerFile.js"></script>
 	
 
 </body>
