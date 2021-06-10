@@ -31,7 +31,7 @@
 		</div>
 		<div id="footer-menubar">
 			<ul>
-				<li><a href="#">HOME</a></li>
+				<li><a href="${pageContext.request.contextPath }/">HOME</a></li>
 				<li><a href="#">ABOUT US</a></li>
 				<li><a href="#">TERMS OF USE</a></li>
 				<li><a href="#">PRIVACY POLICY</a></li>
