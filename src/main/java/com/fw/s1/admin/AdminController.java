@@ -60,8 +60,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("saleDay")
-	public void saleDay()throws Exception{
-		
+	public void saleDay(Model model)throws Exception{
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1);
+		java.sql.Date date = new java.sql.Date(calendar.getTimeInMillis());
+		model.addAttribute("lastDay", date.toString());
 	}
 	
 	//일단 최근 데이터만 가져오는걸로 하고 다른 날짜를 선택한다면 해당 날짜로 선택이 되게 하면 될 것이다.

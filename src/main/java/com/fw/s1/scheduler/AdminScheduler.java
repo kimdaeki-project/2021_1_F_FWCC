@@ -55,6 +55,6 @@ public class AdminScheduler {
 			list.add(hashMap.get(iterator.next()));
 		}
 		
-		while(adminService.insertAdmin(list)>0);
+		adminService.insertAdmin(list);
 	}
 }
