@@ -35,8 +35,7 @@ public class CartController {
 	@GetMapping("deleteCart")
 	public Long deleteCart(Authentication authentication)throws Exception{
 		MemberVO memberVO = new MemberVO();
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		memberVO.setUsername("admin");
+		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		return cartService.deleteCart(memberVO);
 	}
 	
@@ -47,8 +46,7 @@ public class CartController {
 		for(int i = 0 ; i < length; i++) {
 			CartVO cartVO = new CartVO();
 			cartVO.setCartNum(cartNums.get(i));
-			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-			cartVO.setUsername("admin");
+			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 			carts.add(cartVO);
 		}
 		return cartService.deleteItem(carts);
@@ -56,8 +54,7 @@ public class CartController {
 	
 	@GetMapping("updateCount")
 	public Long updateCount(CartVO cartVO, Authentication authentication)throws Exception{
-		//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		cartVO.setUsername("admin");
+		cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		if(cartVO.getProductCount()>cartService.getStock(cartVO)) {
 			return 0L;
 		}else if(cartVO.getProductCount()<1) {

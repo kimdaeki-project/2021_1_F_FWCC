@@ -1,4 +1,30 @@
 
+HashMap = function(){
+	this.map = new Array();
+};
+
+HashMap.prototype={
+	put:function(key, value){
+		this.map[key] = value;
+	},
+	get:function(key){
+		return this.map[key];
+	},
+	getAll:function(){
+		return this.map;
+	},
+	clear:function(){
+		this.map = new Array();
+	},
+	getKeys:function(){
+		let keys = new Array();
+		for(let i in this.map){
+			keys.put(i);
+		}
+		return keys;
+	}
+};
+
 var chart1 = bb.generate({
 	data:{
 		columns:[

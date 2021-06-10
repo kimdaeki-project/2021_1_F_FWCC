@@ -122,8 +122,7 @@ public class OrderController {
 	public String getCartList(Authentication authentication, Model model, RedirectAttributes redirectAttributes) throws Exception{
 		String msg = "";
 		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername("admin");
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		List<CartVO> getlist = cartService.getCartList(memberVO);
 		List<CartVO> deleteList = new ArrayList<>();
 		List<CartVO> updatelist = new ArrayList<>();
@@ -189,16 +188,14 @@ public class OrderController {
 		List<CartVO> dlist = new ArrayList<>();
 		List<CartVO> updatelist = new ArrayList<>();
 		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername("admin");
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		memberVO = memberService.getUsernameandemail(memberVO);
 		memberVO.emailSeperator();
 		
 		for(long cartNum : cartNums) {
 			CartVO cartVO = new CartVO();
 			cartVO.setCartNum(cartNum);
-			cartVO.setUsername("admin");
-			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 			clist.add(cartVO);
 		}
 		
@@ -304,8 +301,7 @@ public class OrderController {
 		long cuNum = Long.parseLong(request.getParameter("cuNum"));
 		if(cuNum!=1) {
 			CouponVO couponVO = new CouponVO();
-			//couponVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-			couponVO.setUsername("admin");
+			couponVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 			couponVO.setCuNum(cuNum);
 			if(couponService.useUpdate(couponVO)==0) {
 				throw new Exception();
@@ -326,8 +322,7 @@ public class OrderController {
 		orderlistVO.setSpPrice(spPrice);
 		orderlistVO.setTotPrice(totPrice);
 		orderlistVO.setOrderName(orderName);
-		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		orderlistVO.setUsername("admin");
+		orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		if(orderService.setOrder(orderlistVO)==0) {
 			throw new Exception();
 		}
@@ -368,8 +363,7 @@ public class OrderController {
 		}
 		
 		MileageVO mileageVO = new MileageVO();
-		//mileageVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		mileageVO.setUsername("admin");
+		mileageVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		mileageVO = mileageService.getRecentMileage(mileageVO);
 		
 		if(mileageVO==null) {
@@ -427,8 +421,7 @@ public class OrderController {
 		for(int i = 0 ; i < length; i++) {
 			CartVO cartVO = new CartVO();
 			cartVO.setCartNum(cartNums[i]);
-			//cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-			cartVO.setUsername("admin");
+			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 			cartVOs.add(cartVO);
 		}
 		cartService.deleteItem(cartVOs);
@@ -436,8 +429,7 @@ public class OrderController {
 	
 	@GetMapping("orderResult")
 	public String orderResult(OrderlistVO orderlistVO, Authentication authentication, Model model, RedirectAttributes redirectAttributes)throws Exception{
-		//orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		orderlistVO.setUsername("admin");
+		orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		orderlistVO = orderService.getOrder(orderlistVO);
 		
 		if(orderlistVO == null) {
