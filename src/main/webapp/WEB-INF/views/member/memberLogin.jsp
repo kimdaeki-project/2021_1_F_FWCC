@@ -40,10 +40,8 @@
 			<form
 				id="member_form_3213019162"
 				name=""
-				action="/exec/front/Member/login/"
-				method="post"
-				target="_self"
-				enctype="multipart/form-data"
+				action="./memberLogin"
+				method="POST"
 			>
 				<div class="xans-element- xans-member xans-member-login ">
 					<div class="login">
@@ -54,9 +52,9 @@
 								title="ID"
 							><input
 								id="member_id"
-								name="member_id"
+								name="username"
 								class="inputTypeText"
-								placeholder=""
+								placeholder="ID"
 								value=""
 								type="text"
 							/></label> <label
@@ -64,19 +62,17 @@
 								title="PASSWORD"
 							><input
 								id="member_passwd"
-								name="member_passwd"
+								name="password"
 								autocomplete="off"
 								value=""
 								type="password"
+								placeholder="PASSWORD"
 							/></label>
-							<a
-								href="#"
-								class="btnLogin"
-							>LOGIN</a>
+							<button class="btnLogin">LOGIN</button>
 							<ul>
-								<li><a href="/member/id/find_id.html">아이디찾기</a></li>
+								<li><a href="#">아이디찾기</a></li>
 								<li>/</li>
-								<li><a href="/member/passwd/find_passwd_info.html">비밀번호찾기</a></li>
+								<li><a href="#">비밀번호찾기</a></li>
 							</ul>
 							<ul class="snsArea">
 								<li class=""><a
@@ -110,18 +106,9 @@
 							</ul>
 							<p class="link">
 								회원가입을 하시면 다양하고 특별한<br />혜택이 준비되어 있습니다. <a
-									href="/member/join.html"
+									href="./memberJoin"
 									class="black"
 								>JOIN US</a>
-							</p>
-							<p
-								class="link displaynone"
-								id="noMemberWrap"
-							>
-								비회원님도 상품구매가 가능하나 다양한<br />회원혜택에서 제외됩니다. <a
-									href=""
-									onclick=""
-								>GUEST ORDER</a>
 							</p>
 						</fieldset>
 					</div>
@@ -129,7 +116,6 @@
 			</form>
 		</div>
 	</div>
-
 	<!-- contents END -->
 
 	<!-- footer START -->

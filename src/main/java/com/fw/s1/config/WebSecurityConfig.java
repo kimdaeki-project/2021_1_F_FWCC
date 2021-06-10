@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
+				.antMatchers("/**").permitAll()
 				.antMatchers("/").permitAll()
 				// --- community START ---
 				.antMatchers("/notice/list", "/notice/select","/notice/insert").permitAll()
@@ -57,8 +58,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// --- purchase START
 				//.antMatchers("/purchase/**").hasAnyRole("MEMBER", "ADMIN")
 				// --- purchase END
-				.antMatchers("/**").permitAll()
+				// --- member START ---
+				.antMatchers("/member/**").permitAll()
+				// --- member END ---
 				.anyRequest().authenticated()
+			.and()
+			.formLogin()
+				.loginPage("/member/memberLogin")
+				.defaultSuccessUrl("/member/memberLoginSuccess")
+				.failureUrl("/member/memberLoginFail")
+				.permitAll()
+			.and()
+			.logout()
+				.logoutUrl("/member/memberLogout")
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(false)
+				
 				;
 	}
 	

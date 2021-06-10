@@ -1,5 +1,8 @@
 package com.fw.s1.member;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,38 @@ public class MemberController {
 	@GetMapping("memberLogin")
 	public void getLogin() throws Exception {
 		
+	}
+	
+	@GetMapping("memberLoginSuccess")
+	public ModelAndView loginSuccess(HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		// 1. session의 속성명들 꺼내오기
+		Enumeration<String> enumeration = session.getAttributeNames();
+		while(enumeration.hasMoreElements()) {
+			System.out.println(enumeration.nextElement());
+		}
+		
+		mv.addObject("msg", "로그인 성공");
+		mv.addObject("path", "/");
+		mv.setViewName("common/commonResult");
+		return mv;
+	}
+	
+	@GetMapping("memberLoginFail")
+	public ModelAndView loginFail() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("msg", "다시 로그인해주세요");
+		mv.addObject("path", "/member/memberLogin");
+		mv.setViewName("common/commonResult");
+		return mv;
+	}
+	
+	@GetMapping("memberLogout")
+	public ModelAndView getLogout(HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		session.invalidate();
+		mv.setViewName("/");
+		return mv;
 	}
 	
 	@GetMapping("memberJoin")

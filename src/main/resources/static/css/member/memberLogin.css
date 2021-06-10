@@ -595,7 +595,7 @@ body.eMobilePopup {
 	vertical-align: middle;
 }
 
-.xans-member-login .login fieldset a.btnLogin {
+.xans-member-login .login fieldset button.btnLogin {
 	position: absolute;
 	top: 0;
 	right: 7px;

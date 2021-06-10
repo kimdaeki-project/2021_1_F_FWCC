@@ -16,7 +16,7 @@ import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
 
 @Service
-public class MemberService {
+public class MemberService implements UserDetailsService {
 
 	@Autowired
 	private MemberMapper memberMapper;
@@ -71,13 +71,21 @@ public class MemberService {
 		return result;
 	}
 	
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		MemberVO memberVO = new MemberVO();
-//		memberVO.setUsername(username);
-//		
-//		return memberVO;
-//	}
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("======= Service START =======");
+		System.out.println("username : "+username);
+		System.out.println("======= Service END =======");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(username);
+		try {
+			memberVO = memberMapper.getLogin(memberVO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return memberVO;
+	}
 	
 //	Custom Validation ==============================================================
 //	public boolean usernameCheckError(MemberVO memberVO, Errors errors) throws Exception {
