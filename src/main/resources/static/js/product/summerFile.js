@@ -4,8 +4,7 @@
 
 $("#contents").summernote({
 			height:500,
-			placeholder:'write here...'
-			,
+			placeholder:'write here...',
 			callbacks :{
 				onImageUpload: function(files){
 					uploadFile(files);
@@ -15,9 +14,8 @@ $("#contents").summernote({
 				}
 			}// callback
 		});
-	
 		
-	// $('#contents').summernote('insertImage', url, filename);	
+		
 
 function deleteFile(files){
 	let fileName = $(files[0]).attr("src");
@@ -44,14 +42,6 @@ function uploadFile(files){
 			//$("#contents").summernote('insertImage',fileName);
 		}
 	});
-	
-	/*
-	fileName=result.trim();
-            let node = '<img class="formoveimg" alt="'+fileName+'" src="'
-                        +$("#rootcontext").val()+'/resources/uploaded/'+name+'/'+fileName+'">';
-            $("#content").summernote('pasteHTML', node);
-	*/
-	
 	
 	
 }
