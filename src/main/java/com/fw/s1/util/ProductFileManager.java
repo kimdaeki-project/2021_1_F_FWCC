@@ -13,10 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductFileManager {
 
 	public String save(String name, MultipartFile multipartFile, HttpSession session) throws Exception{
-		ClassPathResource classPathResource = new ClassPathResource("/");
+
+		String path="/";
+		ClassPathResource classPathResource = new ClassPathResource(path);
+		File file = new File(classPathResource.getFile(), name);
 		
-	      File file = new File(classPathResource.getFile().getParentFile().getParentFile().getAbsolutePath(),"src/main/resources/static/images/product/test/");
-	      System.out.println(file.getAbsolutePath());
+		System.out.println(file.getAbsolutePath());
 		
 		if(!file.exists()) {
 			file.mkdirs();

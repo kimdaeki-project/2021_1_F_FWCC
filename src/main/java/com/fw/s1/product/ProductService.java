@@ -52,7 +52,7 @@ public class ProductService {
 	
 	public String setSummerFileUpload(MultipartFile file) throws Exception{
 		
-		String fileName = productFileManager.save("src/main/resources/static/images/product/test", file, session);
+		String fileName = productFileManager.save("static/images/product/test", file, session);
 		return fileName;
 		
 	}

@@ -38,7 +38,8 @@ function uploadFile(files){
 		processData:false,
 		contentType:false,
 		success: function(result){
-            $("#contents").summernote('insertImage', result);		
+            $("#contents").summernote('insertImage', result);
+			console.log(result);	
 			//$("#contents").summernote('insertImage',fileName);
 		}
 	});
