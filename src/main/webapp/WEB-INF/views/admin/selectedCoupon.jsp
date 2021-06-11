@@ -11,7 +11,7 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div>
+<div style="padding:5%; display:inline-block;">
 	<div>
 		<table>
 			<thead>
@@ -22,23 +22,40 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${cuspList}" var="item">
-					<tr>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuSpNum}'></c:out></a>
-						</td>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuName}'></c:out></a>
-						</td>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.disRate}'></c:out></a>
-						</td>
-					</tr>
-				</c:forEach>
+				<tr>
+					<td id="cuSpNum">
+						<c:out value='${item.cuSpNum}'></c:out>
+					</td>
+					<td>
+						<c:out value='${item.cuName}'></c:out>
+					</td>
+					<td>
+						<c:out value='${item.disRate}'></c:out>
+					</td>
+				</tr>
 			</tbody>
 		</table>
+		<div>
+			<input id="couponperiod" type="number" min="1" max="1000" value="1">
+			<button id="selectUser">지정전송</button>
+			<button id="allSend">모두에게 전송</button>
+		</div>
+		<div id="userform" style="display: none;">
+			<div id="usernameList">
+				<div>
+					<input type="text" class="usernames" name="usernames">
+					<button class="deleteusername">삭제하기</button>
+				</div>
+			</div>
+			<div>
+				<button id="addusername">추가하기</button>
+				<button id="selectTransmit">전송하기</button>
+			</div>
+		</div>
 	</div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/selectedCoupon.js"></script>
 </body>
 </html>

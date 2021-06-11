@@ -1,6 +1,7 @@
 package com.fw.s1.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,8 @@ public class MemberService implements UserDetailsService {
 	public MemberVO getUsernameandemail(MemberVO memberVO)throws Exception{
 		return memberMapper.getUsernameandemail(memberVO);
 	}
-
+	
+	public List<MemberVO> getAllusername()throws Exception{
+		return memberMapper.getAllusername();
+	}
 }

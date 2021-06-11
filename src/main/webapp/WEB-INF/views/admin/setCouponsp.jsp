@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="height:100%;">
+<html style="height:100%; overflow-y: scroll;">
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
 <meta charset="UTF-8">

@@ -27,6 +27,17 @@
 		select * from couponsp
 	</select>
 	
+	<select id="getCouponsp" parameterType="CouponspVO" resultType="CouponspVO">
+		select * from couponsp where cuSpNum=#{cuSpNum}
+	</select>
+	
+	<insert id="couponForAll" parameterType="java.util.List">
+		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.username}, #{item.cuSpNum}, #{item.pubDate}, #{item.exDate}, 0)
+		</foreach>
+	</insert>
+	
 	<update id="useUpdate" parameterType="CouponVO">
 		update coupon set useCheck=1 where username=#{username} and cuNum=#{cuNum}
 	</update>

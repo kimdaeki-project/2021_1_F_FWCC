@@ -21,7 +21,15 @@ public class CouponService {
 		return couponMapper.getCouponspList();
 	}
 	
+	public CouponspVO getCouponsp(CouponspVO couponspVO)throws Exception{
+		return couponMapper.getCouponsp(couponspVO);
+	}
+	
 	public Long useUpdate(CouponVO couponVO)throws Exception{
 		return couponMapper.useUpdate(couponVO);
+	}
+	
+	public Long couponForAll(List<CouponVO> list)throws Exception{
+		return couponMapper.couponForAll(list);
 	}
 }

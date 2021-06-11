@@ -60,4 +60,8 @@
 			<result column="enabledMile" property="enabledMile"/>
 		</association>
 	</resultMap>
+	
+	<select id="getAllusername" resultType="MemberVO">
+		select username from member
+	</select>
 </mapper>

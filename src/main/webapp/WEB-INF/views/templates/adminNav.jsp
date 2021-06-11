@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div style="grid-row:1/3; background-color: rgba(128,128,128,0.6); text-align: center; z-index:200; display:grid; grid-template-rows:11% 1fr 1fr 1fr;position:sticky; top:0;">
+<div style="grid-row:1/-1; background-color: rgba(128,128,128,0.6); text-align: center; z-index:200; display:grid; grid-template-rows:11% 1fr 1fr 1fr;position:sticky; top:0;">
 	<div style="padding:12%;">
 		<a href="${pageContext.request.contextPath}/admin/adminHome">
 			<img alt="" src="${pageContext.request.contextPath}/images/logo_b.png" style="margin:1.5% 3%; transform:scale(1.2);">

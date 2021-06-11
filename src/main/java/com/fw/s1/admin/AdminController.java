@@ -1,6 +1,7 @@
 package com.fw.s1.admin;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fw.s1.coupon.CouponService;
+import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.coupon.CouponspVO;
+import com.fw.s1.member.MemberService;
+import com.fw.s1.member.MemberVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -26,6 +30,8 @@ public class AdminController {
 	private CouponService couponService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private MemberService memberService;
 	
 	@ModelAttribute("date")
 	public String adminAll() {
@@ -54,9 +60,54 @@ public class AdminController {
 		model.addAttribute("cuspList", couponService.getCouponspList());
 	}
 	
-	@PostMapping("transmitCoupon")
-	public void transmitCoupon(CouponspVO couponspVO)throws Exception {
-		
+	@GetMapping("selectedCoupon")
+	public void selectedCoupon(CouponspVO couponspVO, Model model)throws Exception{
+		model.addAttribute("item", couponService.getCouponsp(couponspVO));
+	}
+	
+	@ResponseBody
+	@GetMapping("couponforall")
+	public Long couponforall(Long cuSpNum, Integer period)throws Exception{
+		List<MemberVO> list = memberService.getAllusername();
+		Calendar calendar = Calendar.getInstance();
+		java.sql.Date date1 = new java.sql.Date(calendar.getTimeInMillis());
+		calendar.add(Calendar.MONTH, period);
+		java.sql.Date date2 = new java.sql.Date(calendar.getTimeInMillis());
+		if(date1.after(date2)||date1.equals(date2)) {
+			return 0L;
+		}
+		List<CouponVO> list2 = new ArrayList<>();
+		for(MemberVO memberVO : list) {
+			CouponVO couponVO = new CouponVO();
+			couponVO.setUsername(memberVO.getUsername());
+			couponVO.setCuSpNum(cuSpNum);
+			couponVO.setPubDate(date1);
+			couponVO.setExDate(date2);
+			list2.add(couponVO);
+		}
+		return couponService.couponForAll(list2);
+	}
+	
+	@ResponseBody
+	@PostMapping("couponServeral")
+	public Long couponServeral(String[] usernames, Long cuSpNum, Integer period)throws Exception{
+		List<CouponVO> list = new ArrayList<>();
+		Calendar calendar = Calendar.getInstance();
+		java.sql.Date date1 = new java.sql.Date(calendar.getTimeInMillis());
+		calendar.add(Calendar.MONTH, period);
+		java.sql.Date date2 = new java.sql.Date(calendar.getTimeInMillis());
+		if(date1.after(date2)||date1.equals(date2)) {
+			return 0L;
+		}
+		for(String username : usernames) {
+			CouponVO couponVO = new CouponVO();
+			couponVO.setUsername(username);
+			couponVO.setCuSpNum(cuSpNum);
+			couponVO.setPubDate(date1);
+			couponVO.setExDate(date2);
+			list.add(couponVO);
+		}
+		return couponService.couponForAll(list);
 	}
 	
 	@GetMapping("saleDay")
