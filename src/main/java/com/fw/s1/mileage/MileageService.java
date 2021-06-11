@@ -18,4 +18,12 @@ public class MileageService {
 	public Long setMileAfterOrder(List<MileageVO> list)throws Exception{
 		return mileageMapper.setMileAfterOrder(list);
 	}
+	
+	public Long mileageForAll(MileageVO mileageVO)throws Exception{
+		return mileageMapper.mileageForAll(mileageVO);
+	}
+	
+	public Long mileageForSelect(List<MileageVO> list)throws Exception{
+		return mileageMapper.mileageForSelect(list);
+	}
 }

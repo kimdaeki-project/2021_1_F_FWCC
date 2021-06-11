@@ -20,10 +20,11 @@
 			<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/saleMonth">월간판매현황</a></li>
 		</ul>
 	</div>
-	<div style="padding:8%; font-size: 1.7rem;">쿠폰관리
+	<div style="padding:8%; font-size: 1.7rem;">쿠폰 &amp; 마일리지
 		<ul style="list-style: none; padding:0; font-size:1.2rem; margin-top: 8%;">
 			<li><a href="${pageContext.request.contextPath}/admin/transmitCoupon">쿠폰전송</a></li>
 			<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/setCouponsp">쿠폰등록</a></li>
+			<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/transmitMile">마일리지전송</a></li>
 		</ul>
 	</div>
 </div>

@@ -29,7 +29,11 @@ public class CouponService {
 		return couponMapper.useUpdate(couponVO);
 	}
 	
-	public Long couponForAll(List<CouponVO> list)throws Exception{
-		return couponMapper.couponForAll(list);
+	public Long couponForAll(CouponVO couponVO)throws Exception{
+		return couponMapper.couponForAll(couponVO);
+	}
+	
+	public Long couponForSelected(List<CouponVO> list)throws Exception{
+		return couponMapper.couponForSelected(list);
 	}
 }

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.coupon.CouponspVO;
-import com.fw.s1.member.MemberService;
-import com.fw.s1.member.MemberVO;
+import com.fw.s1.mileage.MileageService;
+import com.fw.s1.mileage.MileageVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -31,7 +31,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	@Autowired
-	private MemberService memberService;
+	private MileageService mileageService;
 	
 	@ModelAttribute("date")
 	public String adminAll() {
@@ -40,35 +40,36 @@ public class AdminController {
 		return sf.format(nowTime);
 	}
 	
+	//admin main페이지로 이동
 	@GetMapping("adminHome")
-	public void adminHome() {
-		
-	}
+	public void adminHome() { }
 	
+	//쿠폰 종류를 입력하는 페이지로 이동
 	@GetMapping("setCouponsp")
-	public void setCouponsp()throws Exception {
-		
-	}
+	public void setCouponsp()throws Exception {	}
 	
+	//쿠폰 종류 입력후 저장을 위함
 	@PostMapping("setCouponsp")
 	public void setCouponsp(CouponspVO couponspVO)throws Exception{
 		
 	}
 	
+	//쿠폰 목록을 보여주는 페이지
 	@GetMapping("transmitCoupon")
 	public void transmitCoupon(Model model)throws Exception {
 		model.addAttribute("cuspList", couponService.getCouponspList());
 	}
 	
+	//선택한 쿠폰을 보낼 페이지로 이동
 	@GetMapping("selectedCoupon")
 	public void selectedCoupon(CouponspVO couponspVO, Model model)throws Exception{
 		model.addAttribute("item", couponService.getCouponsp(couponspVO));
 	}
 	
+	//쿠폰을 모든 사람들에게 전송
 	@ResponseBody
 	@GetMapping("couponforall")
 	public Long couponforall(Long cuSpNum, Integer period)throws Exception{
-		List<MemberVO> list = memberService.getAllusername();
 		Calendar calendar = Calendar.getInstance();
 		java.sql.Date date1 = new java.sql.Date(calendar.getTimeInMillis());
 		calendar.add(Calendar.MONTH, period);
@@ -76,18 +77,15 @@ public class AdminController {
 		if(date1.after(date2)||date1.equals(date2)) {
 			return 0L;
 		}
-		List<CouponVO> list2 = new ArrayList<>();
-		for(MemberVO memberVO : list) {
-			CouponVO couponVO = new CouponVO();
-			couponVO.setUsername(memberVO.getUsername());
-			couponVO.setCuSpNum(cuSpNum);
-			couponVO.setPubDate(date1);
-			couponVO.setExDate(date2);
-			list2.add(couponVO);
-		}
-		return couponService.couponForAll(list2);
+		CouponVO couponVO = new CouponVO();
+		couponVO.setCuSpNum(cuSpNum);
+		couponVO.setPubDate(date1);
+		couponVO.setExDate(date2);
+
+		return couponService.couponForAll(couponVO);
 	}
 	
+	//쿠폰을 입력한 username들에게 보냄
 	@ResponseBody
 	@PostMapping("couponServeral")
 	public Long couponServeral(String[] usernames, Long cuSpNum, Integer period)throws Exception{
@@ -107,7 +105,35 @@ public class AdminController {
 			couponVO.setExDate(date2);
 			list.add(couponVO);
 		}
-		return couponService.couponForAll(list);
+		return couponService.couponForSelected(list);
+	}
+	
+	//마일리지 전송하는 페이지
+	@GetMapping("transmitMile")
+	public void transmitMile() { }
+	
+	//모든 사람들에게 마일리지를 전송
+	@ResponseBody
+	@GetMapping("transAllMile")
+	public Long transAllMile(MileageVO mileageVO)throws Exception {
+		mileageVO.setEnabledMile(mileageVO.getChangeMile());
+		return mileageService.mileageForAll(mileageVO);
+	}
+	
+	//입력한 사람들에게만 마일리지를 전송
+	@ResponseBody
+	@PostMapping("mileageForSelect")
+	public Long mileageForSelect(Long mileage, String contents, String[] usernames)throws Exception{
+		List<MileageVO> list = new ArrayList<>();
+		for(String temp : usernames) {
+			MileageVO mileageVO = new MileageVO();
+			mileageVO.setUsername(temp);
+			mileageVO.setChangeMile(mileage);
+			mileageVO.setEnabledMile(mileage);
+			mileageVO.setMileContents(contents);
+			list.add(mileageVO);
+		}
+		return mileageService.mileageForSelect(list);
 	}
 	
 	@GetMapping("saleDay")
@@ -118,7 +144,6 @@ public class AdminController {
 		model.addAttribute("lastDay", date.toString());
 	}
 	
-	//일단 최근 데이터만 가져오는걸로 하고 다른 날짜를 선택한다면 해당 날짜로 선택이 되게 하면 될 것이다.
 	@GetMapping("getSaleDay")
 	@ResponseBody
 	public String[] getSaleDay(String date)throws Exception{

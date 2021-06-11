@@ -11,4 +11,8 @@ public interface MileageMapper {
 	public MileageVO getRecentMileage(MileageVO mileageVO)throws Exception;
 	//구매 후 마일리지 잃은 양과 얻은 량을 표기
 	public Long setMileAfterOrder(List<MileageVO> list)throws Exception;
+	//모든 사람들에게 마일리지 전송
+	public Long mileageForAll(MileageVO mileageVO)throws Exception;
+	//선택한 사람들에게 마일리지 전송
+	public Long mileageForSelect(List<MileageVO> list)throws Exception;
 }

@@ -18,5 +18,7 @@ public interface CouponMapper {
 	//결제할 때 쿠폰을 사용했을 경우 해당 쿠폰의 사용여부를 업데이트 한다.
 	public Long useUpdate(CouponVO couponVO)throws Exception;
 	//모든 사람에게 쿠폰을 전송해준다.
-	public Long couponForAll(List<CouponVO> list)throws Exception;
+	public Long couponForAll(CouponVO couponVO)throws Exception;
+	//선택된 사람에게 쿠폰을 전송해준다.
+	public Long couponForSelected(List<CouponVO> list)throws Exception;
 }

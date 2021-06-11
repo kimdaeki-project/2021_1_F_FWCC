@@ -15,4 +15,16 @@
 			#{item.mileContents}, #{item.enabledMile})
 		</foreach>
 	</insert>
+	<insert id="mileageForAll" parameterType="MileageVO">
+		INSERT INTO mileage (usedMile, changeMile, username, orderNum, mileContents, enabledmile)
+  		SELECT usedMile, changeMile+#{changeMile}, username, NULL, #{mileContents}, enabledMile+#{enabledMile} 
+  		FROM mileage WHERE mileNum IN (SELECT MAX(mileNum) FROM mileage GROUP BY username);
+	</insert>
+	<insert id="mileageForSelect" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledmile)
+			(select usedMile, #{item.changeMile}, username, null, #{item.mileContents}, enabledMile+#{item.enabledMile}
+			from mileage where mileNum = (select max(mileNum) from mileage where username=#{item.username}))
+		</foreach>
+	</insert>
 </mapper>

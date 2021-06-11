@@ -31,7 +31,13 @@
 		select * from couponsp where cuSpNum=#{cuSpNum}
 	</select>
 	
-	<insert id="couponForAll" parameterType="java.util.List">
+	<insert id="couponForAll" parameterType="CouponVO">
+		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) 
+		select m.username, #{cuSpNum}, #{pubDate}, #{exDate}, 0 from member m
+		group by username
+	</insert>
+	
+	<insert id="couponForSelected" parameterType="java.util.List">
 		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) values
 		<foreach collection="list" item="item" separator=",">
 			(#{item.username}, #{item.cuSpNum}, #{item.pubDate}, #{item.exDate}, 0)

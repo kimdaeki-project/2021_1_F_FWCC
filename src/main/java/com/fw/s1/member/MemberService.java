@@ -107,8 +107,4 @@ public class MemberService implements UserDetailsService {
 	public MemberVO getUsernameandemail(MemberVO memberVO)throws Exception{
 		return memberMapper.getUsernameandemail(memberVO);
 	}
-	
-	public List<MemberVO> getAllusername()throws Exception{
-		return memberMapper.getAllusername();
-	}
 }

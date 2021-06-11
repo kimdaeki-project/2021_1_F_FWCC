@@ -43,13 +43,16 @@
 			</ul>
 		</div>
 		<div style="width:22%; padding:3%; margin:0 5%; border-radius: 1rem; background-color: #607d8b;">
-			<h2>쿠폰관리</h2>
+			<h2 style="font-size:1.7rem;">쿠폰 &amp; 마일리지</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
 					<a href="./transmitCoupon">쿠폰전송</a>
 				</li>
 				<li style="padding:5%;">
 					<a href="./setCouponsp">쿠폰등록</a>
+				</li>
+				<li style="padding:5%;">
+					<a href="${pageContext.request.contextPath}/admin/transmitMile">마일리지전송</a>
 				</li>
 			</ul>
 		</div>
