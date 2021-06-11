@@ -57,7 +57,9 @@
             }
         }).open();
     }
-    
+ 
+// 회원가입 항목 check 값 ==================================
+let joinCheck = false;
 
 // 전체 동의 checkbox ==============================
 $("#sAgreeAllChecked").click(function(){
@@ -78,8 +80,9 @@ $(".ec-base-chk").click(function(){
 });
 
 // input 커서 집어넣으면 값 초기화 ============================
-$(".eraser").focus(function(){
+$(".eraser").click(function(){
 	$(this).val("");
+	$("errorUsername").html("");
 });
 
 $(".eraser").each(function(){	
@@ -87,9 +90,13 @@ $(".eraser").each(function(){
 		let eraser = $(this).val();
 		if(eraser.length == 0){
 			$(this).next().html("필수입력사항 입니다");
+		}else if (eraser.length >= 4){
+			$(this).next().html("");
 		}
 	});
 });
+
+
 
 
 // MemberVO init =======================================

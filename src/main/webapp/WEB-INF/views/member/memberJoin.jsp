@@ -69,6 +69,8 @@
 							placeholder=""
 							type="text"
 							value="test"
+							onfocus="inputInit()"
+							onblur="inputEssentials()"
 						/>
 						<span id="usernameError" class="errorUsername error1"></span>
 						<span id="usernameSuccess" class="errorUsername"></span>	
@@ -121,7 +123,7 @@
 							src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 							alt="필수"
 						/></th>
-						<td><span id="nameContents"><form:input
+						<td><form:input
 								id="nameT"
 								path="name"
 								class="ec-member-name eraser"
@@ -129,7 +131,9 @@
 								maxlength="30"
 								value="test"
 								type="text"
-							/></span> <span
+							/>
+							<span id="nameError" class="errorName error1"></span>
+							 <span
 							id="under14Msg"
 							class="displaynone"
 						>14세 미만 사용자는 법정대리인 동의가 필요합니다.</span></td>
