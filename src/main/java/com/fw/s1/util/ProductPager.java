@@ -77,9 +77,9 @@ public class ProductPager {
 	}
 	
 	public void makeNum(long totalCount) {
-		long totalPage = totalCount/perPage;
+		this.totalPage = totalCount/perPage;
 		if(totalCount%perPage!=0) {
-			totalPage++;
+			this.totalPage++;
 		}
 		
 		long totalBlock = totalPage/perBlock;

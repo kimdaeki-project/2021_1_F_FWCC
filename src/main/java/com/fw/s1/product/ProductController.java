@@ -26,6 +26,15 @@ public class ProductController {
 		System.out.println(productPager);
 		System.out.println(productPager.getProductType());
 		System.out.println(productPager.isSale());
+//		String str=productPager.getProductType();
+//		if(str.equals("TOP-")||str.equals("BOTTOM-")) {
+//			System.out.println("str1 : "+str);
+//			str=str.replace("-", "");			
+//		}
+//		str=str.toLowerCase();
+//		System.out.println("str2 : "+str);
+//		productPager.setProductType(str);
+//		System.out.println(productPager.getProductType());
 		if(productPager.getProductType().equals("All-New arrival")||productPager.getProductType().equals("sale-")) {
 			productPager.setProductType(null);
 		}
@@ -38,9 +47,10 @@ public class ProductController {
 		model.addAttribute("pager", productPager);
 		model.addAttribute("sortStandard", productPager.getSortStandard());
 		model.addAttribute("sale", productPager.isSale());
-		System.out.println(productPager.getLastNum());
+		System.out.println("lastNum : "+productPager.getLastNum());
 		System.out.println("pre : "+ productPager.isPre());
 		System.out.println("next : "+productPager.isNext());
+		System.out.println("totalPage : "+productPager.getTotalPage());
 		return "/product/productList";
 	}
 

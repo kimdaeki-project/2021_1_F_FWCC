@@ -25,7 +25,9 @@ public class ProductService {
 	
 	public List<ProductVO> getList(ProductPager productPager) throws Exception{
 		long num = productMapper.getTotalCount(productPager);
-		System.out.println(num);
+		System.out.println("totalNum"+num);
+		
+		
 		productPager.makeRow();
 		productPager.makeNum(num);
 		List<ProductVO> list = productMapper.getList(productPager);

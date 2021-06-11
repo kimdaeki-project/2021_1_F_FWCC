@@ -5,11 +5,45 @@
 
 <mapper namespace="com.fw.s1.product.ProductMapper">
 
+<select id="getTotalCount" parameterType="ProductPager"
+		resultType="java.lang.Long">
+		select count(productNum) from product
+		where
+
+		<!-- and collab like concat('%',#{collab},'%') and productType like concat('%',#{productType},'%') -->
+		<!-- 
+		<choose>
+			<when test="productType=='top'">
+				productDivNum in (select productDivNum from
+				productDivision where productType like
+				'%top%')
+
+				and
+			</when>
+			<when test="productType=='bottom'">
+				productDivNum in (select productDivNum from
+				productDivision where productType like
+				concat('%','bottom','%'))
+				
+				and
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		 -->
+		 productDivNum in (select productDivNum from productDivision where productType like concat('%',#{productType},'%'))
+		and
+		productSaleable = 1
+		<if test="sale">
+			and productDisRate > 0
+		</if>
+	</select>
+
 	<select id="getList" parameterType="ProductPager"
 		resultType="ProductVO">
 		select * from
 		(select row_number() over(
-		order by 
+		order by
 		<choose>
 			<when test="sortStandard=='name'">
 				productTitle asc
@@ -24,14 +58,33 @@
 				productNum desc
 			</otherwise>
 		</choose>
-		
+
 		) as R, P.* from
 		(select * from product
-		where productSaleable = 1
-		and collab like concat('%',#{collab},'%')
-		and productType like concat('%',#{productType},'%')
+		where
+		productDivNum in (select productDivNum from productDivision where productType like concat('%',#{productType},'%'))
+<!-- 
+		<choose>
+			<when test="productType=='top'">
+				productDivNum in (select productDivNum from
+				productDivision where productType like concat('%','top','%'))
+				and
+			</when>
+			<when test="productType=='bottom'">
+				productDivNum in (select productDivNum from
+				productDivision where productType like
+				concat('%','bottom','%'))
+				
+				and
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+ -->
+ 		and
+		productSaleable = 1
 		<if test="sale">
-		and productDisRate > 0
+			and productDisRate > 0
 		</if>
 		) as P
 		) as RP
@@ -71,23 +124,14 @@
 		productNum=#{productNum}
 	</delete>
 
-	<select id="getTotalCount" parameterType="ProductPager"
-		resultType="java.lang.Long">
-		select count(productNum) from product
-		where productSaleable = 1
-		and collab like
-		concat('%',#{collab},'%')
-		and productType like
-		concat('%',#{productType},'%')
-		<if test="sale">
-		and productDisRate > 0
-		</if>
-	</select>
-
 	
+
+
 	<update id="updateStock" parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";">
-			update productinfo set stock = stock - #{item.stock} where pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
+			update
+			productinfo set stock = stock - #{item.stock} where
+			pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
 		</foreach>
 	</update>
 </mapper>
