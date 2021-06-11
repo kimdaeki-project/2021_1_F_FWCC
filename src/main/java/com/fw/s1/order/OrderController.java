@@ -298,8 +298,8 @@ public class OrderController {
 	@PostMapping("orderComplete")
 	@Transactional(rollbackFor = Exception.class)
 	public void orderComplete(HttpServletRequest request, Authentication authentication)throws Exception{
-		long cuNum = Long.parseLong(request.getParameter("cuNum"));
-		if(cuNum!=1) {
+		Long cuNum = Long.parseLong(request.getParameter("cuNum"));
+		if(cuNum!=0) {
 			CouponVO couponVO = new CouponVO();
 			couponVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 			couponVO.setCuNum(cuNum);
@@ -373,6 +373,7 @@ public class OrderController {
 		String[] tempChangeMiles = request.getParameterValues("changeMiles");
 		long[] changeMiles = new long[length];
 		for(int i = 0 ; i < 2; i++) {
+			System.out.println(tempChangeMiles[i]);
 			changeMiles[i] = Long.parseLong(tempChangeMiles[i]);
 		}
 		List<MileageVO> mileageVOs = new ArrayList<>();

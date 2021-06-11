@@ -267,9 +267,9 @@
 			<button id="purchasebutton"
 				data-name="${name}"
 				data-originTotPrice="${totalprice}"
-				data-cuSale="<c:out value='0'></c:out>"
-				data-mileSp='<c:out value="0"></c:out>'
-				data-cuNum="<c:out value='1'></c:out>"
+				data-cuSale="0"
+				data-mileSp="0"
+				data-cuNum="0"
 				data-changeMile='<c:out value="${totalMileage}"></c:out>'>
 				PAYMENT
 			</button>
@@ -499,7 +499,7 @@
 					<tr>
 						<td style="text-align: center; padding:3%;">
 							- <select id="couponSelector">
-								<option value="1" data-disRate="0" selected="selected">선택하세요.</option>
+								<option value="0" data-disRate="0" selected="selected">선택하세요.</option>
 								<c:forEach items="${cuList}" var="item">
 									<option value="${item.cuNum}" data-disRate="<c:out value='${item.couponspVO.disRate}'></c:out>">
 										<c:out value="${item.couponspVO.cuName}"></c:out>

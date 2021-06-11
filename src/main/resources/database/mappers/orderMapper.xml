@@ -28,7 +28,8 @@
  
  	<insert id="setOrder" parameterType="OrderlistVO">
  		insert into orderlist(orderNum, totPrice, spPrice, cuNum, username, destination, orderDate, orderState, orderMessage, orderName)
- 		values(#{orderNum}, #{totPrice}, #{spPrice}, #{cuNum}, #{username}, #{destination}, sysdate(), 1, #{orderMessage}, #{orderName})
+ 		values(#{orderNum}, #{totPrice}, #{spPrice}, <if test="cuNum==0">null</if><if test="cuNum!=0">#{cuNum}</if>, 
+ 		#{username}, #{destination}, sysdate(), 1, #{orderMessage}, #{orderName})
  	</insert>
 	<select id="getOrder" parameterType="OrderlistVO" resultMap="orderAndMileage">
 		select * from orderlist o inner join mileage m on o.orderNum = m.orderNum

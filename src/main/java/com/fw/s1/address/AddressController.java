@@ -28,8 +28,7 @@ public class AddressController {
 	@ResponseBody
 	@GetMapping("getSelectOne")
 	public String getSelectOne(AddressVO addressVO, Authentication authentication)throws Exception{
-		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		addressVO.setUsername("admin");
+		addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		addressVO = addressService.getSelectOne(addressVO);
 		
 		if(addressVO==null) {
@@ -46,8 +45,7 @@ public class AddressController {
 	public Long deleteAddress(long[] addrNums, Authentication authentication)throws Exception{
 		List<AddressVO> addressVOs = new ArrayList<>();
 		MemberVO memberVO = new MemberVO();
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		memberVO.setUsername("admin");
+		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		
 		for(long addrNum : addrNums) {
 			AddressVO addressVO = new AddressVO();
@@ -63,8 +61,7 @@ public class AddressController {
 	@GetMapping("getAddressList")
 	public String[] getAddressList(Authentication authentication)throws Exception{
 		MemberVO memberVO = new MemberVO();
-		//memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		memberVO.setUsername("admin");
+		memberVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		List<AddressVO> list = addressService.getAddressList(memberVO);
 		int length = list.size();
 		
@@ -94,8 +91,7 @@ public class AddressController {
 	@GetMapping("updateAddress")
 	@Transactional(rollbackFor = Exception.class)
 	public Long updateAddress(AddressVO addressVO, Authentication authentication)throws Exception{
-		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		addressVO.setUsername("admin");
+		addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		Long result = addressService.beforeAddreess(addressVO);
 		
 		if(result<1) {
@@ -110,8 +106,7 @@ public class AddressController {
 	@GetMapping("setAddress")
 	@Transactional(rollbackFor = Exception.class)
 	public Long setAddress(AddressVO addressVO, Authentication authentication)throws Exception{
-		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		addressVO.setUsername("admin");
+		addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		addressService.beforeAddreess(addressVO);
 		
 		return addressService.setAddress(addressVO);
@@ -121,8 +116,7 @@ public class AddressController {
 	@GetMapping("getSelectRecent")
 	public String getSelectRecent(Authentication authentication)throws Exception{
 		AddressVO addressVO = new AddressVO();
-		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		addressVO.setUsername("admin");
+		addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		
 		Gson gson = new Gson();
 		addressVO = addressService.getSelectRecent(addressVO);
@@ -139,8 +133,7 @@ public class AddressController {
 	@GetMapping("checkCount")
 	public Long checkCount(Authentication authentication)throws Exception{
 		AddressVO addressVO = new AddressVO();
-		//addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
-		addressVO.setUsername("admin");
+		addressVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		return addressService.checkCount(addressVO);
 	}
 
