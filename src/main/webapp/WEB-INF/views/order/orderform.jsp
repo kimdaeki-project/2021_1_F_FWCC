@@ -218,7 +218,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="border-bottom: 2px rgba(128,128,128, 0.5) solid; font-size:1.6rem;">
+				<tr style="border-bottom: 2px rgba(128,128,128,0.5) solid; font-size:1.6rem;">
 					<td style="padding: 3%;"><strong>KRW <span><c:out value="${totalprice}"></c:out></span></strong></td>
 					<td style="padding: 3%;"><strong>- KRW <span id="onsaleprice"><c:out value='0'></c:out></span></strong></td>
 					<td style="padding: 3%;"><strong>= KRW <span id="endprice"><c:out value="${totalprice}"></c:out></span></strong></td>

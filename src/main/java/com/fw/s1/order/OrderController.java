@@ -371,9 +371,8 @@ public class OrderController {
 		}
 		
 		String[] tempChangeMiles = request.getParameterValues("changeMiles");
-		long[] changeMiles = new long[length];
+		long[] changeMiles = new long[2];
 		for(int i = 0 ; i < 2; i++) {
-			System.out.println(tempChangeMiles[i]);
 			changeMiles[i] = Long.parseLong(tempChangeMiles[i]);
 		}
 		List<MileageVO> mileageVOs = new ArrayList<>();
