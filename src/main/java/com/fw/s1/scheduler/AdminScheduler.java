@@ -37,8 +37,6 @@ public class AdminScheduler {
 			if(hashMap.get(purchaseVO.getProductNum())==null) {
 				AdminVO adminVO = new AdminVO();
 				adminVO.setAdminDate(dbdate);
-				adminVO.setCollab(purchaseVO.getProductVO().getCollab());
-				adminVO.setProductType(purchaseVO.getProductVO().getProductType());
 				adminVO.setProductNum(purchaseVO.getProductNum());
 				adminVO.setSellCount(purchaseVO.getProductCount());
 				hashMap.put(purchaseVO.getProductNum(), adminVO);

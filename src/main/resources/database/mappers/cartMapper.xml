@@ -14,8 +14,7 @@
 			<result column="productTitle" property="productTitle"/>
 			<result column="productPrice" property="productPrice"/>
 			<result column="productDisRate" property="productDisRate"/>
-			<result column="productType" property="productType"/>
-			<result column="collab" property="collab"/>
+			<result column="productDivNum" property="productDivNum"/>
 			<result column="finalPrice" property="finalPrice"/>
 			<result column="productMileage" property="productMileage"/>
 			<result column="productSaleable" property="productSaleable"/>
@@ -37,19 +36,19 @@
   <select id="getCartList" parameterType="MemberVO" resultMap="cartfragments">
   	SELECT cf.*, p.*, i.* 
   		from (SELECT c.*, pf.fileName 
-  			FROM cart c INNER JOIN productfiles pf ON c.productnum=pf.productNum 
-  			WHERE c.username=#{username} and pf.fileName like concat('fileName', '_')
-  			<!-- LIKE CONCAT('T\_', '%') --> ) cf
+  			FROM cart c left JOIN (select * from productFiles where fileName LIKE CONCAT('T\_', '%')) pf 
+  			ON c.productnum=pf.productNum WHERE c.username=#{username}) cf
 		INNER JOIN product p ON cf.productNum=p.productNum 
 		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum
   </select>
   
   <select id="getCartSelectList" parameterType="java.util.List" resultMap="cartfragments">
  		SELECT cf.*, p.*, i.* from
-		(select c.*, pf.fileName from cart c inner join productfiles pf on c.productNum = pf.productNum where 
+		(select c.*, pf.fileName from cart c 
+			left join (select * from productfiles where fileName LIKE CONCAT('T\_', '%')) pf 
+			on c.productNum = pf.productNum where 
 		<foreach collection="list" item="item" separator="or">
-			(c.username=#{item.username} and c.cartNum=#{item.cartNum} and pf.fileName like concat('fileName', '_'))
-  			<!-- LIKE CONCAT('T\_', '%') -->
+			(c.username=#{item.username} and c.cartNum=#{item.cartNum})
 		</foreach>) cf
 		INNER JOIN product p ON cf.productNum=p.productNum 
 		INNER JOIN productinfo i on cf.pInfoNum=i.pInfoNum

@@ -55,8 +55,6 @@ class ProductMapperTest {
 			vo.setProductTitle(name+i);
 			vo.setProductPrice((long) ((i+1)*10000));
 			vo.setProductContents("productContents"+i);
-			vo.setCollab("collab"+i%3);
-			vo.setProductType(name);
 			int result = productMapper.setInsert(vo);
 			total += result;
 			System.out.println("r : "+result+" t : "+total);

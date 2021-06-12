@@ -115,8 +115,11 @@ public class AdminController {
 	//모든 사람들에게 마일리지를 전송
 	@ResponseBody
 	@GetMapping("transAllMile")
-	public Long transAllMile(MileageVO mileageVO)throws Exception {
-		mileageVO.setEnabledMile(mileageVO.getChangeMile());
+	public Long transAllMile(Long mileage, String contents)throws Exception {
+		MileageVO mileageVO = new MileageVO();
+		mileageVO.setChangeMile(mileage);
+		mileageVO.setEnabledMile(mileage);
+		mileageVO.setMileContents(contents);
 		return mileageService.mileageForAll(mileageVO);
 	}
 	
@@ -136,6 +139,7 @@ public class AdminController {
 		return mileageService.mileageForSelect(list);
 	}
 	
+	//하루 일치의 판매량을 집계하여 보여주는 페이지
 	@GetMapping("saleDay")
 	public void saleDay(Model model)throws Exception{
 		Calendar calendar = Calendar.getInstance();
@@ -144,6 +148,7 @@ public class AdminController {
 		model.addAttribute("lastDay", date.toString());
 	}
 	
+	//하루 일치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
 	@GetMapping("getSaleDay")
 	@ResponseBody
 	public String[] getSaleDay(String date)throws Exception{

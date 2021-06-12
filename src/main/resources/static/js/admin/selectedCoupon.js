@@ -10,7 +10,7 @@ $("#allSend").click(function(event){
 		swal({
 			icon:"info",
 			title:"INFO",
-			text:"적어도 한달은 보내야 한다."
+			text:"적어도 유효기한은 한달 이상이어야 합니다."
 		});
 		return;
 	}
@@ -57,18 +57,28 @@ $("#selectTransmit").click(function(event){
 	const period = $("#couponperiod").val();
 	
 	$(".usernames").each(function(){
-		let data = $(this).val();
-		if(data.trim()!=''){
+		let data = $(this).val().trim();
+		if(data!=''){
 			usernames.push(data);
 		}
 	});
+	
+	if(period<1){
+		swal({
+			icon:"info",
+			title:"INFO",
+			text:"적어도 유효기한은 한달 이상이어야 합니다."
+		});
+		return;
+	}
 	
 	if(usernames.length==0){
 		swal({
 			icon:"info",
 			title:"INFO",
-			text:"username을 하나 이상 입력해 주세요."
+			text:"적어도 제대로 된 형식의 username을 하나 이상 적어주어야 합니다."
 		});
+		return;
 	}
 	
 	$.post({

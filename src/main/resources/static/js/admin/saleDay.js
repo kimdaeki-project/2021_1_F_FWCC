@@ -1,42 +1,14 @@
+const chart = toastui.Chart;
 
-HashMap = function(){
-	this.map = new Array();
+const chart1 = $("#chart1");
+const data1 = {
+	categories:
 };
-
-HashMap.prototype={
-	put:function(key, value){
-		this.map[key] = value;
-	},
-	get:function(key){
-		return this.map[key];
-	},
-	getAll:function(){
-		return this.map;
-	},
-	clear:function(){
-		this.map = new Array();
-	},
-	getKeys:function(){
-		let keys = new Array();
-		for(let i in this.map){
-			keys.put(i);
-		}
-		return keys;
-	}
-};
-
-var chart1 = bb.generate({
-	data:{
-		columns:[
-		],
-		type: "pie",
-	},
-	bindto:"#chart1"
-});
 
 $(document).ready(function(){
 	
 	let array1 = new Array();
+	const hm = new Map();
 	
 	$.get({
 		url:"./getSaleDay",
@@ -52,10 +24,15 @@ $(document).ready(function(){
 				temp1.push(productTitle);
 				temp1.push(sellCount);
 				array1.push(temp1);
+				
+				if(hm.has(obj.productVO.productDivNum)){
+					let tempdata = hm.get(obj.productVO.productDivNum);
+					hm.set(obj.productVO.productDivNum, tempdata + obj.sellCount);
+				}else{
+					hm.set(obj.productVO.productDivNum, obj.sellCount);
+				}
 			}
-			chart1.load({
-				columns:array1
-			});
+			
 		}
 	});
 });
@@ -66,6 +43,7 @@ $("#ajaxDate").click(function(event){
 	let selectedDate = $("#getDate").val();
 	
 	let array1 = new Array();
+	const hm = new Map();
 	
 	$.get({
 		url:"./getSaleDay",
@@ -81,11 +59,15 @@ $("#ajaxDate").click(function(event){
 				temp1.push(productTitle);
 				temp1.push(sellCount);
 				array1.push(temp1);
+				
+				if(hm.has(obj.productVO.productDivNum)){
+					let tempdata = hm.get(obj.productVO.productDivNum);
+					hm.set(obj.productVO.productDivNum, tempdata + obj.sellCount);
+				}else{
+					hm.set(obj.productVO.productDivNum, obj.sellCount);
+				}
 			}
-			chart1.unload();
-			chart1.load({
-				columns:array1
-			});
+			
 		}
 	});
 });

@@ -13,13 +13,13 @@ public class ProductVO {
 	private Long productDisRate;
 	private String summary;
 	private String productContents;
-	private String collab;
-	private String productType;
+	private Long productDivNum;
 	private Long finalPrice;
 	private Long productMileage;
 
 	private Boolean productSaleable;
 	
+	private ProductDivisionVO productDivisionVO;
 //	private List<ProductFileVO> files;
 //	private List<ProductInfoVO> infos;
 	

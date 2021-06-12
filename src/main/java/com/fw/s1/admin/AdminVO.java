@@ -13,8 +13,6 @@ public class AdminVO {
 	private Date adminDate;
 	private Long productNum;
 	private Long sellCount;
-	private String productType;
-	private String collab;
 	
 	private ProductVO productVO;
 }

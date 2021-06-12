@@ -24,7 +24,7 @@
 	<select id="getTodayPurchase" parameterType="java.sql.Date" resultMap="purchaseAndProduct">
 		select p.*, pro.* from purchase p inner join orderlist o on o.orderNum = p.orderNum 
 		inner join product pro on p.productNum=pro.productNum
-		where o.orderDate like concat(#{param}, '%')
+		where o.orderDate like concat(#{value}, '%')
 	</select>
 	<insert id="setOrderPurchase" parameterType="java.util.List">
 	insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)

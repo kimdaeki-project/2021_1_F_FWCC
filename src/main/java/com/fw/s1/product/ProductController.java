@@ -47,8 +47,8 @@ public class ProductController {
 	@PostMapping(value="insert")
 	public void  setInsert(ProductVO productVO, MultipartFile[] files, String size)throws Exception{
 		System.out.println(productVO.getProductTitle());
-		System.out.println(productVO.getCollab());
-		System.out.println(productVO.getProductType());
+		//System.out.println(productVO.getCollab());
+		//System.out.println(productVO.getProductType());
 		System.out.println(productVO.getProductPrice());
 		System.out.println(productVO.getSummary());
 		System.out.println(productVO.getProductContents());

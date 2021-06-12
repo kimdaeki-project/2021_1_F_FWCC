@@ -12,26 +12,34 @@
 			<id column="productNum" property="productNum"/>
 			<result column="productTitle" property="productTitle"/>
 			<result column="productPrice" property="productPrice"/>
-			<result column="collab" property="collab"/>
-			<result column="productType" property="productType"/>
 			<result column="finalPrice" property="finalPrice"/>
+			<result column="productDivNum" property="productDivNum"/>
+			<association property="productDivisionVO" javaType="ProductDivisionVO">
+				<id column="productDivNum" property="productDivNum"/>
+				<result column="collab" property="collab"/>
+				<result column="productType" property="productType"/>
+			</association>
 		</association>
 	</resultMap>
 
 	<select id="saleDay" parameterType="java.lang.String" resultMap="adminAndProduct">
-		select a.*, p.* from admin a inner join product p on a.productNum=p.productNum where a.adminDate = #{date}
+		select a.*, p.*, pd.* 
+		from admin a inner join product p on a.productNum = p.productNum 
+		left join productdivision pd on p.productDivNum = pd.productDivNum
+		where a.adminDate = #{value}
 	</select>
 	
 	<select id="saleDays" parameterType="java.util.HashMap" resultMap="adminAndProduct">
-		select a.*, p.* from admin a inner join product p on a.productNum=p.productNum 
+		select a.*, p.*, pd.* from admin a inner join product p on a.productNum=p.productNum 
+		left join productdivision pd on p.productDivNum = pd.productDivNum
 		where a.adminDate between #{start} and #{end}
 	</select>
 
 	<insert id="insertAdmin" parameterType="java.util.List">
-		insert into admin (adminDate, productNum, sellCount, productType, collab)
+		insert into admin (adminDate, productNum, sellCount)
 		values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.adminDate}, #{item.productNum}, #{item.sellCount}, #{item.productType}, #{item.collab})
+			(#{item.adminDate}, #{item.productNum}, #{item.sellCount})
 		</foreach>
 	</insert>
 </mapper>

@@ -14,6 +14,7 @@
 <div>
 	<div>
 		<input id="sendmileage" type="number" min="0" max="1000000" value="1000">
+		<input type="text" id="mileContents" placeholder="보낼 메세지 입력">
 		<button id="toggleselectusers">선택 전송</button>
 		<button id="allmiletrans">모두에게 전송</button>
 		<div id="selectusers" style="display:none;">

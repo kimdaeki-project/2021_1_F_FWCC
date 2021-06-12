@@ -5,8 +5,8 @@
 <html style="height:100%; overflow-y: scroll;">
 <head>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.0.3/billboard.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.0.3/billboard.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+<script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -19,6 +19,7 @@
 		<button id="ajaxDate">날짜 선택</button>
 	</div>
 	<div id="chart1" style="height:40%; width:40%; display: inline-block;"></div>
+	<div id="chart2" style="height:40%; width:40%; display: inline-block;"></div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/saleDay.js"></script>
