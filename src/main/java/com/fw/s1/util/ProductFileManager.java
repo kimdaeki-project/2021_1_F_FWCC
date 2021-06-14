@@ -11,6 +11,38 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class ProductFileManager {
+	
+	
+	public String thumbNailSave(String name, MultipartFile multipartFile, HttpSession session) throws Exception{
+
+		String path="/";
+		ClassPathResource classPathResource = new ClassPathResource(path);
+		File file = new File(classPathResource.getFile(), name);
+		
+		System.out.println(file.getAbsolutePath());
+		
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		
+		// 2. 저장할 파일명
+		String fileName="";
+		
+		// b. API
+		fileName = "T_"+UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename();
+		
+		// 3. HDD에 저장
+		file = new File(file,fileName);
+		
+		// a. FileCopyUtils
+//		FileCopyUtils.copy(multipartFile.getBytes(), file);
+		
+		// b. MultipartFile
+		multipartFile.transferTo(file);
+		
+		return fileName;
+	}
+	
 
 	public String save(String name, MultipartFile multipartFile, HttpSession session) throws Exception{
 

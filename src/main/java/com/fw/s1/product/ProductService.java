@@ -23,6 +23,10 @@ public class ProductService {
 	@Autowired
 	private HttpSession session;
 	
+	public Long getNextNum() throws Exception{
+		return productMapper.getNextNum();
+	}
+	
 	public List<ProductVO> getList(ProductPager productPager) throws Exception{
 		long num = productMapper.getTotalCount(productPager);
 		System.out.println("totalNum"+num);
@@ -43,6 +47,43 @@ public class ProductService {
 		return productMapper.updateStock(list);
 	}
 	
+	public int setInsert(ProductVO productVO, String size, MultipartFile thumbNail) throws Exception{
+		String type = productVO.getProductType();
+		type = type.replace(",", "-");
+		Long price = productVO.getProductPrice();
+		Long disRate = productVO.getProductDisRate();
+		if(disRate==null) {
+			disRate = 0L;
+		}
+		Long finalPrice = price*(100-disRate);
+		Long mileage = ((price/100)*5);
+		productVO.setFinalPrice(finalPrice);
+		productVO.setProductMileage(mileage);
+		productVO.setProductType(type);
+		productVO.setProductSaleable(true);
+		System.out.println("disRate : "+ disRate);
+		System.out.println("finalPrice : "+finalPrice);
+		System.out.println("mileage : "+mileage);
+		System.out.println("type : "+type);
+		System.out.println("saleable : "+productVO.getProductSaleable());
+		int result = productMapper.setInsert(productVO);
+		ProductFileVO pFileVO = new ProductFileVO();
+		pFileVO.setProductNum(productVO.getProductNum());
+		
+		String fileName = productFileManager.thumbNailSave("static/images/product/"+productVO.getProductNum(), thumbNail, session);
+		pFileVO.setFileName(fileName);
+		pFileVO.setOriName(thumbNail.getOriginalFilename());
+		result = productMapper.setFileInsert(pFileVO);
+		String[] sizeAssy = size.split(",");
+		for(String str:sizeAssy) {
+			System.out.println("size : "+str);
+			ProductInfoVO pInfoVO = new ProductInfoVO();
+			pInfoVO.setProductNum(productVO.getProductNum());
+			pInfoVO.setSize(str);
+			result = productMapper.setInsertPInfo(pInfoVO);
+		}
+		return result;
+	}
 	
 	
 	
@@ -52,9 +93,9 @@ public class ProductService {
 	}
 	
 	
-	public String setSummerFileUpload(MultipartFile file) throws Exception{
+	public String setSummerFileUpload(MultipartFile file,String productNum) throws Exception{
 		
-		String fileName = productFileManager.save("static/images/product/test", file, session);
+		String fileName = productFileManager.save("static/images/product/"+productNum, file, session);
 		return fileName;
 		
 	}

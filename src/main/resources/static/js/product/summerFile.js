@@ -26,9 +26,10 @@ function deleteFile(files){
 }
 
 function uploadFile(files){
+	const pNum = $("#pNum").attr("title");
 	const formData = new FormData(); // form 태그 작성
 	formData.append('file',files[0]); // input type = "File" name="file"
-	let fileName="";
+	formData.append('productNum',pNum);
 	$.ajax({
 		type:"post",
 		url:"./summerFileUpload",
@@ -38,9 +39,11 @@ function uploadFile(files){
 		processData:false,
 		contentType:false,
 		success: function(result){
-            $("#contents").summernote('insertImage', result);
-			console.log(result);	
+           // $("#contents").summernote('insertImage', result);
+			// console.log(result);	
 			//$("#contents").summernote('insertImage',fileName);
+			 let node = '<img class="formoveimg" src="'+result+'">';
+            $("#contents").summernote('pasteHTML', node);
 		}
 	});
 	

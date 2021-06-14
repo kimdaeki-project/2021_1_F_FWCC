@@ -55,25 +55,31 @@ public class ProductController {
 	}
 
 	@GetMapping(value="insert")
-	public String setInsert()throws Exception{
+	public String setInsert(Model model)throws Exception{
+		model.addAttribute("productNum", productService.getNextNum());
 		return "/product/productInsert";
 	}
 
 	@PostMapping(value="insert")
-	public void  setInsert(ProductVO productVO, MultipartFile[] files, MultipartFile thumbnail, String size)throws Exception{
-		System.out.println(productVO.getProductTitle());
-		System.out.println(productVO.getCollab());
-		System.out.println(productVO.getProductType());
-		System.out.println(productVO.getProductPrice());
-		System.out.println(productVO.getSummary());
-		System.out.println(productVO.getProductContents());
-		System.out.println(thumbnail.getOriginalFilename());
-		System.out.println(files == null);
-		System.out.println(files.length);
-		for(MultipartFile mf:files) {
-			System.out.println(mf.getOriginalFilename());
-		}
-		System.out.println(size);
+	public void  setInsert(ProductVO productVO, MultipartFile thumbnail, String size)throws Exception{
+		System.out.println("");
+		System.out.println("=============================================================");
+		System.out.println("productNum : "+productVO.getProductNum());
+		System.out.println("title : "+productVO.getProductTitle());
+		System.out.println("collab : "+productVO.getCollab());
+		System.out.println("productType : "+productVO.getProductType());
+		System.out.println("price : "+productVO.getProductPrice());
+		System.out.println("summary : "+productVO.getSummary());
+		System.out.println("contents : "+productVO.getProductContents());
+		System.out.println("thumbNail : "+thumbnail.getOriginalFilename());
+		System.out.println("disRate : "+productVO.getProductDisRate());
+//		System.out.println(files == null);
+//		System.out.println(files.length);
+//		for(MultipartFile mf:files) {
+//			System.out.println(mf.getOriginalFilename());
+//		}
+		System.out.println("size : "+size);
+		int result = productService.setInsert(productVO, size, thumbnail);
 
 	}
 	
@@ -90,11 +96,13 @@ public class ProductController {
 	
 	@PostMapping(value="summerFileUpload")
 	@ResponseBody
-	public String setSummerFileUpload(MultipartFile file)throws Exception{
+	public String setSummerFileUpload(MultipartFile file,String productNum)throws Exception{
+		System.out.println(productNum);
 		System.out.println("summerfileUpload");
+		System.out.println(file == null);
 		System.out.println(file.getOriginalFilename());
-		String fileName = productService.setSummerFileUpload(file);
-		fileName="/images/product/test/"+fileName;
+		String fileName = productService.setSummerFileUpload(file,productNum);
+		fileName="/images/product/"+productNum+"/"+fileName;
 		
 		return fileName;
 	}
