@@ -22,6 +22,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+// Member Login =========================================================================
 	@GetMapping("memberLogin")
 	public void getLogin() throws Exception {
 		
@@ -59,6 +60,7 @@ public class MemberController {
 		return mv;
 	}
 	
+// Member Join ============================================================================
 	@GetMapping("memberJoin")
 	public void setJoin(Model model) throws Exception {
 		model.addAttribute("memberVO", new MemberVO());
@@ -87,5 +89,12 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
+// My Page ================================================================================
+	@GetMapping("memberPage")
+	public void memberPage() throws Exception {
+		
+	}
+	
 	
 }
