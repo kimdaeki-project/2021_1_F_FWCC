@@ -12,32 +12,30 @@
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
 <div>
-	<div>
-		<table>
-			<thead>
+	<table style="width:80%; margin: 10% 5%; text-align: center;">
+		<thead>
+			<tr>
+				<th style="padding:1%;">쿠폰 번호</th>
+				<th style="padding:1%;">쿠폰 이름</th>
+				<th style="padding:1%;">할인률</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${cuspList}" var="item">
 				<tr>
-					<th>쿠폰 번호</th>
-					<th>쿠폰 이름</th>
-					<th>할인률</th>
+					<td style="padding:1%;">
+						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuSpNum}'></c:out></a>
+					</td>
+					<td style="padding:1%;">
+						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuName}'></c:out></a>
+					</td>
+					<td style="padding:1%;">
+						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.disRate}'></c:out></a>
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${cuspList}" var="item">
-					<tr>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuSpNum}'></c:out></a>
-						</td>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuName}'></c:out></a>
-						</td>
-						<td>
-							<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.disRate}'></c:out></a>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 </body>

@@ -15,12 +15,12 @@
 	<div>
 		<input type="date" id="getDate" value="<c:out value='${lastDay}'></c:out>" min="2021-06-01" max='<c:out value="${lastDay}"></c:out>'/>
 		<button id="ajaxDate">날짜 선택</button>
+		<br><span>(목표 주의 마지막 일을 선택)</span>
 	</div>
 	<div id="chart1" style="height:70%; width:100%; display: inline-block;"></div>
 	<div id="chart2" style="height:40%; width:40%; display: inline-block;"></div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/saleDay.js"></script>
 </body>
 </html>

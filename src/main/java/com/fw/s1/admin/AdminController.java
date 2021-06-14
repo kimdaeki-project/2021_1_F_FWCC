@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,6 +158,80 @@ public class AdminController {
 			calendar.add(Calendar.DATE, -1);
 			java.sql.Date date2 = new java.sql.Date(calendar.getTimeInMillis());
 			date = date2.toString();
+		}
+		List<AdminVO> list = adminService.saleDay(date);
+		Gson gson = new Gson();
+		int length = list.size();
+		String[] result = new String[length];
+		for(int i = 0 ; i < length; i++) {
+			result[i] = gson.toJson(list.get(i));
+		}
+		return result;
+	}
+	
+	//일주일치의 판매량을 집계하여 보여주는 페이지
+	@GetMapping("saleWeek")
+	public void saleWeek(Model model)throws Exception{
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1);
+		java.sql.Date date = new java.sql.Date(calendar.getTimeInMillis());
+		model.addAttribute("lastDay", date.toString());
+	}
+	
+	//일주일치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
+	@GetMapping("getSaleWeek")
+	@ResponseBody
+	public String[] getSaleWeek(String date)throws Exception{
+		String date2 = "";
+		if(date=="") {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, -1);
+			java.sql.Date tempdate = new java.sql.Date(calendar.getTimeInMillis());
+			date = tempdate.toString();
+			calendar.add(Calendar.DATE, -6);
+			tempdate = new java.sql.Date(calendar.getTimeInMillis());
+			date2 = tempdate.toString();
+		}else {
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(simpleDateFormat.parse(date).getTime());
+			calendar.add(Calendar.DATE, -6);
+			java.sql.Date tempdate = new java.sql.Date(calendar.getTimeInMillis());
+			date2 = tempdate.toString();
+		}
+		System.out.println(date2);
+		HashMap<String, String> hm = new HashMap<>();
+		hm.put("start", date2);
+		hm.put("end", date);
+		List<AdminVO> list = adminService.saleDays(hm);
+		Gson gson = new Gson();
+		int length = list.size();
+		String[] result = new String[length];
+		for(int i = 0 ; i < length; i++) {
+			result[i] = gson.toJson(list.get(i));
+		}
+		return result;
+	}
+		
+	//한달치의 판매량을 집계하여 보여주는 페이지
+	@GetMapping("saleMonth")
+	public void saleMonth(Model model)throws Exception{
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1);
+		java.sql.Date date = new java.sql.Date(calendar.getTimeInMillis());
+		String result = date.toString().replaceAll("\\-[0-9]+$", "");
+		model.addAttribute("lastMonth",result);
+	}
+	
+	//한달치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
+	@GetMapping("getSaleMonth")
+	@ResponseBody
+	public String[] getSaleMonth(String date)throws Exception{
+		if(date=="") {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, -1);
+			java.sql.Date date2 = new java.sql.Date(calendar.getTimeInMillis());
+			date = date2.toString().replaceAll("\\-[0-9]+$", "");
 		}
 		List<AdminVO> list = adminService.saleDay(date);
 		Gson gson = new Gson();
