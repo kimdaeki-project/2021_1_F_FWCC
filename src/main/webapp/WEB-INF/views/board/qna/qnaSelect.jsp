@@ -17,7 +17,7 @@
 	<div id="container">
 		<div style="padding: 68px 34px 0;">
 			<div class="title" style="margin: 60px 0 40px; text-align: center;">
-				<p>Notice</p>
+				<p>Qna</p>
 			</div>
 			<div>
 				<table class="table"
@@ -28,7 +28,7 @@
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">SUBJECT
 							</th>
 
-							<td style="width: 350px; padding: 10px; vertical-align: top;">${vo.title}
+							<td style="width: 350px; padding: 10px; vertical-align: top;">${qnaVo.title}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">
@@ -42,7 +42,7 @@
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">WRITER
 							</th>
 
-							<td style="width: 350px; padding: 10px; vertical-align: top;">${vo.writer}
+							<td style="width: 350px; padding: 10px; vertical-align: top;">${qnaVo.writer}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">
@@ -57,39 +57,33 @@
 							</th>
 
 							<td
-								style="width: 100px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${vo.regDate}
+								style="width: 100px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${qnaVo.regDate}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top; border-bottom: 1px solid #ccc;">HIT
 							</th>
 
 							<td
-								style="width: 1000px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${vo.hit}
+								style="width: 1000px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${qnaVo.hit}
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<div style="text-align: center;">${vo.contents}</div>
-				<c:forEach items="${vo.files}" var="fileVO">
+				<div style="text-align: center;">${qnaVo.contents}</div>
+				<c:forEach items="${qnaVo.files}" var="fileqnaVo">
 					<a
-						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a>
+						href="fileDown?fileName=${fileqnaVo.fileName}&oriName=${fileqnaVo.oriName}">${fileqnaVo.oriName}</a>
 				</c:forEach>
 			</div>
 			<table class="table"
 					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; ">
 					<tbody>
-					<c:forEach items="${cm}" var="com" >
+
 					<tr>
-					<td><div>${com.commentNum} ${com.writer} ${com.regDate} </div>
-						<div>${com.contents}</div>
-						<div>
-						<a href="./commentUpdate?commentNum=${com.commentNum}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn btn-info">Deletec</a>
-						</div>
-					</td>
-						
+					<td><div>${cm.writer} ${cm.regDate} </div>
+						<div>${cm.contents}</div></td>
 					</tr>
-					</c:forEach>
+
 					</tbody>
 			</table>
 			<div>
@@ -100,7 +94,7 @@
 					</div>
 					<div class="form-group">
 						<label for="num">num:</label> <input type="number"
-							class="form-control myCheck" id="num" name="num" value="${vo.num}" }>
+							class="form-control myCheck" id="num" name="num" value="${qnaVo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
@@ -112,30 +106,8 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
-			
-			
-			<div>
-				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
-				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
-				
-			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	const del = document.getElementById("del");
-	const frm = document.getElementById("frm");
-	
-	del.addEventListener("click", function(){
-		let result = confirm("Delete??");
-		
-		if(result){
-			//frm.method="post";
-			frm.setAttribute("method", "post");
-			frm.submit();
-			//location.href="./${board}Delete?num=${dto.num}";
-		}
-	});
-</script>
 	<c:import
 		url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/boardInsert.js"></script>

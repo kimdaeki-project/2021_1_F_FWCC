@@ -83,14 +83,14 @@ public class Pager {
 
 	public Long getPerPage() {
 		if(this.perPage == null || this.perPage==0) {
-			this.perPage=10L;
+			this.perPage=12L;
 		}
 		return perPage;
 	}
 
 	public void setPerPage(Long perPage) {
 		if(perPage==null || perPage==0) {
-			this.perPage=10L;
+			this.perPage=12L;
 		}else {
 			this.perPage = perPage;
 		}

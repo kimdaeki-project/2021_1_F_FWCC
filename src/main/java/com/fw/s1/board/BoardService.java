@@ -18,7 +18,7 @@ public interface BoardService {
 		public int setInsert(BoardVO boardVO, MultipartFile [] files)throws Exception;
 		
 		//Update
-		public int setUpdate(BoardVO boardVO)throws Exception;
+		public int setUpdate(BoardVO boardVO, MultipartFile [] files)throws Exception;
 
 		//Delete
 		public int setDelete(BoardVO boardVO)throws Exception;
@@ -26,7 +26,9 @@ public interface BoardService {
 		//commentInsert
 		public int commentInsert(BoardCommentVO boardCommentVO)throws Exception;
 		//commentList
-		public BoardCommentVO commentList(BoardCommentVO boardCommentVO)throws Exception;
+		public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO)throws Exception;
+		//commentSelect
+		public BoardCommentVO commentSelect(BoardCommentVO boardCommentVO)throws Exception;
 		//commenetUpdate
 		public int commentUpdate(BoardCommentVO boardCommentVO)throws Exception;
 		//commentDelete

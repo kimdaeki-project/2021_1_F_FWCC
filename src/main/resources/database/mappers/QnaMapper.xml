@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-   <mapper namespace="com.fw.s1.board.notice.NoticeMapper">
+   <mapper namespace="com.fw.s1.board.qna.QnaMapper">
    		<sql id="searcher">
    		<!-- 공통으로 사용하는 sql문 -->
    		<where>
@@ -24,8 +24,8 @@
    		</sql>
    		
    		
-   		<select id="getList" resultType="NoticeVO" parameterType="Pager">
-			select * from notice
+   		<select id="getList" resultType="QnaVO" parameterType="Pager">
+			select * from qna
 			<include refid="searcher"></include>
 			order by num desc
 			limit #{startRow}, #{perPage}
@@ -33,19 +33,20 @@
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			select count(num) from notice
+   			select count(num) from qna
    			<include refid="searcher"></include>
    		</select>
    		
    		<select id="getSelect" resultMap="selectResult" parameterType="BoardVO">
 			SELECT N.*, NF.* from
-			notice N left join noticeFiles NF
+			qna N left join qnaFiles NF
 			on N.num = NF.num
 			WHERE N.num=#{num}
    		</select>
    		
-   		<resultMap type="NoticeVO" id="selectResult">
+   		<resultMap type="QnaVO" id="selectResult">
    			<id column="num" property="num"/>
+   			<result column="productNum" property="productNum"/>
    			<result column="title" property="title"/>
    			<result column="writer" property="writer"/>
    			<result column="contents" property="contents"/>
@@ -59,50 +60,42 @@
    		</resultMap>
    		
    		<update id="setHitUpdate" parameterType="BoardVO">
-   			update notice set hit=hit+1 where num=#{num}
+   			update qna set hit=hit+1 where num=#{num}
    		</update>
    		
    		<insert id="setInsert" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			insert into notice (title,writer,contents,regDate,hit)
+   			insert into qna (title,writer,contents,regDate,hit)
    			values(#{title}, #{writer},#{contents}, now(), 0)
    		</insert>
    		
    		<insert id="setFileInsert" parameterType="BoardFileVO">
-   			insert into noticeFiles (num, filename, oriname)
+   			insert into qnaFiles (num, filename, oriname)
    			values (#{num}, #{fileName}, #{oriName})
    		</insert>
    		
-   		<update id="setUpdate" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			update notice set title=#{title}, contents=#{contents} where num=#{num}
+   		<update id="setUpdate" parameterType="BoardVO">
+   			update qna set title=#{title}, contents=#{contents} where num=#{num}
    		</update>
    		
    		<delete id="setDelete" parameterType="BoardVO">
-   			SET foreign_key_checks = 0;
-			delete from notice where num=#{num};
-			delete from noticefiles where num=#{num};
-			delete from noticecomment where num=#{num};
-			SET foreign_key_checks = 1
+   			delete from qna where num=#{num}
    		</delete>
    		
    		<insert id="commentInsert" parameterType="BoardCommentVO">
-   			insert into noticeComment (writer, regDate, contents, num)
+   			insert into qnaComment (writer, regDate, contents, num)
    			values (#{writer}, now(), #{contents}, #{num})
    		</insert>
    		
    		<select id="commentList" parameterType="BoardCommentVO" resultType="BoardCommentVO">
-			select * from noticeComment where num=#{num}
+			select * from qnaComment where num=#{num}
    		</select>
    		
-   		<select id="commentSelect" parameterType="BoardCommentVO" resultType="BoardCommentVO">
-			select * from noticeComment where commentNum=#{commentNum}
-   		</select>
-   		
-   		<update id="commentUpdate" parameterType="BoardCommentVO" >
-   			update noticeComment set contents=#{contents}, regDate=now() where commentNum=#{commentNum}
+   		<update id="commentUpdate" parameterType="BoardCommentVO">
+   			update qnaComment set writer=#{writer}, regDate=#{regDate}, contents=#{contents}, num=#{num} where commentNum=#{commentNum}
    		</update>
    		
    		<delete id="commentDelete" parameterType="BoardCommentVO">
-   			delete from noticeComment where commentNum=#{commentNum}
+   			delete from qnaComment where commentNum=#{commentNum}
    		</delete>
    
    </mapper>
