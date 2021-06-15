@@ -8,7 +8,10 @@ let today = dayjs().format("YYYY-MM-DD");
 // 페이지 로딩 시 기간 default 3개월 전
 $(document).ready(function() {
 	$("#history_end_date").val(today);
-	$("#history_start_date").val();
+	
+	//3개월 전
+	let targetDate = dayjs().subtract(3, "month").format("YYYY-MM-DD");
+	$("#history_start_date").val(targetDate);
 });
 
 // 날짜 검색 버튼 ==============================================
