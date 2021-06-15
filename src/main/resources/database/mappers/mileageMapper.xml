@@ -15,4 +15,9 @@
 			#{item.mileContents}, #{item.enabledMile})
 		</foreach>
 	</insert>
+	
+	<insert id="setMileAfterJoin" parameterType="MileageVO">
+		INSERT INTO mileage(mileNum, usedMile, changeMile, username, orderNum, mileContents, enabledMile)
+		VALUES(0, #{usedMile}, #{changeMile}, #{username}, null, #{mileContents}, #{enabledMile})
+	</insert>
 </mapper>

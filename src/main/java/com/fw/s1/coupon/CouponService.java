@@ -24,4 +24,9 @@ public class CouponService {
 	public Long useUpdate(CouponVO couponVO)throws Exception{
 		return couponMapper.useUpdate(couponVO);
 	}
+	
+	// Member 쿠폰 개수
+	public Long getMemberCouponCount(CouponVO couponVO) throws Exception {
+		return couponMapper.getMemberCouponCount(couponVO);
+	}
 }

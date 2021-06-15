@@ -15,4 +15,7 @@ public interface CouponMapper {
 	public List<CouponspVO> getCouponspList()throws Exception;
 	//결제할 때 쿠폰을 사용했을 경우 해당 쿠폰의 사용여부를 업데이트 한다.
 	public Long useUpdate(CouponVO couponVO)throws Exception;
+	
+	// Member 쿠폰 개수
+	public Long getMemberCouponCount(CouponVO couponVO) throws Exception;
 }

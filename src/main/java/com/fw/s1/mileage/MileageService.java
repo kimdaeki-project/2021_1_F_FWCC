@@ -18,4 +18,9 @@ public class MileageService {
 	public Long setMileAfterOrder(List<MileageVO> list)throws Exception{
 		return mileageMapper.setMileAfterOrder(list);
 	}
+	
+	// 회원가입 후 마일리지 적립
+	public Long setMileAfterJoin(MileageVO mileageVO) throws Exception {
+		return mileageMapper.setMileAfterJoin(mileageVO);
+	}
 }
