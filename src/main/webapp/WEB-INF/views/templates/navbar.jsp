@@ -33,7 +33,7 @@
 			<li id="navbar-columnlist"><a href="#">Collaboration</a>
 				<ul id="navbar-colaul">
 					<li><a href="#">10th Anniversary Collection</a></li>
-					<li><a href="#">TAW&TOE X FrizmWORKS</a></li>
+					<li><a href="#">TAW&amp;TOE X FrizmWORKS</a></li>
 					<li><a href="#">Penfield X FrizmWORKS</a></li>
 					<li><a href="#">SLOWBOY X FrizmWORKS</a></li>
 					<li><a href="#">Targetto X FrizmWORKS</a></li>
@@ -105,7 +105,7 @@
 				<ul id="navbar-rightul">
 					<li><a href="${pageContext.request.contextPath}/notice/list">Notice</a></li>
 					<li><a href="#">Stockist</a></li>
-					<li><a href="#">Q&A</a></li>
+					<li><a href="#">Q&amp;A</a></li>
 					<li><a href="#">Review</a></li>
 				</ul>
 			</li>

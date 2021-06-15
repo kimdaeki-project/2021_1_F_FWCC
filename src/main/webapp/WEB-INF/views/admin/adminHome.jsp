@@ -11,7 +11,7 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div style="text-align: center;">
+<div style="text-align: center; overflow: auto;">
 	<h1 style="padding: 8% 3% 3% 3%;">Admin HomePage</h1>
 	<div style="width:100%; list-style: none; padding-left: 0; margin-top:2%; display: flex; justify-content: space-around;">
 		<div style="width:22%; padding:3%; margin:0 5% 0 7%; border-radius: 1rem;  background-color: #607d8b;">

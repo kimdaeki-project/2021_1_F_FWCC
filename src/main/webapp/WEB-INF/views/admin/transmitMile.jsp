@@ -11,7 +11,7 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div>
+<div style="overflow: auto;">
 	<div>
 		<input id="sendmileage" type="number" min="0" max="1000000" value="1000">
 		<input type="text" id="mileContents" placeholder="보낼 메세지 입력">

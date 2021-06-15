@@ -238,6 +238,7 @@ public class AdminController {
 		int length = list.size();
 		String[] result = new String[length];
 		for(int i = 0 ; i < length; i++) {
+			list.get(i).setParseDate(list.get(i).getAdminDate().toString());
 			result[i] = gson.toJson(list.get(i));
 		}
 		return result;
