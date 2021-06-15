@@ -15,6 +15,8 @@ import org.springframework.validation.Errors;
 
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.mileage.MileageService;
+import com.fw.s1.mileage.MileageVO;
 
 @Service
 public class MemberService implements UserDetailsService {
@@ -27,6 +29,9 @@ public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private AddressService addressService;
+	
+	@Autowired
+	private MileageService mileageService;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(MemberVO memberVO) throws Exception {
@@ -51,7 +56,16 @@ public class MemberService implements UserDetailsService {
 		addressVO.setBasicAddr(memberVO.getBasicAddr());
 		addressVO.setDetailAddr(memberVO.getDetailAddr());
 		result = addressService.setJoinAddress(addressVO);
-	
+		
+		// 6. mileage table 저장
+		MileageVO mileageVO = new MileageVO();
+		mileageVO.setUsedMile(0L);
+		mileageVO.setChangeMile(2000L);
+		mileageVO.setUsername(memberVO.getUsername());
+		mileageVO.setMileContents("신규회원 적립금");
+		mileageVO.setEnabledMile(2000L);
+		result = (int)mileageService.setMileAfterJoin(mileageVO).longValue();
+		
 		if(result<1) {
 			throw new Exception();
 		}

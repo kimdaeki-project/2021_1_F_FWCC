@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fw.s1.coupon.CouponService;
+import com.fw.s1.coupon.CouponVO;
+import com.fw.s1.mileage.MileageService;
+import com.fw.s1.mileage.MileageVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -22,6 +28,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MileageService mileageService;
+	
+	@Autowired
+	private CouponService couponService;
+	
+// Member Login =========================================================================
 	@GetMapping("memberLogin")
 	public void getLogin() throws Exception {
 		
@@ -59,6 +72,7 @@ public class MemberController {
 		return mv;
 	}
 	
+// Member Join ============================================================================
 	@GetMapping("memberJoin")
 	public void setJoin(Model model) throws Exception {
 		model.addAttribute("memberVO", new MemberVO());
@@ -87,5 +101,31 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
+// My Page ================================================================================
+	@GetMapping("memberPage")
+	public ModelAndView memberPage(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		// 1. mileage 가져오기
+		MileageVO mileageVO = new MileageVO();
+		mileageVO.setUsername(authentication.getName());
+		mileageVO = mileageService.getRecentMileage(mileageVO);
+		// 2. coupon 개수 가져오기
+		CouponVO couponVO = new CouponVO();
+		couponVO.setUsername(authentication.getName());
+		long couponCount = couponService.getMemberCouponCount(couponVO);
+		
+		mv.addObject("mileage", mileageVO.getEnabledMile());
+		mv.addObject("couponCount", couponCount);
+		mv.setViewName("member/memberPage");
+		return mv;
+	}
+	
+	// orderList
+	@GetMapping("memberPage/orderList")
+	public void getOrderList() throws Exception {
+		
+	}
+	
 	
 }

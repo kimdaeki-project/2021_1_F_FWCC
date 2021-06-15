@@ -15,4 +15,6 @@ public interface MileageMapper {
 	public Long mileageForAll(MileageVO mileageVO)throws Exception;
 	//선택한 사람들에게 마일리지 전송
 	public Long mileageForSelect(List<MileageVO> list)throws Exception;
+	// 회원가입 후 마일리지 적립
+	public Long setMileAfterJoin(MileageVO mileageVO) throws Exception;
 }

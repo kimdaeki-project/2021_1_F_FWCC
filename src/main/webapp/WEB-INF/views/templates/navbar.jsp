@@ -81,7 +81,7 @@
 			</li>
 			<li><a href="#">Search <img src="/images/header_ico_search.png" alt="검색" /></a></li>
 			<li id="navbar-columnlist">
-				<a href="#">My Account</a>
+				<a href="${pageContext.request.contextPath }/member/memberPage">My Account</a>
 				<ul id="navbar-rightul">
 					<li><a href="#">ORDER LIST</a></li>
 					<li><a href="#">PROFILE</a></li>

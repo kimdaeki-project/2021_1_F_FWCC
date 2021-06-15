@@ -35,5 +35,8 @@ public class CouponService {
 	
 	public Long couponForSelected(List<CouponVO> list)throws Exception{
 		return couponMapper.couponForSelected(list);
+	// Member 쿠폰 개수
+	public Long getMemberCouponCount(CouponVO couponVO) throws Exception {
+		return couponMapper.getMemberCouponCount(couponVO);
 	}
 }

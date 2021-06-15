@@ -21,4 +21,6 @@ public interface CouponMapper {
 	public Long couponForAll(CouponVO couponVO)throws Exception;
 	//선택된 사람에게 쿠폰을 전송해준다.
 	public Long couponForSelected(List<CouponVO> list)throws Exception;
+	// Member 쿠폰 개수
+	public Long getMemberCouponCount(CouponVO couponVO) throws Exception;
 }
