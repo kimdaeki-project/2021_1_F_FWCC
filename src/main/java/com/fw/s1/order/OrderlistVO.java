@@ -20,5 +20,8 @@ public class OrderlistVO {
 	private String orderMessage;
 	private String orderName;
 	
+	private String startDate;
+	private String endDate;
+	
 	private MileageVO mileageVO;
 }

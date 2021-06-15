@@ -1,6 +1,7 @@
 package com.fw.s1.member;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,6 +21,8 @@ import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.order.OrderService;
+import com.fw.s1.order.OrderlistVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -33,6 +36,9 @@ public class MemberController {
 	
 	@Autowired
 	private CouponService couponService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 // Member Login =========================================================================
 	@GetMapping("memberLogin")
@@ -121,10 +127,17 @@ public class MemberController {
 		return mv;
 	}
 	
-	// orderList
+// orderList =============================================
 	@GetMapping("memberPage/orderList")
-	public void getOrderList() throws Exception {
+	public ModelAndView getOrderList(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		OrderlistVO orderlistVO = new OrderlistVO();
+		orderlistVO.setUsername(authentication.getName());
+		List<OrderlistVO> ar = orderService.getOrderList(orderlistVO);
 		
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/orderList");
+		return mv;
 	}
 	
 	

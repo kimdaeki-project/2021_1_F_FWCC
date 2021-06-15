@@ -1,6 +1,9 @@
 package com.fw.s1.order;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,5 +18,10 @@ public class OrderService {
 	
 	public OrderlistVO getOrder(OrderlistVO orderlistVO)throws Exception{
 		return orderMapper.getOrder(orderlistVO);
+	}
+	
+	// member orderList 조회
+	public List<OrderlistVO> getOrderList(OrderlistVO orderlistVO) throws Exception {
+		return orderMapper.getOrderList(orderlistVO);
 	}
 }

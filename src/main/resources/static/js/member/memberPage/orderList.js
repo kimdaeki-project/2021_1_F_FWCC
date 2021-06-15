@@ -9,9 +9,9 @@ let today = dayjs().format("YYYY-MM-DD");
 $(document).ready(function() {
 	$("#history_end_date").val(today);
 	
-	//3개월 전
+	/*//3개월 전
 	let targetDate = dayjs().subtract(3, "month").format("YYYY-MM-DD");
-	$("#history_start_date").val(targetDate);
+	$("#history_start_date").val(targetDate);*/
 });
 
 // 날짜 검색 버튼 ==============================================
@@ -22,16 +22,45 @@ $("#btn01").click(function() {
 
 // 1주일 버튼
 $("#btn07").click(function() {
-	let targetDate = new Date();
-	targetDate.setDate(targetDate.getDate() - 7);
-	targetDate = getFormatDate(targetDate);
+	let targetDate = dayjs().subtract(7, "day").format("YYYY-MM-DD");
 	$("#history_start_date").val(targetDate);
 });
 
 // 1개월 버튼
 $("#btn30").click(function(){
-	let now = dayjs().format("YYYY-MM-DD");
-	console.log(now);
+	let targetDate = dayjs().subtract(1, "month").format("YYYY-MM-DD");
+	$("#history_start_date").val(targetDate);
+});
+
+// 3개월 버튼
+$("#btn90").click(function(){
+	let targetDate = dayjs().subtract(3, "month").format("YYYY-MM-DD");
+	$("#history_start_date").val(targetDate);
+});
+
+// 6개월 버튼
+$("#btn180").click(function(){
+	let targetDate = dayjs().subtract(6, "month").format("YYYY-MM-DD");
+	$("#history_start_date").val(targetDate);
+});
+
+// 필터 조회 ===================================================
+$("#order_search_btn").click(function(){
+	let orderStatus = $("#order_status").val();
+	let startDate = $("#history_start_date").val();
+	let endDate = $("#history_end_date").val();
+	$.ajax(
+		method="GET",
+		url="./orderList",
+		data={
+			orderState:orderStatus,
+			startDate:startDate,
+			endDate:endDate
+		},
+		success=function(){
+			
+		}
+	);
 });
 
 

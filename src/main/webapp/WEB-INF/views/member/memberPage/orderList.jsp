@@ -79,7 +79,7 @@
 							</select>
 						</div>
 						<span class="period"> <a
-							href="#none"
+							href="#"
 							id="btn01"
 							class="btnNormal"
 							days="00"
@@ -87,7 +87,7 @@
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date1.gif"
 								alt="오늘"
 							/></a> <a
-							href="#none"
+							href="#"
 							id="btn07"
 							class="btnNormal"
 							days="07"
@@ -95,7 +95,7 @@
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date2.gif"
 								alt="1주일"
 							/></a> <a
-							href="#none"
+							href="#"
 							id="btn30"
 							class="btnNormal"
 							days="30"
@@ -103,14 +103,16 @@
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date3.gif"
 								alt="1개월"
 							/></a> <a
-							href="#none"
+							href="#"
+							id="btn90"
 							class="btnNormal"
 							days="90"
 						><img
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_date4.gif"
 								alt="3개월"
 							/></a> <a
-							href="#none"
+							href="#"
+							id="btn180"
 							class="btnNormal"
 							days="180"
 						><img
@@ -141,7 +143,7 @@
 						/>
 					</fieldset>
 					<ul>
-						<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
+						<li>기본적으로 전체 주문내역이 조회되며, 기간 검색시 특정 기간의 주문내역을 조회하실 수 있습니다.</li>
 						<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 					</ul>
 				</div>
@@ -189,121 +191,25 @@
 							<th scope="col">취소/교환/반품</th>
 						</tr>
 					</thead>
-					<tbody class="center displaynone">
-						<tr class="">
-						<!-- 주문일자 [주문번호] START -->
-							<td class="number displaynone">
-								<p>
-									<a
-										href="detail.html"
-										class="line"
-									>[]</a>
-								</p> <a
-								href="#none"
-								class="displaynone"
-								onclick=""
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif"
-									alt="주문취소"
-								/></a> <a
-								href="cancel.html"
-								class="displaynone button"
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel2.gif"
-									alt="취소신청"
-								/></a> <a
-								href="exchange.html"
-								class="displaynone button"
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_exchange.gif"
-									alt="교환신청"
-								/></a> <a
-								href="return.html"
-								class="displaynone button"
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_return.gif"
-									alt="반품신청"
-								/></a>
-							</td>
-						<!-- 주문일자 [주문번호] END -->
-							
-						<!-- 썸네일 START -->
-							<td class="thumb"><a href="/product/detail.html"><img
-									src=""
-									onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"
-									alt=""
-								/></a></td>
-						<!-- 썸네일 END -->
-							<td class="product left top"><a href="/product/detail.html"><strong></strong></a>
-								<div class="option displaynone"></div>
-								<ul class="xans-element- xans-myshop xans-myshop-optionset option">
-									<li class=""><strong></strong> (개)</li>
-								</ul>
-								<p class="gBlank5 displaynone">무이자할부 상품</p></td>
-							<td></td>
-							<td class="right"><strong></strong>
-							<div class="displaynone"></div></td>
-						<!-- 주문처리상태 START -->
-							<td class="state">
-								<p class="txtEm"></p>
-								<p class="displaynone">
-									<a
-										href=""
-										target=""
-									></a>
-								</p>
-								<p class="displaynone">
-									<a
-										href="#none"
-										class="line"
-										onclick=""
-									>[]</a>
-								</p> <a
-								href="/board/product/write.html"
-								class="displaynone"
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_comment.gif"
-									alt="구매후기"
-								/></a> <a
-								href="#none"
-								class="displaynone"
-								onclick=""
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract.gif"
-									alt="취소철회"
-								/></a> <a
-								href="#none"
-								class="displaynone"
-								onclick=""
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract2.gif"
-									alt="교환철회"
-								/></a> <a
-								href="#none"
-								class="displaynone"
-								onclick=""
-							><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_retract3.gif"
-									alt="반품철회"
-								/></a>
-							</td>
-						<!-- 주문처리상태 END -->
-						<!-- 취소/교환/반품 START -->
-							<td>
-								<p class="displaynone">
-									<a
-										href="#none"
-										class="line"
-										onclick=""
-									>[상세정보]</a>
-								</p>
-								<p class="displaynone">-</p>
-							</td>
-						<!-- 취소/교환/반품 START -->
-						</tr>
-					</tbody>
+					<c:if test="${list != null}">					
+						<tbody>
+							<c:forEach items="${list}" var="VO">
+								<tr>
+									<td>${VO.orderNum}</td>
+									<td>이미지</td>
+									<td>상품정보</td>
+									<td>수량</td>
+									<td>${VO.spPrice}</td>
+										<td>${VO.orderState}</td>
+									<td>취소교환반품</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</c:if>
 				</table>
-				<p class="message ">주문 내역이 없습니다.</p>
+				<c:if test="${list == null}">				
+					<p class="message ">주문 내역이 없습니다.</p>
+				</c:if>
 			</div>
 <!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate">

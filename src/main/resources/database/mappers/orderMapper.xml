@@ -35,4 +35,9 @@
 		select * from orderlist o inner join mileage m on o.orderNum = m.orderNum
 		where o.username=#{username} and m.mileNum = (select max(mileNum) from mileage where orderNum=#{orderNum})
 	</select>
+	
+	<!-- member -->
+	<select id="getOrderList" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where username=#{username}
+	</select>
  </mapper>
