@@ -113,6 +113,9 @@
 			<li>
 				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_black">AdminPage</a>
 			</li>
+			<li>
+				<a href="${pageContext.request.contextPath}/product/insert" target="_black">Pinsert</a>
+			</li>
 			
 		</ul>
 	</div>

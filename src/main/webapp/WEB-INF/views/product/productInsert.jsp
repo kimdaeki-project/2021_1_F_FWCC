@@ -34,7 +34,8 @@ input[type="number"]::-webkit-inner-spin-button {
 <div class="contents">
 <form action="insert" method="post" enctype="multipart/form-data">
 <h1>productInsert</h1>
-
+<input hidden="hidden" name=productNum value="${productNum}" id="pNum" title="${productNum}">
+<p>${productNum}</p>
 <h4>제품 이름</h4>
 <input type="text" name="productTitle">
 <h4>제품 가격</h4>
@@ -58,7 +59,7 @@ input[type="number"]::-webkit-inner-spin-button {
 <h4>썸네일</h4>
 <div class="image-container">
     <img style="width: 500px;" id="preview-image">
-    <input style="display: block;" type="file" id="input-image" name="files">
+    <input style="display: block;" type="file" id="input-image" name="thumbnail">
 </div>
 <h4>제품 요약</h4>
 <textarea  style="resize: none;" id="summary" class="myCheck" name="summary"></textarea>
@@ -69,54 +70,40 @@ input[type="number"]::-webkit-inner-spin-button {
 <input type="checkbox" name="size" value="XL">XL
 <input type="checkbox" name="size" value="2XL">2XL
 <h4>상세 내용</h4>
-<textarea name="productContents" style="resize: none;" id="summernote"></textarea>
+<textarea name="productContents" style="resize: none;" id="contents"></textarea>
  
 <button>올리기</button>
 </form>
 </div>
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+<script type="text/javascript" src="/js/product/summerFile.js"></script>
 <script type="text/javascript">
+function readImage(input) {
 
-$("#summernote").summernote({
-	height:500,
-	placeholder:'write here...',
-	callbacks :{
-		onImageUpload: function(files){
-			uploadFile(files);
-		},// onImageUpload
-		onMediaDelete: function(files){
-			deleteFile(files);
-		}
-	}// callback
-});
-/* 
- function readImage(input) {
+   // 인풋 태그에 파일이 있는 경우
+   if(input.files && input.files[0]) {
 
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
+       // 이미지 파일인지 검사 (생략)
 
-        // 이미지 파일인지 검사 (생략)
+       // FileReader 인스턴스 생성
+       const reader = new FileReader()
 
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
+       // 이미지가 로드가 된 경우
+       reader.onload = e => {
+           const previewImage = document.getElementById("preview-image")
+           previewImage.src = e.target.result
+       }
 
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            const previewImage = document.getElementById("preview-image")
-            previewImage.src = e.target.result
-        }
-
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-    }
+       // reader가 이미지 읽도록 하기
+       reader.readAsDataURL(input.files[0])
+   }
 }
 
-// input file에 change 이벤트 부여
+//input file에 change 이벤트 부여
 const inputImage = document.getElementById("input-image")
 inputImage.addEventListener("change", e => {
-    readImage(e.target)
+   readImage(e.target)
 })
-*/
 </script>
 </body>
 </html>

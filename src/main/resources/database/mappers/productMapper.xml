@@ -5,11 +5,34 @@
 
 <mapper namespace="com.fw.s1.product.ProductMapper">
 
+	<!-- +++++++++++++++++++++++++CW START+++++++++++++++++++++++++++++++++++ -->
+
+	<!-- ++++++++++ R ++++++++++ -->
+	<select id="getTotalCount" parameterType="ProductPager"
+		resultType="java.lang.Long">
+		select count(productNum) from product
+		where
+
+		<!-- and collab like concat('%',#{collab},'%') and productType like concat('%',#{productType},'%') -->
+		<!-- <choose> <when test="productType=='top'"> productDivNum in (select 
+			productDivNum from productDivision where productType like '%top%') and </when> 
+			<when test="productType=='bottom'"> productDivNum in (select productDivNum 
+			from productDivision where productType like concat('%','bottom','%')) and 
+			</when> <otherwise> </otherwise> </choose> -->
+		productDivNum in (select productDivNum from productDivision where
+		productType like concat('%',#{productType},'%'))
+		and
+		productSaleable = 1
+		<if test="sale">
+			and productDisRate > 0
+		</if>
+	</select>
+
 	<select id="getList" parameterType="ProductPager"
 		resultType="ProductVO">
 		select * from
 		(select row_number() over(
-		order by 
+		order by
 		<choose>
 			<when test="sortStandard=='name'">
 				productTitle asc
@@ -24,26 +47,49 @@
 				productNum desc
 			</otherwise>
 		</choose>
-		
+
 		) as R, P.* from
 		(select * from product
-		where productSaleable = 1
-		and collab like concat('%',#{collab},'%')
-		and productType like concat('%',#{productType},'%')
+		where
+		productDivNum in (select
+		productDivNum from productDivision where productType like
+		concat('%',#{productType},'%'))
+		<!-- <choose> <when test="productType=='top'"> productDivNum in (select 
+			productDivNum from productDivision where productType like concat('%','top','%')) 
+			and </when> <when test="productType=='bottom'"> productDivNum in (select 
+			productDivNum from productDivision where productType like concat('%','bottom','%')) 
+			and </when> <otherwise> </otherwise> </choose> -->
+		and
+		productSaleable = 1
 		<if test="sale">
-		and productDisRate > 0
+			and productDisRate > 0
 		</if>
 		) as P
 		) as RP
 		where R between #{startRow} and #{lastRow}
 	</select>
 
+
+	<select id="getNextNum" resultType="java.lang.Long">
+		select max(productNum)+1 from
+		product
+	</select>
+
+	<select id="getFileName" parameterType="ProductFileVO"
+		resultType="ProductFileVO">
+		select * from productFiles where fileNum=#{fileNum}
+	</select>
+	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
+		select * from productFiles where productNum=#{productNum} and fileName like 'T_%'
+	</select>
+
+	<!-- ++++++++++ C ++++++++++ -->
+
 	<insert id="setInsert" parameterType="ProductVO">
 		insert into product
-		(productTitle,
-		productPrice,productContents,collab,productType,finalPrice,productMileage,productSaleable)
+		(productTitle,summary,productPrice,productContents,finalPrice,productMileage,productSaleable,productDivNum)
 		values
-		(#{productTitle},#{productPrice},#{productContents},#{collab},#{productType},#{finalPrice},#{productMileages},#{productSaleable})
+		(#{productTitle},#{summary},#{productPrice},#{productContents},#{finalPrice},#{productMileage},#{productSaleable},(select productDivNum from productDivision where collab=#{collab} and productType=#{productType}))
 	</insert>
 
 	<select id="getSelect" parameterType="ProductVO"
@@ -51,6 +97,19 @@
 		select * from product where productNum=#{productNum}
 	</select>
 
+	<insert id="setInsertPInfo" parameterType="ProductInfoVO">
+		insert into
+		productInfo (productNum,size)
+		values(#{productNum},#{size})
+	</insert>
+
+	<insert id="setFileInsert" parameterType="ProductFileVO">
+		insert into
+		productFiles (productNum,fileName,oriName)
+		values(#{productNum},#{fileName},#{oriName})
+	</insert>
+
+	<!-- ++++++++++ U ++++++++++ -->
 	<update id="setUpdate" parameterType="ProductVO">
 		update product set
 		productTitle=#{productTitle},
@@ -66,28 +125,28 @@
 		productNum=#{productNum}
 	</update>
 
+
+	<!-- ++++++++++ D ++++++++++ -->
+
 	<delete id="setDelete" parameterType="ProductVO">
 		delete from product where
 		productNum=#{productNum}
 	</delete>
+	<delete id="setFileDelete" parameterType="ProductFileVO">
+		delete productFiles
+		where fileNum=#{fileNum}
+	</delete>
 
-	<select id="getTotalCount" parameterType="ProductPager"
-		resultType="java.lang.Long">
-		select count(productNum) from product
-		where productSaleable = 1
-		and collab like
-		concat('%',#{collab},'%')
-		and productType like
-		concat('%',#{productType},'%')
-		<if test="sale">
-		and productDisRate > 0
-		</if>
-	</select>
 
-	
+
+	<!-- +++++++++++++++++++++++++CW END+++++++++++++++++++++++++++++++++++ -->
+
+
 	<update id="updateStock" parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";">
-			update productinfo set stock = stock - #{item.stock} where pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
+			update
+			productinfo set stock = stock - #{item.stock} where
+			pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
 		</foreach>
 	</update>
 </mapper>

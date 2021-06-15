@@ -19,6 +19,14 @@ class ProductMapperTest {
 	private ProductMapper productMapper;
 
 	@Test
+	void getNextNumTest() throws Exception{
+		Long num=0L;
+		System.out.println(num);
+		num = productMapper.getNextNum();
+		System.out.println(num);
+		assertNotEquals(0, num);
+	}
+//	@Test
 	void getListTest() throws Exception {
 		ProductPager productPager = new ProductPager();
 		long num = productMapper.getTotalCount(productPager);
