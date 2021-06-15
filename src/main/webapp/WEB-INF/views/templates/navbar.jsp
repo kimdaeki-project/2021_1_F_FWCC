@@ -111,10 +111,10 @@
 			</li>
 			
 			<li>
-				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_black">AdminPage</a>
+				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_blank">AdminPage</a>
 			</li>
 			<li>
-				<a href="${pageContext.request.contextPath}/product/insert" target="_black">Pinsert</a>
+				<a href="${pageContext.request.contextPath}/product/insert" target="_blank">Pinsert</a>
 			</li>
 			
 		</ul>
