@@ -16,6 +16,9 @@ public class ProductVO {
 	private Long productDivNum;
 	private Long finalPrice;
 	private Long productMileage;
+	
+	private String collab;
+	private String productType;
 
 	private Boolean productSaleable;
 	
