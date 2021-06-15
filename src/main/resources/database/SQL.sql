@@ -21,6 +21,43 @@ ADD COLUMN productSaleable BIT NULL DEFAULT 0 AFTER productMileage;
 ALTER TABLE fw01.product 
 ADD COLUMN summary LONGTEXT NULL AFTER productDisRate;
   
+CREATE TABLE `fw01`.`productDivision` (
+  `productDivNum` BIGINT NOT NULL AUTO_INCREMENT,
+  `collab` VARCHAR(100) NULL,
+  `productType` VARCHAR(100) NULL,
+  PRIMARY KEY (`productDivNum`));
+
+insert into productDivision (collab,productType)
+values('none','top-long');
+insert into productDivision (collab,productType)
+values('none','top-short');
+insert into productDivision (collab,productType)
+values('none','bottom-long');
+insert into productDivision (collab,productType)
+values('none','bottom-short');
+
+insert into productDivision (collab,productType)
+values('collab1','top-long');
+insert into productDivision (collab,productType)
+values('collab1','top-short');
+insert into productDivision (collab,productType)
+values('collab1','bottom-long');
+insert into productDivision (collab,productType)
+values('collab1','bottom-short');
+
+ALTER TABLE `fw01`.`product` 
+DROP COLUMN `productType`,
+DROP COLUMN `collab`,
+ADD COLUMN `productDivNum` BIGINT NULL AFTER `productSaleable`,
+ADD INDEX `PRODUCT_PDI_NUM_idx` (`productDivNum` ASC) VISIBLE;
+
+ALTER TABLE `fw01`.`product` 
+ADD CONSTRAINT `PRODUCT_PDI_NUM`
+  FOREIGN KEY (`productDivNum`)
+  REFERENCES `fw01`.`productDivision` (`productDivNum`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 -- product table dummydata
 DELIMITER //
 FOR i IN 1..5
@@ -167,6 +204,9 @@ insert into productFiles (productNum,fileName, oriName)
 values(2,'fileName2-3','oriName2-3');
 insert into productFiles (productNum,fileName, oriName)
 values(3,'fileName3-3','oriName3-3');
+
+
+
 
 -- 형수 데이터 테이블 =======================================================================================
 -- member table -----------------------------------------------------------------------------------

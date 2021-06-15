@@ -1,5 +1,6 @@
 package com.fw.s1.product;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -67,13 +68,23 @@ public class ProductService {
 		System.out.println("type : "+type);
 		System.out.println("saleable : "+productVO.getProductSaleable());
 		int result = productMapper.setInsert(productVO);
-		ProductFileVO pFileVO = new ProductFileVO();
-		pFileVO.setProductNum(productVO.getProductNum());
 		
-		String fileName = productFileManager.thumbNailSave("static/images/product/"+productVO.getProductNum(), thumbNail, session);
-		pFileVO.setFileName(fileName);
-		pFileVO.setOriName(thumbNail.getOriginalFilename());
-		result = productMapper.setFileInsert(pFileVO);
+		String[] fileNames = productFileManager.thumbNailSave("/"+productVO.getProductNum(), thumbNail,session);
+		for(String str:fileNames) {
+			System.out.println(str);
+			ProductFileVO pFileVO = new ProductFileVO();
+			pFileVO.setProductNum(productVO.getProductNum());
+			pFileVO.setFileName(str);
+			pFileVO.setOriName(thumbNail.getOriginalFilename());
+			result = productMapper.setFileInsert(pFileVO);
+		}
+		
+//		String bFile = productFileManager.createThumbnail("static/images/product/"+productVO.getProductNum(),fileName, thumbNail, 100, 100);
+//		pFileVO = new ProductFileVO();
+//		pFileVO.setProductNum(productVO.getProductNum());
+//		pFileVO.setFileName(bFile);
+//		pFileVO.setOriName(thumbNail.getOriginalFilename());
+//		result = productMapper.setFileInsert(pFileVO);
 		String[] sizeAssy = size.split(",");
 		for(String str:sizeAssy) {
 			System.out.println("size : "+str);
@@ -95,7 +106,7 @@ public class ProductService {
 	
 	public String setSummerFileUpload(MultipartFile file,String productNum) throws Exception{
 		
-		String fileName = productFileManager.save("static/images/product/"+productNum, file, session);
+		String fileName = productFileManager.save("/"+productNum, file, session);
 		return fileName;
 		
 	}

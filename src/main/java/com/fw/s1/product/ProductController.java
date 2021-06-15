@@ -61,7 +61,7 @@ public class ProductController {
 	}
 
 	@PostMapping(value="insert")
-	public void  setInsert(ProductVO productVO, MultipartFile thumbnail, String size)throws Exception{
+	public String  setInsert(ProductVO productVO, MultipartFile thumbnail, String size)throws Exception{
 		System.out.println("");
 		System.out.println("=============================================================");
 		System.out.println("productNum : "+productVO.getProductNum());
@@ -80,7 +80,7 @@ public class ProductController {
 //		}
 		System.out.println("size : "+size);
 		int result = productService.setInsert(productVO, size, thumbnail);
-
+		return "redirect:/";
 	}
 	
 	
@@ -102,7 +102,7 @@ public class ProductController {
 		System.out.println(file == null);
 		System.out.println(file.getOriginalFilename());
 		String fileName = productService.setSummerFileUpload(file,productNum);
-		fileName="/images/product/"+productNum+"/"+fileName;
+		fileName="/resources/images/product/"+productNum+"/"+fileName;
 		
 		return fileName;
 	}

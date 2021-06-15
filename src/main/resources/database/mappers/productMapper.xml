@@ -76,8 +76,11 @@
 	</select>
 
 	<select id="getFileName" parameterType="ProductFileVO"
-		resultType="productFileVO">
+		resultType="ProductFileVO">
 		select * from productFiles where fileNum=#{fileNum}
+	</select>
+	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
+		select * from productFiles where productNum=#{productNum} and fileName like 'T_%'
 	</select>
 
 	<!-- ++++++++++ C ++++++++++ -->

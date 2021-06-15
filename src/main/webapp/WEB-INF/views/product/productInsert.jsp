@@ -76,36 +76,34 @@ input[type="number"]::-webkit-inner-spin-button {
 </form>
 </div>
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-<script type="text/javascript" src="/js/product/summerFile.js">
+<script type="text/javascript" src="/js/product/summerFile.js"></script>
+<script type="text/javascript">
+function readImage(input) {
 
-/* 
- function readImage(input) {
+   // 인풋 태그에 파일이 있는 경우
+   if(input.files && input.files[0]) {
 
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
+       // 이미지 파일인지 검사 (생략)
 
-        // 이미지 파일인지 검사 (생략)
+       // FileReader 인스턴스 생성
+       const reader = new FileReader()
 
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
+       // 이미지가 로드가 된 경우
+       reader.onload = e => {
+           const previewImage = document.getElementById("preview-image")
+           previewImage.src = e.target.result
+       }
 
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            const previewImage = document.getElementById("preview-image")
-            previewImage.src = e.target.result
-        }
-
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-    }
+       // reader가 이미지 읽도록 하기
+       reader.readAsDataURL(input.files[0])
+   }
 }
 
-// input file에 change 이벤트 부여
+//input file에 change 이벤트 부여
 const inputImage = document.getElementById("input-image")
 inputImage.addEventListener("change", e => {
-    readImage(e.target)
+   readImage(e.target)
 })
-*/
 </script>
 </body>
 </html>
