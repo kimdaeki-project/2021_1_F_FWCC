@@ -15,4 +15,6 @@ public class AdminVO {
 	private Long sellCount;
 	
 	private ProductVO productVO;
+	
+	private String parseDate;
 }

@@ -1,4 +1,5 @@
-
+var chart1;
+var chart2;
 $(document).ready(function(){
 	
 	google.charts.load("current", {packages:["corechart", "bar"]});
@@ -126,6 +127,8 @@ $("#ajaxDate").click(function(event){
 			
 			google.charts.setOnLoadCallback(
 				function(){
+					chart1.clearChart();
+					chart2.clearChart();
 					drawChart1(arr);
 					drawChart2(array2);
 			});
@@ -148,7 +151,7 @@ function drawChart1(data1){
 		legend: {'position': 'bottom'}
 	}
 	
-	var chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
+	chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
 	chart2.draw(data,options);
 }
 
@@ -172,6 +175,6 @@ function drawChart2(data2){
 		},
 		chartArea:{width:'90%', height:'80%'}
 	}
-	var chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));
+	chart1 = new google.visualization.ColumnChart(document.getElementById('chart1'));
 	chart1.draw(view,options);
 }

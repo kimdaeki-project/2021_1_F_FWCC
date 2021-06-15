@@ -14,12 +14,13 @@
 <div style="padding:5% 10%;">
 	<div>
 		<input type="month" id="getMonth" value="<c:out value='${lastMonth}'></c:out>" min="2021-06" max='<c:out value="${lastMonth}"></c:out>'/>
-		<button id="ajaxDate">날짜 선택</button>
+		<button id="ajaxMonth">월 선택</button>
 	</div>
 	<div id="chart1" style="height:70%; width:100%; display: inline-block;"></div>
 	<div id="chart2" style="height:40%; width:40%; display: inline-block;"></div>
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/saleMonth.js"></script>
 </body>
 </html>
