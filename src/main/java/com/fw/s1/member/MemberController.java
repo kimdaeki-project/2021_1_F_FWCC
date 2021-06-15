@@ -121,5 +121,11 @@ public class MemberController {
 		return mv;
 	}
 	
+	// orderList
+	@GetMapping("memberPage/orderList")
+	public void getOrderList() throws Exception {
+		
+	}
+	
 	
 }

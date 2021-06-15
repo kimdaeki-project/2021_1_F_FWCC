@@ -70,7 +70,7 @@
 			>
 				<div class="shopMain order">
 					<h3>
-						<a href="#"><strong>order</strong>주문내역 조회</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/orderList"><strong>order</strong>주문내역 조회</a>
 					</h3>
 				</div>
 				<div class="shopMain profile">

@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// --- purchase END
 				// --- member START ---
 				.antMatchers("/member/memberJoin", "/member/memberLogin").permitAll()
-				.antMatchers("/member/memberPage").hasAnyRole("MEMBER", "ADMIN")
+				.antMatchers("/member/memberPage/**").hasAnyRole("MEMBER", "ADMIN")
 				// --- member END ---
 				.anyRequest().authenticated()
 			.and()
