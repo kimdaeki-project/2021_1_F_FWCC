@@ -23,6 +23,8 @@
 	rel="stylesheet"
 	href="/css/member/memberPage/orderList.css"
 >
+<!-- CDN example (unpkg) -->
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <meta charset="UTF-8">
 <title>FWCC-orderList</title>
 </head>
@@ -78,6 +80,7 @@
 						</div>
 						<span class="period"> <a
 							href="#none"
+							id="btn01"
 							class="btnNormal"
 							days="00"
 						><img
@@ -85,6 +88,7 @@
 								alt="오늘"
 							/></a> <a
 							href="#none"
+							id="btn07"
 							class="btnNormal"
 							days="07"
 						><img
@@ -92,6 +96,7 @@
 								alt="1주일"
 							/></a> <a
 							href="#none"
+							id="btn30"
 							class="btnNormal"
 							days="30"
 						><img
