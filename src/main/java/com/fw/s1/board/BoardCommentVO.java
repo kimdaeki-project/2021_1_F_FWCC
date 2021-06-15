@@ -1,6 +1,6 @@
 package com.fw.s1.board;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 

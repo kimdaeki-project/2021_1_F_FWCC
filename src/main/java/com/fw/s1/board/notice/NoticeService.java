@@ -20,6 +20,8 @@ import com.fw.s1.util.Pager;
 @Service
 public class NoticeService implements BoardService {
 
+	
+
 	@Autowired
 	private NoticeMapper noticeMapper;
 	@Autowired
@@ -103,8 +105,8 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
+	public int setUpdate(BoardVO boardVO,MultipartFile[] files) throws Exception {
+		
 		return noticeMapper.setUpdate(boardVO);
 	}
 
@@ -112,6 +114,12 @@ public class NoticeService implements BoardService {
 	public int setDelete(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeMapper.setDelete(boardVO);
+	}
+	
+	@Override
+	public BoardCommentVO commentSelect(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.commentSelect(boardCommentVO);
 	}
 
 }

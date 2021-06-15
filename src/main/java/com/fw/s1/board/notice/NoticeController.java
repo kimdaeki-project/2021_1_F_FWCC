@@ -110,9 +110,9 @@ public class NoticeController {
 	}
 
 	@PostMapping("update")
-	public String setUpdate(BoardVO boardVO) throws Exception {
+	public String setUpdate(BoardVO boardVO,MultipartFile [] files) throws Exception {
 
-		int result = noticeService.setUpdate(boardVO);
+		int result = noticeService.setUpdate(boardVO,files);
 
 		return "redirect:./list";
 	}
@@ -129,18 +129,18 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 
-	@PostMapping("commentDelete")
+	@GetMapping("commentDelete")
 	public String commentDelete(BoardCommentVO boardCommentVO) throws Exception {
-		int result = noticeService.commentInsert(boardCommentVO);
+		int result = noticeService.commentDelete(boardCommentVO);
 		return "redirect:./list";
 	}
 
 	@GetMapping("commentUpdate")
-	public String commentUpdate(BoardVO boardVO, Model model) throws Exception {
-		boardVO = noticeService.getSelect(boardVO);
-		model.addAttribute("vo", boardVO);
-		model.addAttribute("action", "update");
-		return "board/notice/form";
+	public String commentUpdate(BoardCommentVO boardCommentVO, Model model) throws Exception {
+		boardCommentVO = noticeService.commentSelect(boardCommentVO);
+		model.addAttribute("cvo", boardCommentVO);
+		model.addAttribute("action", "commentUpdate");
+		return "board/notice/cform";
 	}
 
 	@PostMapping("commentUpdate")

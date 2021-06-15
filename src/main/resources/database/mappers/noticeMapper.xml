@@ -72,13 +72,15 @@
    			values (#{num}, #{fileName}, #{oriName})
    		</insert>
    		
-   		<update id="setUpdate" parameterType="BoardVO">
+   		<update id="setUpdate" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
    			update notice set title=#{title}, contents=#{contents} where num=#{num}
    		</update>
    		
    		<delete id="setDelete" parameterType="BoardVO">
    			SET foreign_key_checks = 0;
 			delete from notice where num=#{num};
+			delete from noticefiles where num=#{num};
+			delete from noticecomment where num=#{num};
 			SET foreign_key_checks = 1
    		</delete>
    		
@@ -91,8 +93,12 @@
 			select * from noticeComment where num=#{num}
    		</select>
    		
-   		<update id="commentUpdate" parameterType="BoardCommentVO">
-   			update noticeComment set writer=#{writer}, regDate=#{regDate}, contents=#{contents}, num=#{num} where commentNum=#{commentNum}
+   		<select id="commentSelect" parameterType="BoardCommentVO" resultType="BoardCommentVO">
+			select * from noticeComment where commentNum=#{commentNum}
+   		</select>
+   		
+   		<update id="commentUpdate" parameterType="BoardCommentVO" >
+   			update noticeComment set contents=#{contents}, regDate=now() where commentNum=#{commentNum}
    		</update>
    		
    		<delete id="commentDelete" parameterType="BoardCommentVO">

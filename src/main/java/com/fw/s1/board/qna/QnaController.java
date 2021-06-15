@@ -91,7 +91,7 @@ public class QnaController {
 		@PostMapping("update")
 		public String setUpdate(BoardVO boardVO)throws Exception{
 			
-			int result = qnaService.setUpdate(boardVO);
+			int result = qnaService.setUpdate(boardVO, null);
 			
 			return "redirect:./list";
 		}

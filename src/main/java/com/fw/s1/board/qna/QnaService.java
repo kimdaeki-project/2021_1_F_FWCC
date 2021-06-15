@@ -20,69 +20,57 @@ public class QnaService implements BoardService{
 	private QnaMapper qnaMapper;
 	@Autowired
 	private FileManager fileManager;
-	
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		pager.makeRow();
-		Long totalCount = qnaMapper.getTotalCount(pager);
-		pager.makeNum(totalCount);
-		return qnaMapper.getList(pager);
+		return null;
 	}
-
 	@Override
 	public BoardVO getSelect(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		qnaMapper.setHitUpdate(boardVO);
-		return qnaMapper.getSelect(boardVO);
+		return null;
 	}
-
 	@Override
 	public int setInsert(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		// TODO Auto-generated method stub
-		int result = qnaMapper.setInsert(boardVO);
-		
-		String filePath= "upload/qna/";
-		
-		
-		
-		return result;
+		return 0;
 	}
-
 	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
+	public int setUpdate(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.setUpdate(boardVO);
+		return 0;
 	}
-
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.setDelete(boardVO);
+		return 0;
 	}
-
 	@Override
 	public int commentInsert(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.commentInsert(boardCommentVO);
+		return 0;
 	}
-
 	@Override
 	public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.commentList(boardCommentVO);
+		return null;
 	}
-
+	@Override
+	public BoardCommentVO commentSelect(BoardCommentVO boardCommentVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public int commentUpdate(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.commentUpdate(boardCommentVO);
+		return 0;
 	}
-
 	@Override
 	public int commentDelete(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaMapper.commentUpdate(boardCommentVO);
+		return 0;
 	}
+	
+	
 
 }

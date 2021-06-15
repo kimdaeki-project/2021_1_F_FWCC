@@ -80,8 +80,14 @@
 					<tbody>
 					<c:forEach items="${cm}" var="com" >
 					<tr>
-					<td><div>${com.writer} ${com.regDate} </div>
-						<div>${com.contents}</div></td>
+					<td><div>${com.commentNum} ${com.writer} ${com.regDate} </div>
+						<div>${com.contents}</div>
+						<div>
+						<a href="./commentUpdate?commentNum=${com.commentNum}" class="btn btn-danger">Updatec</a>
+						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn btn-info">Deletec</a>
+						</div>
+					</td>
+						
 					</tr>
 					</c:forEach>
 					</tbody>
@@ -106,19 +112,12 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
+			
+			
 			<div>
 				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
-				<a href="#" id="del" class="btn btn-info">Delete</a>
-				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete1</a>
+				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
 				
-				
-<%-- 				<c:if test="${board ne 'notice'}">
-				<a href="./${board}Reply?num=${dto.num}" class="btn btn-primary">Reply</a>
-				</c:if> --%>
-				
-				<form action="./delete" id="del" method="get">
-					<input type="hidden" name="num" value="${vo.num}">
-				</form>
 			</div>
 		</div>
 	</div>
