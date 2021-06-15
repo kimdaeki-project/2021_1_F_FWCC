@@ -52,7 +52,7 @@ public class QnaController {
 		@GetMapping("select")
 		public ModelAndView getSelect(BoardVO boardVO,BoardCommentVO boardCommentVO)throws Exception{
 			ModelAndView mv = new ModelAndView();
-			boardCommentVO = qnaService.commentList(boardCommentVO);
+			List<BoardCommentVO> qbc = qnaService.commentList(boardCommentVO);
 			mv.addObject("qnaCm",boardCommentVO);
 			boardVO = qnaService.getSelect(boardVO);
 			mv.addObject("qnaVo", boardVO);

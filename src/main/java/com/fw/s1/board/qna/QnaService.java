@@ -44,18 +44,7 @@ public class QnaService implements BoardService{
 		
 		String filePath= "upload/qna/";
 		
-		for(MultipartFile multipartFile:files) {
-			if(multipartFile.getSize()==0) {
-				continue;
-			}
-			String fileName= fileManager.save(multipartFile, filePath);
-			System.out.println(fileName);
-			BoardFileVO boardFileVO = new BoardFileVO();
-			boardFileVO.setFileName(fileName);
-			boardFileVO.setOriName(multipartFile.getOriginalFilename());
-			boardFileVO.setNum(boardVO.getNum());
-			qnaMapper.setFileInsert(boardFileVO);
-		}
+		
 		
 		return result;
 	}
@@ -79,7 +68,7 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public BoardCommentVO commentList(BoardCommentVO boardCommentVO) throws Exception {
+	public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
 		return qnaMapper.commentList(boardCommentVO);
 	}

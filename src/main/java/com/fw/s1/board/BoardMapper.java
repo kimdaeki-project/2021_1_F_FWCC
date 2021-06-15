@@ -24,7 +24,7 @@ public interface BoardMapper {
 		//commentInsert
 		public int commentInsert(BoardCommentVO boardCommentVO)throws Exception;
 		//commentList
-		public BoardCommentVO commentList(BoardCommentVO boardCommentVO)throws Exception;
+		public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO)throws Exception;
 		//commentUpdate
 		public int commentUpdate(BoardCommentVO boardCommentVO)throws Exception;
 		//commentDelete

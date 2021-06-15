@@ -26,7 +26,7 @@ public interface BoardService {
 		//commentInsert
 		public int commentInsert(BoardCommentVO boardCommentVO)throws Exception;
 		//commentList
-		public BoardCommentVO commentList(BoardCommentVO boardCommentVO)throws Exception;
+		public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO)throws Exception;
 		//commenetUpdate
 		public int commentUpdate(BoardCommentVO boardCommentVO)throws Exception;
 		//commentDelete

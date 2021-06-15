@@ -1,40 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
+<!-- summernote -->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<!------------>
+<style type="text/css">
+#sample {
+	display: none;
+}
+</style>
 
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<!-- include summernote css/js-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-<!-- include summernote-ko-KR -->
-<script src="${pageContext.request.contextPath}/js/board/summernote-ko-KR.js"></script>
-<title>글쓰기</title>
-
-<script>
-$(document).ready(function() {
-	  $('#summernote').summernote({
- 	    	placeholder: 'content',
-	        minHeight: 370,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : 'ko-KR'
-	  });
-	});
-</script>
 </head>
 <body>
-
-<div class="container">
+<c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
+	<div class="container">
 		<h2>${board}form</h2>
 		<form id="frm" action="./insert" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="writer">Writer:</label> <input type="text"
+					 value="${member.id}"
 					class="form-control myCheck" id="writer" name="writer">
 			</div>
 
@@ -43,16 +37,19 @@ $(document).ready(function() {
 					class="form-control myCheck" id="title" name="title">
 			</div>
 
-			<div class="form-group" style="margin: auto;">
+			<div class="form-group">
 				<label for="contents">Contents"</label>
-				<textarea class="form-control myCheck" id="contents" name="contents"></textarea>
+				<textarea class="form-control myCheck" rows="5" id="contents"
+					name="contents"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="file" name="files">
+				<input type="file" name="files">
 			</div>
 			
+			<div id="files" title="0"></div>
 			
-			<div>
-					<input type="file" name="files">
-					<input type="file" name="files">
-				</div>
+			
 			
 			<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 		</form>
@@ -60,7 +57,10 @@ $(document).ready(function() {
 
 	<div id="sample">
 		<div class="input-group">
-			
+			<div class="custom-file">
+				<input type="file"  id="inputGroupFile04"
+					class="form-control-file border" name="files">
+			</div>
 			<div class="input-group-append delete">
 				<input class="btn btn-outline-secondary" type="button"
 					id="inputGroupFileAddon04" value="Delete">
@@ -71,10 +71,9 @@ $(document).ready(function() {
 	</div>
 
 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/boardInsert.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/fileAdd.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/board/summerFile.js"></script>
-	
+	<script type="text/javascript" src="/js/board/boardInsert.js"></script>
+	<script type="text/javascript" src="/js/board/fileAdd.js"></script>
+	<script type="text/javascript" src="/js/board/summerFile.js"></script>
 
 </body>
 </html>

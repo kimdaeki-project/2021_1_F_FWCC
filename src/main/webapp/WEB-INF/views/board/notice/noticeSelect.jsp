@@ -78,12 +78,12 @@
 			<table class="table"
 					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; ">
 					<tbody>
-
+					<c:forEach items="${cm}" var="com" >
 					<tr>
-					<td><div>${cm.writer} ${cm.regDate} </div>
-						<div>${cm.contents}</div></td>
+					<td><div>${com.writer} ${com.regDate} </div>
+						<div>${com.contents}</div></td>
 					</tr>
-
+					</c:forEach>
 					</tbody>
 			</table>
 			<div>
