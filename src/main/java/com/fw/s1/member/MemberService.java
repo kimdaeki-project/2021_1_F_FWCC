@@ -88,9 +88,6 @@ public class MemberService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("======= Service START =======");
-		System.out.println("username : "+username);
-		System.out.println("======= Service END =======");
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(username);
 		try {

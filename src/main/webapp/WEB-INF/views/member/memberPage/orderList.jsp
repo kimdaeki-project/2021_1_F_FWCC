@@ -196,8 +196,10 @@
 							<c:forEach items="${list}" var="VO">
 								<tr>
 									<td>${VO.orderNum}</td>
-									<td>${VO.productFileVO.fileName}</td>
-									<td>${VO.productVO.productTitle}</td>
+									<c:forEach items="${VO.productFileVO}" var="file">
+										<td>${file.fileName}</td>
+										
+									</c:forEach>
 									<td>수량</td>
 									<td>${VO.spPrice}</td>
 										<td>${VO.orderState}</td>

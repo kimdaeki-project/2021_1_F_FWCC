@@ -51,13 +51,11 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		// 1. session의 속성명들 꺼내오기
 		Enumeration<String> enumeration = session.getAttributeNames();
-		while(enumeration.hasMoreElements()) {
-			System.out.println(enumeration.nextElement());
-		}
 		
-		mv.addObject("msg", "로그인 성공");
-		mv.addObject("path", "/");
-		mv.setViewName("common/commonResult");
+//		mv.addObject("msg", "로그인 성공");
+//		mv.addObject("path", "/");
+//		mv.setViewName("common/commonResult");
+		mv.setViewName("index");
 		return mv;
 	}
 	
@@ -141,6 +139,10 @@ public class MemberController {
 		OrderlistVO orderlistVO = new OrderlistVO();
 		orderlistVO.setUsername(authentication.getName());
 		List<OrderlistVO> ar = orderService.getOrderList(orderlistVO);
+		for(OrderlistVO VO:ar) {
+			System.out.println(VO);
+		}
+		
 		
 		mv.addObject("list", ar);
 		mv.setViewName("member/memberPage/orderList");
