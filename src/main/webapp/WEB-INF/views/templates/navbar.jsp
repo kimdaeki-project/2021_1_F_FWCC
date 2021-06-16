@@ -114,7 +114,7 @@
 				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_blank">AdminPage</a>
 			</li>
 			<li>
-				<a href="${pageContext.request.contextPath}/product/insert" target="_blank">Pinsert</a>
+				<a href="${pageContext.request.contextPath}/product/allList" target="_blank">Pupdate</a>
 			</li>
 			
 		</ul>

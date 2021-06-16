@@ -106,4 +106,19 @@ public class ProductController {
 	}
 	
 	
+	@GetMapping(value="allList")
+	public String setUpdate(Model model)throws Exception{
+		List<ProductVO> array = productService.setUpdate();
+		model.addAttribute("allList",array);
+		return "product/allList";
+	}
+	
+	@GetMapping(value="update")
+	public String setUpdate(ProductVO productVO)throws Exception{
+		System.out.println(productVO.getProductNum());
+		
+		return "product/allList";
+	}
+	
+	
 }

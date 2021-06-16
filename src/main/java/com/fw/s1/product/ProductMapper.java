@@ -18,6 +18,7 @@ public interface ProductMapper {
 	public Long getNextNum()throws Exception;
 	public int setInsertPInfo(ProductInfoVO pInfoVO) throws Exception;
 	public int setFileInsert(ProductFileVO productFileVO) throws Exception;
+	public List<ProductVO> getAllList()throws Exception;
 	
 	//구매 후 해당 상품의 재고량을 줄이는 메서드
 	public Long updateStock(List<ProductInfoVO> list)throws Exception;

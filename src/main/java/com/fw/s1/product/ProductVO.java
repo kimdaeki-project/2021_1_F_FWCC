@@ -24,6 +24,6 @@ public class ProductVO {
 	
 	private ProductDivisionVO productDivisionVO;
 //	private List<ProductFileVO> files;
-//	private List<ProductInfoVO> infos;
+	private List<ProductInfoVO> infos;
 	
 }

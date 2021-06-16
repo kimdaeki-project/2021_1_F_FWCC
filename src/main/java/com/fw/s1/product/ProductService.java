@@ -113,4 +113,12 @@ public class ProductService {
 	
 	
 	
+	public List<ProductVO> setUpdate()throws Exception{
+		List<ProductVO> array = productMapper.getAllList();
+		System.out.println(array.size());
+		return array;
+	}
+	
+	
+	
 }

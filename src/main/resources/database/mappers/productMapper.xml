@@ -82,6 +82,10 @@
 	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
 		select * from productFiles where productNum=#{productNum} and fileName like 'T_%'
 	</select>
+	
+	<select id="getAllList" resultType="ProductVO">
+		select * from product
+	</select>
 
 	<!-- ++++++++++ C ++++++++++ -->
 
@@ -108,6 +112,7 @@
 		productFiles (productNum,fileName,oriName)
 		values(#{productNum},#{fileName},#{oriName})
 	</insert>
+	
 
 	<!-- ++++++++++ U ++++++++++ -->
 	<update id="setUpdate" parameterType="ProductVO">
