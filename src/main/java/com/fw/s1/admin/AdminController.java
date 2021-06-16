@@ -21,6 +21,7 @@ import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.coupon.CouponspVO;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.product.ProductService;
 import com.google.gson.Gson;
 
 @Controller
@@ -33,6 +34,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private MileageService mileageService;
+	@Autowired
+	private ProductService productService;
 	
 	@ModelAttribute("date")
 	public String adminAll() {
@@ -242,5 +245,10 @@ public class AdminController {
 			result[i] = gson.toJson(list.get(i));
 		}
 		return result;
+	}
+	
+	@GetMapping("productInsert")
+	public void productInsert(Model model)throws Exception{
+		model.addAttribute("productNum", productService.getNextNum());
 	}
 }

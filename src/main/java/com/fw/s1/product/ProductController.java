@@ -78,7 +78,7 @@ public class ProductController {
 //		}
 		System.out.println("size : "+size);
 		int result = productService.setInsert(productVO, size, thumbnail);
-		return "redirect:/";
+		return "redirect:/admin/adminHome";
 	}
 	
 	

@@ -20,7 +20,7 @@ $("#contents").summernote({
 function deleteFile(files){
 	let fileName = $(files[0]).attr("src");
 	fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-	$.post("./summerFileDelete",{fileName:fileName},function(result){
+	$.post("/product/summerFileDelete",{fileName:fileName},function(result){
 		console.log(result);
 	});	
 }
@@ -32,7 +32,7 @@ function uploadFile(files){
 	formData.append('productNum',pNum);
 	$.ajax({
 		type:"post",
-		url:"./summerFileUpload",
+		url:"/product/summerFileUpload",
 		data:formData,
 		enctype:"multipart/form-data",
 		cache:false,
