@@ -114,16 +114,23 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		// 1. mileage 가져오기
 		MileageVO mileageVO = new MileageVO();
-		mileageVO.setUsername(authentication.getName());
-		mileageVO = mileageService.getRecentMileage(mileageVO);
-		// 2. coupon 개수 가져오기
-		CouponVO couponVO = new CouponVO();
-		couponVO.setUsername(authentication.getName());
-		long couponCount = couponService.getMemberCouponCount(couponVO);
+		if(authentication != null) {			
+			mileageVO.setUsername(authentication.getName());
+			mileageVO = mileageService.getRecentMileage(mileageVO);
+			// 2. coupon 개수 가져오기
+			CouponVO couponVO = new CouponVO();
+			couponVO.setUsername(authentication.getName());
+			long couponCount = couponService.getMemberCouponCount(couponVO);
+			
+			mv.addObject("mileage", mileageVO.getEnabledMile());
+			mv.addObject("couponCount", couponCount);
+			mv.setViewName("member/memberPage");
+		} else {
+			mv.addObject("msg", "로그인이 필요합니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/commonResult");
+		}
 		
-		mv.addObject("mileage", mileageVO.getEnabledMile());
-		mv.addObject("couponCount", couponCount);
-		mv.setViewName("member/memberPage");
 		return mv;
 	}
 	

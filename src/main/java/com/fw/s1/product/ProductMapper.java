@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fw.s1.order.OrderlistVO;
 import com.fw.s1.util.ProductPager;
 
 @Mapper
@@ -21,5 +22,4 @@ public interface ProductMapper {
 	
 	//구매 후 해당 상품의 재고량을 줄이는 메서드
 	public Long updateStock(List<ProductInfoVO> list)throws Exception;
-
 }

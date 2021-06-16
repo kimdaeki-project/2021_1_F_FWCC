@@ -196,12 +196,12 @@
 							<c:forEach items="${list}" var="VO">
 								<tr>
 									<td>${VO.orderNum}</td>
-									<td>이미지</td>
-									<td>상품정보</td>
+									<td>${VO.productFileVO.fileName}</td>
+									<td>${VO.productVO.productTitle}</td>
 									<td>수량</td>
 									<td>${VO.spPrice}</td>
 										<td>${VO.orderState}</td>
-									<td>취소교환반품</td>
+									<td><a href="#"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"/></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

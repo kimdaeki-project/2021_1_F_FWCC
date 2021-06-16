@@ -3,6 +3,8 @@ package com.fw.s1.order;
 import java.sql.Date;
 
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.product.ProductFileVO;
+import com.fw.s1.product.ProductVO;
 
 import lombok.Data;
 
@@ -22,6 +24,9 @@ public class OrderlistVO {
 	
 	private String startDate;
 	private String endDate;
+	
+	private ProductVO[] productVOs;
+	private ProductFileVO[] productFileVOs;
 	
 	private MileageVO mileageVO;
 }
