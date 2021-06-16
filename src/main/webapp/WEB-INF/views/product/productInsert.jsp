@@ -32,27 +32,29 @@ input[type="number"]::-webkit-inner-spin-button {
 <body>
 <c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
 <div class="contents">
-<form action="insert" method="post" enctype="multipart/form-data">
+<form id="frm" action="insert" method="post" enctype="multipart/form-data">
 <h1>productInsert</h1>
 <input hidden="hidden" name=productNum value="${productNum}" id="pNum" title="${productNum}">
 <p>${productNum}</p>
 <h4>제품 이름</h4>
-<input type="text" name="productTitle">
+<input type="text" name="productTitle" id="pTitle">
 <h4>제품 가격</h4>
-<input type="number" name="productPrice">
+<input type="number" name="productPrice" id="pPrice">
 <h4>콜라보레이션구분</h4>
-<select name="collab">
+<select name="collab" id="pCollab">
 <option value="default">콜라보레이션여부</option>
 <option value="none">콜라보레이션 안함</option>
 <option value="name1">콜라보레이션 이름</option>
 </select>
 <h4>제품 구분</h4>
-<select name="productType">
+<select name="productType" id="pType1">
+<option value="default">대분류</option>
 <option value="top">상의</option>
 <option value="bottom">하의</option>
 </select>
 <h4>제품 세부 구분</h4>
-<select name="productType">
+<select name="productType" id="pType2">
+<option value="default">소분류</option>
 <option>long</option>
 <option>short</option>
 </select>
@@ -64,19 +66,20 @@ input[type="number"]::-webkit-inner-spin-button {
 <h4>제품 요약</h4>
 <textarea  style="resize: none;" id="summary" class="myCheck" name="summary"></textarea>
 <h4>사이즈</h4>
-<input type="checkbox" name="size" value="S">S
-<input type="checkbox" name="size" value="M">M
-<input type="checkbox" name="size" value="L">L
-<input type="checkbox" name="size" value="XL">XL
-<input type="checkbox" name="size" value="2XL">2XL
+<input type="checkbox" name="size" value="S" class="size">S
+<input type="checkbox" name="size" value="M" class="size">M
+<input type="checkbox" name="size" value="L" class="size">L
+<input type="checkbox" name="size" value="XL" class="size">XL
+<input type="checkbox" name="size" value="2XL" class="size">2XL
 <h4>상세 내용</h4>
 <textarea name="productContents" style="resize: none;" id="contents"></textarea>
  
-<button>올리기</button>
 </form>
+<a id="sBtn">올리기</a>
 </div>
 <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 <script type="text/javascript" src="/js/product/summerFile.js"></script>
+<script type="text/javascript" src="/js/product/productInsert.js"></script>
 <script type="text/javascript">
 function readImage(input) {
 
