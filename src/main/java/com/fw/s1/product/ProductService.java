@@ -119,6 +119,14 @@ public class ProductService {
 		return array;
 	}
 	
+	public ProductVO setUpdate(ProductVO producVO)throws Exception{
+		ProductVO vo = productMapper.getProductSelect(producVO);
+		vo.setFiles(productMapper.getFileSelect(vo));
+		vo.setInfos(productMapper.getInfoSelect(vo));
+		vo.setProductDivisionVO(productMapper.getDivisionSelect(vo));
+		return vo;
+	}
+	
 	
 	
 }

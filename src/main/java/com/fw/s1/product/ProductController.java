@@ -114,10 +114,11 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="update")
-	public String setUpdate(ProductVO productVO)throws Exception{
+	public String setUpdate(Model model,ProductVO productVO)throws Exception{
 		System.out.println(productVO.getProductNum());
-		
-		return "product/allList";
+		ProductVO vo = productService.setUpdate(productVO);
+		model.addAttribute("VO", vo);
+		return "product/productUpdate";
 	}
 	
 	

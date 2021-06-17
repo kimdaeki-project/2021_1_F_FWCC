@@ -86,6 +86,20 @@
 	<select id="getAllList" resultType="ProductVO">
 		select * from product
 	</select>
+	
+	<select id="getProductSelect" parameterType="ProductVO" resultType="ProductVO">
+		select * from product where productNum = #{productNum}
+	</select>
+	<select id="getInfoSelect" parameterType="ProductVO" resultType="ProductInfoVO">
+		select * from productInfo where productNum = #{productNum}
+	</select>
+	<select id="getFileSelect" parameterType="ProductVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum}
+	</select>
+	<select id="getDivisionSelect" parameterType="ProductVO" resultType="ProductDivisionVO">
+		select * from productDivision where productDivNum = #{productDivNum}
+	</select>
+	
 
 	<!-- ++++++++++ C ++++++++++ -->
 
@@ -96,10 +110,7 @@
 		(#{productTitle},#{summary},#{productPrice},#{productContents},#{finalPrice},#{productMileage},#{productSaleable},(select productDivNum from productDivision where collab=#{collab} and productType=#{productType}))
 	</insert>
 
-	<select id="getSelect" parameterType="ProductVO"
-		resultType="ProductVO">
-		select * from product where productNum=#{productNum}
-	</select>
+	
 
 	<insert id="setInsertPInfo" parameterType="ProductInfoVO">
 		insert into
