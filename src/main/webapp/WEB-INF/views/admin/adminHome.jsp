@@ -24,7 +24,7 @@
 					<a href="./productUpdate">상품정보수정</a>
 				</li>
 				<li style="padding:5%;">
-					<a href="./productStock">상품재고정리</a>
+					<a href="./orderlistUpdate">배송정보수정</a>
 				</li>
 			</ul>
 		</div>

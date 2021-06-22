@@ -35,4 +35,20 @@
 		select * from orderlist o inner join mileage m on o.orderNum = m.orderNum
 		where o.username=#{username} and m.mileNum = (select max(mileNum) from mileage where orderNum=#{orderNum})
 	</select>
+	<select id="orderStateChange" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderState=#{orderState}
+	</select>
+	<select id="selectedOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderNum = #{orderNum}
+	</select>
+	
+	<update id="orderlistUpdate" parameterType="OrderlistVO">
+		update order set orderState = #{orderState} where orderNum = #{orderNum}
+	</update>
+	<update id="orderlistsUpdate" parameterType="java.util.List">
+		update order set orderState = orderState+1 where 
+		<foreach collection="list" item="item" separator="or">
+			(orderNum=#{item.orderNum})
+		</foreach>
+	</update>
  </mapper>

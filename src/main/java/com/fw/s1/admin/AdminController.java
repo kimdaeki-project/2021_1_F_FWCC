@@ -21,6 +21,8 @@ import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.coupon.CouponspVO;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.order.OrderService;
+import com.fw.s1.order.OrderlistVO;
 import com.fw.s1.product.ProductService;
 import com.google.gson.Gson;
 
@@ -36,6 +38,8 @@ public class AdminController {
 	private MileageService mileageService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderService orderService;
 	
 	@ModelAttribute("date")
 	public String adminAll() {
@@ -250,5 +254,48 @@ public class AdminController {
 	@GetMapping("productInsert")
 	public void productInsert(Model model)throws Exception{
 		model.addAttribute("productNum", productService.getNextNum());
+	}
+	
+	@GetMapping("orderlistUpdate")
+	public void orderlistUpdate()throws Exception{
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("orderStateChange")
+	public String[] orderStateChange(OrderlistVO orderlistVO)throws Exception{
+		List<OrderlistVO> list = orderService.orderStateChange(orderlistVO);
+		Gson gson = new Gson();
+		int size = list.size();
+		String[] result = new String[size];
+		for(int i = 0 ; i < size; i++) {
+			result[i]=gson.toJson(list.get(i));
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("selectedOrder")
+	public String selectedOrder(OrderlistVO orderlistVO)throws Exception{
+		Gson gson = new Gson();
+		return gson.toJson(orderService.selectedOrder(orderlistVO));
+	}
+	
+	@ResponseBody
+	@PostMapping("orderlistUpdate")
+	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception{
+		return orderService.orderlistUpdate(orderlistVO);
+	}
+	
+	@ResponseBody
+	@PostMapping("orderlistsUpdate")
+	public Long orderlistsUpdate(String[] orderNums)throws Exception{
+		List<OrderlistVO> list = new ArrayList<OrderlistVO>();
+		for(String temp : orderNums) {
+			OrderlistVO orderlistVO = new OrderlistVO();
+			orderlistVO.setOrderNum(temp);
+			list.add(orderlistVO);
+		}
+		return orderService.orderlistsUpdate(list);
 	}
 }
