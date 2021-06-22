@@ -60,4 +60,14 @@
 			<result column="enabledMile" property="enabledMile"/>
 		</association>
 	</resultMap>
+	
+	<select id="getMemberProfile" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where username=#{username}
+	</select>
+	
+	<update id="setMemberUpdate" parameterType="MemberVO">
+		update member set password=#{password}, phone=#{phone}, email=#{email}, smsAgree=#{smsAgree}, emailAgree=#{emailAgree}
+		where username=#{username}
+	</update>
+	
 </mapper>

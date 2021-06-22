@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 
+import com.fw.s1.address.AddressMapper;
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
 import com.fw.s1.mileage.MileageService;
@@ -31,6 +32,9 @@ public class MemberService implements UserDetailsService {
 	private AddressService addressService;
 	
 	@Autowired
+	private AddressMapper addressMapper;
+	
+	@Autowired
 	private MileageService mileageService;
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -41,7 +45,7 @@ public class MemberService implements UserDetailsService {
 		memberVO.setEnabled(true);
 		// 3. member table 저장
 		int result = memberMapper.setJoin(memberVO);
-		// 4. role table 저장
+		// 4. memberRole table 저장
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", memberVO.getUsername());
 		map.put("roleName", "ROLE_MEMBER");
@@ -86,11 +90,37 @@ public class MemberService implements UserDetailsService {
 		return result;
 	}
 	
+	public MemberVO getMemberProfile(MemberVO memberVO) throws Exception {
+		memberVO = memberMapper.getMemberProfile(memberVO);
+		String phone = memberVO.getPhone();
+		String[] phones = phone.split("-");
+		memberVO.setPhone0(phones[0]);
+		memberVO.setPhone1(phones[1]);
+		memberVO.setPhone2(phones[2]);
+		return memberVO;
+	}
+	
+	public AddressVO getProfileAddress(MemberVO memberVO) throws Exception{
+		return addressMapper.getProfileAddress(memberVO);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public Long setMemberUpdate(MemberVO memberVO) throws Exception {
+		long result = 0L;
+		// 1. password 암호화
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		// 2. member Update
+		result = memberMapper.setMemberUpdate(memberVO);
+		// 3. address Update
+		result = addressMapper.setProfileAddressUpdate(memberVO);
+		
+		return result;
+	}
+	
+	
+// ======================================================================================
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("======= Service START =======");
-		System.out.println("username : "+username);
-		System.out.println("======= Service END =======");
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(username);
 		try {

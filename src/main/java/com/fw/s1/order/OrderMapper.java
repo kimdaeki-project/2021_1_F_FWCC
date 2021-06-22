@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fw.s1.product.ProductFileVO;
+
 @Mapper
 public interface OrderMapper {
 
@@ -19,4 +21,10 @@ public interface OrderMapper {
 	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception;
 	//선택된 항목들의 주문번호로 state update
 	public Long orderlistsUpdate(List<OrderlistVO> list)throws Exception;
+	
+	// member orderList 조회
+	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception;
+	
+	// member orderList filter 조회
+	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO) throws Exception;
 }

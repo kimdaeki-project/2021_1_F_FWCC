@@ -13,6 +13,10 @@ public interface AddressMapper {
 	
 	//회원가입 시 주소 insert
 	public int setJoinAddress(AddressVO addressVO) throws Exception;
+	//회원정보 조회 시 주소 select
+	public AddressVO getProfileAddress(MemberVO memberVO) throws Exception;
+	//회원정보 수정 시 주소 update
+	public Long setProfileAddressUpdate(MemberVO memberVO) throws Exception;
 
 	//주소목록 불러오기
 	public List<AddressVO> getAddressList(MemberVO memberVO)throws Exception;

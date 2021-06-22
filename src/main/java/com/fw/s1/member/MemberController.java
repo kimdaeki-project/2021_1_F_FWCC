@@ -1,6 +1,8 @@
 package com.fw.s1.member;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fw.s1.address.AddressVO;
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.order.OrderService;
+import com.fw.s1.order.OrderlistVO;
+import com.fw.s1.product.ProductFileVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -34,6 +41,9 @@ public class MemberController {
 	@Autowired
 	private CouponService couponService;
 	
+	@Autowired
+	private OrderService orderService;
+	
 // Member Login =========================================================================
 	@GetMapping("memberLogin")
 	public void getLogin() throws Exception {
@@ -45,13 +55,11 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		// 1. session의 속성명들 꺼내오기
 		Enumeration<String> enumeration = session.getAttributeNames();
-		while(enumeration.hasMoreElements()) {
-			System.out.println(enumeration.nextElement());
-		}
 		
-		mv.addObject("msg", "로그인 성공");
-		mv.addObject("path", "/");
-		mv.setViewName("common/commonResult");
+//		mv.addObject("msg", "로그인 성공");
+//		mv.addObject("path", "/");
+//		mv.setViewName("common/commonResult");
+		mv.setViewName("index");
 		return mv;
 	}
 	
@@ -108,24 +116,79 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		// 1. mileage 가져오기
 		MileageVO mileageVO = new MileageVO();
-		mileageVO.setUsername(authentication.getName());
-		mileageVO = mileageService.getRecentMileage(mileageVO);
-		// 2. coupon 개수 가져오기
-		CouponVO couponVO = new CouponVO();
-		couponVO.setUsername(authentication.getName());
-		long couponCount = couponService.getMemberCouponCount(couponVO);
+		if(authentication != null) {			
+			mileageVO.setUsername(authentication.getName());
+			mileageVO = mileageService.getRecentMileage(mileageVO);
+			// 2. coupon 개수 가져오기
+			CouponVO couponVO = new CouponVO();
+			couponVO.setUsername(authentication.getName());
+			long couponCount = couponService.getMemberCouponCount(couponVO);
+			
+			mv.addObject("mileage", mileageVO.getEnabledMile());
+			mv.addObject("couponCount", couponCount);
+			mv.setViewName("member/memberPage");
+		} else {
+			mv.addObject("msg", "로그인이 필요합니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/commonResult");
+		}
 		
-		mv.addObject("mileage", mileageVO.getEnabledMile());
-		mv.addObject("couponCount", couponCount);
-		mv.setViewName("member/memberPage");
 		return mv;
 	}
 	
-	// orderList
+// orderList =============================================
 	@GetMapping("memberPage/orderList")
-	public void getOrderList() throws Exception {
-		
+	public ModelAndView getOrderList(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		OrderlistVO orderlistVO = new OrderlistVO();
+		orderlistVO.setUsername(authentication.getName());
+		List<ProductFileVO> ar = orderService.getOrderList(orderlistVO);
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/orderList");
+		return mv;
 	}
 	
+	@GetMapping("memberPage/filteredList")
+	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
+		System.out.println("=== 검색 컨트롤러 ===");
+		ModelAndView mv = new ModelAndView();
+		orderlistVO.setUsername(authentication.getName());
+		System.out.println("===========================================================");
+		System.out.println(orderlistVO.getStartDate());
+		System.out.println(orderlistVO.getEndDate());
+		System.out.println("===========================================================");
+		List<ProductFileVO> ar = orderService.getFilteredList(orderlistVO);
+		for(ProductFileVO VO:ar) {
+			System.out.println(VO);
+		}
+		String result = "";
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return ar;
+	}
+
+// profile ===============================================
+	@GetMapping("memberPage/memberProfile")
+	public ModelAndView getMemberProfile(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		memberVO = memberService.getMemberProfile(memberVO);
+		AddressVO addressVO = memberService.getProfileAddress(memberVO);
+		mv.addObject("VO", memberVO);
+		mv.addObject("addressVO", addressVO);
+		mv.setViewName("member/memberPage/memberProfile");
+		return mv;
+	}
+	
+	@PostMapping("memberPage/memberUpdate")
+	public ModelAndView setMemberUpdate(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		long result = 0L;
+		result = memberService.setMemberUpdate(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
 	
 }
