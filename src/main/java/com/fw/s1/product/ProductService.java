@@ -56,7 +56,7 @@ public class ProductService {
 		if(disRate==null) {
 			disRate = 0L;
 		}
-		Long finalPrice = price*(100-disRate);
+		Long finalPrice = price*(100-disRate)/100;
 		Long mileage = ((price/100)*5);
 		productVO.setFinalPrice(finalPrice);
 		productVO.setProductMileage(mileage);
@@ -98,16 +98,73 @@ public class ProductService {
 	
 	
 	
-	public boolean setSummerFileDelete(String fileName) throws Exception{
-		boolean result = productFileManager.Delete("src/main/resources/static/images/product/test", fileName, session);
+	public boolean setSummerFileDelete(String fileName,String productNum) throws Exception{
+		boolean result = productFileManager.Delete("/"+productNum, fileName, session);
 		return result;
 	}
 	
 	
 	public String setSummerFileUpload(MultipartFile file,String productNum) throws Exception{
-		
+		System.out.println("num:"+productNum);
 		String fileName = productFileManager.save("/"+productNum, file, session);
 		return fileName;
+		
+	}
+	
+	
+	
+	public List<ProductVO> setUpdate()throws Exception{
+		List<ProductVO> array = productMapper.getAllList();
+		System.out.println(array.size());
+		return array;
+	}
+	
+	public ProductVO setUpdate(ProductVO productVO)throws Exception{
+		ProductVO vo = productMapper.getProductSelect(productVO);
+		vo.setFile(productMapper.getMain(vo));
+		vo.setInfos(productMapper.getInfoSelect(vo));
+		vo.setProductDivisionVO(productMapper.getDivisionSelect(vo));
+		return vo;
+	}
+	
+	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbNail) throws Exception{
+		String type = productVO.getProductType();
+		type = type.replace(",", "-");
+		productVO.setProductType(type);
+		System.out.println(type);
+		int result = productMapper.setUpdate(productVO);
+		if(sizeList.length==stockList.length) {
+			for(int i=0;i<sizeList.length;i++) {
+				ProductInfoVO piVO = new ProductInfoVO();
+				piVO.setProductNum(productVO.getProductNum());
+				piVO.setSize(sizeList[i]);
+				piVO.setStock(stockList[i]);
+				int result2 = productMapper.setUpdateProductInfo(piVO);
+				System.out.println(i+" : "+result2);
+			}
+		}
+		if(thumbNail.getOriginalFilename().length()>0) {
+			List<ProductFileVO> array = productMapper.getFileSelect(productVO);
+			System.out.println(array.size());
+			if(array.size()!=0) {
+				for(ProductFileVO file:array) {
+					boolean delCheck = productFileManager.Delete("/"+productVO.getProductNum(), file.getFileName(), session);
+					System.out.println("=====");
+					System.out.println(delCheck);
+					System.out.println("=====");
+				}
+				productMapper.setFileDelete(productVO);
+			}
+			String[] fileNames = productFileManager.thumbNailSave("/"+productVO.getProductNum(), thumbNail, session);
+			for(String str:fileNames) {
+				System.out.println(str);
+				ProductFileVO pFileVO = new ProductFileVO();
+				pFileVO.setProductNum(productVO.getProductNum());
+				pFileVO.setFileName(str);
+				pFileVO.setOriName(thumbNail.getOriginalFilename());
+				result = productMapper.setFileInsert(pFileVO);
+			}
+		}
 		
 	}
 	

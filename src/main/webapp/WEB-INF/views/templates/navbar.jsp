@@ -113,7 +113,6 @@
 			<li>
 				<a href="${pageContext.request.contextPath}/admin/adminHome" target="_blank">AdminPage</a>
 			</li>
-			
 		</ul>
 	</div>
 </nav>

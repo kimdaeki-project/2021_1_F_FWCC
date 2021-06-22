@@ -80,8 +80,28 @@
 		select * from productFiles where fileNum=#{fileNum}
 	</select>
 	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
-		select * from productFiles where productNum=#{productNum} and fileName like 'T_%'
+		select * from productFiles where productNum = #{productNum} and fileName like 'T_%'
 	</select>
+	<select id="getMain" parameterType="ProductFileVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum} and fileName like 'M_%'
+	</select>
+	<select id="getAllList" resultType="ProductVO">
+		select * from product
+	</select>
+	
+	<select id="getProductSelect" parameterType="ProductVO" resultType="ProductVO">
+		select * from product where productNum = #{productNum}
+	</select>
+	<select id="getInfoSelect" parameterType="ProductVO" resultType="ProductInfoVO">
+		select * from productInfo where productNum = #{productNum}
+	</select>
+	<select id="getFileSelect" parameterType="ProductVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum}
+	</select>
+	<select id="getDivisionSelect" parameterType="ProductVO" resultType="ProductDivisionVO">
+		select * from productDivision where productDivNum = #{productDivNum}
+	</select>
+	
 
 	<!-- ++++++++++ C ++++++++++ -->
 
@@ -92,10 +112,6 @@
 		(#{productTitle},#{summary},#{productPrice},#{productContents},#{finalPrice},#{productMileage},#{productSaleable},(select productDivNum from productDivision where collab=#{collab} and productType=#{productType}))
 	</insert>
 
-	<select id="getSelect" parameterType="ProductVO"
-		resultType="ProductVO">
-		select * from product where productNum=#{productNum}
-	</select>
 
 	<insert id="setInsertPInfo" parameterType="ProductInfoVO">
 		insert into
@@ -108,21 +124,31 @@
 		productFiles (productNum,fileName,oriName)
 		values(#{productNum},#{fileName},#{oriName})
 	</insert>
+	
 
 	<!-- ++++++++++ U ++++++++++ -->
 	<update id="setUpdate" parameterType="ProductVO">
 		update product set
 		productTitle=#{productTitle},
 		productPrice=#{productPrice},
+		summary=#{summary},
 		productContents=#{productContents},
 		productDisRate=#{productDisRate},
-		collab=#{collab},
-		productType=#{productType},
 		finalPrice=#{finalPrice},
 		productMileage=#{productMileage},
-		productSaleable=#{productSaleable}
+		productSaleable=#{productSaleable},
+		productDivNum=(select productDivNum from productDivision where collab=#{collab} and productType=#{productType})
 		where
 		productNum=#{productNum}
+	</update>
+	
+	<update id="setUpdateProductInfo" parameterType="ProductInfoVO">
+		update productInfo set
+		stock = #{stock}
+		where
+		productNum = #{productNum}
+		and
+		size = #{size}
 	</update>
 
 
@@ -132,9 +158,9 @@
 		delete from product where
 		productNum=#{productNum}
 	</delete>
-	<delete id="setFileDelete" parameterType="ProductFileVO">
-		delete productFiles
-		where fileNum=#{fileNum}
+	<delete id="setFileDelete" parameterType="ProductVO">
+		delete from productFiles
+		where productNum =#{productNum}
 	</delete>
 
 

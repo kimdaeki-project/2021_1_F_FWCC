@@ -23,7 +23,7 @@ public class ProductVO {
 	private Boolean productSaleable;
 	
 	private ProductDivisionVO productDivisionVO;
-//	private List<ProductFileVO> files;
-//	private List<ProductInfoVO> infos;
+	private ProductFileVO file;
+	private List<ProductInfoVO> infos;
 	
 }
