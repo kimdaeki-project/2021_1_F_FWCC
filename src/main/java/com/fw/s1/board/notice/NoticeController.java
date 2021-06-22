@@ -136,11 +136,15 @@ public class NoticeController {
 	}
 
 	@GetMapping("commentUpdate")
-	public String commentUpdate(BoardCommentVO boardCommentVO, Model model) throws Exception {
+	public String commentUpdate(BoardVO boardVO, BoardCommentVO boardCommentVO, Model model) throws Exception {
+		boardVO = noticeService.getSelect(boardVO);
 		boardCommentVO = noticeService.commentSelect(boardCommentVO);
+		List<BoardCommentVO> lbc = noticeService.commentList(boardCommentVO);
+		model.addAttribute("cm", lbc);
+		model.addAttribute("vo", boardVO);
 		model.addAttribute("cvo", boardCommentVO);
 		model.addAttribute("action", "commentUpdate");
-		return "board/notice/cform";
+		return "board/notice/noticeSelect";
 	}
 
 	@PostMapping("commentUpdate")

@@ -21,6 +21,8 @@
 		<typeAlias type="com.fw.s1.board.BoardCommentVO" alias="BoardCommentVO"/>
   		<typeAlias type="com.fw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
   		<typeAlias type="com.fw.s1.board.qna.QnaVO" alias="QnaVO"/>
+  		<typeAlias type="com.fw.s1.board.review.ReviewVO" alias="ReviewVO"/>
+  		<typeAlias type="com.fw.s1.board.lookbook.LookBookVO" alias="LookBookVO"/>
   		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
   		<typeAlias type="com.fw.s1.member.RoleVO" alias="RoleVO"/>
   		<typeAlias type="com.fw.s1.address.AddressVO" alias="AddressVO"/>

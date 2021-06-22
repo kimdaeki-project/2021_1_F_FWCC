@@ -105,8 +105,8 @@
 				<ul id="navbar-rightul">
 					<li><a href="${pageContext.request.contextPath}/notice/list">Notice</a></li>
 					<li><a href="#">Stockist</a></li>
-					<li><a href="#">Q&amp;A</a></li>
-					<li><a href="#">Review</a></li>
+					<li><a href="${pageContext.request.contextPath}/qna/list">Q&amp;A</a></li>
+					<li><a href="${pageContext.request.contextPath}/review/list">Review</a></li>
 				</ul>
 			</li>
 			

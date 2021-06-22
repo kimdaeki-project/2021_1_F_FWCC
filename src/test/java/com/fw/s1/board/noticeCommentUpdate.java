@@ -14,7 +14,7 @@ class noticeCommentUpdate {
 	private NoticeMapper noticeMapper;
 	
 	@Test
-	void test() {
+	void commentUpdateTest()throws Exception {
 		fail("Not yet implemented");
 	}
 

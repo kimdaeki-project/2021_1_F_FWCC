@@ -38,7 +38,7 @@ a:hover {
 <div style="padding: 68px 34px 0;">
 <div class="container">
 	<div class="title" style="margin: 60px 0 40px; text-align:center;">
-			<p>Review</p>
+			<p>Notice</p>
 	</div>		
 		<table class="table" style="border-collapse: separate;
 	  border-spacing: 1px;
@@ -48,8 +48,7 @@ a:hover {
 			<thead >
 				<tr>
 					<th style="width: 100px;">NO</th>
-					<th style="width: 100px;">PRODUCT</th>
-					<th style="width: 500px;">SUBJECT</th>
+					<th style="width: 600px;">SUBJECT</th>
 					<th style="width: 100px; text-align:center;">WRITER</th>
 					<th style="width: 100px; text-align:center;">DATE</th>
 					<th style="width: 100px; text-align:center;">HIT</th>
@@ -57,20 +56,19 @@ a:hover {
 			</thead>
 			
 			<tbody>
-			<c:forEach items="${Qlist}" var="Qdto" >
+			<c:forEach items="${Rlist}" var="Rdto" >
 				<tr>
-					<td>${Qdto.num}</td>
-					<td>${Qdto.productNum}</td>
-					<td><a style="color:black;" href="./select?num=${Qdto.num}">
+					<td>${Rdto.num}</td>
+					<td><a style="color:black;" href="./select?num=${Rdto.num}">
 					
 					<c:catch>
-					<c:forEach begin="1" end="${Qdto.depth}">--</c:forEach>
+					<c:forEach begin="1" end="${Rdto.depth}">--</c:forEach>
 					</c:catch>
-					${Qdto.title}
+					${Rdto.title}
 					</a></td>
-					<td style="text-align:center;">${Qdto.writer}</td>
-					<td style="text-align:center;">${Qdto.regDate}</td>
-					<td style="text-align:center;">${Qdto.hit}</td>
+					<td style="text-align:center;">${Rdto.writer}</td>
+					<td style="text-align:center;">${Rdto.regDate}</td>
+					<td style="text-align:center;">${Rdto.hit}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
