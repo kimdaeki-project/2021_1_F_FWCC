@@ -83,9 +83,11 @@ public class ProductController {
 	
 	
 	@PostMapping(value="summerFileDelete")
-	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
+	public ModelAndView setSummerFileDelete(String fileName,String productNum) throws Exception{
+		System.out.println(fileName);
+		System.out.println(productNum);
 		ModelAndView mv  = new ModelAndView();
-		boolean result = productService.setSummerFileDelete(fileName);
+		boolean result = productService.setSummerFileDelete(fileName,productNum);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
 		return mv;
@@ -119,6 +121,29 @@ public class ProductController {
 		ProductVO vo = productService.setUpdate(productVO);
 		model.addAttribute("VO", vo);
 		return "product/productUpdate";
+	}
+	@PostMapping(value="update")
+	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
+		System.out.println(productVO.getProductTitle());
+		System.out.println(productVO.getProductPrice());
+		System.out.println(productVO.getProductDisRate());
+		System.out.println(productVO.getFinalPrice());
+		System.out.println(thumbnail==null);
+		System.out.println("oriName : "+thumbnail.getOriginalFilename());
+		System.out.println("oriNameLenghth : "+thumbnail.getOriginalFilename().length());
+		System.out.println(productVO.getSummary());
+		System.out.println(productVO.getProductContents());
+		System.out.println(productVO.getCollab());
+		System.out.println(productVO.getProductType());
+		System.out.println(sizeList.length);
+		System.out.println(stockList.length);
+		for(String size:sizeList) {
+			System.out.println(size);
+		}
+		for(Long stock:stockList) {
+			System.out.println(stock);
+		}
+		productService.setUpdate(productVO, sizeList, stockList, thumbnail);
 	}
 	
 	

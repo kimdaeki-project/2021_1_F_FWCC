@@ -34,7 +34,7 @@ input[type="number"]::-webkit-inner-spin-button {
 <div class="contents">
 <form id="frm" action="insert" method="post" enctype="multipart/form-data">
 <h1>productInsert</h1>
-<input hidden="hidden" name=productNum value="${productNum}" id="pNum" title="${productNum}">
+<input hidden="hidden" name="productNum" value="${productNum}" id="pNum" title="${productNum}">
 <p>${productNum}</p>
 <h4>제품 이름</h4>
 <input type="text" name="productTitle" id="pTitle">

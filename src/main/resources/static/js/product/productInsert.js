@@ -84,9 +84,9 @@ $("#sBtn").click(function(){
 	isEmptySummary()
 	isOkSize()
 	isEmptyContents()
+	finalCheck=titleCheck&&priceCheck&&collabCheck&&type1Check&&type2Check&&thumbCheck&&summaryCheck&&sizeCheck&&contentsCheck; 
 	/*
 	alert($("#contents").val())
-	finalCheck=titleCheck&&priceCheck&&collabCheck&&type1Check&&type2Check&&thumbCheck&&summaryCheck&&sizeCheck&&contentsCheck; 
 	alert("title : "+titleCheck
 	+"\n"+"price : "+priceCheck
 	+"\n"+"collab : "+collabCheck

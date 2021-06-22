@@ -20,13 +20,15 @@ $("#contents").summernote({
 function deleteFile(files){
 	let fileName = $(files[0]).attr("src");
 	fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-	$.post("./summerFileDelete",{fileName:fileName},function(result){
+	let productNum = $("#pNum").attr("title");
+	$.post("./summerFileDelete",{fileName:fileName,productNum:productNum},function(result){
 		console.log(result);
 	});	
 }
 
 function uploadFile(files){
 	const pNum = $("#pNum").attr("title");
+	console.log(pNum)
 	const formData = new FormData(); // form 태그 작성
 	formData.append('file',files[0]); // input type = "File" name="file"
 	formData.append('productNum',pNum);

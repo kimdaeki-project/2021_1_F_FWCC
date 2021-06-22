@@ -135,7 +135,7 @@ class ProductMapperTest {
 	void setDeleteTest() throws Exception{
 		ProductVO vo = new ProductVO();
 		vo.setProductNum(36L);
-		int result = productMapper.setDelete(vo);
-		assertNotEquals(0, result);
+//		int result = productMapper.setDelete(vo);
+//		assertNotEquals(0, result);
 	}
 }

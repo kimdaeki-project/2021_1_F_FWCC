@@ -48,7 +48,7 @@ public class ProductFileManager {
 		
 		multipartFile.transferTo(file);
 // 본파일 저장
-//		File file2 = new File(path+fileName);
+		File file2 = new File(path,fileName);
 //		System.out.println("f2A : "+file2.getAbsolutePath());
 //		System.out.println("f2 : "+file2);
 //		
@@ -104,8 +104,8 @@ public class ProductFileManager {
 
 		
 		// 임시파일 삭제
-//	      boolean check = file2.delete();
-//	      System.out.println("delete : "+check);
+	      boolean check = file2.delete();
+	      System.out.println("delete : "+check);
 		return array;
 	}
 	
@@ -128,7 +128,7 @@ public class ProductFileManager {
 
 	public String save(String name, MultipartFile multipartFile, HttpSession session) throws Exception{
 
-		String path=session.getServletContext().getRealPath("resources/images/product/"+name);
+		String path=session.getServletContext().getRealPath("resources/images/product"+name);
 		File file = new File(path);
 		
 		System.out.println(path);
@@ -161,7 +161,7 @@ public class ProductFileManager {
 	
 	public boolean Delete(String name,String fileName, HttpSession session) throws Exception{
 		//1. 경로 설정
-		String path = session.getServletContext().getRealPath("resources/upload/"+name);
+		String path=session.getServletContext().getRealPath("resources/images/product"+name);
 		File file = new File(path, fileName);
 		boolean check = false;
 		if(file.exists()) {

@@ -11,18 +11,20 @@ public interface ProductMapper {
 	
 	public Long getTotalCount(ProductPager productPager) throws Exception;
 	public List<ProductVO> getList(ProductPager productPager) throws Exception;
+	public Long getNextNum()throws Exception;
 	public ProductVO getProductSelect(ProductVO productVO) throws Exception;
 	public List<ProductInfoVO> getInfoSelect(ProductVO productVO) throws Exception;
 	public List<ProductFileVO> getFileSelect(ProductVO productVO) throws Exception;
 	public ProductDivisionVO getDivisionSelect(ProductVO productVO) throws Exception;
 	public int setInsert(ProductVO productVO) throws Exception;
 	public int setUpdate(ProductVO productVO) throws Exception;
-	public int setDelete(ProductVO productVO) throws Exception;
-	public Long getNextNum()throws Exception;
+	public int setFileDelete(ProductVO productVO) throws Exception;
 	public int setInsertPInfo(ProductInfoVO pInfoVO) throws Exception;
 	public int setFileInsert(ProductFileVO productFileVO) throws Exception;
 	public List<ProductVO> getAllList()throws Exception;
-	
+	public ProductFileVO getThumbNail(ProductVO productVO) throws Exception;
+	public ProductFileVO getMain(ProductVO productVO) throws Exception;
+	public int setUpdateProductInfo(ProductInfoVO productInfoVO) throws Exception;
 	
 	
 	
