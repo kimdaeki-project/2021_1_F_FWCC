@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.fw.s1.board.lookbook.lookbookMapper">
+    	<select id="lbList" resultType="lookbookVO" parameterType="Pager">
+			select * from lookbook
+			<include refid="searcher"></include>
+			order by num desc
+			limit #{startRow}, #{perPage}
+			<!-- limit 시작index번호(0부터시작), 갯수 --> 
+   		</select>
+   		
+   		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
+   			select count(num) from lookbook
+   			<include refid="searcher"></include>
+   		</select>
+   		
+    	<insert id="lbInsert" parameterType="LookBookVO">
+   			insert into lookbook (division, fileName, title)
+   			values (#{division}, #{fileName}, #{title})
+   		</insert>
+   		
+   		<select id="lbSelect" parameterType="LookBookVO" resultType="LookBookVO">
+			select * from lookbook where lookbookNum=#{lookbookNum}
+   		</select>
+   		
+   		<update id="lbUpdate" parameterType="LookBookVO">
+   			update lookbook set division=#{division}, fileName=#{fileName}, title=#{title} where lookbookNum=#{lookbookNum}
+   		</update>
+   		
+   		<delete id="lbDelete" parameterType="LookBookVO">
+   			delete from reviewComment where lookbookNum=#{lookbookNum}
+   		</delete>
+   	</mapper>
+    

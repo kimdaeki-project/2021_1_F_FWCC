@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-   <mapper namespace="com.fw.s1.board.notice.NoticeMapper">
+   <mapper namespace="com.fw.s1.board.review.ReviewMapper">
    		<sql id="searcher">
    		<!-- 공통으로 사용하는 sql문 -->
    		<where>
@@ -24,8 +24,8 @@
    		</sql>
    		
    		
-   		<select id="getList" resultType="NoticeVO" parameterType="Pager">
-			select * from notice
+   		<select id="getList" resultType="reviewVO" parameterType="Pager">
+			select * from review
 			<include refid="searcher"></include>
 			order by num desc
 			limit #{startRow}, #{perPage}
@@ -33,18 +33,18 @@
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			select count(num) from notice
+   			select count(num) from review
    			<include refid="searcher"></include>
    		</select>
    		
    		<select id="getSelect" resultMap="selectResult" parameterType="BoardVO">
 			SELECT N.*, NF.* from
-			notice N left join noticeFiles NF
+			review N left join reviewFiles NF
 			on N.num = NF.num
 			WHERE N.num=#{num}
    		</select>
    		
-   		<resultMap type="NoticeVO" id="selectResult">
+   		<resultMap type="reviewVO" id="selectResult">
    			<id column="num" property="num"/>
    			<result column="title" property="title"/>
    			<result column="writer" property="writer"/>
@@ -59,50 +59,50 @@
    		</resultMap>
    		
    		<update id="setHitUpdate" parameterType="BoardVO">
-   			update notice set hit=hit+1 where num=#{num}
+   			update review set hit=hit+1 where num=#{num}
    		</update>
    		
    		<insert id="setInsert" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			insert into notice (title,writer,contents,regDate,hit)
+   			insert into review (title,writer,contents,regDate,hit)
    			values(#{title}, #{writer},#{contents}, now(), 0)
    		</insert>
    		
    		<insert id="setFileInsert" parameterType="BoardFileVO">
-   			insert into noticeFiles (num, filename, oriname)
+   			insert into reviewFiles (num, filename, oriname)
    			values (#{num}, #{fileName}, #{oriName})
    		</insert>
    		
    		<update id="setUpdate" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
-   			update notice set title=#{title}, contents=#{contents} where num=#{num}
+   			update review set title=#{title}, contents=#{contents} where num=#{num}
    		</update>
    		
    		<delete id="setDelete" parameterType="BoardVO">
    			SET foreign_key_checks = 0;
-			delete from notice where num=#{num};
-			delete from noticefiles where num=#{num};
-			delete from noticecomment where num=#{num};
+			delete from review where num=#{num};
+			delete from reviewfiles where num=#{num};
+			delete from reviewcomment where num=#{num};
 			SET foreign_key_checks = 1
    		</delete>
    		
    		<insert id="commentInsert" parameterType="BoardCommentVO">
-   			insert into noticeComment (writer, regDate, contents, num)
+   			insert into reviewComment (writer, regDate, contents, num)
    			values (#{writer}, now(), #{contents}, #{num})
    		</insert>
    		
    		<select id="commentList" parameterType="BoardCommentVO" resultType="BoardCommentVO">
-			select * from noticeComment where num=#{num}
+			select * from reviewComment where num=#{num}
    		</select>
    		
    		<select id="commentSelect" parameterType="BoardCommentVO" resultType="BoardCommentVO">
-			select * from noticeComment where commentNum=#{commentNum}
+			select * from reviewComment where commentNum=#{commentNum}
    		</select>
    		
    		<update id="commentUpdate" parameterType="BoardCommentVO">
-   			update noticeComment set contents=#{contents}, regDate=now() where commentNum=#{commentNum}
+   			update reviewComment set contents=#{contents}, regDate=now() where commentNum=#{commentNum}
    		</update>
    		
    		<delete id="commentDelete" parameterType="BoardCommentVO">
-   			delete from noticeComment where commentNum=#{commentNum}
+   			delete from reviewComment where commentNum=#{commentNum}
    		</delete>
    
    </mapper>

@@ -17,7 +17,7 @@
 	<div id="container">
 		<div style="padding: 68px 34px 0;">
 			<div class="title" style="margin: 60px 0 40px; text-align: center;">
-				<p>Notice</p>
+				<p>Review</p>
 			</div>
 			<div>
 				<table class="table"
@@ -83,8 +83,8 @@
 					<td><div>${com.commentNum} ${com.writer} ${com.regDate} </div>
 						<div>${com.contents}</div>
 						<div>
-						<a href="./commentUpdate?commentNum=${com.commentNum}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn btn-info">Deletec</a>
+						<a href="./commentUpdate?commentNum=${Rcom.commentNum}&num=${Rcom.num}" class="btn btn-danger">Updatec</a>
+						<a href="./commentDelete?commentNum=${Rcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
 						</div>
 					</td>
 						
@@ -93,14 +93,14 @@
 					</tbody>
 			</table>
 			<div>
-				<form id="frm" action="./commentInsert" method="post">
+				<form id="frm" action="./RcommentInsert" method="post">
 					<div class="form-group">
 						<label for="writer">Writer:</label> <input type="text"
 							class="form-control myCheck" id="writer" name="writer">
 					</div>
 					<div class="form-group">
 						<label for="num">num:</label> <input type="number"
-							class="form-control myCheck" id="num" name="num" value="${vo.num}" }>
+							class="form-control myCheck" id="num" name="num" value="${Rvo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
@@ -112,11 +112,13 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
-			
+			<c:if test="${Rcvo.commentNum >=1}">
+				<c:import url="/WEB-INF/views/board/review/rcUpdate.jsp"></c:import>
+			</c:if>
 			
 			<div>
-				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
-				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
+				<a href="./Rupdate?num=${vo.num}" class="btn btn-danger">Update</a>
+				<a href="./Rdelete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
 				
 			</div>
 		</div>

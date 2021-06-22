@@ -1,4 +1,4 @@
-package com.fw.s1.board.qna;
+package com.fw.s1.board.review;
 
 import java.util.List;
 
@@ -23,15 +23,15 @@ import com.fw.s1.member.MemberVO;
 import com.fw.s1.util.Pager;
 
 @Controller
-@RequestMapping("/qna/**")
-public class QnaController {
+@RequestMapping("/review/**")
+public class ReviewController {
 	@Autowired
-	private QnaService qnaService;
+	private ReviewService reviewService;
 
 	
 	  @PostMapping("summerFileDelete") public ModelAndView
 	  setSummerFileDelete(String fileName)throws Exception{ ModelAndView mv = new
-	  ModelAndView(); boolean result = qnaService.setSummerFileDelete(fileName);
+	  ModelAndView(); boolean result = reviewService.setSummerFileDelete(fileName);
 	  mv.addObject("result", result); mv.setViewName("common/ajaxResult"); return
 	  mv; }
 	  
@@ -39,20 +39,20 @@ public class QnaController {
 	  setSummerFileUpload(MultipartFile file)throws Exception{ ModelAndView mv =
 	  new ModelAndView(); System.out.println("Summer File Upload");
 	  System.out.println(file.getOriginalFilename()); String fileName =
-	  qnaService.setSummerFileUpload(file); fileName =
-	  "../resources/upload/qna/"+fileName; mv.addObject("result", fileName) ;
+	  reviewService.setSummerFileUpload(file); fileName =
+	  "../resources/upload/review/"+fileName; mv.addObject("result", fileName) ;
 	  mv.setViewName("common/ajaxResult");
 	  
 	  return mv; }
 	 
 
-	// /qna/fileDown
+	// /review/fileDown
 	@GetMapping("fileDown")
 	public ModelAndView fileDown(String fileName, String oriName) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("fileName", fileName);
 		mv.addObject("oriName", oriName);
-		mv.addObject("filePath", "/upload/qna/");
+		mv.addObject("filePath", "/upload/review/");
 
 		// view의 이름은 Bean의 이름과 일치
 		mv.setViewName("down");
@@ -60,32 +60,32 @@ public class QnaController {
 		return mv;
 	}
 
-	// /qna/list
+	// /review/list
 	@GetMapping("list")
 	public String getList(Model model, Pager pager) throws Exception {
-		List<BoardVO> ar = qnaService.getList(pager);
-		model.addAttribute("Qlist", ar);
+		List<BoardVO> ar = reviewService.getList(pager);
+		model.addAttribute("Rlist", ar);
 		model.addAttribute("pager", pager);
 
-		return "board/qna/qnaList";
+		return "board/review/reviewList";
 	}
 
 	@GetMapping("select")
 	public ModelAndView getSelect(BoardVO boardVO, BoardCommentVO boardCommentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<BoardCommentVO> lbc = qnaService.commentList(boardCommentVO);
-		mv.addObject("Qcm", lbc);
-		boardVO = qnaService.getSelect(boardVO);
-		mv.addObject("Qvo", boardVO);
-		mv.setViewName("board/qna/qnaSelect");
+		List<BoardCommentVO> lbc = reviewService.commentList(boardCommentVO);
+		mv.addObject("Rcm", lbc);
+		boardVO = reviewService.getSelect(boardVO);
+		mv.addObject("Rvo", boardVO);
+		mv.setViewName("board/review/reviewSelect");
 		return mv;
 	}
 
 	@GetMapping("insert")
 	public String setInsert(Model model) throws Exception {
-		model.addAttribute("Qvo", new BoardVO());
-		model.addAttribute("action", "qnaInsert");
-		return "board/qna/qnaInsert";
+		model.addAttribute("Rvo", new BoardVO());
+		model.addAttribute("action", "reviewInsert");
+		return "board/review/reviewInsert";
 	}
 
 	@PostMapping("insert")
@@ -95,62 +95,62 @@ public class QnaController {
 //				System.out.println(f.getOriginalFilename());
 //			}
 
-		int result = qnaService.setInsert(boardVO, files);
+		int result = reviewService.setInsert(boardVO, files);
 
 		return "redirect:./list";
 	}
 
 	@GetMapping("update")
 	public String setUpdate(BoardVO boardVO, Model model) throws Exception {
-		boardVO = qnaService.getSelect(boardVO);
-		model.addAttribute("Qvo", boardVO);
-		model.addAttribute("action", "Qupdate");
-		return "board/qna/qnaUpdate";
+		boardVO = reviewService.getSelect(boardVO);
+		model.addAttribute("Rvo", boardVO);
+		model.addAttribute("action", "update");
+		return "board/review/reviewUpdate";
 
 	}
 
 	@PostMapping("update")
 	public String setUpdate(BoardVO boardVO,MultipartFile [] files) throws Exception {
 
-		int result = qnaService.setUpdate(boardVO,files);
+		int result = reviewService.setUpdate(boardVO,files);
 
 		return "redirect:./list";
 	}
 
 	@GetMapping("delete")
 	public String setDelete(BoardVO boardVO) throws Exception {
-		int result = qnaService.setDelete(boardVO);
+		int result = reviewService.setDelete(boardVO);
 		return "redirect:./list";
 	}
 
 	@PostMapping("commentInsert")
 	public String commentInsert(BoardCommentVO boardCommentVO) throws Exception {
-		int result = qnaService.commentInsert(boardCommentVO);
-		return "redirect:./select";
+		int result = reviewService.commentInsert(boardCommentVO);
+		return "redirect:";
 	}
 
 	@GetMapping("commentDelete")
 	public String commentDelete(BoardCommentVO boardCommentVO) throws Exception {
-		int result = qnaService.commentDelete(boardCommentVO);
-		return "redirect:./select";
+		int result = reviewService.commentDelete(boardCommentVO);
+		return "redirect:";
 	}
 
 	@GetMapping("commentUpdate")
 	public String commentUpdate(BoardVO boardVO, BoardCommentVO boardCommentVO, Model model) throws Exception {
-		boardVO = qnaService.getSelect(boardVO);
-		boardCommentVO = qnaService.commentSelect(boardCommentVO);
-		List<BoardCommentVO> lbc = qnaService.commentList(boardCommentVO);
-		model.addAttribute("Qcm", lbc);
-		model.addAttribute("Qvo", boardVO);
-		model.addAttribute("Qcvo", boardCommentVO);
+		boardVO = reviewService.getSelect(boardVO);
+		boardCommentVO = reviewService.commentSelect(boardCommentVO);
+		List<BoardCommentVO> lbc = reviewService.commentList(boardCommentVO);
+		model.addAttribute("Rcm", lbc);
+		model.addAttribute("Rvo", boardVO);
+		model.addAttribute("Rcvo", boardCommentVO);
 		model.addAttribute("action", "commentUpdate");
-		return "board/qna/qnaSelect";
+		return "board/review/reviewSelect";
 	}
 
 	@PostMapping("commentUpdate")
 	public String commentUpdate(BoardCommentVO boardCommentVO) throws Exception {
-		int result = qnaService.commentUpdate(boardCommentVO);
-		return "redirect:./select";
+		int result = reviewService.commentUpdate(boardCommentVO);
+		return "redirect:";
 	}
 
 }

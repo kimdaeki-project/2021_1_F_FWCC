@@ -17,7 +17,7 @@
 	<div id="container">
 		<div style="padding: 68px 34px 0;">
 			<div class="title" style="margin: 60px 0 40px; text-align: center;">
-				<p>qna</p>
+				<p>Review</p>
 			</div>
 			<div>
 				<table class="table"
@@ -28,7 +28,7 @@
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">SUBJECT
 							</th>
 
-							<td style="width: 350px; padding: 10px; vertical-align: top;">${Qvo.title}
+							<td style="width: 350px; padding: 10px; vertical-align: top;">${Rvo.title}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">
@@ -42,7 +42,7 @@
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">WRITER
 							</th>
 
-							<td style="width: 350px; padding: 10px; vertical-align: top;">${Qvo.writer}
+							<td style="width: 350px; padding: 10px; vertical-align: top;">${Rvo.writer}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">
@@ -57,20 +57,20 @@
 							</th>
 
 							<td
-								style="width: 100px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${Qvo.regDate}
+								style="width: 100px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${Rvo.regDate}
 							</td>
 							<th scope="row"
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top; border-bottom: 1px solid #ccc;">HIT
 							</th>
 
 							<td
-								style="width: 1000px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${Qvo.hit}
+								style="width: 1000px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc;">${Rvo.hit}
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<div style="text-align: center;">${Qvo.contents}</div>
-				<c:forEach items="${Qvo.files}" var="fileVO">
+				<div style="text-align: center;">${Rvo.contents}</div>
+				<c:forEach items="${Rvo.files}" var="fileVO">
 					<a
 						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a>
 				</c:forEach>
@@ -78,13 +78,13 @@
 			<table class="table"
 					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; ">
 					<tbody>
-					<c:forEach items="${Qcm}" var="Qcom" >
+					<c:forEach items="${Rcm}" var="Rcom" >
 					<tr>
-					<td><div>${Qcom.commentNum} ${Qcom.writer} ${Qcom.regDate} </div>
-						<div>${Qcom.contents}</div>
+					<td><div>${Rcom.commentNum} ${Rcom.writer} ${Rcom.regDate} </div>
+						<div>${Rcom.contents}</div>
 						<div>
-						<a href="./commentUpdate?commentNum=${Qcom.commentNum}&num=${Qcom.num}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${Qcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
+						<a href="./commentUpdate?commentNum=${Rcom.commentNum}&num=${Rcom.num}" class="btn btn-danger">Updatec</a>
+						<a href="./commentDelete?commentNum=${Rcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
 						</div>
 					</td>
 						
@@ -100,7 +100,7 @@
 					</div>
 					<div class="form-group">
 						<label for="num">num:</label> <input type="number"
-							class="form-control myCheck" id="num" name="num" value="${Qvo.num}" }>
+							class="form-control myCheck" id="num" name="num" value="${Rvo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
@@ -112,13 +112,13 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
-			<c:if test="${Qcvo.commentNum >=1}">
-				<c:import url="/WEB-INF/views/board/qna/qcUpdate.jsp"></c:import>
+			<c:if test="${Rcvo.commentNum >=1}">
+				<c:import url="/WEB-INF/views/board/review/rcUpdate.jsp"></c:import>
 			</c:if>
 			
 			<div>
-				<a href="./update?num=${Qvo.num}" class="btn btn-danger">Update</a>
-				<a href="./delete?num=${Qvo.num}" id="del" class="btn btn-info">Delete</a>
+				<a href="./update?num=${Rvo.num}" class="btn btn-danger">Update</a>
+				<a href="./delete?num=${Rvo.num}" id="del" class="btn btn-info">Delete</a>
 				
 			</div>
 		</div>

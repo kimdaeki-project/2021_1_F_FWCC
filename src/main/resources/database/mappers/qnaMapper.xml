@@ -24,7 +24,7 @@
    		</sql>
    		
    		
-   		<select id="getList" resultType="QnaVO" parameterType="Pager">
+   		<select id="getList" resultType="qnaVO" parameterType="Pager">
 			select * from qna
 			<include refid="searcher"></include>
 			order by num desc
@@ -44,9 +44,8 @@
 			WHERE N.num=#{num}
    		</select>
    		
-   		<resultMap type="QnaVO" id="selectResult">
+   		<resultMap type="qnaVO" id="selectResult">
    			<id column="num" property="num"/>
-   			<result column="productNum" property="productNum"/>
    			<result column="title" property="title"/>
    			<result column="writer" property="writer"/>
    			<result column="contents" property="contents"/>
@@ -73,12 +72,16 @@
    			values (#{num}, #{fileName}, #{oriName})
    		</insert>
    		
-   		<update id="setUpdate" parameterType="BoardVO">
+   		<update id="setUpdate" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
    			update qna set title=#{title}, contents=#{contents} where num=#{num}
    		</update>
    		
    		<delete id="setDelete" parameterType="BoardVO">
-   			delete from qna where num=#{num}
+   			SET foreign_key_checks = 0;
+			delete from qna where num=#{num};
+			delete from qnafiles where num=#{num};
+			delete from qnacomment where num=#{num};
+			SET foreign_key_checks = 1
    		</delete>
    		
    		<insert id="commentInsert" parameterType="BoardCommentVO">
@@ -90,8 +93,12 @@
 			select * from qnaComment where num=#{num}
    		</select>
    		
+   		<select id="commentSelect" parameterType="BoardCommentVO" resultType="BoardCommentVO">
+			select * from qnaComment where commentNum=#{commentNum}
+   		</select>
+   		
    		<update id="commentUpdate" parameterType="BoardCommentVO">
-   			update qnaComment set writer=#{writer}, regDate=#{regDate}, contents=#{contents}, num=#{num} where commentNum=#{commentNum}
+   			update qnaComment set contents=#{contents}, regDate=now() where commentNum=#{commentNum}
    		</update>
    		
    		<delete id="commentDelete" parameterType="BoardCommentVO">
