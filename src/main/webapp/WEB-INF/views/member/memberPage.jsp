@@ -78,7 +78,7 @@
 						<a href="${pageContext.request.contextPath}/member/memberPage/memberProfile"><strong>profile</strong>회원 정보</a>
 					</h3>
 				</div>
-				<div class="shopMain wishlist">
+				<!-- <div class="shopMain wishlist">
 					<h3>
 						<a href="#"><strong>wishlist</strong>관심 상품</a>
 					</h3>
@@ -87,12 +87,13 @@
 					<h3>
 						<a href="#"><strong>today view</strong>오늘 본 상품</a>
 					</h3>
-				</div>
+				</div> -->
 				<div class="shopMain mileage ">
 					<h3 class="txtTitle16B">
 						<a href="#"><strong>mileage</strong>적립금</a>
 					</h3>
 				</div>
+				<br>
 				<div class="shopMain coupon ">
 					<h3>
 						<a href="#"><strong>coupon</strong>쿠폰</a>

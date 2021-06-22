@@ -97,7 +97,7 @@
 					<a href="${pageContext.request.contextPath }/member/memberLogin">Login</a> / <a href="${pageContext.request.contextPath }/member/memberJoin">Join</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<a href="${pageContext.request.contextPath }/member/memberLogout">Logout</a> / <a href="#">My info</a>
+					<a href="${pageContext.request.contextPath }/member/memberLogout">Logout</a> / <a href="${pageContext.request.contextPath }/member/memberPage/memberProfile">My info</a>
 				</sec:authorize>
 			</li>
 			<li id="navbar-columnlist">
