@@ -27,4 +27,9 @@ public class OrderService {
 		return orderMapper.getOrderList(orderlistVO);
 	}
 	
+	// member orderList filter 조회
+	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO) throws Exception {
+		return orderMapper.getFilteredList(orderlistVO);
+	}
+	
 }

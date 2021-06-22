@@ -17,4 +17,6 @@ public interface OrderMapper {
 	// member orderList 조회
 	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception;
 	
+	// member orderList filter 조회
+	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO) throws Exception;
 }

@@ -79,5 +79,17 @@
 		where O.username=#{username} and PF.fileName like 'T_%'
 		order by O.orderNum asc
 	</select>
+	
+	<select id="getFilteredList" parameterType="OrderlistVO" resultMap="getOrderProduct">
+		select PF.fileName, P.productTitle, O.*, PU.* from productFiles PF
+		inner join product P
+		on PF.productNum = P.productNum
+		inner join purchase PU
+		on P.productNum = PU.productNum
+		inner join orderlist O
+		on PU.orderNum = O.orderNum
+		where O.username=#{username} and PF.fileName like 'T_%' and orderDate between #{startDate} and #{endDate}
+		order by O.orderNum asc
+	</select>
 
  </mapper>

@@ -8,10 +8,6 @@ let today = dayjs().format("YYYY-MM-DD");
 // 페이지 로딩 시 기간 default 3개월 전
 $(document).ready(function() {
 	$("#history_end_date").val(today);
-	
-	/*//3개월 전
-	let targetDate = dayjs().subtract(3, "month").format("YYYY-MM-DD");
-	$("#history_start_date").val(targetDate);*/
 });
 
 // 날짜 검색 버튼 ==============================================
@@ -53,17 +49,17 @@ $("#order_search_btn").click(function(){
 	console.log(endDate);
 	$.ajax({
 		type:"GET",
-		url:"./orderlist",
+		url:"./filteredList",
 		data:{
 			orderState:orderState,
 			startDate:startDate,
 			endDate:endDate
 		},
 		success:function(result){
-			alert(result);
+			alert("success");
 		},
 		error:function(result){
-			alert(result);
+			alert("error");
 		}
 	}); // --- ajax END ---
 });

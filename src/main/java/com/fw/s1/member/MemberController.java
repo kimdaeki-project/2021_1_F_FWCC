@@ -1,5 +1,6 @@
 package com.fw.s1.member;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fw.s1.coupon.CouponService;
@@ -146,7 +148,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("memberPage/filteredList")
-	public ModelAndView getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
+	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
 		System.out.println("=== 검색 컨트롤러 ===");
 		ModelAndView mv = new ModelAndView();
 		orderlistVO.setUsername(authentication.getName());
@@ -154,10 +156,14 @@ public class MemberController {
 		System.out.println(orderlistVO.getStartDate());
 		System.out.println(orderlistVO.getEndDate());
 		System.out.println("===========================================================");
-		List<ProductFileVO> ar = orderService.getOrderList(orderlistVO);
-		mv.addObject("list", ar);
+		List<ProductFileVO> ar = orderService.getFilteredList(orderlistVO);
+		for(ProductFileVO VO:ar) {
+			System.out.println(VO);
+		}
+		String result = "";
+		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
-		return mv;
+		return ar;
 	}
 	
 }

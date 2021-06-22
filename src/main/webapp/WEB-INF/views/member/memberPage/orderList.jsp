@@ -43,9 +43,7 @@
 
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab ">
 				<ul class="menu">
-					<li class="tab_class"><a href="#">주문내역조회 (<span
-							id="xans_myshop_total_orders"
-						>0</span>)
+					<li class="tab_class"><a href="#">주문내역조회 (<span id="xans_myshop_total_orders">0</span>)
 					</a></li>
 					<li class="tab_class_cs"><a href="#">취소/반품/교환 내역 (<span
 							id="xans_myshop_total_orders_cs"
@@ -54,11 +52,10 @@
 				</ul>
 			</div>
 			<form
-				method="GET"
+				action="#"
 				id="OrderHistoryForm"
-				name="OrderHistoryForm"
 			>
-<!-- 검색 필터 START -->
+				<!-- 검색 필터 START -->
 				<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
 					<fieldset class="ec-base-box">
 						<legend>검색기간설정</legend>
@@ -120,7 +117,6 @@
 							id="history_start_date"
 							name="startDate"
 							class="fText"
-							readonly="readonly"
 							size="10"
 							value=""
 							type="text"
@@ -128,7 +124,6 @@
 							id="history_end_date"
 							name="endDate"
 							class="fText"
-							readonly="readonly"
 							size="10"
 							value=""
 							type="text"
@@ -144,8 +139,8 @@
 						<li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
 					</ul>
 				</div>
-<!-- ????????????????????????????????????? -->
-				<input
+				<!-- ????????????????????????????????????? -->
+				<!-- 	<input
 					id="mode"
 					name="mode"
 					value=""
@@ -155,10 +150,10 @@
 					name="term"
 					value=""
 					type="hidden"
-				/>
-<!-- ????????????????????????????????????? -->
+				/> -->
+				<!-- ????????????????????????????????????? -->
 			</form>
-<!-- 검색 필터 END -->
+			<!-- 검색 필터 END -->
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem ec-base-table typeList">
 				<div class="title">
 					<h3>주문 상품 정보</h3>
@@ -188,9 +183,12 @@
 							<th scope="col">취소/교환/반품</th>
 						</tr>
 					</thead>
-					<c:if test="${list != null}">					
+					<c:if test="${list != null}">
 						<tbody>
-							<c:forEach items="${list}" var="VO">
+							<c:forEach
+								items="${list}"
+								var="VO"
+							>
 								<tr>
 									<td>${VO.fileName }</td>
 									<td>${VO.productVO.productTitle}</td>
@@ -198,54 +196,52 @@
 									<td>${VO.purchaseVO.productCount}</td>
 									<td>${VO.purchaseVO.proPriceSum}</td>
 									<td><c:choose>
-										<c:when test="${VO.orderlistVO.orderState == 1}">
+											<c:when test="${VO.orderlistVO.orderState == 1}">
 											주문완료
 										</c:when>
-										<c:when test="${VO.orderlistVO.orderState == 2}">
+											<c:when test="${VO.orderlistVO.orderState == 2}">
 											배송중
 										</c:when>
-										<c:when test="${VO.orderlistVO.orderState == 3}">
+											<c:when test="${VO.orderlistVO.orderState == 3}">
 											배송완료
 										</c:when>
-										<c:when test="${VO.orderlistVO.orderState == 4}">
+											<c:when test="${VO.orderlistVO.orderState == 4}">
 											취소
 										</c:when>
-									</c:choose></td>
-									<td>
-										<c:if test="${VO.orderlistVO.orderState != 4}">
-											<a href="#"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"/></a>
-										</c:if>
-									</td>
+										</c:choose></td>
+									<td><c:if test="${VO.orderlistVO.orderState != 4}">
+											<a href="#"><img
+												src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif"
+												alt="주문취소"
+											/></a>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</c:if>
 				</table>
-				<c:if test="${list == null}">				
+				<c:if test="${list == null}">
 					<p class="message ">주문 내역이 없습니다.</p>
 				</c:if>
 			</div>
-<!-- pager START -->
+			<!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate">
 				<a
 					href="#"
 					class="first"
-				>&lt;</a> <a
-					href="#"
-				>PREV</a>
+				>&lt;</a> <a href="#">PREV</a>
 				<ol>
 					<li class="xans-record-"><a
 						href="#"
 						class="this"
 					>1</a></li>
 				</ol>
-				<a href="#">NEXT</a>
-				<a
+				<a href="#">NEXT</a> <a
 					href="#"
 					class="last"
 				>&gt;</a>
 			</div>
-<!-- pager END -->
+			<!-- pager END -->
 		</div>
 	</div>
 	<!-- contents END -->
@@ -257,6 +253,9 @@
 	<!-- External JS -->
 
 	<!-- Custom JS -->
-<script type="text/javascript" src="/js/member/memberPage/orderList.js"></script>
+	<script
+		type="text/javascript"
+		src="/js/member/memberPage/orderList.js"
+	></script>
 </body>
 </html>
