@@ -34,6 +34,10 @@ public class MemberVO implements UserDetails{
 	@Length(min = 3)
 	private String phone;
 	
+	private String phone0;
+	private String phone1;
+	private String phone2;
+	
 	@Email
 	private String email;
 	private String birth;

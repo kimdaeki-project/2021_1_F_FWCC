@@ -75,7 +75,7 @@
 				</div>
 				<div class="shopMain profile">
 					<h3>
-						<a href="#"><strong>profile</strong>회원 정보</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberProfile"><strong>profile</strong>회원 정보</a>
 					</h3>
 				</div>
 				<div class="shopMain wishlist">
