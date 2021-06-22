@@ -3,10 +3,10 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace="com.fw.s1.board.lookbook.lookbookMapper">
+    <mapper namespace="com.fw.s1.board.lookbook.LookBookMapper">
     	<select id="lbList" resultType="lookbookVO" parameterType="Pager">
 			select * from lookbook
-			<include refid="searcher"></include>
+			<!-- <include refid="searcher"></include> -->
 			order by num desc
 			limit #{startRow}, #{perPage}
 			<!-- limit 시작index번호(0부터시작), 갯수 --> 
@@ -14,7 +14,7 @@
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
    			select count(num) from lookbook
-   			<include refid="searcher"></include>
+   			<!-- <include refid="searcher"></include> -->
    		</select>
    		
     	<insert id="lbInsert" parameterType="LookBookVO">

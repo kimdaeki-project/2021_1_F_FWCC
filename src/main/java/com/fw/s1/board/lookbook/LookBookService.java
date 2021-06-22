@@ -12,9 +12,9 @@ public class LookBookService {
 	@Autowired
 	private LookBookMapper lookbookMapper;
 	
-	public List<LookBookVO> lbList(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.lbList(lookbookVO);
-	}
+	//public List<LookBookVO> lbList(LookBookVO lookbookVO) throws Exception {
+	//	return lookbookMapper.lbList(lookbookVO);
+	//}
 	
 	public LookBookVO lbSelect(LookBookVO lookbookVO) throws Exception {
 		return lookbookMapper.lbSelect(lookbookVO);
