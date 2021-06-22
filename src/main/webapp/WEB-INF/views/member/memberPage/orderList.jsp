@@ -65,17 +65,14 @@
 						<div class="stateSelect ">
 							<select
 								id="order_status"
-								name="order_status"
+								name="orderState"
 								class="fSelect"
 							>
-								<option value="all">전체 주문처리상태</option>
-								<option value="shipped_before">입금전</option>
-								<option value="shipped_standby">배송준비중</option>
-								<option value="shipped_begin">배송중</option>
-								<option value="shipped_complate">배송완료</option>
-								<option value="order_cancel">취소</option>
-								<option value="order_exchange">교환</option>
-								<option value="order_return">반품</option>
+								<option value="0">전체 주문처리상태</option>
+								<option value="1">주문완료</option>
+								<option value="2">배송중</option>
+								<option value="3">배송완료</option>
+								<option value="4">취소</option>
 							</select>
 						</div>
 						<span class="period"> <a
@@ -121,7 +118,7 @@
 							/></a>
 						</span> <input
 							id="history_start_date"
-							name="history_start_date"
+							name="startDate"
 							class="fText"
 							readonly="readonly"
 							size="10"
@@ -129,7 +126,7 @@
 							type="text"
 						/> ~ <input
 							id="history_end_date"
-							name="history_end_date"
+							name="endDate"
 							class="fText"
 							readonly="readonly"
 							size="10"
@@ -182,9 +179,9 @@
 					</colgroup>
 					<thead>
 						<tr class="kor">
-							<th scope="col">주문일자 [주문번호]</th>
 							<th scope="col">이미지</th>
 							<th scope="col">상품정보</th>
+							<th scope="col">주문일자 [주문번호]</th>
 							<th scope="col">수량</th>
 							<th scope="col">상품구매금액</th>
 							<th scope="col">주문처리상태</th>
@@ -195,15 +192,30 @@
 						<tbody>
 							<c:forEach items="${list}" var="VO">
 								<tr>
-									<td>${VO.orderNum}</td>
-									<c:forEach items="${VO.productFileVO}" var="file">
-										<td>${file.fileName}</td>
-										
-									</c:forEach>
-									<td>수량</td>
-									<td>${VO.spPrice}</td>
-										<td>${VO.orderState}</td>
-									<td><a href="#"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"/></a></td>
+									<td>${VO.fileName }</td>
+									<td>${VO.productVO.productTitle}</td>
+									<td>${VO.orderlistVO.orderNum}</td>
+									<td>${VO.purchaseVO.productCount}</td>
+									<td>${VO.purchaseVO.proPriceSum}</td>
+									<td><c:choose>
+										<c:when test="${VO.orderlistVO.orderState == 1}">
+											주문완료
+										</c:when>
+										<c:when test="${VO.orderlistVO.orderState == 2}">
+											배송중
+										</c:when>
+										<c:when test="${VO.orderlistVO.orderState == 3}">
+											배송완료
+										</c:when>
+										<c:when test="${VO.orderlistVO.orderState == 4}">
+											취소
+										</c:when>
+									</c:choose></td>
+									<td>
+										<c:if test="${VO.orderlistVO.orderState != 4}">
+											<a href="#"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif" alt="주문취소"/></a>
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -216,20 +228,20 @@
 <!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate">
 				<a
-					href="?page=1&history_start_date=2021-03-17&history_end_date=2021-06-15&past_year=2020"
+					href="#"
 					class="first"
 				>&lt;</a> <a
-					href="?page=1&history_start_date=2021-03-17&history_end_date=2021-06-15&past_year=2020"
+					href="#"
 				>PREV</a>
 				<ol>
 					<li class="xans-record-"><a
-						href="?page=1&history_start_date=2021-03-17&history_end_date=2021-06-15&past_year=2020"
+						href="#"
 						class="this"
 					>1</a></li>
 				</ol>
-				<a href="?page=1&history_start_date=2021-03-17&history_end_date=2021-06-15&past_year=2020">NEXT</a>
+				<a href="#">NEXT</a>
 				<a
-					href="?page=1&history_start_date=2021-03-17&history_end_date=2021-06-15&past_year=2020"
+					href="#"
 					class="last"
 				>&gt;</a>
 			</div>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.fw.s1.product.ProductFileVO;
+
 @Service
 public class OrderService {
 
@@ -21,7 +23,8 @@ public class OrderService {
 	}
 	
 	// member orderList 조회
-	public List<OrderlistVO> getOrderList(OrderlistVO orderlistVO) throws Exception {
+	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception {
 		return orderMapper.getOrderList(orderlistVO);
 	}
+	
 }

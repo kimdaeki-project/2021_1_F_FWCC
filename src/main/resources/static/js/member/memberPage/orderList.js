@@ -46,21 +46,26 @@ $("#btn180").click(function(){
 
 // 필터 조회 ===================================================
 $("#order_search_btn").click(function(){
-	let orderStatus = $("#order_status").val();
+	let orderState = $("#order_status").val();
 	let startDate = $("#history_start_date").val();
 	let endDate = $("#history_end_date").val();
-	$.ajax(
-		method="GET",
-		url="./orderList",
-		data={
-			orderState:orderStatus,
+	console.log(startDate);
+	console.log(endDate);
+	$.ajax({
+		type:"GET",
+		url:"./orderlist",
+		data:{
+			orderState:orderState,
 			startDate:startDate,
 			endDate:endDate
 		},
-		success=function(){
-			
+		success:function(result){
+			alert(result);
+		},
+		error:function(result){
+			alert(result);
 		}
-	);
+	}); // --- ajax END ---
 });
 
 

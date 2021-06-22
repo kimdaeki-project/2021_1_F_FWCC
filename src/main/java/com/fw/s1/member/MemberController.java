@@ -23,6 +23,7 @@ import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
 import com.fw.s1.order.OrderService;
 import com.fw.s1.order.OrderlistVO;
+import com.fw.s1.product.ProductFileVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -138,16 +139,25 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		OrderlistVO orderlistVO = new OrderlistVO();
 		orderlistVO.setUsername(authentication.getName());
-		List<OrderlistVO> ar = orderService.getOrderList(orderlistVO);
-		for(OrderlistVO VO:ar) {
-			System.out.println(VO);
-		}
-		
-		
+		List<ProductFileVO> ar = orderService.getOrderList(orderlistVO);
 		mv.addObject("list", ar);
 		mv.setViewName("member/memberPage/orderList");
 		return mv;
 	}
 	
+	@GetMapping("memberPage/filteredList")
+	public ModelAndView getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
+		System.out.println("=== 검색 컨트롤러 ===");
+		ModelAndView mv = new ModelAndView();
+		orderlistVO.setUsername(authentication.getName());
+		System.out.println("===========================================================");
+		System.out.println(orderlistVO.getStartDate());
+		System.out.println(orderlistVO.getEndDate());
+		System.out.println("===========================================================");
+		List<ProductFileVO> ar = orderService.getOrderList(orderlistVO);
+		mv.addObject("list", ar);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
 	
 }
