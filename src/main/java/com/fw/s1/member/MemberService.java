@@ -104,6 +104,13 @@ public class MemberService implements UserDetailsService {
 		return addressMapper.getProfileAddress(memberVO);
 	}
 	
+	public boolean getPwCheck(MemberVO memberVO) throws Exception {
+		String pwCheck = memberVO.getPasswordCheck();
+		memberVO = memberMapper.getMemberProfile(memberVO);
+		boolean check = passwordEncoder.matches(pwCheck, memberVO.getPassword());
+		return check;
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public Long setMemberUpdate(MemberVO memberVO) throws Exception {
 		long result = 0L;

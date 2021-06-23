@@ -181,6 +181,15 @@ public class MemberController {
 		return mv;
 	}
 	
+	@PostMapping("memberPage/pwCheck")
+	public ModelAndView getPwCheck(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boolean result = memberService.getPwCheck(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
 	@PostMapping("memberPage/memberUpdate")
 	public ModelAndView setMemberUpdate(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
