@@ -90,7 +90,7 @@
 				</div> -->
 				<div class="shopMain mileage ">
 					<h3 class="txtTitle16B">
-						<a href="#"><strong>mileage</strong>적립금</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberMileage"><strong>mileage</strong>적립금</a>
 					</h3>
 				</div>
 				<br>

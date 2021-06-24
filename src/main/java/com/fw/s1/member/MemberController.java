@@ -200,4 +200,15 @@ public class MemberController {
 		return mv;
 	}
 	
+// mileage ===============================================
+	@GetMapping("memberPage/memberMileage")
+	public void getMemberMileage(Authentication authentication) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<MileageVO> ar = memberService.getMemberMileage(memberVO);
+		for(MileageVO VO:ar) {
+			System.out.println(VO);
+		}
+	}
+	
 }

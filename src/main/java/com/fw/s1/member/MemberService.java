@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import com.fw.s1.address.AddressMapper;
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.mileage.MileageMapper;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
 
@@ -36,6 +37,9 @@ public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private MileageService mileageService;
+	
+	@Autowired
+	private MileageMapper mileageMapper;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(MemberVO memberVO) throws Exception {
@@ -122,6 +126,10 @@ public class MemberService implements UserDetailsService {
 		result = addressMapper.setProfileAddressUpdate(memberVO);
 		
 		return result;
+	}
+	
+	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception {
+		return mileageMapper.getMemberMileage(memberVO);
 	}
 	
 	

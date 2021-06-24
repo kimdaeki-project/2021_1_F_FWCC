@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fw.s1.member.MemberVO;
+
 @Mapper
 public interface MileageMapper {
 
@@ -17,4 +19,7 @@ public interface MileageMapper {
 	public Long mileageForSelect(List<MileageVO> list)throws Exception;
 	// 회원가입 후 마일리지 적립
 	public Long setMileAfterJoin(MileageVO mileageVO) throws Exception;
+	
+	// member 마일리지 조회
+	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception;
 }
