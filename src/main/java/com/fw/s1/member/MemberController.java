@@ -202,13 +202,28 @@ public class MemberController {
 	
 // mileage ===============================================
 	@GetMapping("memberPage/memberMileage")
-	public void getMemberMileage(Authentication authentication) throws Exception {
+	public ModelAndView getMemberMileage(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(authentication.getName());
 		List<MileageVO> ar = memberService.getMemberMileage(memberVO);
 		for(MileageVO VO:ar) {
 			System.out.println(VO);
 		}
+		MileageVO mileageVO = memberService.getRecentMemberMileage(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("mileageVO", mileageVO);
+		mv.setViewName("member/memberPage/memberMileage");
+		return mv;
+	}
+	
+// coupon ===============================================
+	@GetMapping("memberPage/memberCoupon")
+	public ModelAndView getMemberCoupon(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberPage/memberCoupon");
+		return mv;
 	}
 	
 }

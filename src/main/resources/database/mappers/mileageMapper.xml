@@ -52,4 +52,11 @@
 			<result column="orderDate" property="orderDate"/>
 		</association>
 	</resultMap>
+	
+	<select id="getRecentMemberMileage" parameterType="MemberVO" resultType="MileageVO">
+		select * from mileage 
+		where username = #{username}
+		order by mileNum desc
+		limit 1
+	</select>
 </mapper>

@@ -132,6 +132,10 @@ public class MemberService implements UserDetailsService {
 		return mileageMapper.getMemberMileage(memberVO);
 	}
 	
+	public MileageVO getRecentMemberMileage(MemberVO memberVO) throws Exception {
+		return mileageMapper.getRecentMemberMileage(memberVO);
+	}
+	
 	
 // ======================================================================================
 	@Override

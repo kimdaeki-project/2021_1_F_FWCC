@@ -22,4 +22,7 @@ public interface MileageMapper {
 	
 	// member 마일리지 조회
 	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception;
+	
+	// member 최근 마일리지 조회
+	public MileageVO getRecentMemberMileage(MemberVO memberVO) throws Exception;
 }

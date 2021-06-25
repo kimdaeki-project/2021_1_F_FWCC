@@ -537,45 +537,214 @@ body.eMobilePopup {
 	}
 }
 
-.xans-myshop-summary {
-	margin: 0 0 20px;
+.displaynone {
+	display: none;
 }
 
-.xans-myshop-summary ul:after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-.xans-myshop-summary ul li {
-	float: left;
-	margin: 5px 0;
-	padding: 0 45px;
-	width: 50%;
-	height: 20px;
+.coupon_list td {
+	color: #555555;
+	font-family: 돋움;
 	font-size: 12px;
-	line-height: 1.6;
-	vertical-align: top;
-	box-sizing: border-box;
+	line-height: 17px;
+	word-break: break-all
 }
 
-.xans-myshop-summary .title {
-	float: left;
-	width: 50%;
-	padding: 0 0 0 10px;
-	font-weight: normal;
+.coupon_list th {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	line-height: 17px;
+	word-break: break-all
+}
+
+.coupon_product {
+	margin: 0px;
+}
+
+.coupon_product td {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	line-height: 17px;
+	word-break: break-all
+}
+
+.coupon_product a:link {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	text-decoration: none;
+	line-height: 17px
+}
+
+.coupon_product a:visited {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	text-decoration: none;
+	line-height: 17px
+}
+
+.coupon_product a:active {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	text-decoration: none;
+	line-height: 17px
+}
+
+.coupon_product a:hover {
+	color: #555555;
+	font-family: 돋움;
+	font-size: 12px;
+	text-decoration: none;
+	line-height: 17px
+}
+
+.tle_h1 {
 	background:
-		url("//img.echosting.cafe24.com/skin/base/common/ico_arrow.png")
-		no-repeat 0 6px;
-	box-sizing: border-box;
+		url(//img.cafe24.com/images/ec_admin/sample/my_shopping/bg_h1.gif)
+		repeat-x;
+	height: 50px;
 }
 
-.xans-myshop-summary .data {
+.boxi_1 {
+	border: 1px #7f9db9 solid;
+	height: 19px;
+}
+
+.left_menu {
+	width: 140px;
 	float: left;
-	width: 50%;
-	padding: 0 10px 0 10px;
-	text-align: right;
-	box-sizing: border-box;
+	border: 1px #ccc solid;
+	margin-top: 15px;
+}
+
+.left_menu h1 {
+	margin: 0;
+	background-color: #0092d6;
+	padding: 10px 5px 8px 10px;
+	font: bold 12px/12px gulim;
+	color: #fff;
+}
+
+.lmenu {
+	margin: 0;
+	padding: 12px 5px 5px 10px;
+}
+
+.lmenu .xx {
+	list-style-type: none;
+	background:
+		url(//img.cafe24.com/images/ec_admin/sample/my_shopping/bul_77.gif) 0
+		3px no-repeat;
+	padding: 0 0 8px 9px;
+	font: 12px/12px gulim;
+	color: #333;
+	position: relative;
+}
+
+.lmenu .xx ul {
+	border: 1px #ccc solid;
+	background-color: #fff;
+	padding: 8px 5px 2px 8px;
+	width: 130px;
+	position: absolute;
+	left: 50px;
+	top: -5px;
+}
+
+.lmenu .xx ul li {
+	list-style-type: none;
+	background:
+		url(//img.cafe24.com/images/ec_admin/sample/my_shopping/bul_66.gif) 0
+		5px no-repeat;
+	padding: 0 0 4px 8px;
+	font: 12px/12px gulim;
+}
+
+.body_contents {
+	width: 505px;
+	float: right;
+	margin: 15px 0 0 10px;
+	padding-bottom: 40px;
+}
+
+.mtle_xx {
+	margin: 30px 0 0 0;
+	padding: 0 0 8px 12px;
+	background:
+		url(//img.cafe24.com/images/ec_admin/sample/my_shopping/bul_88.gif)
+		no-repeat;
+	font: bold 13px/13px gulim;
+	color: #333;
+}
+
+.table_coupon {
+	width: 100%;
+}
+
+.table_coupon td {
+	border-bottom: 1px #ccc solid;
+	padding: 10px;
+	font: 12px/1.4em dotum;
+}
+
+.cls_now a:link {
+	font: bold;
+	color: red;
+}
+
+.cls_now a:visited {
+	font: bold;
+	color: red;
+}
+
+.xans-myshop-couponlist .title {
+	overflow: hidden;
+	margin: 40px 0 10px 10px;
+	*zoom: 1;
+}
+
+.xans-myshop-couponlist .title h3 {
+	float: left;
+	color: #353535;
+	font-size: 12px;
+}
+
+.xans-myshop-couponlist .title p {
+	float: right;
+	color: #757575;
+}
+
+.xans-myshop-couponlist td.payment, .xans-myshop-couponlist td.sale,
+	.xans-myshop-couponlist td.mileage {
+	color: #757575;
+}
+
+.xans-myshop-couponserial .title {
+	margin: 0 0 10px 10px;
+}
+
+.xans-myshop-couponserial .title h3 {
+	color: #353535;
+	font-size: 12px;
+}
+
+.xans-myshop-couponserial .couponSerial {
+	text-align: center;
+}
+
+.xans-myshop-couponserial .couponSerial #coupon_code {
+	height: 34px;
+	width: 340px;
+	font-size: 15px;
+	text-align: center;
+}
+
+.xans-myshop-couponserial .couponSerial p {
+	padding: 10px 0 0;
+	color: #757575;
 }
 
 ::selection {
@@ -3448,7 +3617,7 @@ div.ec-base-help ul li {
 }
 
 .ec-base-table .right {
-	text-align: left;
+	text-align: right;
 }
 
 .ec-base-table.typeList .center td, .ec-base-table.typeList td.center {

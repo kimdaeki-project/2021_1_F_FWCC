@@ -41,20 +41,14 @@
 				</div>
 				<div class="xans-element- xans-myshop xans-myshop-summary ec-base-box gHalf">
 					<ul>
-						<li class=""><strong class="title">총 적립금</strong> <span class="data"><span
+						<li class=""><strong class="title">총 적립금</strong> <span class="data">${mileageVO.usedMile + mileageVO.enabledMile}점<span
 								id="xans_myshop_summary_total_mileage"
 							></span>&nbsp;</span></li>
-						<li class=""><strong class="title">사용가능 적립금</strong> <span class="data"><span
+						<li class=""><strong class="title">사용가능 적립금</strong> <span class="data">${mileageVO.enabledMile}점<span
 								id="xans_myshop_summary_avail_mileage"
 							></span>&nbsp;</span></li>
-						<li class=""><strong class="title">사용된 적립금</strong> <span class="data"><span
+						<li class=""><strong class="title">사용된 적립금</strong> <span class="data">${mileageVO.usedMile}점<span
 								id="xans_myshop_summary_used_mileage"
-							></span>&nbsp;</span></li>
-						<li class=""><strong class="title">미가용 적립금</strong> <span class="data"><span
-								id="xans_myshop_summary_unavail_mileage"
-							></span>&nbsp;</span></li>
-						<li class=""><strong class="title">환불예정 적립금</strong> <span class="data"><span
-								id="xans_myshop_summary_returned_mileage"
 							></span>&nbsp;</span></li>
 					</ul>
 				</div>
@@ -87,44 +81,50 @@
 								</tr>
 							</thead>
 							<tbody class=" center">
-								<tr class="xans-record-">
-									<td></td>
-									<td class="right"></td>
-									<td><a href="#"></a></td>
-									<td class="left"></td>
-								</tr>
+								<c:if test="${list != null}">
+									<c:forEach items="${list}" var="VO">
+										<tr class="xans-record-">
+											<td>${VO.orderlistVO.orderDate}</td>
+											<td class="right">${VO.changeMile}</td>
+											<td><a href="#">${VO.orderNum}</a></td>
+											<td class="left">${VO.mileContents}</td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
-						<p class="message displaynone">적립금 내역이 없습니다.</p>
+						<c:if test="${list == null}">
+						<p class="message">적립금 내역이 없습니다.</p>
+						</c:if>
 					</div>
 				</div>
 			</div>
-
+			
+			<!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-historypaging ec-base-paginate">
 				<a
-					href="/myshop/mileage/historyList.html?page=1"
+					href="#"
 					class="first"
-				>&lt;</a> <a href="/myshop/mileage/historyList.html?page=1">PREV</a>
+				>&lt;</a> <a href="#">PREV</a>
 				<ol>
 					<li class="xans-record-"><a
-						href="?page=1"
+						href="#"
 						class="this"
 					>1</a></li>
 				</ol>
-				<a href="/myshop/mileage/historyList.html?page=1">NEXT</a> <a
-					href="/myshop/mileage/historyList.html?page=1"
+				<a href="#">NEXT</a> <a
+					href="#"
 					class="last"
 				>&gt;</a>
 			</div>
-
+			<!-- pager END -->
+			
 			<div class="xans-element- xans-myshop xans-myshop-head ec-base-help ">
 				<h3>적립금 안내</h3>
 				<div class="inner">
 					<ol class="xans-element- xans-myshop xans-myshop-historyinfo">
-						<li class="item1 ">주문으로 발생한 적립금은 배송완료 후 1일 부터 실제 사용 가능한 적립금으로 전환됩니다. 배송완료 시점으로부터 1일 동안은
-							미가용 적립금으로 분류됩니다.</li>
-						<li class="item2 ">미가용 적립금은 반품, 구매취소 등을 대비한 임시 적립금으로 사용가능 적립금으로 전환되기까지 상품구매에 사용하실 수 없습니다.</li>
-						<li class="item3 ">사용가능 적립금(총적립금 - 사용된적립금 - 미가용적립금)은 상품구매 시 바로 사용가능합니다.</li>
+						<li class="item1 ">주문으로 발생한 적립금은 배송완료 후 1일 부터 실제 사용 가능한 적립금으로 전환됩니다.</li>
+						<li class="item3 ">사용가능 적립금(총적립금 - 사용된적립금)은 상품구매 시 바로 사용가능합니다.</li>
 					</ol>
 				</div>
 			</div>

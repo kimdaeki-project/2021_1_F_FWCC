@@ -96,7 +96,7 @@
 				<br>
 				<div class="shopMain coupon ">
 					<h3>
-						<a href="#"><strong>coupon</strong>쿠폰</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberCoupon"><strong>coupon</strong>쿠폰</a>
 					</h3>
 				</div>
 				<div class="shopMain board">

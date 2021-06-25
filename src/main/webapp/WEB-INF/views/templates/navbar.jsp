@@ -86,7 +86,7 @@
 					<li><a href="${pageContext.request.contextPath }/member/memberPage/orderList">ORDER LIST</a></li>
 					<li><a href="${pageContext.request.contextPath }/member/memberPage/memberProfile">PROFILE</a></li>
 					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberMileage">MILEAGE</a></li>
-					<li><a href="#">COUPON</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberCoupon">COUPON</a></li>
 					<li><a href="#">MY BOARD</a></li>
 				</ul>
 			</li>
