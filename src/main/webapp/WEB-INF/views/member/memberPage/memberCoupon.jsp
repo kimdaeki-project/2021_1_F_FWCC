@@ -43,12 +43,11 @@
 				name="frmCouponlist"
 				action=""
 				method="POST"
-				
 			>
 				<div class="xans-element- xans-myshop xans-myshop-couponlist">
 					<div class="title">
 						<h3>마이 쿠폰 목록</h3>
-						<p>사용가능 쿠폰 : 장</p>
+						<p>사용가능 쿠폰 : ${couponCount}장</p>
 					</div>
 					<div class="ec-base-table typeList">
 						<table
@@ -58,45 +57,48 @@
 							<caption>마이 쿠폰 목록</caption>
 							<colgroup>
 								<col style="width: auto" />
-								<col style="width: 130px" />
-								<col style="width: 130px" />
-								<col style="width: 130px" />
-								<col style="width: 130px" />
-								<col style="width: 170px" />
+								<col style="width: 100px" />
+								<col style="width: 100px" />
+								<col style="width: 100px" />
+								<col style="width: 200px" />
 							</colgroup>
 							<thead>
 								<tr>
 									<th scope="col">쿠폰명</th>
 									<th scope="col">쿠폰적용 상품</th>
-									<th scope="col">구매금액</th>
 									<th scope="col">결제수단</th>
 									<th scope="col">쿠폰 혜택</th>
 									<th scope="col">사용가능 기간</th>
 								</tr>
 							</thead>
-							<tbody class=" center">
-								<tr class="xans-record-">
-									<td class="left"><strong>우수고객 6월 정기 쿠폰 (15%)</strong></td>
-									<td>전체상품</td>
-									<td>제한없음</td>
-									<td class="left">제한없음</td>
-									<td>할인 15%</td>
-									<td>2021-05-31 00:00:00 ~ 2021-07-01 23:00:00</td>
-								</tr>	
-							</tbody>
-							<tbody class="displaynone">
-								<tr>
-									<td
-										colspan="7"
-										class="message"
-									>보유하고 계신 쿠폰 내역이 없습니다</td>
-								</tr>
-							</tbody>
+							<c:if test="${list != null}">
+								<tbody class=" center">
+									<c:forEach items="${list}" var="VO">
+										<tr class="xans-record-">
+											<td class="left"><strong>${VO.couponspVO.cuName}</strong></td>
+											<td class="left">전체상품</td>
+											<td class="left">제한없음</td>
+											<td class="left">${VO.couponspVO.disRate} % 할인</td>
+											<td class="left">${VO.pubDate} ~ ${VO.exDate}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</c:if>
+							<c:if test="${list == null}">
+								<tbody class="">
+									<tr>
+										<td
+											colspan="7"
+											class="message"
+										>보유하고 계신 쿠폰 내역이 없습니다</td>
+									</tr>
+								</tbody>
+							</c:if>
 						</table>
 					</div>
 				</div>
 			</form>
-			
+
 			<!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-couponlistpaging ec-base-paginate">
 				<a
@@ -115,7 +117,7 @@
 				>&gt;&gt;</a>
 			</div>
 			<!-- pager END -->
-			
+
 			<!-- coupon insert START -->
 			<%-- <form
 				id="frmSerialCoupon"
@@ -156,7 +158,7 @@
 				</div>
 			</form> --%>
 			<!-- coupon insert END -->
-			
+
 			<div class="ec-base-help">
 				<h3>쿠폰 이용 안내</h3>
 				<div class="inner">

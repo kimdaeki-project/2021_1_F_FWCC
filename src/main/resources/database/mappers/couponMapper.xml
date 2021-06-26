@@ -48,7 +48,7 @@
 		update coupon set useCheck=1 where username=#{username} and cuNum=#{cuNum}
 	</update>
 	
-	<select id="getMemberCouponCount" parameterType="CouponVO" resultType="java.lang.Long">
-		select count(cuNum) from coupon where username = #{username};
+	<select id="getMemberCouponCount" parameterType="MemberVO" resultType="java.lang.Long">
+		select count(cuNum) from coupon where username = #{username}
 	</select>
 </mapper>

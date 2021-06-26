@@ -58,7 +58,7 @@
 					<li class=""><strong class="title">coupon</strong> <strong class="data"><span
 							id="xans_myshop_bankbook_coupon_cnt"
 						></span><span>${couponCount}개</span></strong> <a
-						href="#"
+						href="${pageContext.request.contextPath}/member/memberPage/memberCoupon"
 						class="button"
 					>view</a></li>
 				</ul>
@@ -101,7 +101,7 @@
 				</div>
 				<div class="shopMain board">
 					<h3>
-						<a href="#"><strong>board</strong>게시물 관리</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberBoard"><strong>board</strong>게시물 관리</a>
 					</h3>
 				</div>
 				<div class="shopMain address col2">

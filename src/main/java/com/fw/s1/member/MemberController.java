@@ -120,9 +120,9 @@ public class MemberController {
 			mileageVO.setUsername(authentication.getName());
 			mileageVO = mileageService.getRecentMileage(mileageVO);
 			// 2. coupon 개수 가져오기
-			CouponVO couponVO = new CouponVO();
-			couponVO.setUsername(authentication.getName());
-			long couponCount = couponService.getMemberCouponCount(couponVO);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUsername(authentication.getName());
+			long couponCount = couponService.getMemberCouponCount(memberVO);
 			
 			mv.addObject("mileage", mileageVO.getEnabledMile());
 			mv.addObject("couponCount", couponCount);
@@ -221,8 +221,23 @@ public class MemberController {
 	@GetMapping("memberPage/memberCoupon")
 	public ModelAndView getMemberCoupon(Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<CouponVO> ar = couponService.getCouponList(memberVO);
 		
+		long couponCount = couponService.getMemberCouponCount(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("couponCount", couponCount);
 		mv.setViewName("member/memberPage/memberCoupon");
+		return mv;
+	}
+	
+// board ===============================================
+	@GetMapping("memberPage/memberBoard")
+	public ModelAndView getMemberBoard(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberPage/memberBoard");
 		return mv;
 	}
 	
