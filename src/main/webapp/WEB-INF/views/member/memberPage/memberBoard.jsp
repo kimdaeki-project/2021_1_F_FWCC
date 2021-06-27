@@ -38,18 +38,6 @@
 				<h2>MY POST</h2>
 			</div>
 			<div class="xans-element- xans-myshop xans-myshop-boardpackage ">
-				<div class="xans-element- xans-myshop xans-myshop-boardlisthead ">
-					<p>
-						분류 선택 <select
-							id="board_sort"
-							name="board_sort"
-							onchange="BOARD.change_sort('boardSearchForm', this);"
-						>
-							<option value="D">작성 일자별</option>
-							<option value="C">분류별</option>
-						</select>
-					</p>
-				</div>
 				<div
 					class="xans-element- xans-myshop xans-myshop-boardlist ec-base-table typeList gBorder gBlank10"
 				>
@@ -78,39 +66,59 @@
 								<th scope="col">HIT</th>
 							</tr>
 						</thead>
-						<tbody class="center">
-							<tr class="">
-								<td></td>
-								<td><a
-									href=""
-									class="txtEm"
-								></a></td>
-								<td class="left subject"><a href=""></a></td>
-								<td></td>
-								<td><span class="txtNum"></span></td>
-								<td><span class="txtNum"></span></td>
-							</tr>
-						</tbody>
-						<tbody class="displaynone">
-							<tr>
-								<td
-									colspan="6"
-									class="message"
-								>게시물이 없습니다.</td>
-							</tr>
-						</tbody>
+						<c:if test="${list != null}">
+							<tbody class="center">
+								<c:forEach
+									items="${list}"
+									var="VO"
+									varStatus="status"
+								>
+									<tr class="">
+										<td class="left">${status.count}</td>
+										<td class="left"><c:if test="${VO.typeNum == 2}">
+										Q&A
+									</c:if> <c:if test="${VO.typeNum == 3}">
+										Review
+									</c:if></td>
+										<td class="left subject"><a href="">${VO.title}</a></td>
+										<td class="left">${VO.writer}</td>
+										<td class="left">${VO.regDate}<span class="txtNum"></span></td>
+										<td class="left">${VO.hit}<span class="txtNum"></span></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</c:if>
+						<c:if test="${list == null}">
+							<tbody class="">
+								<tr>
+									<td
+										colspan="6"
+										class="message"
+									>게시물이 없습니다.</td>
+								</tr>
+							</tbody>
+						</c:if>
 					</table>
 				</div>
 			</div>
 
+			<!-- pager & search START -->
+			<div class="xans-element- xans-myshop xans-myshop-boardlistpaging ec-base-paginate">
+				<a href="?page=1">&lt;</a>
+				<ol>
+					<li class="xans-record-"><a
+						href="?page=1"
+						class="this"
+					>1</a></li>
+				</ol>
+				<a href="?page=1">&gt;</a>
+			</div>
 
 			<form
 				id="boardSearchForm"
 				name=""
-				action="/myshop/board_list.html"
+				action="#"
 				method="get"
-				target=""
-				enctype="multipart/form-data"
 			>
 				<input
 					id="board_no"
@@ -128,8 +136,7 @@
 					value=""
 					type="hidden"
 				/>
-				<!-- pager & search START -->
-				<div class="xans-element- xans-myshop xans-myshop-boardlistsearch ">
+				<div class="xans-element- xans-myshop xans-myshop-boardlistsearch">
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p>
@@ -145,23 +152,20 @@
 							</select> <input
 								id="search"
 								name="search"
-								fw-filter=""
-								fw-label=""
-								fw-msg=""
 								class="inputTypeText"
 								placeholder=""
 								value=""
 								type="text"
 							/> <a
-								href="#none"
+								href="#"
 								onclick="BOARD.form_submit('boardSearchForm');"
 								class="btnFind"
 							>find</a>
 						</p>
 					</fieldset>
 				</div>
-				<!-- pager & search END -->
 			</form>
+			<!-- pager & search END -->
 		</div>
 	</div>
 	<!-- contents END -->
