@@ -106,7 +106,7 @@
 				</div>
 				<div class="shopMain address col2">
 					<h3>
-						<a href="#"><strong>address</strong>배송 주소록 관리</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberAddress"><strong>address</strong>배송 주소록 관리</a>
 					</h3>
 				</div>
 			</div>

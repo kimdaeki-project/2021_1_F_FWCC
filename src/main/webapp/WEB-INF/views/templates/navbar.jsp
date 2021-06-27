@@ -88,7 +88,7 @@
 					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberMileage">MILEAGE</a></li>
 					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberCoupon">COUPON</a></li>
 					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberBoard">MY BOARD</a></li>
-					<li><a href="${pageContext.request.contextPath}/member/memberPage/">ADDRESS</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/memberPage/memberAddress">ADDRESS</a></li>
 				</ul>
 			</li>
 			<li>

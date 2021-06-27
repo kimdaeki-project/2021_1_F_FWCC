@@ -245,4 +245,16 @@ public class MemberController {
 		return mv;
 	}
 	
+// address ===============================================
+	@GetMapping("memberPage/memberAddress")
+	public ModelAndView getMemberAddress(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberPage/memberAddress");
+		return mv;
+	}
+	
+	
+	
+	
 }
