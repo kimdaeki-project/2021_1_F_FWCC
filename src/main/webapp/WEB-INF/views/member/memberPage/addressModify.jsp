@@ -24,7 +24,7 @@
 	href="/css/member/memberPage/addressInsert.css"
 >
 <meta charset="UTF-8">
-<title>FWCC-addressInsert</title>
+<title>FWCC-addressModify</title>
 </head>
 <body>
 	<!-- header START -->
@@ -40,7 +40,7 @@
 			</div>
 			<form
 				id="frmAddr"
-				action="./addressInsert"
+				action="./addressModify"
 				method="POST"
 			>
 				<div class="xans-element- xans-myshop xans-myshop-addrregister ">
@@ -60,12 +60,14 @@
 										src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
 										alt="필수"
 									/></th>
-									<td><input
+									<td>
+										<input hidden="" name="addrNum" value="${VO.addrNum}"/>
+									<input
 										id="addrNameT"
 										name="addrName"
 										class="inputTypeText"
 										placeholder=""
-										value=""
+										value="${VO.addrName}"
 										type="text"
 									/></td>
 								</tr>
@@ -79,7 +81,7 @@
 										name="recipient"
 										class="ec-member-name"
 										placeholder=""
-										value=""
+										value="${VO.recipient}"
 										type="text"
 									/></td>
 								</tr>
@@ -96,7 +98,7 @@
 										placeholder=""
 										readonly="readonly"
 										maxlength="14"
-										value=""
+										value="${VO.zipCode}"
 										size="10"
 										type="text"
 									/> <a
@@ -112,7 +114,7 @@
 										class="inputTypeText"
 										placeholder=""
 										readonly="readonly"
-										value=""
+										value="${VO.basicAddr}"
 										size="50"
 										type="text"
 									/> 기본주소<br /> <span
@@ -123,7 +125,7 @@
 										name="detailAddr"
 										class="inputTypeText"
 										placeholder=""
-										value=""
+										value="${VO.detailAddr}"
 										size="50"
 										type="text"
 									/> 나머지주소</td>
@@ -138,18 +140,18 @@
 										id="phone0"
 										name="addrPhone1"
 										class="eraser"
-										title="${VO.phone0}"
+										title="${VO.addrPhone1}"
 									>
 											<option
 												value="010"
 												id="010"
 												label="010"
+												selected="selected"
 											/>
 											<option
 												value="011"
 												id="011"
 												label="011"
-												selected="selected"
 											/>
 											<option
 												value="016"
@@ -176,14 +178,14 @@
 										name="addrPhone2"
 										class="eraser"
 										maxlength="4"
-										value=""
+										value="${VO.addrPhone2}"
 										type="text"
 									/>-<input
 										id="phone2"
 										name="addrPhone3"
 										class="eraser"
 										maxlength="4"
-										value=""
+										value="${VO.addrPhone3}"
 										type="text"
 									/></td>
 								</tr>
@@ -201,8 +203,8 @@
 					<div class="ec-base-button">
 						<span class="gRight"> <button
 						><img
-								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_register2.gif"
-								alt="등록"
+								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_modify2.gif"
+								alt="수정"
 							/></button> <a href="./memberAddress"><img
 								src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_cancel.gif"
 								alt="취소"
@@ -234,7 +236,7 @@
 	<!-- Custom JS -->
 	<script
 		type="text/javascript"
-		src="/js/member/memberPage/addressInsert.js"
+		src="/js/member/memberPage/addressModify.js"
 	></script>
 
 </body>

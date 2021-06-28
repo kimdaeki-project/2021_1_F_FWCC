@@ -70,11 +70,17 @@
 						</thead>
 						<c:if test="${list != null}">
 							<tbody class=" center">
-								<c:forEach items="${list}" var="VO">
+								<c:forEach
+									items="${list}"
+									var="VO"
+								>
 									<tr class="xans-record-">
 										<td><input
 											value=""
+											name="addressSelect"
+											class="check"
 											type="checkbox"
+											title="${VO.addrNum}"
 										/></td>
 										<td><a href="#"><img
 												src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_fix.gif"
@@ -88,14 +94,27 @@
 										/> <span class="">${VO.addrName}</span></td>
 										<td class="left"><span class="">${VO.recipient}</span></td>
 										<td class="left"><span class="">${VO.addrPhone}</span></td>
-										<td class="left">(<span class="">${VO.zipCode}</span>) <span class="">${VO.basicAddr}</span> <span
-											class=""
-										>${VO.detailAddr}</span></td>
-										<td><a href="#"><img
-												src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_modify.gif"
-												class=""
-												alt="수정"
-											/></a></td>
+										<td class="left">(<span class="">${VO.zipCode}</span>) <span class="">${VO.basicAddr}</span>
+											<span class="">${VO.detailAddr}</span></td>
+										<td>
+											<form
+												action="./addressModify"
+												method="GET"
+											>
+												<input
+													hidden=""
+													name="addrNum"
+													value="${VO.addrNum}"
+												/>
+												<button>
+													<img
+														src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_modify.gif"
+														class=""
+														alt="수정"
+													/>
+												</button>
+											</form>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -114,6 +133,7 @@
 				</div>
 				<div class="ec-base-button">
 					<span class="gLeft "> <a href="#"><img
+							id="deleteAddr"
 							src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_address_delete.gif"
 							alt="선택 주소록 삭제"
 						/></a>
@@ -145,10 +165,10 @@
 	<!-- External JS -->
 
 	<!-- Custom JS -->
-	<!-- <script
-	type="text/javascript"
-	src="/js/member/memberPage/memberAddress.js"
-></script> -->
+	<script
+		type="text/javascript"
+		src="/js/member/memberPage/memberAddress.js"
+	></script>
 
 </body>
 </html>

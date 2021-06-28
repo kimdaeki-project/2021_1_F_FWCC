@@ -61,4 +61,15 @@
   	select * from address where username = #{username}
   </select>
   
+  <insert id="setMemberAddress" parameterType="AddressVO">
+  	insert into address(username, addrName, recipient, zipCode, basicAddr, detailAddr, addrPhone, recentUse, orderAddr) 
+  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 0, 0)
+  </insert>
+  
+  <update id="updateMemberAddress" parameterType="AddressVO">
+  	update address set addrName=#{addrName}, recipient=#{recipient}, addrPhone=#{addrPhone},
+  	zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}, recentUse=0
+  	where username=#{username} and addrNum=#{addrNum}
+  </update>
+  
 </mapper>
