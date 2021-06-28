@@ -85,8 +85,11 @@
 					<td><div>${Rcom.commentNum} ${Rcom.writer} ${Rcom.regDate} </div>
 						<div>${Rcom.contents}</div>
 						<div>
+						<sec:authentication property="principal.username" var="user_id"/>
+						<c:if test="${Rcom.writer == user_id }">
 						<a href="./commentUpdate?commentNum=${Rcom.commentNum}&num=${Rcom.num}" class="btn btn-danger">Updatec</a>
 						<a href="./commentDelete?commentNum=${Rcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
+						</c:if>
 						</div>
 					</td>
 						
@@ -94,14 +97,15 @@
 					</c:forEach>
 					</tbody>
 			</table>
+			<c:if test="${Rcvo.commentNum == Null}">
 			<div>
 				<form id="frm" action="./commentInsert" method="post">
 					<div class="form-group">
-						<label for="writer">Writer:</label> <input type="text"
-							class="form-control myCheck" id="writer" name="writer">
+						<input type="hidden"
+							class="form-control myCheck" id="writer" name="writer" value="<sec:authentication property="principal.username"/>">
 					</div>
 					<div class="form-group">
-						<label for="num">num:</label> <input type="number"
+						<input type="hidden"
 							class="form-control myCheck" id="num" name="num" value="${Rvo.num}" }>
 					</div>
 
@@ -114,15 +118,18 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
+			</c:if>
 			<c:if test="${Rcvo.commentNum >=1}">
 				<c:import url="/WEB-INF/views/board/review/rcUpdate.jsp"></c:import>
 			</c:if>
 			
+			<sec:authentication property="principal.username" var="user_id"/>
+			<c:if test="${com.writer == user_id }">
 			<div>
 				<a href="./update?num=${Rvo.num}" class="btn btn-danger">Update</a>
 				<a href="./delete?num=${Rvo.num}" id="del" class="btn btn-info">Delete</a>
-				
 			</div>
+			</c:if>
 		</div>
 	</div>
 	<script type="text/javascript">

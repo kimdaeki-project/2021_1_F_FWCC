@@ -57,7 +57,7 @@ a:hover {
 					<c:catch>
 					<c:forEach begin="1" end="${Rdto.depth}">--</c:forEach>
 					</c:catch>
-					<img class="card-img-top" src="C:\hancheol\workspace\FWCC\target\classes\static\upload\review\${fileVO.fileName}.jpg" alt="Card image cap">
+					<img class="card-img-top" src="C:\hancheol\workspace\FWCC\target\classes\static\upload\review\f35c2e1d-9aec-4d0e-aff1-ce43f8632017_고양이45.jpg" alt="Card image cap">
 					</a>
 					${Rdto.title}
 					${Rdto.writer} ${Rdto.regDate}

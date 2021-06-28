@@ -57,6 +57,13 @@
 	    
 	  </ul>
 	 </div> 
+	 <sec:authorize access="hasRole('ROLE_ADMIN')">
+  		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	</sec:authorize>
+	 
 			</div>
 			</div>
 			

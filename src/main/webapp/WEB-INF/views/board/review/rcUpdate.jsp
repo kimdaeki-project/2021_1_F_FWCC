@@ -22,14 +22,9 @@
 
 </head>
 <body>
-<c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
-<div id="container">
-<div style="padding: 68px 34px 0;">
-	<div class="container">
-		<h2>Review</h2>
 		<form id="frm" action="./commentUpdate" method="post">
 					<div class="form-group">
-						<label for="num">num:</label> <input type="number"
+						<input type="hidden"
 							class="form-control myCheck" id="commentNum" name="commentNum" value="${Rcvo.commentNum}" }>
 					</div>
 
@@ -41,9 +36,7 @@
 
 					<input type="submit" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
-	</div>
-</div>
-</div>
+
 
 	<script type="text/javascript" src="/js/board/fileAdd.js"></script>
 

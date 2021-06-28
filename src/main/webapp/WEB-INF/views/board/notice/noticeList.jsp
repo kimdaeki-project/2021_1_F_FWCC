@@ -16,7 +16,10 @@ a:hover {
   text-decorationd: underline;
 }
 
+
 .pagination a { 
+	outline: none;
+	font-size:12px;
     font-weight:bold; 
     color: black; 
     float: left; 
@@ -49,28 +52,28 @@ a:hover {
 	  margin : 20px 10px;">
 			<thead >
 				<tr>
-					<th style="width: 100px;">NO</th>
-					<th style="width: 600px;">SUBJECT</th>
-					<th style="width: 100px; text-align:center;">WRITER</th>
-					<th style="width: 100px; text-align:center;">DATE</th>
-					<th style="width: 100px; text-align:center;">HIT</th>
+					<th style="width: 100px; font-size:12px;">NO</th>
+					<th style="width: 600px; font-size:12px;">SUBJECT</th>
+					<th style="width: 100px; text-align:center; font-size:12px;">WRITER</th>
+					<th style="width: 100px; text-align:center; font-size:12px;">DATE</th>
+					<th style="width: 100px; text-align:center; font-size:12px;">HIT</th>
 				</tr>
 			</thead>
 			
 			<tbody>
 			<c:forEach items="${list}" var="dto" >
 				<tr>
-					<td>${dto.num}</td>
-					<td><a style="color:black;" href="./select?num=${dto.num}">
+					<td style="font-size:13px;">${dto.num}</td>
+					<td style="font-size:13px;"><a style="color:black;" href="./select?num=${dto.num}">
 					
 					<c:catch>
 					<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
 					</c:catch>
 					${dto.title}
 					</a></td>
-					<td style="text-align:center;">${dto.writer}</td>
-					<td style="text-align:center;">${dto.regDate}</td>
-					<td style="text-align:center;">${dto.hit}</td>
+					<td style="text-align:center; font-size:13px;">${dto.writer}</td>
+					<td style="text-align:center; font-size:13px;">${dto.regDate}</td>
+					<td style="text-align:center; font-size:13px;">${dto.hit}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -78,6 +81,15 @@ a:hover {
 		</table>
 	</div>
 	
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="user_id"/>
+	<c:if test="${user_id == 'admin'}">
+  		<a href="./insert" class="btn  btn-primary" role="button">aWrite</a>
+	</c:if>
+
+	</sec:authorize>
+	
+
 	<div style="margin: 40px 0 40px;">
 	  <ul class="pagination" style=" justify-content: center;">
 	  
@@ -100,25 +112,17 @@ a:hover {
 	<form id="frm" action="./list" class="form-inline">
 		<input type="hidden" name="curPage" value="1" id="curPage">
 	  <div class="input-group-prepend">
-	   <select class="form-control" name="kind" id="kind" >
-	    <option class="sel">Title</option>
-	    <option class="sel">Contents</option>
-	    <option class="sel">Writer</option>
-	  </select>
+	  <select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
+<option value="subject">제목</option>
+<option value="contents">내용</option>
+<option value="writer">글쓴이</option>
+</select>
+<input id="search" name="search" fw-filter="" fw-label="" fw-msg="" class="inputTypeText" placeholder="" value="${pager.search}" type="text">
 	  </div>
-	  <input type="text" class="form-control" name="search" id="search" value="${pager.search}" placeholder="">
-	    <div class="input-group-append">
-	    <button class="btn btn-success" type="submit">Search</button>
-	  </div>
+	  
+	  <button type="submit" class="btn btn-link" ><font color="black">find</font></button>
 	 </form> 
 	</div> 
-  
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-  		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	</sec:authorize>
-	<sec:authorize access="isAuthenticated()">
-		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	</sec:authorize>
 
   
 <script type="text/javascript">

@@ -27,7 +27,7 @@
 		<h2>noticeform</h2>
 		<form id="frm" action="./commentUpdate" method="post">
 					<div class="form-group">
-						<label for="num">num:</label> <input type="number"
+						<input type="hidden"
 							class="form-control myCheck" id="commentNum" name="commentNum" value="${cvo.commentNum}" }>
 					</div>
 

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.fw.s1.board.BoardVO;
 import com.fw.s1.util.Pager;
 
 @Controller
@@ -34,5 +36,24 @@ public class LookBookController {
 		mv.addObject("vo", lookbookVO);
 		mv.setViewName("board/lookbook/lookbookSelect");
 		return mv;
+	}
+	
+	@GetMapping("insert")
+	public String setInsert(Model model) throws Exception {
+		model.addAttribute("vo", new BoardVO());
+		model.addAttribute("action", "insert");
+		return "board/lookbook/lookbookInsert";
+	}
+
+	@PostMapping("insert")
+	public String setInsert(LookBookVO lookbookVO) throws Exception {
+//			System.out.println(files.length);
+//			for(MultipartFile f : files) {
+//				System.out.println(f.getOriginalFilename());
+//			}
+
+		int result = lookbookService.setInsert(lookbookVO);
+
+		return "redirect:./list";
 	}
 }
