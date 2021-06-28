@@ -1,5 +1,6 @@
 package com.fw.s1.coupon;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class CouponService {
 	
 	public Long couponForAll(CouponVO couponVO)throws Exception{
 		return couponMapper.couponForAll(couponVO);
+	}
+	
+	public Long scheduleDelete(Date date)throws Exception{
+		return couponMapper.scheduleDelete(date);
 	}
 	
 	public Long couponForSelected(List<CouponVO> list)throws Exception{
