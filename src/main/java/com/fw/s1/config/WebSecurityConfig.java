@@ -38,12 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
-//				.antMatchers("/**").permitAll()
+				.antMatchers("/**").permitAll()
 				.antMatchers("/").permitAll()
 				// --- community START ---
 				.antMatchers("/notice/list", "/notice/select","/notice/insert").permitAll()
 				// --- community END ---
 				// --- product START ---
+				.antMatchers("/product/**").permitAll()
 //				.antMatchers("/product/list").permitAll()
 //				.antMatchers("/product/select").permitAll()
 //				.antMatchers("/product/**").hasRole("ADMIN")

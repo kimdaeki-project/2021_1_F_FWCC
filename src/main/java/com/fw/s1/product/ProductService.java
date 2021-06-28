@@ -168,6 +168,18 @@ public class ProductService {
 		
 	}
 	
-	
+	public ProductVO getSelect(ProductVO productVO)throws Exception{
+		productVO = productMapper.getProductSelect(productVO);
+		System.out.println("=====================Select==========================");
+		System.out.println(productVO);
+		System.out.println("pTitle : "+productVO.getProductTitle());
+		System.out.println("pPrice : "+productVO.getProductPrice());
+		System.out.println("pFinalPrice : "+productVO.getFinalPrice());
+		System.out.println("pSummary : "+productVO.getSummary());
+		System.out.println("pContents : "+productVO.getProductContents());
+		productVO.setFile(productMapper.getMain(productVO));
+		productVO.setInfos(productMapper.getInfoSelect(productVO));
+		return productVO;
+	}
 	
 }

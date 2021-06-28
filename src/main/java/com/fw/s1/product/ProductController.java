@@ -146,5 +146,11 @@ public class ProductController {
 		productService.setUpdate(productVO, sizeList, stockList, thumbnail);
 	}
 	
+	@GetMapping(value="select")
+	public String getSelect(ProductVO productVO,Model model)throws Exception{
+		productVO = productService.getSelect(productVO);
+		model.addAttribute("VO",productVO);
+		return "product/productSelect";
+	}
 	
 }
