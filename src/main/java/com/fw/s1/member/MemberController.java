@@ -316,9 +316,9 @@ public class MemberController {
 		addressVO.setUsername(authentication.getName());
 		System.out.println(addressVO);
 		System.out.println(addressVO.getAddrNum());
-		long result = memberService.deleteMemberAddress(addressVO);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
+//		long result = memberService.deleteMemberAddress(addressVO);
+//		mv.addObject("result", result);
+//		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
