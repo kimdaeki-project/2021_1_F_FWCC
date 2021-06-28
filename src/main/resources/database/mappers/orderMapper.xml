@@ -94,7 +94,7 @@
 		inner join orderlist O
 		on PU.orderNum = O.orderNum
 		where O.username=#{username} and PF.fileName like 'T_%'
-		order by O.orderNum asc
+		order by O.orderNum desc
 	</select>
 	
 	<select id="getFilteredList" parameterType="OrderlistVO" resultMap="getOrderProduct">

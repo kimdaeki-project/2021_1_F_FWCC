@@ -194,7 +194,7 @@
 									<td>${VO.productVO.productTitle}</td>
 									<td>${VO.orderlistVO.orderNum}</td>
 									<td>${VO.purchaseVO.productCount}</td>
-									<td>${VO.purchaseVO.proPriceSum}</td>
+									<td>${VO.orderlistVO.spPrice}</td>
 									<td><c:choose>
 											<c:when test="${VO.orderlistVO.orderState == 1}">
 											주문완료
