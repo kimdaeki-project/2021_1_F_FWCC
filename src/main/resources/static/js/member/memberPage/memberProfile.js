@@ -100,6 +100,70 @@ $(document).ready(function(){
 // 회원정보 수정 =============================================== 
 $("#updateBtn").click(function(){
 	username = $("#usernameT").val();
+	let oldPWCheck = $("#passwordCheckT").val();
+	$.ajax({
+		method:"POST",
+		url:"./pwCheck",
+		data:{
+			username:username,
+			passwordCheck:oldPWCheck
+		},
+		success:function(result){
+			result = result.trim();
+			console.log(result);
+			if(result == "true"){
+				username = $("#usernameT").val();
+				username = username.toLowerCase();
+				newPassword = $("#newPasswordT").val();
+				if(newPassword == ""){
+					password = oldPWCheck;
+				} else {
+					password = newPassword;
+				}
+				passwordCheck = $("#newPasswordCheckT").val();
+				zipCode = $("#zipCodeT").val();
+				basicAddr = $("#basicAddrT").val();
+				detailAddr = $("#detailAddrT").val();
+				phone0 = $("#phone0").val();
+				phone1 = $("#phone1").val();
+				phone2 = $("#phone2").val();
+				phone = phone0+"-"+phone1+"-"+phone2;
+				email = $("#emailT").val();
+				smsAgree = $("#is_sms0").prop("checked");
+				emailAgree = $("#is_news_mail0").prop("checked");
+				$.ajax({
+					method:"POST",
+					url:"./memberUpdate",
+					data:{
+						username:username,
+						password:password,
+						phone:phone,
+						email:email,
+						smsAgree:smsAgree,
+						emailAgree:emailAgree,
+						zipCode:zipCode,
+						basicAddr:basicAddr,
+						detailAddr:detailAddr
+					},
+					success:function(result){
+						result = result.trim();
+						if(result != 0){
+							alert("회원정보 수정 성공");
+							location.href="/"
+						}
+					}
+				}); // --- memberUpdate ajax END ---/
+			}else {
+				console.log("Update failed");
+			}
+		} // --- pwCheck success END ---
+	}); // --- pwCheck ajax END ---
+	
+function memberUpdate(){
+	
+}
+	
+/*	username = $("#usernameT").val();
 	username = username.toLowerCase();
 	password = $("#newPasswordT").val();
 	passwordCheck = $("#newPasswordCheckT").val();
@@ -134,7 +198,7 @@ $("#updateBtn").click(function(){
 				location.href="/"
 			}
 		}
-	});
+	}); // --- ajax END ---*/
 });
 
 

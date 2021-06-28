@@ -14,21 +14,21 @@
 <div style="text-align: center;">
 	<h1 style="padding: 8% 3% 3% 3%;">Admin HomePage</h1>
 	<div style="width:100%; list-style: none; padding-left: 0; margin-top:2%; display: flex; justify-content: space-around;">
-		<div style="width:22%; padding:3%; margin:0 5% 0 7%; border-radius: 1rem;  background-color: #607d8b;">
+		<div style="width:22%; padding:3%; margin:0 5% 0 7%; border-radius: 1rem; border: 5px solid #607d8b;">
 			<h2>상품관리</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
 					<a href="./productInsert">상품등록</a>
 				</li>
 				<li style="padding:5%;">
-					<a href="./productUpdate">상품정보수정</a>
+					<a href="./adminAllList">상품정보수정</a>
 				</li>
 				<li style="padding:5%;">
 					<a href="./orderlistUpdate">배송정보수정</a>
 				</li>
 			</ul>
 		</div>
-		<div style="width:22%; padding:3%; margin:0 5%; border-radius: 1rem;  background-color: #607d8b;">
+		<div style="width:22%; padding:3%; margin:0 5%; border-radius: 1rem; border: 5px solid #607d8b;">
 			<h2>판매현황</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
@@ -42,7 +42,7 @@
 				</li>
 			</ul>
 		</div>
-		<div style="width:22%; padding:3%; margin:0 5%; border-radius: 1rem; background-color: #607d8b;">
+		<div style="width:22%; padding:3%; margin:0 5%; border-radius: 1rem; border: 5px solid #607d8b;">
 			<h2 style="font-size:1.7rem;">쿠폰 &amp; 마일리지</h2>
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">

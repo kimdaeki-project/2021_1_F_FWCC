@@ -12,4 +12,6 @@ public class BoardVO {
 	private Date regDate;
 	private Long hit;
 	private String title;
+	
+	private Long typeNum;
 }

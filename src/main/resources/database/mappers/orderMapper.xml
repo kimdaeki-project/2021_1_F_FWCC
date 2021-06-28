@@ -73,12 +73,15 @@
 	<select id="selectedOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
 		select * from orderlist where orderNum = #{orderNum}
 	</select>
+	<select id="checkOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderNum = #{orderNum} and username = #{username}
+	</select>
 	
 	<update id="orderlistUpdate" parameterType="OrderlistVO">
-		update order set orderState = #{orderState} where orderNum = #{orderNum}
+		update orderlist set orderState = #{orderState} where orderNum = #{orderNum}
 	</update>
 	<update id="orderlistsUpdate" parameterType="java.util.List">
-		update order set orderState = orderState+1 where 
+		update orderlist set orderState = orderState+1 where 
 		<foreach collection="list" item="item" separator="or">
 			(orderNum=#{item.orderNum})
 		</foreach>
@@ -86,27 +89,28 @@
 	
 	<!-- member -->
 	<select id="getOrderList" parameterType="OrderlistVO" resultMap="getOrderProduct">
-		select PF.fileName, P.productTitle, O.*, PU.* from productFiles PF
-		inner join product P
-		on PF.productNum = P.productNum
-		inner join purchase PU
-		on P.productNum = PU.productNum
-		inner join orderlist O
-		on PU.orderNum = O.orderNum
-		where O.username=#{username} and PF.fileName like 'T_%'
-		order by O.orderNum asc
+		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
+        INNER JOIN purchase PU ON O.orderNum = PU.orderNum
+        INNER JOIN product P ON PU.productNum = P.productNum 
+        LEFT JOIN (
+            SELECT * FROM productfiles 
+            WHERE fileName LIKE CONCAT('T\_', '%')
+        ) PF ON P.productNum = PF.productNum
+        WHERE O.username = #{username}
+        ORDER BY O.orderNum DESC
 	</select>
 	
 	<select id="getFilteredList" parameterType="OrderlistVO" resultMap="getOrderProduct">
-		select PF.fileName, P.productTitle, O.*, PU.* from productFiles PF
-		inner join product P
-		on PF.productNum = P.productNum
-		inner join purchase PU
-		on P.productNum = PU.productNum
-		inner join orderlist O
-		on PU.orderNum = O.orderNum
-		where O.username=#{username} and PF.fileName like 'T_%' and orderDate between #{startDate} and #{endDate}
-		order by O.orderNum asc
+		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
+        INNER JOIN purchase PU ON O.orderNum = PU.orderNum
+        INNER JOIN product P ON PU.productNum = P.productNum 
+        LEFT JOIN (
+            SELECT * FROM productfiles 
+            WHERE fileName LIKE CONCAT('T\_', '%') 
+                and orderDate between #{startDate} and #{endDate}
+        ) PF ON P.productNum = PF.productNum
+        WHERE O.username = #{username}
+        ORDER BY O.orderNum DESC
 	</select>
 
  </mapper>

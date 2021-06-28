@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.board.qna.QnaVO;
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.mileage.MileageService;
@@ -120,9 +121,9 @@ public class MemberController {
 			mileageVO.setUsername(authentication.getName());
 			mileageVO = mileageService.getRecentMileage(mileageVO);
 			// 2. coupon 개수 가져오기
-			CouponVO couponVO = new CouponVO();
-			couponVO.setUsername(authentication.getName());
-			long couponCount = couponService.getMemberCouponCount(couponVO);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUsername(authentication.getName());
+			long couponCount = couponService.getMemberCouponCount(memberVO);
 			
 			mv.addObject("mileage", mileageVO.getEnabledMile());
 			mv.addObject("couponCount", couponCount);
@@ -181,6 +182,15 @@ public class MemberController {
 		return mv;
 	}
 	
+	@PostMapping("memberPage/pwCheck")
+	public ModelAndView getPwCheck(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boolean result = memberService.getPwCheck(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
 	@PostMapping("memberPage/memberUpdate")
 	public ModelAndView setMemberUpdate(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -190,5 +200,61 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
+// mileage ===============================================
+	@GetMapping("memberPage/memberMileage")
+	public ModelAndView getMemberMileage(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<MileageVO> ar = memberService.getMemberMileage(memberVO);
+		for(MileageVO VO:ar) {
+			System.out.println(VO);
+		}
+		MileageVO mileageVO = memberService.getRecentMemberMileage(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("mileageVO", mileageVO);
+		mv.setViewName("member/memberPage/memberMileage");
+		return mv;
+	}
+	
+// coupon ===============================================
+	@GetMapping("memberPage/memberCoupon")
+	public ModelAndView getMemberCoupon(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<CouponVO> ar = couponService.getCouponList(memberVO);
+		
+		long couponCount = couponService.getMemberCouponCount(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("couponCount", couponCount);
+		mv.setViewName("member/memberPage/memberCoupon");
+		return mv;
+	}
+	
+// board ===============================================
+	@GetMapping("memberPage/memberBoard")
+	public ModelAndView getMemberBoard(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<QnaVO> ar = memberService.getMemberBoardList(memberVO);
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/memberBoard");
+		return mv;
+	}
+	
+// address ===============================================
+	@GetMapping("memberPage/memberAddress")
+	public ModelAndView getMemberAddress(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberPage/memberAddress");
+		return mv;
+	}
+	
+	
+	
 	
 }

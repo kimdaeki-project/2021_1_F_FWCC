@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
@@ -24,6 +25,7 @@ import com.fw.s1.mileage.MileageVO;
 import com.fw.s1.order.OrderService;
 import com.fw.s1.order.OrderlistVO;
 import com.fw.s1.product.ProductService;
+import com.fw.s1.product.ProductVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -299,5 +301,39 @@ public class AdminController {
 			list.add(orderlistVO);
 		}
 		return orderService.orderlistsUpdate(list);
+	}
+	
+	@GetMapping("adminAllList")
+	public void adminAllList(Model model)throws Exception{
+		model.addAttribute("allList", productService.setUpdate());
+	}
+	
+	@GetMapping("productUpdate")
+	public void productUpdate(ProductVO productVO, Model model)throws Exception{
+		model.addAttribute("VO", productService.setUpdate(productVO));
+	}
+	
+	@PostMapping("productUpdate")
+	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
+		System.out.println(productVO.getProductTitle());
+		System.out.println(productVO.getProductPrice());
+		System.out.println(productVO.getProductDisRate());
+		System.out.println(productVO.getFinalPrice());
+		System.out.println(thumbnail==null);
+		System.out.println("oriName : "+thumbnail.getOriginalFilename());
+		System.out.println("oriNameLenghth : "+thumbnail.getOriginalFilename().length());
+		System.out.println(productVO.getSummary());
+		System.out.println(productVO.getProductContents());
+		System.out.println(productVO.getCollab());
+		System.out.println(productVO.getProductType());
+		System.out.println(sizeList.length);
+		System.out.println(stockList.length);
+		for(String size:sizeList) {
+			System.out.println(size);
+		}
+		for(Long stock:stockList) {
+			System.out.println(stock);
+		}
+		productService.setUpdate(productVO, sizeList, stockList, thumbnail);
 	}
 }

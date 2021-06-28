@@ -16,6 +16,9 @@ import org.springframework.validation.Errors;
 import com.fw.s1.address.AddressMapper;
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.board.qna.QnaMapper;
+import com.fw.s1.board.qna.QnaVO;
+import com.fw.s1.mileage.MileageMapper;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
 
@@ -36,6 +39,12 @@ public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private MileageService mileageService;
+	
+	@Autowired
+	private MileageMapper mileageMapper;
+	
+	@Autowired
+	private QnaMapper qnaMapper;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(MemberVO memberVO) throws Exception {
@@ -104,6 +113,13 @@ public class MemberService implements UserDetailsService {
 		return addressMapper.getProfileAddress(memberVO);
 	}
 	
+	public boolean getPwCheck(MemberVO memberVO) throws Exception {
+		String pwCheck = memberVO.getPasswordCheck();
+		memberVO = memberMapper.getMemberProfile(memberVO);
+		boolean check = passwordEncoder.matches(pwCheck, memberVO.getPassword());
+		return check;
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public Long setMemberUpdate(MemberVO memberVO) throws Exception {
 		long result = 0L;
@@ -115,6 +131,18 @@ public class MemberService implements UserDetailsService {
 		result = addressMapper.setProfileAddressUpdate(memberVO);
 		
 		return result;
+	}
+	
+	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception {
+		return mileageMapper.getMemberMileage(memberVO);
+	}
+	
+	public MileageVO getRecentMemberMileage(MemberVO memberVO) throws Exception {
+		return mileageMapper.getRecentMemberMileage(memberVO);
+	}
+	
+	public List<QnaVO> getMemberBoardList(MemberVO memberVO) throws Exception {
+		return qnaMapper.getMemberBoardList(memberVO);
 	}
 	
 	
