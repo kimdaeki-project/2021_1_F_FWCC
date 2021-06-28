@@ -182,4 +182,7 @@ public class ProductService {
 		return productVO;
 	}
 	
+	public String[] setInsert()throws Exception{
+		return productMapper.getDivision();
+	}
 }

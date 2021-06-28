@@ -19,6 +19,16 @@ class ProductMapperTest {
 	private ProductMapper productMapper;
 
 	@Test
+	void getDivisionTest()throws Exception{
+		String[] divs = productMapper.getDivision();
+		for(String str:divs) {
+			System.out.println(str);
+		}
+		assertNotNull(divs);
+	}
+	
+	
+//	@Test
 	void getNextNumTest() throws Exception{
 		Long num=0L;
 		System.out.println(num);

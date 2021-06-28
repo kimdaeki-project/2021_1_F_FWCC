@@ -253,7 +253,9 @@ public class AdminController {
 	
 	@GetMapping("productInsert")
 	public void productInsert(Model model)throws Exception{
+		String[] divsions = productService.setInsert();
 		model.addAttribute("productNum", productService.getNextNum());
+		model.addAttribute("divisions",divsions);
 	}
 	
 	@GetMapping("orderlistUpdate")
