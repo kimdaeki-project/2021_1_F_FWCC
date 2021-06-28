@@ -20,7 +20,17 @@ class ProductMapperTest {
 
 	@Test
 	void getDivisionTest()throws Exception{
-		String[] divs = productMapper.getDivision();
+		ProductDivisionVO pdVO = new ProductDivisionVO();
+		pdVO.setCollab("collab12");
+		List<ProductDivisionVO> array = productMapper.getDivision(pdVO);
+		System.out.println("size : "+array.size());
+		assertNotNull(array);
+	}
+	
+	
+//	@Test
+	void getDivisionsTest()throws Exception{
+		String[] divs = productMapper.getDivisions();
 		for(String str:divs) {
 			System.out.println(str);
 		}

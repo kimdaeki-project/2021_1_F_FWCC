@@ -255,9 +255,9 @@ public class AdminController {
 	
 	@GetMapping("productInsert")
 	public void productInsert(Model model)throws Exception{
-		String[] divsions = productService.setInsert();
+		String[] divisions = productService.getDivisions();
 		model.addAttribute("productNum", productService.getNextNum());
-		model.addAttribute("divisions",divsions);
+		model.addAttribute("divisions",divisions);
 	}
 	
 	@GetMapping("orderlistUpdate")
@@ -310,11 +310,14 @@ public class AdminController {
 	
 	@GetMapping("productUpdate")
 	public void productUpdate(ProductVO productVO, Model model)throws Exception{
+		String[] divisions = productService.getDivisions();
 		model.addAttribute("VO", productService.setUpdate(productVO));
+		model.addAttribute("divisions",divisions);
 	}
 	
 	@PostMapping("productUpdate")
-	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
+	public String setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
+		System.out.println("-------controller");
 		System.out.println(productVO.getProductTitle());
 		System.out.println(productVO.getProductPrice());
 		System.out.println(productVO.getProductDisRate());
@@ -335,5 +338,7 @@ public class AdminController {
 			System.out.println(stock);
 		}
 		productService.setUpdate(productVO, sizeList, stockList, thumbnail);
+		System.out.println("service end");
+		return "redirect:/admin/adminHome";
 	}
 }

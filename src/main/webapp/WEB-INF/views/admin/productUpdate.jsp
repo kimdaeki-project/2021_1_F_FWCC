@@ -28,10 +28,10 @@
 		<p>${VO.productDivisionVO.collab}</p>
 		<p>${VO.productDivisionVO.productType}</p>
 		 -->
-		<h4>판매여부</h4>
-		<select name="productSaleable">
-			<option value="0">판매 안함</option>
-			<option value="1">판매</option>
+		<h4 id="saleable" title="${VO.productSaleable}">판매여부</h4>
+		<select name="productSaleable" id="pSaleable">
+			<option value="false">판매 안함</option>
+			<option value="true">판매</option>
 		</select>
 		<h4>제품 이름</h4>
 		<input type="text" name="productTitle" id="pTitle" value="${VO.productTitle}">
@@ -45,8 +45,9 @@
 		<h4>콜라보레이션구분</h4>
 		<select name="collab" id="pCollab" title="${VO.productDivisionVO.collab}">
 			<option value="default">콜라보레이션여부</option>
-			<option value="none">콜라보레이션 안함</option>
-			<option value="name1">콜라보레이션 이름</option>
+			<c:forEach items="${divisions}" var="division">
+			<option value="${division}">${division}</option>
+			</c:forEach>
 		</select>
 		<h4>제품 구분</h4>
 		<p hidden="hidden" id="type" title="${VO.productDivisionVO.productType}"></p>

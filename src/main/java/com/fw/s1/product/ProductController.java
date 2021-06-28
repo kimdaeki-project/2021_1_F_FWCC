@@ -153,4 +153,16 @@ public class ProductController {
 		return "product/productSelect";
 	}
 	
+	@GetMapping(value="divInsert")
+	public String setInsertDivision()throws Exception{
+		return "/product/divisionInsert";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="divisionCheck")
+	public String divisionCheck(ProductDivisionVO productDivisionVO)throws Exception{
+		String result = productService.getDivision(productDivisionVO);
+		return result;
+	}
+	
 }
