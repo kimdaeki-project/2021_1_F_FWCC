@@ -27,14 +27,14 @@
 		<h2>noticeform</h2>
 		<form id="frm" action="./commentUpdate" method="post">
 					<div class="form-group">
-						<label for="num">num:</label> <input type="number"
+						<input type="hidden"
 							class="form-control myCheck" id="commentNum" name="commentNum" value="${cvo.commentNum}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
 						<label for="contents">Contents"</label>
 						<textarea class="form-control myCheck" id="contents"
-							name="contents">${Rcvo.contents}</textarea>
+							name="contents">${cvo.contents}</textarea>
 					</div>
 
 					<input type="submit" id="btn" value="WRITE" class="btn btn-primary">

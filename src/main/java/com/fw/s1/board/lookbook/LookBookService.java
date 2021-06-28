@@ -2,8 +2,14 @@ package com.fw.s1.board.lookbook;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fw.s1.util.FileManager;
+import com.fw.s1.util.Pager;
 
 
 
@@ -11,24 +17,44 @@ import org.springframework.stereotype.Service;
 public class LookBookService {
 	@Autowired
 	private LookBookMapper lookbookMapper;
+	@Autowired
+	private FileManager fileManager;
+	@Autowired
+	private HttpSession session;
 	
-	//public List<LookBookVO> lbList(LookBookVO lookbookVO) throws Exception {
-	//	return lookbookMapper.lbList(lookbookVO);
-	//}
+	 public boolean setSummerFileDelete(String fileName)throws Exception{ boolean
+		 result = fileManager.delete("notice", fileName, session); return result; }
+		  
+		 public String setSummerFileUpload(MultipartFile file)throws Exception{
+		  
+		 String fileName = fileManager.save("notice", file, session); return fileName;
+		 }
 	
-	public LookBookVO lbSelect(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.lbSelect(lookbookVO);
+	public List<LookBookVO> List(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
+		pager.makeRow();
+		Long totalCount = lookbookMapper.getTotalCount(pager);
+		pager.makeNum(totalCount);
+		return lookbookMapper.List(pager);
+	}
+	 	
+	public LookBookVO getSelect(LookBookVO lookbookVO) throws Exception {
+		return lookbookMapper.getSelect(lookbookVO);
 	}
 	
-	public int lbInsert(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.lbInsert(lookbookVO);
+	public int setInsert(LookBookVO lookbookVO) throws Exception {
+		int result = lookbookMapper.setInsert(lookbookVO);
+
+		return result;
+	}
+
+	
+	public int setUpdate(LookBookVO lookbookVO) throws Exception {
+		return lookbookMapper.setUpdate(lookbookVO);
 	}
 	
-	public int lbUpdate(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.lbUpdate(lookbookVO);
+	public int setDelete(LookBookVO lookbookVO) throws Exception {
+		return lookbookMapper.setDelete(lookbookVO);
 	}
-	
-	public int lbDelete(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.lbDelete(lookbookVO);
-	}
+
 }
