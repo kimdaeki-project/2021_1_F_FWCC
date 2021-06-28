@@ -130,12 +130,14 @@ public class ProductService {
 	
 	@Transactional(rollbackFor = Exception.class)
 	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbNail) throws Exception{
+		System.out.println("------service");
 		String type = productVO.getProductType();
 		type = type.replace(",", "-");
 		productVO.setProductType(type);
 		System.out.println(type);
 		int result = productMapper.setUpdate(productVO);
 		if(sizeList.length==stockList.length) {
+			System.out.println("listLength : "+sizeList.length);
 			for(int i=0;i<sizeList.length;i++) {
 				ProductInfoVO piVO = new ProductInfoVO();
 				piVO.setProductNum(productVO.getProductNum());
@@ -145,6 +147,8 @@ public class ProductService {
 				System.out.println(i+" : "+result2);
 			}
 		}
+		System.out.println("file");
+		System.out.println(thumbNail.getOriginalFilename().length());
 		if(thumbNail.getOriginalFilename().length()>0) {
 			List<ProductFileVO> array = productMapper.getFileSelect(productVO);
 			System.out.println(array.size());
@@ -184,4 +188,18 @@ public class ProductService {
 		return productVO;
 	}
 	
+	public String[] getDivisions()throws Exception{
+		return productMapper.getDivisions();
+	}
+	
+	public String getDivision(ProductDivisionVO productDivisionVO)throws Exception{
+		String result="";
+		List<ProductDivisionVO> array = productMapper.getDivision(productDivisionVO);
+		if(array.size()>0) {
+			result="불가";
+		}else {
+			result="가능";
+		}
+		return result;
+	}
 }

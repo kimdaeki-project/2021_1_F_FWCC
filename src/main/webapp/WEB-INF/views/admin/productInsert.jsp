@@ -47,8 +47,9 @@ input[type="number"]::-webkit-inner-spin-button {
 		<h4>콜라보레이션구분</h4>
 		<select name="collab" id="pCollab">
 			<option value="default">콜라보레이션여부</option>
-			<option value="none">콜라보레이션 안함</option>
-			<option value="name1">콜라보레이션 이름</option>
+			<c:forEach items="${divisions}" var="division">
+			<option value="${division}">${division}</option>
+			</c:forEach>
 		</select>
 		
 		<h4>제품 구분</h4>

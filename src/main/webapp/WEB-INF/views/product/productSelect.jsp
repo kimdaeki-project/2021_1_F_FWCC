@@ -87,7 +87,7 @@
 				${VO.productContents}</div>
 		</div>
 	</div>
-
+<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 
 
 	<script type="text/javascript">

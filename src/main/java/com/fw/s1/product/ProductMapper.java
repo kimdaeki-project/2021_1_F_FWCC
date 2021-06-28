@@ -20,6 +20,8 @@ public interface ProductMapper {
 	public List<ProductVO> getAllList()throws Exception;
 	public ProductFileVO getThumbNail(ProductVO productVO) throws Exception;
 	public ProductFileVO getMain(ProductVO productVO) throws Exception;
+	public String[] getDivisions() throws Exception;
+	public List<ProductDivisionVO> getDivision(ProductDivisionVO productDivisonVO) throws Exception;
 	
 	public int setInsert(ProductVO productVO) throws Exception;
 	public int setUpdate(ProductVO productVO) throws Exception;
