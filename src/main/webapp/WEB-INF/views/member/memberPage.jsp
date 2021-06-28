@@ -58,7 +58,7 @@
 					<li class=""><strong class="title">coupon</strong> <strong class="data"><span
 							id="xans_myshop_bankbook_coupon_cnt"
 						></span><span>${couponCount}개</span></strong> <a
-						href="#"
+						href="${pageContext.request.contextPath}/member/memberPage/memberCoupon"
 						class="button"
 					>view</a></li>
 				</ul>
@@ -90,23 +90,23 @@
 				</div> -->
 				<div class="shopMain mileage ">
 					<h3 class="txtTitle16B">
-						<a href="#"><strong>mileage</strong>적립금</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberMileage"><strong>mileage</strong>적립금</a>
 					</h3>
 				</div>
 				<br>
 				<div class="shopMain coupon ">
 					<h3>
-						<a href="#"><strong>coupon</strong>쿠폰</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberCoupon"><strong>coupon</strong>쿠폰</a>
 					</h3>
 				</div>
 				<div class="shopMain board">
 					<h3>
-						<a href="#"><strong>board</strong>게시물 관리</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberBoard"><strong>board</strong>게시물 관리</a>
 					</h3>
 				</div>
 				<div class="shopMain address col2">
 					<h3>
-						<a href="#"><strong>address</strong>배송 주소록 관리</a>
+						<a href="${pageContext.request.contextPath}/member/memberPage/memberAddress"><strong>address</strong>배송 주소록 관리</a>
 					</h3>
 				</div>
 			</div>

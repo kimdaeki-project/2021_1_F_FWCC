@@ -28,8 +28,35 @@
 		</foreach>
 	</insert>
 	
+<!-- member -->
 	<insert id="setMileAfterJoin" parameterType="MileageVO">
 		INSERT INTO mileage(mileNum, usedMile, changeMile, username, orderNum, mileContents, enabledMile)
 		VALUES(0, #{usedMile}, #{changeMile}, #{username}, null, #{mileContents}, #{enabledMile})
 	</insert>
+	
+	<select id="getMemberMileage" parameterType="MemberVO" resultMap="memberMileage">
+		select M.*, O.orderDate from mileage M
+		left join orderlist O
+		on M.orderNum = O.orderNum
+		where M.username = #{username}
+	</select>
+	<resultMap type="MileageVO" id="memberMileage">
+		<id column="mileNum" property="mileNum"/>
+		<result column="usedMile" property="usedMile"/>
+		<result column="changeMile" property="changeMile"/>
+		<result column="username" property="username"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="mileContents" property="mileContents"/>
+		<result column="enabledMile" property="enabledMile"/>
+		<association property="orderlistVO" javaType="OrderlistVO" >
+			<result column="orderDate" property="orderDate"/>
+		</association>
+	</resultMap>
+	
+	<select id="getRecentMemberMileage" parameterType="MemberVO" resultType="MileageVO">
+		select * from mileage 
+		where username = #{username}
+		order by mileNum desc
+		limit 1
+	</select>
 </mapper>

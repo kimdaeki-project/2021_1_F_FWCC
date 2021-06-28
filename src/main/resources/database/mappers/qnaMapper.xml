@@ -104,6 +104,16 @@
    		<delete id="commentDelete" parameterType="BoardCommentVO">
    			delete from qnaComment where commentNum=#{commentNum}
    		</delete>
+   		
+   		<!-- member -->
+   		<select id="getMemberBoardList" parameterType="MemberVO" resultType="QnaVO">
+   			select R.num, (select  null) productNum, R.title, R.writer, R.regDate, R.hit, R.contents, R.typeNum from review R
+			where R.writer = #{username}
+			union
+			select Q.* from qna Q
+			where Q.writer = #{username}
+			order by regDate desc
+   		</select>
    
    </mapper>
     
