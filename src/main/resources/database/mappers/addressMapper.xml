@@ -72,4 +72,11 @@
   	where username=#{username} and addrNum=#{addrNum}
   </update>
   
+  <delete id="deleteMemberAddress" parameterType="AddressVO">
+  		delete from address where
+  		<foreach collection="AddressVO" item="VO" open="(" separator="," close=")">
+  			username=#{VO.username} and addrNum=#{VO.addrNum}
+  		</foreach>
+  </delete>
+  
 </mapper>

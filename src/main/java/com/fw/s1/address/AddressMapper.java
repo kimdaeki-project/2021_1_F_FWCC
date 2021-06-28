@@ -23,6 +23,8 @@ public interface AddressMapper {
 	public Long setMemberAddress(AddressVO addressVO) throws Exception;
 	//memberPage 주소 업데이트
 	public Long updateMemberAddress(AddressVO addressVO) throws Exception;
+	//memberPage 주소 삭제
+	public Long deleteMemberAddress(AddressVO addressVO) throws Exception;
 
 	//주소목록 불러오기
 	public List<AddressVO> getAddressList(MemberVO memberVO)throws Exception;

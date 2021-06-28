@@ -28,7 +28,20 @@ $("#deleteAddr").click(function(){
 		let selected = $(this).prop("checked");
 		if(selected){
 			let addrNum = $(this).attr("title");
-			console.log(addrNum);
+			$.ajax({
+				method:"POST",
+				url:"./addressDelete",
+				data:{
+					addrNum:addrNum
+				},
+				success:function(result){
+					result=result.trim();
+					alert("AJAX success : "+result);
+				},
+				error:function(result){
+					alert("AJAX error : "+result);
+				}
+			});
 		}
 	});
 });

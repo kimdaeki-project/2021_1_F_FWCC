@@ -159,9 +159,14 @@ public class MemberService implements UserDetailsService {
 		addressVO.phoneSeperator();
 		return addressVO;
 	}
+	
 	public Long updateMemberAddress(AddressVO addressVO) throws Exception {
 		addressVO.setAddrPhone(addressVO.getAddrPhone1()+"-"+addressVO.getAddrPhone2()+"-"+addressVO.getAddrPhone3());
 		return addressMapper.updateMemberAddress(addressVO);
+	}
+	
+	public Long deleteMemberAddress(AddressVO addressVO) throws Exception {
+		return addressMapper.deleteMemberAddress(addressVO);
 	}
 	
 	
