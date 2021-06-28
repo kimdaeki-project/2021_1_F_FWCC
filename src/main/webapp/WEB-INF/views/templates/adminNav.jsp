@@ -10,7 +10,7 @@
 		<div style="padding:2%; font-size: 1.7em; margin-top:3%;">상품관리
 			<ul style="list-style: none; padding:0; font-size:1.2rem; margin-top: 5%;">
 				<li><a href="${pageContext.request.contextPath}/admin/productInsert">상품등록</a></li>
-				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/productUpdate">상품정보수정</a></li>
+				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/adminAllList">상품정보수정</a></li>
 				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/orderlistUpdate">배송정보수정</a></li>
 			</ul>
 		</div>

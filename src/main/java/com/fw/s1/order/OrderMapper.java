@@ -17,10 +17,13 @@ public interface OrderMapper {
 	public List<OrderlistVO> orderStateChange(OrderlistVO orderlistVO)throws Exception;
 	//해당 번호의 주문번호만 선택해서 확인
 	public OrderlistVO selectedOrder(OrderlistVO orderlistVO)throws Exception;
+	//해당 ordernum이 접속한 username을 가지고 있는지 확인
+	public OrderlistVO checkOrder(OrderlistVO orderlistVO)throws Exception;
 	//해당 번호의 주문번호로 검색한 항목 state update
 	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception;
 	//선택된 항목들의 주문번호로 state update
 	public Long orderlistsUpdate(List<OrderlistVO> list)throws Exception;
+	
 	
 	// member orderList 조회
 	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception;

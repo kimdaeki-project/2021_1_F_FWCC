@@ -194,7 +194,7 @@
 									<td>${VO.productVO.productTitle}</td>
 									<td>${VO.orderlistVO.orderNum}</td>
 									<td>${VO.purchaseVO.productCount}</td>
-									<td>${VO.purchaseVO.proPriceSum}</td>
+									<td>${VO.orderlistVO.spPrice}</td>
 									<td><c:choose>
 											<c:when test="${VO.orderlistVO.orderState == 1}">
 											주문완료
@@ -210,7 +210,7 @@
 										</c:when>
 										</c:choose></td>
 									<td><c:if test="${VO.orderlistVO.orderState != 4}">
-											<a href="#"><img
+											<a href="#" class="orderCancle" data-orderNum='${VO.orderlistVO.orderNum}'><img
 												src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif"
 												alt="주문취소"
 											/></a>
@@ -257,5 +257,6 @@
 		type="text/javascript"
 		src="/js/member/memberPage/orderList.js"
 	></script>
+	<script type="text/javascript" src='${pageContext.request.contextPath}/js/order/orderCancle.js'></script>
 </body>
 </html>

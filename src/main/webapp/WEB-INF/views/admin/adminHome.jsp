@@ -21,7 +21,7 @@
 					<a href="./productInsert">상품등록</a>
 				</li>
 				<li style="padding:5%;">
-					<a href="./productUpdate">상품정보수정</a>
+					<a href="./adminAllList">상품정보수정</a>
 				</li>
 				<li style="padding:5%;">
 					<a href="./orderlistUpdate">배송정보수정</a>

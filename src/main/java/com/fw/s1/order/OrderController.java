@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fw.s1.address.AddressService;
@@ -82,13 +84,32 @@ public class OrderController {
 	
 	//삭제 작업을 위한 메서드, 후반에 완성시키자.
 	@ResponseBody
-	@PostMapping("cancle/{merchant_uid}")
-	public boolean testCancelPaymentAlreadyCancelledMerchantUid(@PathVariable(value="merchant_uid")String merchant_uid) {
+	@PostMapping("cancle")
+	public boolean testCancelPaymentAlreadyCancelledMerchantUid(String merchant_uid, Authentication authentication) {
 		String test_already_cancelled_merchant_uid = merchant_uid;
 		CancelData cancel_data = new CancelData(test_already_cancelled_merchant_uid, false); //merchant_uid를 통한 전액취소
 		cancel_data.setEscrowConfirmed(true); //에스크로 구매확정 후 취소인 경우 true설정
+		OrderlistVO orderlistVO = new OrderlistVO();
+		orderlistVO.setOrderNum(merchant_uid);
 		boolean check = true;
 		try {
+			if(authentication==null) {
+				throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+			}
+			
+			orderlistVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			
+			try {
+				orderlistVO = orderService.checkOrder(orderlistVO);
+			} catch (Exception e) {
+				check = false;
+				e.printStackTrace();
+			}
+			
+			if(orderlistVO == null) {
+				throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+			}
+			
 			IamportResponse<Payment> payment_response = api.cancelPaymentByImpUid(cancel_data);
 			if(payment_response.getResponse()==null) {
 				check=false;
@@ -110,11 +131,24 @@ public class OrderController {
 				//TODO
 				break;
 			}
-		} catch (IOException e) {
+		}catch (ResponseStatusException e) { 
+			check = false;
+			e.printStackTrace();
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			check=false;
 			e.printStackTrace();
-		}	
+		}
+		if(check) {
+			orderlistVO.setOrderState(4L);
+			try {
+				orderService.orderlistUpdate(orderlistVO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return check;
 	}
 	

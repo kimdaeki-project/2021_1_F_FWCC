@@ -30,6 +30,10 @@ public class OrderService {
 		return orderMapper.selectedOrder(orderlistVO);
 	}
 	
+	public OrderlistVO checkOrder(OrderlistVO orderlistVO)throws Exception{
+		return orderMapper.checkOrder(orderlistVO);
+	}
+	
 	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception{
 		return orderMapper.orderlistUpdate(orderlistVO);
 	}
