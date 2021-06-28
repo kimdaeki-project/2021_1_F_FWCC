@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 //				.antMatchers("/**").permitAll()
-				.antMatchers("/").permitAll()
+				.antMatchers("/**").permitAll()
 				// --- community START ---
 				.antMatchers("/notice/list", "/notice/select","/notice/insert").permitAll()
 				// --- community END ---
