@@ -8,13 +8,14 @@ import com.fw.s1.util.Pager;
 
 @Mapper
 public interface LookBookMapper {
-	public int lbInsert(LookBookVO lookbookVO)throws Exception;
+	public Long getTotalCount(Pager pager)throws Exception;
+	public int setInsert(LookBookVO lookbookVO)throws Exception;
 	//lbList
-	public List<LookBookVO> lbList(Pager pager)throws Exception;
+	public List<LookBookVO> List(Pager pager)throws Exception;
 	//lbSelect
-	public LookBookVO lbSelect(LookBookVO lookbookVO)throws Exception;
+	public LookBookVO getSelect(LookBookVO lookbookVO)throws Exception;
 	//lbUpdate
-	public int lbUpdate(LookBookVO lookbookVO)throws Exception;
+	public int setUpdate(LookBookVO lookbookVO)throws Exception;
 	//lbDelete
-	public int lbDelete(LookBookVO lookbookVO)throws Exception;
+	public int setDelete(LookBookVO lookbookVO)throws Exception;
 }

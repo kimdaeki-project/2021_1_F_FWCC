@@ -3,35 +3,60 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace="com.fw.s1.board.lookbook.LookBookMapper">
-    	<select id="lbList" resultType="lookbookVO" parameterType="Pager">
+   <mapper namespace="com.fw.s1.board.lookbook.LookBookMapper">
+
+   		
+   		
+   		<select id="List" resultType="LookBookVO" parameterType="Pager">
 			select * from lookbook
-			<!-- <include refid="searcher"></include> -->
-			order by num desc
-			limit #{startRow}, #{perPage}
-			<!-- limit 시작index번호(0부터시작), 갯수 --> 
+
+
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			select count(num) from lookbook
-   			<!-- <include refid="searcher"></include> -->
+   			select count(lookbookNum) from lookbook
+
    		</select>
    		
-    	<insert id="lbInsert" parameterType="LookBookVO">
-   			insert into lookbook (division, fileName, title)
-   			values (#{division}, #{fileName}, #{title})
+   		<select id="getSelect" resultMap="selectResult" parameterType="LookBookVO">
+			SELECT N.*, NF.* from
+			lookbook N left join lookbookFiles NF
+			on N.lookbookNum = NF.num
+			WHERE N.lookbookNum=#{lookbookNum}
+   		</select>
+   		
+   		<resultMap type="LookBookVO" id="selectResult">
+   			<id column="lookbookNum" property="lookbookNum"/>
+   			<result column="division" property="division"/>
+   			<result column="title" property="title"/>
+   			<collection property="files" javaType="java.util.List" ofType="LookBookFileVO">
+   				<id column="lookbookFileNum" property="lookbookFileNum"/>
+   				<result column="num" property="num"/>
+   				<result column="fileName" property="fileName"/>
+   			</collection>
+   		</resultMap>
+   		
+   		
+   		<insert id="setInsert" parameterType="LookBookVO" useGeneratedKeys="true" keyProperty="lookbookNum">
+   			insert into lookbook (division,title)
+   			values(#{division}, #{title})
    		</insert>
    		
-   		<select id="lbSelect" parameterType="LookBookVO" resultType="LookBookVO">
-			select * from lookbook where lookbookNum=#{lookbookNum}
-   		</select>
+   		<insert id="setFileInsert" parameterType="LookBookFileVO">
+   			insert into lookbookFiles (num, filename)
+   			values (#{num}, #{fileName})
+   		</insert>
    		
-   		<update id="lbUpdate" parameterType="LookBookVO">
-   			update lookbook set division=#{division}, fileName=#{fileName}, title=#{title} where lookbookNum=#{lookbookNum}
+   		<update id="setUpdate" parameterType="LookBookVO" useGeneratedKeys="true" keyProperty="lookbookNum">
+   			update lookbook set division=#{division}, title=#{title} where lookbookNum=#{lookbookNum}
    		</update>
    		
-   		<delete id="lbDelete" parameterType="LookBookVO">
-   			delete from reviewComment where lookbookNum=#{lookbookNum}
+   		<delete id="setDelete" parameterType="BoardVO">
+			delete from lookbook where lookbookNum=#{lookbookNum};
+			delete from lookbookfiles where lookbookFileNum=#{lookbookFileNum}
+
    		</delete>
-   	</mapper>
+   		
+   
+   </mapper>
     

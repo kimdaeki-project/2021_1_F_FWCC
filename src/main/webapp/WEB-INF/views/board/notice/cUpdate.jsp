@@ -34,7 +34,7 @@
 					<div class="form-group" style="margin: auto;">
 						<label for="contents">Contents"</label>
 						<textarea class="form-control myCheck" id="contents"
-							name="contents">${Rcvo.contents}</textarea>
+							name="contents">${cvo.contents}</textarea>
 					</div>
 
 					<input type="submit" id="btn" value="WRITE" class="btn btn-primary">

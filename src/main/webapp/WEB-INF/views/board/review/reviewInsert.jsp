@@ -23,6 +23,8 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
+<div id="container">
+<div style="padding: 68px 34px 0;">
 	<div class="container">
 		<h2>${board}form</h2>
 		<form id="frm" action="./insert" method="post" enctype="multipart/form-data">
@@ -54,9 +56,10 @@
 		</form>
 	</div>
 
+</div>
+</div>
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 
-
-	</div>
 
 
 	<script type="text/javascript" src="/js/board/boardInsert.js"></script>

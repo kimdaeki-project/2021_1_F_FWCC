@@ -1,7 +1,9 @@
   
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- spring security에 관련된 태그   -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>            
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,43 +40,38 @@ a:hover {
 <div style="padding: 68px 34px 0;">
 <div class="container">
 	<div class="title" style="margin: 60px 0 40px; text-align:center;">
-			<p>Notice</p>
+			<p>Review</p>
 	</div>		
-		<table class="table" style="border-collapse: separate;
-	  border-spacing: 1px;
-	  text-align: left;
-	  line-height: 1.5;
-	  margin : 20px 10px;">
-			<thead >
-				<tr>
-					<th style="width: 100px;">NO</th>
-					<th style="width: 600px;">SUBJECT</th>
-					<th style="width: 100px; text-align:center;">WRITER</th>
-					<th style="width: 100px; text-align:center;">DATE</th>
-					<th style="width: 100px; text-align:center;">HIT</th>
-				</tr>
-			</thead>
-			
-			<tbody>
+	
+	
+	
+
+	<div class="row">
 			<c:forEach items="${Rlist}" var="Rdto" >
-				<tr>
-					<td>${Rdto.num}</td>
-					<td><a style="color:black;" href="./select?num=${Rdto.num}">
-					
+				<div class="col-sm-4">
+				<div class="card" style="width: 22rem; height: 22rem;">
+				  
+				  <div class="card-body">
+				    <p class="card-text">
+				   <a style="color:black;" href="./select?num=${Rdto.num}">
 					<c:catch>
 					<c:forEach begin="1" end="${Rdto.depth}">--</c:forEach>
 					</c:catch>
+					<img class="card-img-top" src="C:\hancheol\workspace\FWCC\target\classes\static\upload\review\${fileVO.fileName}.jpg" alt="Card image cap">
+					</a>
 					${Rdto.title}
-					</a></td>
-					<td style="text-align:center;">${Rdto.writer}</td>
-					<td style="text-align:center;">${Rdto.regDate}</td>
-					<td style="text-align:center;">${Rdto.hit}</td>
-				</tr>
+					${Rdto.writer} ${Rdto.regDate}
+					
+					
+					</p>
+				  </div>
+				</div>
+				</div>
 			</c:forEach>
-			</tbody>
-		
-		</table>
+			</div>
+			
 	</div>
+
 	
 	<div style="margin: 40px 0 40px;">
 	  <ul class="pagination" style=" justify-content: center;">
@@ -111,7 +108,12 @@ a:hover {
 	 </form> 
 	</div> 
   
-  <a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	<sec:authorize access="isAuthenticated()">
+		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	</sec:authorize>
+
+  
+  
 <script type="text/javascript">
 	let kind= '${pager.kind}';
 	$(".sel").each(function() {

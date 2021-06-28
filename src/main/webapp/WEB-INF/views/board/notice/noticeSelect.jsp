@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- spring security에 관련된 태그   -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,8 +85,8 @@
 					<td><div>${com.commentNum} ${com.writer} ${com.regDate} </div>
 						<div>${com.contents}</div>
 						<div>
-						<a href="./commentUpdate?commentNum=${Rcom.commentNum}&num=${Rcom.num}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${Rcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
+						<a href="./commentUpdate?commentNum=${com.commentNum}&num=${com.num}" class="btn btn-danger">Updatec</a>
+						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn btn-info">Deletec</a>
 						</div>
 					</td>
 						
@@ -93,14 +95,14 @@
 					</tbody>
 			</table>
 			<div>
-				<form id="frm" action="./RcommentInsert" method="post">
+				<form id="frm" action="./commentInsert" method="post">
 					<div class="form-group">
 						<label for="writer">Writer:</label> <input type="text"
-							class="form-control myCheck" id="writer" name="writer">
+							class="form-control myCheck" id="writer" name="writer" value="<sec:authentication property="principal.username"/>">
 					</div>
 					<div class="form-group">
 						<label for="num">num:</label> <input type="number"
-							class="form-control myCheck" id="num" name="num" value="${Rvo.num}" }>
+							class="form-control myCheck" id="num" name="num" value="${vo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
@@ -112,13 +114,13 @@
 					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
 				</form>
 			</div>
-			<c:if test="${Rcvo.commentNum >=1}">
-				<c:import url="/WEB-INF/views/board/review/rcUpdate.jsp"></c:import>
+			<c:if test="${cvo.commentNum >=1}">
+				<c:import url="/WEB-INF/views/board/notice/cUpdate.jsp"></c:import>
 			</c:if>
 			
 			<div>
-				<a href="./Rupdate?num=${vo.num}" class="btn btn-danger">Update</a>
-				<a href="./Rdelete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
+				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
+				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
 				
 			</div>
 		</div>

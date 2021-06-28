@@ -1,7 +1,9 @@
   
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- spring security에 관련된 태그   -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>           
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +113,14 @@ a:hover {
 	 </form> 
 	</div> 
   
-  <a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+  		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
+	</sec:authorize>
+
+  
 <script type="text/javascript">
 	let kind= '${pager.kind}';
 	$(".sel").each(function() {
