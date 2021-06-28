@@ -74,7 +74,7 @@
   
   <delete id="deleteMemberAddress" parameterType="AddressVO">
   		delete from address where
-  		<foreach collection="AddressVO" item="VO" open="(" separator="," close=")">
+  		<foreach collection="array" item="VO" open="(" separator="," close=")">
   			username=#{VO.username} and addrNum=#{VO.addrNum}
   		</foreach>
   </delete>
