@@ -49,6 +49,6 @@
 	</update>
 	
 	<select id="getMemberCouponCount" parameterType="MemberVO" resultType="java.lang.Long">
-		select count(cuNum) from coupon where username = #{username}
+		select count(cuNum) from coupon where username = #{username} and useCheck = 0
 	</select>
 </mapper>
