@@ -249,8 +249,19 @@ public class MemberController {
 	@GetMapping("memberPage/memberAddress")
 	public ModelAndView getMemberAddress(Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<AddressVO> ar = memberService.getMemberAddress(memberVO);
+		mv.addObject("list", ar);
 		mv.setViewName("member/memberPage/memberAddress");
+		return mv;
+	}
+	
+	@GetMapping("memberPage/addressInsert")
+	public ModelAndView setAddress() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/memberPage/addressInsert");
 		return mv;
 	}
 	

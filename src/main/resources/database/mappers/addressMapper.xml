@@ -56,4 +56,9 @@
   	update address set zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}
   	where username=#{username} and orderAddr=0
   </update>
+  
+  <select id="getMemberAddress" parameterType="MemberVO" resultType="AddressVO">
+  	select * from address where username = #{username}
+  </select>
+  
 </mapper>

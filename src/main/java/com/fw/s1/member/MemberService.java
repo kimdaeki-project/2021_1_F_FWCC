@@ -145,6 +145,10 @@ public class MemberService implements UserDetailsService {
 		return qnaMapper.getMemberBoardList(memberVO);
 	}
 	
+	public List<AddressVO> getMemberAddress(MemberVO memberVO) throws Exception {
+		return addressMapper.getMemberAddress(memberVO);
+	}
+	
 	
 // ======================================================================================
 	@Override
