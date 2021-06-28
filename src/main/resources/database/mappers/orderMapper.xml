@@ -90,14 +90,14 @@
 	<!-- member -->
 	<select id="getOrderList" parameterType="OrderlistVO" resultMap="getOrderProduct">
 		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
-        INNER JOIN purchase PU ON O.orderNum = PU.orderNum
-        INNER JOIN product P ON PU.productNum = P.productNum 
-        LEFT JOIN (
-            SELECT * FROM productfiles 
-            WHERE fileName LIKE CONCAT('T\_', '%')
-        ) PF ON P.productNum = PF.productNum
-        WHERE O.username = #{username}
-        ORDER BY O.orderNum DESC
+		INNER JOIN purchase PU ON O.orderNum = PU.orderNum
+		INNER JOIN product P ON PU.productNum = P.productNum 
+		LEFT JOIN (
+			SELECT * FROM productfiles 
+			WHERE fileName LIKE CONCAT('T\_', '%')
+		) PF ON P.productNum = PF.productNum
+		WHERE O.username = #{username}
+		ORDER BY O.orderNum DESC
 	</select>
 	
 	<select id="getFilteredList" parameterType="OrderlistVO" resultMap="getOrderProduct">

@@ -145,6 +145,30 @@ public class MemberService implements UserDetailsService {
 		return qnaMapper.getMemberBoardList(memberVO);
 	}
 	
+	public List<AddressVO> getMemberAddress(MemberVO memberVO) throws Exception {
+		return addressMapper.getMemberAddress(memberVO);
+	}
+	
+	public Long setMemberAddress(AddressVO addressVO) throws Exception {
+		addressVO.setAddrPhone(addressVO.getAddrPhone1()+"-"+addressVO.getAddrPhone2()+"-"+addressVO.getAddrPhone3());
+		return addressMapper.setMemberAddress(addressVO);
+	}
+	
+	public AddressVO getAddressSelectOne(AddressVO addressVO) throws Exception {
+		addressVO = addressMapper.getSelectOne(addressVO);
+		addressVO.phoneSeperator();
+		return addressVO;
+	}
+	
+	public Long updateMemberAddress(AddressVO addressVO) throws Exception {
+		addressVO.setAddrPhone(addressVO.getAddrPhone1()+"-"+addressVO.getAddrPhone2()+"-"+addressVO.getAddrPhone3());
+		return addressMapper.updateMemberAddress(addressVO);
+	}
+	
+	public Long deleteMemberAddress(AddressVO addressVO) throws Exception {
+		return addressMapper.deleteMemberAddress(addressVO);
+	}
+	
 	
 // ======================================================================================
 	@Override

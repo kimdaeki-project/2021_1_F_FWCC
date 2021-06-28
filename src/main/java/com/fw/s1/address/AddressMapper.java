@@ -17,6 +17,14 @@ public interface AddressMapper {
 	public AddressVO getProfileAddress(MemberVO memberVO) throws Exception;
 	//회원정보 수정 시 주소 update
 	public Long setProfileAddressUpdate(MemberVO memberVO) throws Exception;
+	//memberPage 주소록 관리 list select
+	public List<AddressVO> getMemberAddress(MemberVO memberVO) throws Exception;
+	//memberPage 주소 추가
+	public Long setMemberAddress(AddressVO addressVO) throws Exception;
+	//memberPage 주소 업데이트
+	public Long updateMemberAddress(AddressVO addressVO) throws Exception;
+	//memberPage 주소 삭제
+	public Long deleteMemberAddress(AddressVO addressVO) throws Exception;
 
 	//주소목록 불러오기
 	public List<AddressVO> getAddressList(MemberVO memberVO)throws Exception;

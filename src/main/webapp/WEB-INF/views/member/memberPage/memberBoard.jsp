@@ -75,12 +75,26 @@
 								>
 									<tr class="">
 										<td class="left">${status.count}</td>
-										<td class="left"><c:if test="${VO.typeNum == 2}">
-										Q&A
-									</c:if> <c:if test="${VO.typeNum == 3}">
-										Review
-									</c:if></td>
-										<td class="left subject"><a href="">${VO.title}</a></td>
+										<td class="left">
+											<c:if test="${VO.typeNum == 2}">
+												Q&A
+											</c:if>
+											<c:if test="${VO.typeNum == 3}">
+												Review
+											</c:if>
+										</td>
+										<td hidden="" class="PKNum">
+											<c:if test="${VO.typeNum == 2}">
+												Q_${VO.num}
+											</c:if>
+											<c:if test="${VO.typeNum == 3}">
+												R_${VO.num}
+											</c:if>
+										</td>
+										<td class="left subject"><a
+											class="boardLink"
+											href="#"
+										>${VO.title}</a></td>
 										<td class="left">${VO.writer}</td>
 										<td class="left">${VO.regDate}<span class="txtNum"></span></td>
 										<td class="left">${VO.hit}<span class="txtNum"></span></td>
@@ -177,10 +191,10 @@
 	<!-- External JS -->
 
 	<!-- Custom JS -->
-	<!-- <script
-	type="text/javascript"
-	src="/js/member/memberPage/memberBoard.js"
-></script> -->
+	<script
+		type="text/javascript"
+		src="/js/member/memberPage/memberBoard.js"
+	></script>
 
 </body>
 </html>
