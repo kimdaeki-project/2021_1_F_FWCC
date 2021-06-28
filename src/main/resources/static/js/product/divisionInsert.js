@@ -2,21 +2,41 @@
  * 
  */
 let dCheck = false;
-$("#duplCheck").click(duplCheck);
+let str="";
 
-function duplCheck(){
+
+function duplCheck(sibal){
 	let collab=$("#collab").val();
+	dCheck=false;
 	if(collab.length>0){
 		$.get("divisionCheck?collab="+collab,function(result){
 			result=result.trim();
-			let str = "이미 있음"
-			alert(result)
+			str = "이미 있음"
 			if(result=="가능"){
 				str = "추가 가능"
 				dCheck=true;
 			}
-			alert(str);
+			$("#divCheckText").text(str);
+			
+			if(sibal){
+				alert(dCheck);
+				if(dCheck){
+					$("#frm").submit();
+				}
+			}
 		})
 	}
 }
+
+$("#duplCheck").click(function(){
+	
+	duplCheck(false);
+})
+
+$("#addBtn").click(function(){
+	duplCheck(true);
+	
+	
+	
+})
 
