@@ -1,16 +1,19 @@
 /**
  * 
  */
-// http://localhost/review/select?num=6
-// http://localhost/qna/select?num=5
 
 $(".boardLink").click(function(){
-	let num = $(".num").
-	$.ajax({
-		method:"GET",
-		url:"./getUrl",
-		data:{
-			
-		}
-	});
+	let PKNum = $(this).parent().prev().html();
+	PKNum = PKNum.trim();
+	console.log(PKNum);
+	let check = PKNum.startsWith("R");
+	if(check) {
+		let num  = PKNum.substring(2);
+		console.log(num);
+		location.href="/review/select?num="+num;
+	} else {
+		let num  = PKNum.substring(2);
+		console.log(num);
+		location.href="/qna/select?num="+num;
+	}
 });
