@@ -88,16 +88,36 @@
 				</c:forEach>
 				<tr>
 				<td colspan='2'>
-				<a href="./list" class="btn btn-danger">List</a>
+				<div style="text-align: right;">
+				<a href="./list" class="btn" style="border:1px solid gray;
+                    width:132px;
+                    height:32px;
+                    font-size:14px
+                    ">List</a>
+				</div>
 				</td>
 				</tr>
 					<c:forEach items="${cm}" var="com" >
 					<tr>
-					<td colspan='2'><div>${com.commentNum} ${com.writer} ${com.regDate} <sec:authentication property="principal.username" var="user_id"/>
+					<td colspan='2'>
+					<div class="row">
+					<div class="col-sm-6">${com.writer} ${com.regDate}</div>
+					<sec:authentication property="principal.username" var="user_id"/>
 						<c:if test="${com.writer == user_id }">
-						<a href="./commentUpdate?commentNum=${com.commentNum}&num=${com.num}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn btn-info">Deletec</a>
-						</c:if></div>
+						<div class="col-sm-6" style="text-align: right;">
+						<a href="./commentUpdate?commentNum=${com.commentNum}&num=${com.num}" class="btn" style="background: gray;
+						color:white;
+                    width:62px;
+                    height:26px;
+                    font-size:10px";>MODIFY</a>
+						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn" style="border:1px solid gray;
+                    width:62px;
+                    height:26px;
+                    font-size:10px;">DELETE</a>
+						</div>
+						
+						</c:if>
+						</div>
 						<div>${com.contents}</div>
 
 					</td>
@@ -123,7 +143,14 @@
 							name="contents"></textarea>
 					</div>
 
-					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
+					<div style="text-align: right; padding: 10px;">
+					<input type="button" id="btn" value="WRITE" class="btn" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+				</div>
+				
+				</div>
 				</form>
 			</div>
 			</c:if>
@@ -132,7 +159,7 @@
 			</c:if>
 			
 			<sec:authentication property="principal.username" var="user_id"/>
-			<c:if test="${com.writer == user_id }">
+			<c:if test="${vo.writer == user_id }">
 			<div>
 				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
 				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
