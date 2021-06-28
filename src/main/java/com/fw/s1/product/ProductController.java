@@ -165,4 +165,9 @@ public class ProductController {
 		return result;
 	}
 	
+	@PostMapping(value="divInsert")
+	public void setInsertDivision(ProductDivisionVO productDivisionVO)throws Exception{
+		productService.setInsertDivision(productDivisionVO);
+	}
+	
 }

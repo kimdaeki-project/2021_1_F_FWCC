@@ -27,6 +27,8 @@ public interface ProductMapper {
 	public int setUpdate(ProductVO productVO) throws Exception;
 	public int setFileDelete(ProductVO productVO) throws Exception;
 	public int setInsertPInfo(ProductInfoVO pInfoVO) throws Exception;
+	public int setInsertDivision(ProductDivisionVO productDivisionVO) throws Exception;
+	
 	public int setFileInsert(ProductFileVO productFileVO) throws Exception;
 	public int setUpdateProductInfo(ProductInfoVO productInfoVO) throws Exception;
 	

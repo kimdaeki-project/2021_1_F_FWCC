@@ -10,7 +10,11 @@
 </head>
 <body>
 <h1>Division Insert</h1>
-<input type="text" name="collab" id="collab"><button id="duplCheck">중복 확인</button>
+<form action="divInsert" method="post" id="frm">
+<input type="text" name="collab" id="collab"><a id="duplCheck">중복 확인</a>
+<p id="divCheckText"></p>
+</form>
+<button id="addBtn">추가</button>
 <script type="text/javascript" src="/js/product/divisionInsert.js"></script>
 </body>
 </html>

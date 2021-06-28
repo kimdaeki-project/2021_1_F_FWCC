@@ -130,6 +130,11 @@
 		values(#{productNum},#{fileName},#{oriName})
 	</insert>
 	
+	<insert id="setInsertDivision" parameterType="ProductDivisionVO">
+		insert into
+		productDivision (collab,producttype)
+		values(#{collab},#{productType})
+	</insert>
 
 	<!-- ++++++++++ U ++++++++++ -->
 	<update id="setUpdate" parameterType="ProductVO">

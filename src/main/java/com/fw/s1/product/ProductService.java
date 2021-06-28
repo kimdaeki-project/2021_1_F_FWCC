@@ -202,4 +202,13 @@ public class ProductService {
 		}
 		return result;
 	}
+	public int setInsertDivision(ProductDivisionVO productDivisionVO)throws Exception{
+		String[] types = {"top-long","top-short","bottom-long","bottom-short"};
+		int result = 0;
+		for(String str:types) {
+			productDivisionVO.setProductType(str);
+			result += productMapper.setInsertDivision(productDivisionVO);
+		}
+		return result;
+	}
 }
