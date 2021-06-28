@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.util.ProductFileManager;
@@ -127,6 +128,7 @@ public class ProductService {
 		return vo;
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbNail) throws Exception{
 		String type = productVO.getProductType();
 		type = type.replace(",", "-");

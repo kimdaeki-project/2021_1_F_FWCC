@@ -68,4 +68,23 @@ public class CartController {
 		cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
 		return cartService.setCart(cartVO);
 	}
+	
+	@PostMapping("setCartList")
+	public Long setCartList(Long productNum, Long[] productCounts, Long[] pInfoNums ,Authentication authentication)throws Exception{
+		int size = productCounts.length;
+		List<CartVO> list = new ArrayList<>();
+		if(authentication==null) {
+			return 0L;
+		}
+		for(int i = 0 ; i < size; i++) {
+			CartVO cartVO = new CartVO();
+			cartVO.setProductNum(productNum);
+			cartVO.setProductCount(productCounts[i]);
+			cartVO.setPInfoNum(pInfoNums[i]);
+			cartVO.setUsername(((UserDetails)authentication.getPrincipal()).getUsername());
+			list.add(cartVO);
+		}
+		
+		return cartService.setCartList(list);
+	}
 }

@@ -18,7 +18,7 @@
 	<div class="contents" style="margin-top: 80px; min-width: 1200px;">
 		<div
 			style="position: fixed; right: 0; width: 390px; padding: 10px 20px; height: 100%;">
-			<h2 id="pTitle" title="${VO.productTitle}">${VO.productTitle}</h2>
+			<h2 id="pTitle" title="${VO.productTitle}" data-productNum="${VO.productNum}">${VO.productTitle}</h2>
 			<div hidden="hidden" id="finalPrice" title="${VO.finalPrice }"></div>
 			<c:if test="${VO.productDisRate eq 0}">
 				<span style="font-size: 12px; color: #000000;">KRW
@@ -53,11 +53,11 @@
 					<thead></thead>
 					<tbody>
 						<c:forEach items="${VO.infos}" var="info">
-							<tr style="display: none;" id="size_${info.size}" title="1" data-infoNum="${info.PInfoNum}">
+							<tr style="display: none;" id="size_${info.size}" title="1">
 								<td>${VO.productTitle}-${info.size}</td>
 								<td><input type="number" min="1" value="1"
 									data-value="${info.size}" class="noProduct"><a
-									class="delInfo" data-value="${info.size}">X</a></td>
+									class="delInfo" data-value="${info.size}" data-infoNum="${info.PInfoNum}">X</a></td>
 								<td><span class="finalPrices" id="${info.size}FinalPrice"
 									title="${VO.finalPrice}">${VO.finalPrice}</span><br> <span
 									style="font-size: 12px; color: #000000;" id="${info.size}Mile"
@@ -73,8 +73,8 @@
 					</tbody>
 				</table>
 			</div>
-			<button style="width: 100%">BUY NOW</button>
-			<button style="width: 100%">ADD CART</button>
+			<button style="width: 100%" id="buynowbutton">BUY NOW</button>
+			<button style="width: 100%" id="addcartbutton">ADD CART</button>
 		</div>
 
 
@@ -148,6 +148,6 @@
 			countTotal()
 		})
 	</script>
-
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/product/productSelect.js"></script>
 </body>
 </html>

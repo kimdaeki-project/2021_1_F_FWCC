@@ -67,6 +67,13 @@
   	values(#{productNum}, #{pInfoNum}, #{productCount}, #{username})
   </insert>
   
+  <insert id="setCartList" parameterType="java.util.List">
+  	insert into cart(productNum, pInfoNum, productCount, username) values
+  	<foreach collection="list" item="item" separator=",">
+  		(#{item.productNum}, #{item.pInfoNum}, #{item.productCount}, #{item.username})
+  	</foreach>
+  </insert>
+  
   <update id="updateCount" parameterType="CartVO">
   	update cart set productCount = #{productCount} where cartNum=#{cartNum} and username = #{username}
   </update>
