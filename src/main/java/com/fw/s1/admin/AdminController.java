@@ -160,8 +160,8 @@ public class AdminController {
 	}
 	
 	//하루 일치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
-	@GetMapping("getSaleDay")
 	@ResponseBody
+	@GetMapping("getSaleDay")
 	public String[] getSaleDay(String date)throws Exception{
 		if(date=="") {
 			Calendar calendar = Calendar.getInstance();
@@ -189,8 +189,8 @@ public class AdminController {
 	}
 	
 	//일주일치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
-	@GetMapping("getSaleWeek")
 	@ResponseBody
+	@GetMapping("getSaleWeek")
 	public String[] getSaleWeek(String date)throws Exception{
 		String date2 = "";
 		if(date=="") {
@@ -234,8 +234,8 @@ public class AdminController {
 	}
 	
 	//한달치의 판매량을 집계하여 보여주는 페이지의 일자를 변경하였을 때 해당 결과를 보내주는 페이지
-	@GetMapping("getSaleMonth")
 	@ResponseBody
+	@GetMapping("getSaleMonth")
 	public String[] getSaleMonth(String date)throws Exception{
 		if(date=="") {
 			Calendar calendar = Calendar.getInstance();
