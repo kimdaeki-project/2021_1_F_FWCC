@@ -31,6 +31,10 @@
 		select * from couponsp where cuSpNum=#{cuSpNum}
 	</select>
 	
+	<insert id="setCouponsp" parameterType="CouponspVO">
+		insert into couponsp(cuName, disRate) values(#{cuName}, #{disRate})
+	</insert>
+	
 	<insert id="couponForAll" parameterType="CouponVO">
 		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) 
 		select m.username, #{cuSpNum}, #{pubDate}, #{exDate}, 0 from member m

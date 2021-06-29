@@ -60,8 +60,9 @@ public class AdminController {
 	
 	//쿠폰 종류 입력후 저장을 위함
 	@PostMapping("setCouponsp")
-	public void setCouponsp(CouponspVO couponspVO)throws Exception{
-		
+	public String setCouponsp(CouponspVO couponspVO)throws Exception{
+		couponService.setCouponsp(couponspVO);
+		return "redirect:/admin/adminHome";
 	}
 	
 	//쿠폰 목록을 보여주는 페이지
@@ -261,14 +262,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("productDivInsert")
-	public void productDivInsert()throws Exception{
-		
-	}
+	public void productDivInsert()throws Exception{	}
 	
 	@GetMapping("orderlistUpdate")
-	public void orderlistUpdate()throws Exception{
-		
-	}
+	public void orderlistUpdate()throws Exception{	}
 	
 	@ResponseBody
 	@GetMapping("orderStateChange")
