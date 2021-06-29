@@ -43,6 +43,11 @@ public class ProductController {
 		}
 		Long total = productService.getTotalCount(productPager);
 		List<ProductVO> list = productService.getList(productPager);
+		for(ProductVO vo:list) {
+			if(vo.getFile()!=null) {
+				System.out.println(vo.getFile());
+			}
+		}
 		model.addAttribute("productList", list);
 		model.addAttribute("totalCount",total);
 		model.addAttribute("collab",collab);

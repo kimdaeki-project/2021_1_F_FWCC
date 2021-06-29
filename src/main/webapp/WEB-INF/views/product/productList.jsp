@@ -143,11 +143,17 @@ clear:both;
 				<c:forEach items="${productList}" var="product">
 					<div class="cardList">
 						<div id="thumb">
-							<a href="${pageContext.request.contextPath }/product/select?productNum=${product.productNum}"><img id="cardImg" alt="test"
-								src="${pageContext.request.contextPath}/images/product/test/frizm_278.jpg"></a>
+							<a href="${pageContext.request.contextPath }/product/select?productNum=${product.productNum}">
+							<c:if test="${!empty product.file.fileName }">
+							<img id="cardImg" alt="${product.file.oriName}" src="/resources/images/product/${product.productNum}/${product.file.fileName}">
+							</c:if>
+							<c:if test="${empty product.file.fileName}">
+							<img id="cardImg" alt="not" src="${pageContext.request.contextPath}/images/product/test/frizm_278.jpg">
+							</c:if>
+							</a>
 						</div>
 						<div id="cardContents">
-						<span ><a href="#" style="font-size: 11px; color: #838383;">${product.productTitle}</a></span>
+						<span ><a href="${pageContext.request.contextPath }/product/select?productNum=${product.productNum}" style="font-size: 11px; color: #838383;">${product.productTitle}</a></span>
 						<br>
 						<c:if test="${product.productDisRate eq 0}">
 							<span style=" font-size: 12px; color: #000000;">KRW ${product.productPrice}</span>

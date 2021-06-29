@@ -30,8 +30,7 @@
 		</if>
 	</select>
 
-	<select id="getList" parameterType="ProductPager"
-		resultType="ProductVO">
+	<select id="getList" parameterType="ProductPager" resultMap="productList">
 		select * from
 		(select row_number() over(
 		order by
@@ -50,7 +49,7 @@
 			</otherwise>
 		</choose>
 
-		) as R, P.* from
+		) as R, P.*,PF.fileName,PF.oriName from
 		(select * from product
 		where
 		productDivNum in (select productDivNum from productDivision where productType like concat('%',#{productType},'%'))
@@ -62,10 +61,30 @@
 			and productDisRate > 0
 		</if>
 		) as P
+		left join
+		(select * from productFiles where fileName like "M\_%") as PF
+		on P.productNum = PF.productNum
 		) as RP
 		where R between #{startRow} and #{lastRow}
 	</select>
 
+<resultMap type="ProductVO" id="productList">
+<id column="productNum" property="productNum"/>
+<result column="productTitle" property="productTitle"/>
+<result column="productPrice" property="productPrice"/>
+<result column="productDisRate" property="productDisRate"/>
+<result column="summary" property="summary"/>
+<result column="productContents" property="productContents"/>
+<result column="productDivNum" property="productDivNum"/>
+<result column="finalPrice" property="finalPrice"/>
+<result column="productMileage" property="productMileage"/>
+<result column="productSaleable" property="productSaleable"/>
+<association property="file" javaType="ProductFileVO">
+	<id column="fileNum" property="fileNum"/>
+	<result column="fileName" property="fileName"/>
+	<result column="oriName" property="oriName"/>
+</association>
+</resultMap>
 
 	<select id="getNextNum" resultType="java.lang.Long">
 		select max(productNum)+1 from
@@ -77,10 +96,10 @@
 		select * from productFiles where fileNum=#{fileNum}
 	</select>
 	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
-		select * from productFiles where productNum = #{productNum} and fileName like 'T_%'
+		select * from productFiles where productNum = #{productNum} and fileName like 'T\_%'
 	</select>
 	<select id="getMain" parameterType="ProductFileVO" resultType="ProductFileVO">
-		select * from productFiles where productNum = #{productNum} and fileName like 'M_%'
+		select * from productFiles where productNum = #{productNum} and fileName like 'M\_%'
 	</select>
 	<select id="getAllList" resultType="ProductVO">
 		select * from product
