@@ -22,6 +22,8 @@
 		productDivNum in (select productDivNum from productDivision where
 		productType like concat('%',#{productType},'%'))
 		and
+		productDivNum in (select productDivNum from productDivision where collab like concat('%',#{collab},'%'))
+		and
 		productSaleable = 1
 		<if test="sale">
 			and productDisRate > 0
@@ -51,14 +53,9 @@
 		) as R, P.* from
 		(select * from product
 		where
-		productDivNum in (select
-		productDivNum from productDivision where productType like
-		concat('%',#{productType},'%'))
-		<!-- <choose> <when test="productType=='top'"> productDivNum in (select 
-			productDivNum from productDivision where productType like concat('%','top','%')) 
-			and </when> <when test="productType=='bottom'"> productDivNum in (select 
-			productDivNum from productDivision where productType like concat('%','bottom','%')) 
-			and </when> <otherwise> </otherwise> </choose> -->
+		productDivNum in (select productDivNum from productDivision where productType like concat('%',#{productType},'%'))
+		and
+		productDivNum in (select productDivNum from productDivision where collab like concat('%',#{collab},'%'))
 		and
 		productSaleable = 1
 		<if test="sale">

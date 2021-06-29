@@ -32,6 +32,7 @@
 			<li><a href="${pageContext.request.contextPath }/product/list?collab=&productType=&name=sale&division=&sortStandard=&sale=true">Sale</a></li>
 			<li id="navbar-columnlist"><a href="#">Collaboration</a>
 				<ul id="navbar-colaul">
+				<!-- 
 					<li><a href="#">10th Anniversary Collection</a></li>
 					<li><a href="#">TAW&amp;TOE X FrizmWORKS</a></li>
 					<li><a href="#">Penfield X FrizmWORKS</a></li>
@@ -45,6 +46,7 @@
 					<li><a href="#">The Knitted X FrizmWORKS</a></li>
 					<li><a href="#">Amon movement X FrizmWORKS</a></li>
 					<li><a href="#">USS2 X FrizmWORKS</a></li>
+					 -->
 				</ul>
 			</li>
 			<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=37">Original Garments®</a></li> -->
