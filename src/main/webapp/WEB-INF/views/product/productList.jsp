@@ -110,7 +110,7 @@ clear:both;
 				<h1 style="text-align: center;">${name}</h1>
 			</c:if>
 
-			<c:if test="${name ne 'All'}">
+			<c:if test="${name eq 'TOP' or name eq 'BOTTOM'}">
 				<div style="text-align: center;">
 					<span><a class="selBtn"
 						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-long&name=${name}&division=long&sortStandard=&sale=${sale}">long</a><a
@@ -124,13 +124,13 @@ clear:both;
 					Total <strong>${totalCount}</strong> items.
 				</p>
 				<div class="sort">
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=new&sale=${sale}">신상품</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=new&sale=${sale}">신상품</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=name&sale=${sale}">상품명</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=name&sale=${sale}">상품명</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=lowPrice&sale=${sale}">낮은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=lowPrice&sale=${sale}">낮은가격</a></span>
 					<span class="sortName"> | </span>
-					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=highPrice&sale=${sale}">높은가격</a></span>
+					<span><a class="sortName" href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&sortStandard=highPrice&sale=${sale}">높은가격</a></span>
 				</div>
 			</div>
 

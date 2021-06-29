@@ -22,8 +22,11 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping(value="list")
-	public String getList(ProductPager productPager, Model model,String name,String division)throws Exception{
-		System.out.println(productPager);
+	public String getList(ProductPager productPager,String collab, Model model,String name,String division)throws Exception{
+		if(collab.length()>0) {
+			productPager.setProductType("");
+		}
+		System.out.println("collab length"+productPager.getCollab().length());
 		System.out.println(productPager.getProductType());
 		System.out.println(productPager.isSale());
 //		String str=productPager.getProductType();
@@ -42,6 +45,7 @@ public class ProductController {
 		List<ProductVO> list = productService.getList(productPager);
 		model.addAttribute("productList", list);
 		model.addAttribute("totalCount",total);
+		model.addAttribute("collab",collab);
 		model.addAttribute("name",name);
 		model.addAttribute("division", division);
 		model.addAttribute("pager", productPager);
@@ -163,6 +167,19 @@ public class ProductController {
 	public String divisionCheck(ProductDivisionVO productDivisionVO)throws Exception{
 		String result = productService.getDivision(productDivisionVO);
 		return result;
+	}
+	
+	@PostMapping(value="divInsert")
+	public void setInsertDivision(ProductDivisionVO productDivisionVO)throws Exception{
+		productService.setInsertDivision(productDivisionVO);
+	}
+	
+	@ResponseBody
+	@GetMapping(value="getDivisions")
+	public String[] getDivisions()throws Exception{
+		String[] array = productService.getDivisions();
+		return array;
+				
 	}
 	
 }
