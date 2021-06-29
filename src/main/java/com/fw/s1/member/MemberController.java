@@ -311,14 +311,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberPage/addressDelete")
-	public ModelAndView deleteAddress(AddressVO addressVO, Authentication authentication) throws Exception {
+	public ModelAndView deleteAddress(long[] ar, Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		addressVO.setUsername(authentication.getName());
-		System.out.println(addressVO);
-		System.out.println(addressVO.getAddrNum());
-//		long result = memberService.deleteMemberAddress(addressVO);
-//		mv.addObject("result", result);
-//		mv.setViewName("common/ajaxResult");
+		long result = 0L;
+		for(long addrNum:ar) {
+			AddressVO addressVO = new AddressVO();
+			addressVO.setUsername(authentication.getName());
+			addressVO.setAddrNum(addrNum);			
+			result = memberService.deleteMemberAddress(addressVO);
+		}
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
