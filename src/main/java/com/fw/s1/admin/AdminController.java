@@ -242,7 +242,7 @@ public class AdminController {
 			java.sql.Date date2 = new java.sql.Date(calendar.getTimeInMillis());
 			date = date2.toString().replaceAll("\\-[0-9]+$", "");
 		}
-		List<AdminVO> list = adminService.saleDay(date);
+		List<AdminVO> list = adminService.saleMonth(date);
 		Gson gson = new Gson();
 		int length = list.size();
 		String[] result = new String[length];
@@ -258,6 +258,11 @@ public class AdminController {
 		String[] divisions = productService.getDivisions();
 		model.addAttribute("productNum", productService.getNextNum());
 		model.addAttribute("divisions",divisions);
+	}
+	
+	@GetMapping("productDivInsert")
+	public void productDivInsert()throws Exception{
+		
 	}
 	
 	@GetMapping("orderlistUpdate")

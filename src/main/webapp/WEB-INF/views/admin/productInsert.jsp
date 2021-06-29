@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html style="height:100%; overflow:auto;">
 <head>
-<c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
+<c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp'>
+	<c:param name="title" value="-ADMIN"></c:param>
+</c:import>
 <!-- summernote -->
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
@@ -27,7 +29,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>

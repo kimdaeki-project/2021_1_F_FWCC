@@ -170,8 +170,9 @@ public class ProductController {
 	}
 	
 	@PostMapping(value="divInsert")
-	public void setInsertDivision(ProductDivisionVO productDivisionVO)throws Exception{
+	public String setInsertDivision(ProductDivisionVO productDivisionVO)throws Exception{
 		productService.setInsertDivision(productDivisionVO);
+		return "redirect:/admin/adminHome";
 	}
 	
 	@ResponseBody

@@ -23,4 +23,8 @@ public class AdminService {
 	public List<AdminVO> saleDays(HashMap<String, String> hashMap)throws Exception{
 		return adminMapper.saleDays(hashMap);
 	}
+	
+	public List<AdminVO> saleMonth(String date)throws Exception{
+		return adminMapper.saleMonth(date);
+	}
 }

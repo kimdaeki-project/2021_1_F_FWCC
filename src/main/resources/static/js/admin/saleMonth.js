@@ -26,8 +26,7 @@ function getData(){
 			date:date
 		},
 		success:function(result){
-			const array1 = new Array();
-			const array2 = new Array();
+			let array1 = new Array();
 			const arr1 = new Array();
 			const arr2 = new Map();
 			const hm = new Map();

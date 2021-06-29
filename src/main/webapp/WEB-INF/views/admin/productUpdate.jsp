@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html style="height:100%; overflow:auto;">
 <head>
-<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
+<c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp'>
+	<c:param name="title" value="-ADMIN"></c:param>
+</c:import>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <!-- summernote -->
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"

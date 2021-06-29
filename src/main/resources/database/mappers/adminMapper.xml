@@ -34,6 +34,12 @@
 		left join productdivision pd on p.productDivNum = pd.productDivNum
 		where a.adminDate between #{start} and #{end}
 	</select>
+	
+	<select id="saleMonth" parameterType="java.lang.String" resultMap="adminAndProduct">
+		select a.*, p.*, pd.* from admin a inner join product p on a.productNum=p.productNum 
+		left join productdivision pd on p.productDivNum = pd.productDivNum
+		where a.adminDate like concat(#{value},'%')
+	</select>
 
 	<insert id="insertAdmin" parameterType="java.util.List">
 		insert into admin (adminDate, productNum, sellCount)

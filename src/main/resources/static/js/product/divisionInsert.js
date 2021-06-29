@@ -9,7 +9,7 @@ function duplCheck(sibal){
 	let collab=$("#collab").val();
 	dCheck=false;
 	if(collab.length>0){
-		$.get("divisionCheck?collab="+collab,function(result){
+		$.get("/product/divisionCheck?collab="+collab,function(result){
 			result=result.trim();
 			str = "이미 있음"
 			if(result=="가능"){

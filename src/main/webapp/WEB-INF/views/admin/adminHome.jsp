@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html style="height:100%; overflow: auto;">
 <head>
-<c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp'></c:import>
+<c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp'>
+	<c:param name="title" value="-ADMIN"></c:param>
+</c:import>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
@@ -19,6 +20,9 @@
 			<ul style="list-style: none; padding-left:0; font-size:1.2rem;">
 				<li style="padding:5%; margin-top:10%;">
 					<a href="./productInsert">상품등록</a>
+				</li>
+				<li style="padding:5%;">
+					<a href="./productDivInsert">상품분류등록</a>
 				</li>
 				<li style="padding:5%;">
 					<a href="./adminAllList">상품정보수정</a>

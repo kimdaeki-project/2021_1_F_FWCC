@@ -4,15 +4,16 @@
 <!DOCTYPE html>
 <html style="height:100%; overflow: auto;">
 <head>
-<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
+<c:import url='${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp'>
+	<c:param name="title" value="-ADMIN"></c:param>
+</c:import>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>	
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>	
 <div style="display:flex; place-content:center;">
-	<div style="margin:11% 0 13% 0; width:40%; height:50%; border-radius: 1rem;  background-color: #607d8b;">
+	<div style="margin:11% 0 13% 0; width:40%; height:50%; border-radius: 1rem;  border: 5px solid #607d8b;">
 		<fieldset style="padding:5%;">
 			<legend style="padding-top:10%; text-align: center;">쿠폰 등록</legend>
 			<form action="./setCouponsp" method="post" style="padding: 3% 10%;">

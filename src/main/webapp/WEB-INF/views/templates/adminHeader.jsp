@@ -13,7 +13,7 @@
 				style="list-style:none; padding-left:0; font-size:1.1rem; text-align: right; padding: 2.4%; 
 				margin-top:0.1%; position:absolute; right:1%; display:none; background-color: #1C2E36;">
 				<li style="margin-top:7%;"><a href="${pageContext.request.contextPath}/" style="text-decoration: none; color: white;">메인 페이지로 이동</a></li>
-				<li style="margin-top:10%;"><a href="${pageContext.request.contextPath}/member/logout" style="text-decoration: none; color: white;">로그아웃</a></li>		
+				<li style="margin-top:10%;"><a href="${pageContext.request.contextPath }/member/memberLogout" style="text-decoration: none; color: white;">로그아웃</a></li>		
 			</ul>
 		</li>
 		<li style="float:right; padding:2.2%; font-size:1.3rem;">
