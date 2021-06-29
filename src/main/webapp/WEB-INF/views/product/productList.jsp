@@ -143,7 +143,7 @@ clear:both;
 				<c:forEach items="${productList}" var="product">
 					<div class="cardList">
 						<div id="thumb">
-							<a href="#"><img id="cardImg" alt="test"
+							<a href="${pageContext.request.contextPath }/product/select?productNum=${product.productNum}"><img id="cardImg" alt="test"
 								src="${pageContext.request.contextPath}/images/product/test/frizm_278.jpg"></a>
 						</div>
 						<div id="cardContents">

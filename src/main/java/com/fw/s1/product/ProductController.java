@@ -146,5 +146,23 @@ public class ProductController {
 		productService.setUpdate(productVO, sizeList, stockList, thumbnail);
 	}
 	
+	@GetMapping(value="select")
+	public String getSelect(ProductVO productVO,Model model)throws Exception{
+		productVO = productService.getSelect(productVO);
+		model.addAttribute("VO",productVO);
+		return "product/productSelect";
+	}
+	
+	@GetMapping(value="divInsert")
+	public String setInsertDivision()throws Exception{
+		return "/product/divisionInsert";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="divisionCheck")
+	public String divisionCheck(ProductDivisionVO productDivisionVO)throws Exception{
+		String result = productService.getDivision(productDivisionVO);
+		return result;
+	}
 	
 }

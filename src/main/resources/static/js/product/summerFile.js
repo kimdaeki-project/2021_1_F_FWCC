@@ -44,7 +44,7 @@ function uploadFile(files){
            // $("#contents").summernote('insertImage', result);
 			// console.log(result);	
 			//$("#contents").summernote('insertImage',fileName);
-			 let node = '<img class="formoveimg" src="'+result+'">';
+			 let node = '<img class="formoveimg" style="width:100%" src="'+result+'"><br>';
             $("#contents").summernote('pasteHTML', node);
 		}
 	});

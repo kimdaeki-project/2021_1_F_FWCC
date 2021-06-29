@@ -75,6 +75,23 @@
 									type="password"
 								/></td>
 							</tr>
+							<tr>
+								<th scope="row">현재 비밀번호 확인<img
+									src="//img.echosting.cafe24.com/skin/base/common/ico_required.gif"
+									class=""
+									alt="필수"
+								/></th>
+								<td><input
+									id="passwordCheckT"
+									name="passwordCheck"
+									class="eraser"
+									autocomplete="off"
+									minlength="4"
+									maxlength="16"
+									value=""
+									type="password"
+								/></td>
+							</tr>
 							<tr class="">
 								<th scope="row">새 비밀번호</th>
 								<td><input

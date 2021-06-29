@@ -101,7 +101,12 @@
 	<select id="getDivisionSelect" parameterType="ProductVO" resultType="ProductDivisionVO">
 		select * from productDivision where productDivNum = #{productDivNum}
 	</select>
-	
+	<select id="getDivisions" resultType="java.lang.String">
+		select distinct collab from productDivision;
+	</select>
+	<select id="getDivision" parameterType="productDivisionVO" resultType="productDivisionVO">
+		select * from productDivision where collab=#{collab}
+	</select>
 
 	<!-- ++++++++++ C ++++++++++ -->
 

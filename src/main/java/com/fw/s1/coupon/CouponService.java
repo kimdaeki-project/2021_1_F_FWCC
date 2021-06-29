@@ -1,5 +1,6 @@
 package com.fw.s1.coupon;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,15 @@ public class CouponService {
 		return couponMapper.couponForAll(couponVO);
 	}
 	
+	public Long scheduleDelete(Date date)throws Exception{
+		return couponMapper.scheduleDelete(date);
+	}
+	
 	public Long couponForSelected(List<CouponVO> list)throws Exception{
 		return couponMapper.couponForSelected(list);
 	}
 	// Member 쿠폰 개수
-	public Long getMemberCouponCount(CouponVO couponVO) throws Exception {
-		return couponMapper.getMemberCouponCount(couponVO);
+	public Long getMemberCouponCount(MemberVO memberVO) throws Exception {
+		return couponMapper.getMemberCouponCount(memberVO);
 	}
 }

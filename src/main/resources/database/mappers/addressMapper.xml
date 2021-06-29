@@ -56,4 +56,27 @@
   	update address set zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}
   	where username=#{username} and orderAddr=0
   </update>
+  
+  <select id="getMemberAddress" parameterType="MemberVO" resultType="AddressVO">
+  	select * from address where username = #{username}
+  </select>
+  
+  <insert id="setMemberAddress" parameterType="AddressVO">
+  	insert into address(username, addrName, recipient, zipCode, basicAddr, detailAddr, addrPhone, recentUse, orderAddr) 
+  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 0, 0)
+  </insert>
+  
+  <update id="updateMemberAddress" parameterType="AddressVO">
+  	update address set addrName=#{addrName}, recipient=#{recipient}, addrPhone=#{addrPhone},
+  	zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}, recentUse=0
+  	where username=#{username} and addrNum=#{addrNum}
+  </update>
+  
+  <delete id="deleteMemberAddress" parameterType="AddressVO">
+  		delete from address where
+  		<foreach collection="array" item="VO" open="(" separator="," close=")">
+  			username=#{VO.username} and addrNum=#{VO.addrNum}
+  		</foreach>
+  </delete>
+  
 </mapper>

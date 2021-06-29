@@ -17,14 +17,17 @@ public interface ProductMapper {
 	public List<ProductInfoVO> getInfoSelect(ProductVO productVO) throws Exception;
 	public List<ProductFileVO> getFileSelect(ProductVO productVO) throws Exception;
 	public ProductDivisionVO getDivisionSelect(ProductVO productVO) throws Exception;
+	public List<ProductVO> getAllList()throws Exception;
+	public ProductFileVO getThumbNail(ProductVO productVO) throws Exception;
+	public ProductFileVO getMain(ProductVO productVO) throws Exception;
+	public String[] getDivisions() throws Exception;
+	public List<ProductDivisionVO> getDivision(ProductDivisionVO productDivisonVO) throws Exception;
+	
 	public int setInsert(ProductVO productVO) throws Exception;
 	public int setUpdate(ProductVO productVO) throws Exception;
 	public int setFileDelete(ProductVO productVO) throws Exception;
 	public int setInsertPInfo(ProductInfoVO pInfoVO) throws Exception;
 	public int setFileInsert(ProductFileVO productFileVO) throws Exception;
-	public List<ProductVO> getAllList()throws Exception;
-	public ProductFileVO getThumbNail(ProductVO productVO) throws Exception;
-	public ProductFileVO getMain(ProductVO productVO) throws Exception;
 	public int setUpdateProductInfo(ProductInfoVO productInfoVO) throws Exception;
 	
 	

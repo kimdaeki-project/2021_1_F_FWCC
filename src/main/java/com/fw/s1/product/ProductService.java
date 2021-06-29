@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.util.ProductFileManager;
@@ -127,13 +128,16 @@ public class ProductService {
 		return vo;
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbNail) throws Exception{
+		System.out.println("------service");
 		String type = productVO.getProductType();
 		type = type.replace(",", "-");
 		productVO.setProductType(type);
 		System.out.println(type);
 		int result = productMapper.setUpdate(productVO);
 		if(sizeList.length==stockList.length) {
+			System.out.println("listLength : "+sizeList.length);
 			for(int i=0;i<sizeList.length;i++) {
 				ProductInfoVO piVO = new ProductInfoVO();
 				piVO.setProductNum(productVO.getProductNum());
@@ -143,6 +147,8 @@ public class ProductService {
 				System.out.println(i+" : "+result2);
 			}
 		}
+		System.out.println("file");
+		System.out.println(thumbNail.getOriginalFilename().length());
 		if(thumbNail.getOriginalFilename().length()>0) {
 			List<ProductFileVO> array = productMapper.getFileSelect(productVO);
 			System.out.println(array.size());
@@ -168,6 +174,32 @@ public class ProductService {
 		
 	}
 	
+	public ProductVO getSelect(ProductVO productVO)throws Exception{
+		productVO = productMapper.getProductSelect(productVO);
+		System.out.println("=====================Select==========================");
+		System.out.println(productVO);
+		System.out.println("pTitle : "+productVO.getProductTitle());
+		System.out.println("pPrice : "+productVO.getProductPrice());
+		System.out.println("pFinalPrice : "+productVO.getFinalPrice());
+		System.out.println("pSummary : "+productVO.getSummary());
+		System.out.println("pContents : "+productVO.getProductContents());
+		productVO.setFile(productMapper.getMain(productVO));
+		productVO.setInfos(productMapper.getInfoSelect(productVO));
+		return productVO;
+	}
 	
+	public String[] getDivisions()throws Exception{
+		return productMapper.getDivisions();
+	}
 	
+	public String getDivision(ProductDivisionVO productDivisionVO)throws Exception{
+		String result="";
+		List<ProductDivisionVO> array = productMapper.getDivision(productDivisionVO);
+		if(array.size()>0) {
+			result="불가";
+		}else {
+			result="가능";
+		}
+		return result;
+	}
 }

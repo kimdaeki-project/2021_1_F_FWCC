@@ -1,5 +1,6 @@
 package com.fw.s1.coupon;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,10 +18,12 @@ public interface CouponMapper {
 	public List<CouponspVO> getCouponspList()throws Exception;
 	//결제할 때 쿠폰을 사용했을 경우 해당 쿠폰의 사용여부를 업데이트 한다.
 	public Long useUpdate(CouponVO couponVO)throws Exception;
+	//이전 날짜의 만료날짜 쿠폰을 삭제한다.
+	public Long scheduleDelete(Date date)throws Exception;
 	//모든 사람에게 쿠폰을 전송해준다.
 	public Long couponForAll(CouponVO couponVO)throws Exception;
 	//선택된 사람에게 쿠폰을 전송해준다.
 	public Long couponForSelected(List<CouponVO> list)throws Exception;
 	// Member 쿠폰 개수
-	public Long getMemberCouponCount(CouponVO couponVO) throws Exception;
+	public Long getMemberCouponCount(MemberVO memberVO) throws Exception;
 }

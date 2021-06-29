@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.board.qna.QnaVO;
 import com.fw.s1.coupon.CouponService;
 import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.mileage.MileageService;
@@ -120,9 +121,9 @@ public class MemberController {
 			mileageVO.setUsername(authentication.getName());
 			mileageVO = mileageService.getRecentMileage(mileageVO);
 			// 2. coupon 개수 가져오기
-			CouponVO couponVO = new CouponVO();
-			couponVO.setUsername(authentication.getName());
-			long couponCount = couponService.getMemberCouponCount(couponVO);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setUsername(authentication.getName());
+			long couponCount = couponService.getMemberCouponCount(memberVO);
 			
 			mv.addObject("mileage", mileageVO.getEnabledMile());
 			mv.addObject("couponCount", couponCount);
@@ -181,6 +182,15 @@ public class MemberController {
 		return mv;
 	}
 	
+	@PostMapping("memberPage/pwCheck")
+	public ModelAndView getPwCheck(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boolean result = memberService.getPwCheck(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
 	@PostMapping("memberPage/memberUpdate")
 	public ModelAndView setMemberUpdate(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -190,5 +200,127 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
+	
+// mileage ===============================================
+	@GetMapping("memberPage/memberMileage")
+	public ModelAndView getMemberMileage(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<MileageVO> ar = memberService.getMemberMileage(memberVO);
+		for(MileageVO VO:ar) {
+			System.out.println(VO);
+		}
+		MileageVO mileageVO = memberService.getRecentMemberMileage(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("mileageVO", mileageVO);
+		mv.setViewName("member/memberPage/memberMileage");
+		return mv;
+	}
+	
+// coupon ===============================================
+	@GetMapping("memberPage/memberCoupon")
+	public ModelAndView getMemberCoupon(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<CouponVO> ar = couponService.getCouponList(memberVO);
+		
+		long couponCount = couponService.getMemberCouponCount(memberVO);
+		mv.addObject("list", ar);
+		mv.addObject("couponCount", couponCount);
+		mv.setViewName("member/memberPage/memberCoupon");
+		return mv;
+	}
+	
+// board ===============================================
+	@GetMapping("memberPage/memberBoard")
+	public ModelAndView getMemberBoard(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<QnaVO> ar = memberService.getMemberBoardList(memberVO);
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/memberBoard");
+		return mv;
+	}
+	
+// address ===============================================
+	@GetMapping("memberPage/memberAddress")
+	public ModelAndView getMemberAddress(Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(authentication.getName());
+		List<AddressVO> ar = memberService.getMemberAddress(memberVO);
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/memberAddress");
+		return mv;
+	}
+	
+	@GetMapping("memberPage/addressInsert")
+	public ModelAndView setAddress() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberPage/addressInsert");
+		return mv;
+	}
+	
+	@PostMapping("memberPage/addressInsert")
+	public ModelAndView setAddress(AddressVO addressVO, Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		addressVO.setUsername(authentication.getName());
+		long result = memberService.setMemberAddress(addressVO);
+		String msg = "등록 실패";
+		String path = "/member/memberPage/addressInsert";
+		if(result >0) {
+			msg = "등록 성공";
+			path = "/member/memberPage/memberAddress";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("path", path);
+		mv.setViewName("common/commonResult");
+		return mv;
+	}
+	
+	@GetMapping("memberPage/addressModify")
+	public ModelAndView modifyAddress(Authentication authentication, Long addrNum) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		AddressVO addressVO = new AddressVO();
+		addressVO.setUsername(authentication.getName());
+		addressVO.setAddrNum(addrNum);
+		addressVO = memberService.getAddressSelectOne(addressVO);
+		mv.addObject("VO", addressVO);
+		mv.setViewName("member/memberPage/addressModify");
+		return mv;
+	}
+	
+	@PostMapping("memberPage/addressModify")
+	public ModelAndView modifyAddress(Authentication authentication, AddressVO addressVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		addressVO.setUsername(authentication.getName());
+		long result = memberService.updateMemberAddress(addressVO);
+		String msg = "수정 실패";
+		String path = "/member/memberPage/addressModify";
+		if(result >0) {
+			msg = "수정 성공";
+			path = "/member/memberPage/memberAddress";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("path", path);
+		mv.setViewName("common/commonResult");
+		return mv;
+	}
+	
+	@PostMapping("memberPage/addressDelete")
+	public ModelAndView deleteAddress(AddressVO addressVO, Authentication authentication) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		addressVO.setUsername(authentication.getName());
+		System.out.println(addressVO);
+		System.out.println(addressVO.getAddrNum());
+		long result = memberService.deleteMemberAddress(addressVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
 	
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
- 
+
 // 주소 API ======================================
 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function execDaumPostcode() {
@@ -59,27 +59,7 @@
         }).open();
     }
     
-// MemberVO init =======================================
-let username = "";
-let password = "";
-let passwordCheck = "";
-let name = "";
-let zipCode = "";
-let basicAddr = "";
-let detailAddr = "";
-let phone0 = "";
-let phone1 = "";
-let phone2 ="";
-let phone = "";
-let email = "";
-let birth_year = "";
-let birth_month = "";
-let birth_day = "";
-let birth = "";
-let smsAgree = "";
-let emailAgree = "";
-
-// 페이지 로딩 시 폰번호 앞자리 check ==========================
+// 페이지 로딩 시 전화번호 앞자리 setting ======================
 $(document).ready(function(){
 	let phoneNum = $("#phone0").attr("title");
 	if(phoneNum == "010"){
@@ -97,111 +77,13 @@ $(document).ready(function(){
 	}
 });
 
-// 회원정보 수정 =============================================== 
-$("#updateBtn").click(function(){
-	username = $("#usernameT").val();
-	let oldPWCheck = $("#passwordCheckT").val();
-	$.ajax({
-		method:"POST",
-		url:"./pwCheck",
-		data:{
-			username:username,
-			passwordCheck:oldPWCheck
-		},
-		success:function(result){
-			result = result.trim();
-			console.log(result);
-			if(result == "true"){
-				username = $("#usernameT").val();
-				username = username.toLowerCase();
-				newPassword = $("#newPasswordT").val();
-				if(newPassword == ""){
-					password = oldPWCheck;
-				} else {
-					password = newPassword;
-				}
-				passwordCheck = $("#newPasswordCheckT").val();
-				zipCode = $("#zipCodeT").val();
-				basicAddr = $("#basicAddrT").val();
-				detailAddr = $("#detailAddrT").val();
-				phone0 = $("#phone0").val();
-				phone1 = $("#phone1").val();
-				phone2 = $("#phone2").val();
-				phone = phone0+"-"+phone1+"-"+phone2;
-				email = $("#emailT").val();
-				smsAgree = $("#is_sms0").prop("checked");
-				emailAgree = $("#is_news_mail0").prop("checked");
-				$.ajax({
-					method:"POST",
-					url:"./memberUpdate",
-					data:{
-						username:username,
-						password:password,
-						phone:phone,
-						email:email,
-						smsAgree:smsAgree,
-						emailAgree:emailAgree,
-						zipCode:zipCode,
-						basicAddr:basicAddr,
-						detailAddr:detailAddr
-					},
-					success:function(result){
-						result = result.trim();
-						if(result != 0){
-							alert("회원정보 수정 성공");
-							location.href="/"
-						}
-					}
-				}); // --- memberUpdate ajax END ---/
-			}else {
-				console.log("Update failed");
-			}
-		} // --- pwCheck success END ---
-	}); // --- pwCheck ajax END ---
-	
-function memberUpdate(){
-	
-}
-	
-/*	username = $("#usernameT").val();
-	username = username.toLowerCase();
-	password = $("#newPasswordT").val();
-	passwordCheck = $("#newPasswordCheckT").val();
-	zipCode = $("#zipCodeT").val();
-	basicAddr = $("#basicAddrT").val();
-	detailAddr = $("#detailAddrT").val();
-	phone0 = $("#phone0").val();
-	phone1 = $("#phone1").val();
-	phone2 = $("#phone2").val();
-	phone = phone0+"-"+phone1+"-"+phone2;
-	email = $("#emailT").val();
-	smsAgree = $("#is_sms0").prop("checked");
-	emailAgree = $("#is_news_mail0").prop("checked");
-	$.ajax({
-		method:"POST",
-		url:"./memberUpdate",
-		data:{
-			username:username,
-			password:password,
-			phone:phone,
-			email:email,
-			smsAgree:smsAgree,
-			emailAgree:emailAgree,
-			zipCode:zipCode,
-			basicAddr:basicAddr,
-			detailAddr:detailAddr
-		},
-		success:function(result){
-			result = result.trim();
-			if(result != 0){
-				alert("회원정보 수정 성공");
-				location.href="/"
-			}
-		}
-	}); // --- ajax END ---*/
-});
 
 
 
 
 
+
+
+
+
+    

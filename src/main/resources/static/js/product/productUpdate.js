@@ -59,6 +59,7 @@ $(document).ready(function(){
 	$("#pCollab").val($("#pCollab").attr("title"));
 	$("#pType1").val(type1);
 	$("#pType2").val(type2);
+	$("#pSaleable").val($("#saleable").attr("title"));
 })
 
 getSizes = function(){

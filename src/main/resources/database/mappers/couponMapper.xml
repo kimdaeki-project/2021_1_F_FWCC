@@ -48,7 +48,11 @@
 		update coupon set useCheck=1 where username=#{username} and cuNum=#{cuNum}
 	</update>
 	
-	<select id="getMemberCouponCount" parameterType="CouponVO" resultType="java.lang.Long">
-		select count(cuNum) from coupon where username = #{username};
+	<delete id="scheduleDelete" parameterType="java.sql.Date">
+		<![CDATA[delete from coupon where useCheck = 0 and exDate <= #{param}]]>
+	</delete>
+	
+	<select id="getMemberCouponCount" parameterType="MemberVO" resultType="java.lang.Long">
+		select count(cuNum) from coupon where username = #{username} and useCheck = 0
 	</select>
 </mapper>

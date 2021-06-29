@@ -19,6 +19,8 @@ public interface CartMapper {
 	public Long getStock(CartVO cartVO)throws Exception;
 	//카트에 품목 넣기
 	public Long setCart(CartVO cartVO)throws Exception;
+	//카트에 여러 품목 넣기
+	public Long setCartList(List<CartVO> list)throws Exception;
 	//카트에 들어있는 항목의 개수 변경
 	public Long updateCount(CartVO cartVO)throws Exception;
 	//재고보다 더 많았던 카트의 항목들 수정

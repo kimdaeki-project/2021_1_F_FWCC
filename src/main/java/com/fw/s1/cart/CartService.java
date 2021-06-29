@@ -33,6 +33,10 @@ public class CartService {
 		return cartMapper.setCart(cartVO);
 	}
 	
+	public Long setCartList(List<CartVO> list)throws Exception{
+		return cartMapper.setCartList(list);
+	}
+	
 	public Long updateCount(CartVO cartVO)throws Exception{
 		return cartMapper.updateCount(cartVO);
 	}
