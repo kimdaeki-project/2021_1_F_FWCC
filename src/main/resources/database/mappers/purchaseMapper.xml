@@ -27,7 +27,7 @@
 		where o.orderDate like concat(#{value}, '%')
 	</select>
 	
-	<select id="getPurAdmin" parameterType="OrderlistVO" resultMap="PurchaseVO">
+	<select id="getPurAdmin" parameterType="OrderlistVO" resultType="PurchaseVO">
 		select * from purchase where orderNum=#{orderNum}
 	</select>
 	
