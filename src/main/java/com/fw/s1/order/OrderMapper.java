@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.fw.s1.product.ProductFileVO;
+import com.fw.s1.util.MemberPager;
 
 @Mapper
 public interface OrderMapper {
@@ -26,7 +27,7 @@ public interface OrderMapper {
 	
 	
 	// member orderList 조회
-	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception;
+	public List<ProductFileVO> getOrderList(MemberPager memberPager) throws Exception;
 	
 	// member orderList filter 조회
 	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO) throws Exception;

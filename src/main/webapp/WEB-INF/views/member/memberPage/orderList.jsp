@@ -51,15 +51,15 @@
 					</a></li>
 				</ul>
 			</div>
+			<!-- 검색 필터 START -->
 			<form
-				action="#"
-				id="OrderHistoryForm"
+				action="./filteredList"
+				method="GET"
 			>
-				<!-- 검색 필터 START -->
 				<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead ">
 					<fieldset class="ec-base-box">
 						<legend>검색기간설정</legend>
-						<div class="stateSelect ">
+						<!-- <div class="stateSelect ">
 							<select
 								id="order_status"
 								name="orderState"
@@ -71,7 +71,7 @@
 								<option value="3">배송완료</option>
 								<option value="4">취소</option>
 							</select>
-						</div>
+						</div> -->
 						<span class="period"> <a
 							href="#"
 							id="btn01"
@@ -127,12 +127,13 @@
 							size="10"
 							value=""
 							type="text"
-						/> <input
-							alt="조회"
-							id="order_search_btn"
-							type="image"
-							src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif"
 						/>
+						<button>
+							<img
+								alt="조회"
+								src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/btn_search.gif"
+							>
+						</button>
 					</fieldset>
 					<ul>
 						<li>기본적으로 전체 주문내역이 조회되며, 기간 검색시 특정 기간의 주문내역을 조회하실 수 있습니다.</li>
@@ -210,7 +211,11 @@
 										</c:when>
 										</c:choose></td>
 									<td><c:if test="${VO.orderlistVO.orderState != 4}">
-											<a href="#" class="orderCancle" data-orderNum='${VO.orderlistVO.orderNum}'><img
+											<a
+												href="#"
+												class="orderCancle"
+												data-orderNum='${VO.orderlistVO.orderNum}'
+											><img
 												src="//img.echosting.cafe24.com/skin/base_ko_KR/myshop/btn_order_cancel.gif"
 												alt="주문취소"
 											/></a>
@@ -219,10 +224,16 @@
 							</c:forEach>
 						</tbody>
 					</c:if>
+					<c:if test="${list == null}">
+						<tbody>
+							<tr>
+								<td colspan="7" class="message">
+									주문 내역이 없습니다.
+								</td>
+							</tr>
+						</tbody>
+					</c:if>
 				</table>
-				<c:if test="${list == null}">
-					<p class="message ">주문 내역이 없습니다.</p>
-				</c:if>
 			</div>
 			<!-- pager START -->
 			<div class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate">
@@ -257,6 +268,9 @@
 		type="text/javascript"
 		src="/js/member/memberPage/orderList.js"
 	></script>
-	<script type="text/javascript" src='${pageContext.request.contextPath}/js/order/orderCancle.js'></script>
+	<script
+		type="text/javascript"
+		src='${pageContext.request.contextPath}/js/order/orderCancle.js'
+	></script>
 </body>
 </html>

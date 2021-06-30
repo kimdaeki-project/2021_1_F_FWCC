@@ -28,6 +28,8 @@ import com.fw.s1.mileage.MileageVO;
 import com.fw.s1.order.OrderService;
 import com.fw.s1.order.OrderlistVO;
 import com.fw.s1.product.ProductFileVO;
+import com.fw.s1.util.MemberPager;
+import com.fw.s1.util.Pager;
 
 @Controller
 @RequestMapping("/member/**")
@@ -79,6 +81,11 @@ public class MemberController {
 		session.invalidate();
 		mv.setViewName("/");
 		return mv;
+	}
+	
+	@GetMapping("finder/idFind")
+	public void getId() throws Exception {
+		
 	}
 	
 // Member Join ============================================================================
@@ -139,33 +146,24 @@ public class MemberController {
 	
 // orderList =============================================
 	@GetMapping("memberPage/orderList")
-	public ModelAndView getOrderList(Authentication authentication) throws Exception {
+	public ModelAndView getOrderList(Authentication authentication, MemberPager memberPager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		OrderlistVO orderlistVO = new OrderlistVO();
-		orderlistVO.setUsername(authentication.getName());
-		List<ProductFileVO> ar = orderService.getOrderList(orderlistVO);
+		memberPager.setUsername(authentication.getName());
+		List<ProductFileVO> ar = orderService.getOrderList(memberPager);
 		mv.addObject("list", ar);
 		mv.setViewName("member/memberPage/orderList");
 		return mv;
 	}
 	
 	@GetMapping("memberPage/filteredList")
-	public List<ProductFileVO> getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
+	public ModelAndView getFilteredList(OrderlistVO orderlistVO, Authentication authentication) throws Exception {
 		System.out.println("=== 검색 컨트롤러 ===");
 		ModelAndView mv = new ModelAndView();
 		orderlistVO.setUsername(authentication.getName());
-		System.out.println("===========================================================");
-		System.out.println(orderlistVO.getStartDate());
-		System.out.println(orderlistVO.getEndDate());
-		System.out.println("===========================================================");
 		List<ProductFileVO> ar = orderService.getFilteredList(orderlistVO);
-		for(ProductFileVO VO:ar) {
-			System.out.println(VO);
-		}
-		String result = "";
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		return ar;
+		mv.addObject("list", ar);
+		mv.setViewName("member/memberPage/orderList");
+		return mv;
 	}
 
 // profile ===============================================
@@ -311,12 +309,15 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberPage/addressDelete")
-	public ModelAndView deleteAddress(AddressVO addressVO, Authentication authentication) throws Exception {
+	public ModelAndView deleteAddress(long[] ar, Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		addressVO.setUsername(authentication.getName());
-		System.out.println(addressVO);
-		System.out.println(addressVO.getAddrNum());
-		long result = memberService.deleteMemberAddress(addressVO);
+		long result = 0L;
+		for(long addrNum:ar) {
+			AddressVO addressVO = new AddressVO();
+			addressVO.setUsername(authentication.getName());
+			addressVO.setAddrNum(addrNum);			
+			result = memberService.deleteMemberAddress(addressVO);
+		}
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
 		return mv;

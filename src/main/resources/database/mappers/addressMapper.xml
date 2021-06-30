@@ -73,10 +73,7 @@
   </update>
   
   <delete id="deleteMemberAddress" parameterType="AddressVO">
-  		delete from address where
-  		<foreach collection="array" item="VO" open="(" separator="," close=")">
-  			username=#{VO.username} and addrNum=#{VO.addrNum}
-  		</foreach>
+  		delete from address where username=#{username} and addrNum=#{addrNum}
   </delete>
   
 </mapper>

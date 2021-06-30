@@ -88,7 +88,7 @@
 	</update>
 	
 	<!-- member -->
-	<select id="getOrderList" parameterType="OrderlistVO" resultMap="getOrderProduct">
+	<select id="getOrderList" parameterType="MemberPager" resultMap="getOrderProduct">
 		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
 		INNER JOIN purchase PU ON O.orderNum = PU.orderNum
 		INNER JOIN product P ON PU.productNum = P.productNum 
@@ -107,9 +107,8 @@
         LEFT JOIN (
             SELECT * FROM productfiles 
             WHERE fileName LIKE CONCAT('T\_', '%') 
-                and orderDate between #{startDate} and #{endDate}
         ) PF ON P.productNum = PF.productNum
-        WHERE O.username = #{username}
+        WHERE O.username = #{username} and O.orderDate between #{startDate} and #{endDate}
         ORDER BY O.orderNum DESC
 	</select>
 

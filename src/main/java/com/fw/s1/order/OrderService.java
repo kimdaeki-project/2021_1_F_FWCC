@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.fw.s1.product.ProductFileVO;
+import com.fw.s1.util.MemberPager;
 
 @Service
 public class OrderService {
@@ -42,8 +43,8 @@ public class OrderService {
 		return orderMapper.orderlistsUpdate(list);
 	}
 	// member orderList 조회
-	public List<ProductFileVO> getOrderList(OrderlistVO orderlistVO) throws Exception {
-		return orderMapper.getOrderList(orderlistVO);
+	public List<ProductFileVO> getOrderList(MemberPager memberPager) throws Exception {
+		return orderMapper.getOrderList(memberPager);
 	}
 	
 	// member orderList filter 조회
