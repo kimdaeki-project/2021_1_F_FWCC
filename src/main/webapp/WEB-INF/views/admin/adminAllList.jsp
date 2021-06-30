@@ -14,28 +14,28 @@
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
 <div style="padding:5% 10%; text-align: center;">
 	<h1>all List</h1>
-	<table style="width: 100%; margin-top: 2%;">
+	<table style="width: 100%; margin-top: 2%; border:1px solid black;">
 		<thead>
 			<tr>
-				<td>product number</td>
-				<td>title</td>
-				<td>price</td>
-				<td>discount rate</td>
-				<td>final price</td>
-				<td>saleable</td>
-				<td>division number</td>
+				<td style="border:1px solid black;">product number</td>
+				<td style="border:1px solid black;">title</td>
+				<td style="border:1px solid black;">price</td>
+				<td style="border:1px solid black;">discount rate</td>
+				<td style="border:1px solid black;">final price</td>
+				<td style="border:1px solid black;">saleable</td>
+				<td style="border:1px solid black;">division number</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${allList}" var="product">
 				<tr>
-					<td>${product.productNum}</td>
-					<td><a href="./productUpdate?productNum=${product.productNum}">${product.productTitle}</a></td>
-					<td>${product.productPrice}</td>
-					<td>${product.productDisRate}</td>
-					<td>${product.finalPrice}</td>
-					<td>${product.productSaleable}</td>
-					<td>${product.productDivNum}</td>
+					<td style="border:1px solid black;">${product.productNum}</td>
+					<td style="border:1px solid black;"><a href="./productUpdate?productNum=${product.productNum}">${product.productTitle}</a></td>
+					<td style="border:1px solid black;">${product.productPrice}</td>
+					<td style="border:1px solid black;">${product.productDisRate}</td>
+					<td style="border:1px solid black;">${product.finalPrice}</td>
+					<td style="border:1px solid black;">${product.productSaleable}</td>
+					<td style="border:1px solid black;">${product.productDivNum}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

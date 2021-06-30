@@ -17,21 +17,21 @@
 	<table style="width:80%; margin: 3% 5%; text-align: center;">
 		<thead>
 			<tr>
-				<th style="padding:1%;">쿠폰 번호</th>
-				<th style="padding:1%;">쿠폰 이름</th>
-				<th style="padding:1%;">할인률</th>
+				<th style="padding:1%; border:1px solid black;">쿠폰 번호</th>
+				<th style="padding:1%; border:1px solid black;">쿠폰 이름</th>
+				<th style="padding:1%; border:1px solid black;">할인률</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${cuspList}" var="item">
 				<tr>
-					<td style="padding:1%;">
+					<td style="padding:1%; border:1px solid black;">
 						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuSpNum}'></c:out></a>
 					</td>
-					<td style="padding:1%;">
+					<td style="padding:1%; border:1px solid black;">
 						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.cuName}'></c:out></a>
 					</td>
-					<td style="padding:1%;">
+					<td style="padding:1%; border:1px solid black;">
 						<a href="./selectedCoupon?cuSpNum=${item.cuSpNum}"><c:out value='${item.disRate}'></c:out></a>
 					</td>
 				</tr>

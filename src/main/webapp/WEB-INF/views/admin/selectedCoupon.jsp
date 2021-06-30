@@ -17,20 +17,20 @@
 		<table style="width: 80%; margin-left:10%;">
 			<thead>
 				<tr>
-					<th>쿠폰 번호</th>
-					<th>쿠폰 이름</th>
-					<th>할인률</th>
+					<th style="padding:0.5%; border:1px solid black;">쿠폰 번호</th>
+					<th style="padding:0.5%; border:1px solid black;">쿠폰 이름</th>
+					<th style="padding:0.5%; border:1px solid black;">할인률</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td id="cuSpNum">
+					<td id="cuSpNum" style="padding:0.5%; border:1px solid black;">
 						<c:out value='${item.cuSpNum}'></c:out>
 					</td>
-					<td>
+					<td style="padding:0.5%; border:1px solid black;">
 						<c:out value='${item.cuName}'></c:out>
 					</td>
-					<td>
+					<td style="padding:0.5%; border:1px solid black;">
 						<c:out value='${item.disRate}'></c:out>
 					</td>
 				</tr>

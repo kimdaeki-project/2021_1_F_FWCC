@@ -9,8 +9,13 @@
 </c:import>
 <meta charset="UTF-8">
 <style>
+	th{
+		padding:0.5%;
+		border:1px solid black;
+	}
 	td{
 		padding:0.5%;
+		border:1px solid black;
 	}
 </style>
 </head>
@@ -31,10 +36,10 @@
 		<table style="width:100%;">
 			<thead>
 				<tr>
-					<th style="padding:1%;"><input type="checkbox" id="allCheck"></th>
-					<th style="padding:1%;">주문번호</th>
-					<th style="padding:1%;">주문이름</th>
-					<th style="padding:1%;">주문현황</th>
+					<th style="padding:1%; border:1px solid black;"><input type="checkbox" id="allCheck"></th>
+					<th style="padding:1%; border:1px solid black;">주문번호</th>
+					<th style="padding:1%; border:1px solid black;">주문이름</th>
+					<th style="padding:1%; border:1px solid black;">주문현황</th>
 				</tr>
 			</thead>
 			<tbody id="orderlists">
