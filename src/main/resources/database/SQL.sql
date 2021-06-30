@@ -753,5 +753,28 @@ INSERT INTO lookbook(division,fileName,title)
 VALUES('p','fileName2','title12');
 INSERT INTO lookbook(division,fileName,title)
 VALUES('v','fileName3','title3');
+
+-- lookbookfile -----------------------------------------------------------
+
+CREATE TABLE lookbookFiles
+(
+    `lookbookFileNum`  BIGINT          NOT NULL    AUTO_INCREMENT COMMENT '글번호', 
+    `fileName`     VARCHAR(100)    NULL        COMMENT '파일이름',
+	 `num`       BIGINT         NULL        COMMENT '글번호',  
+    CONSTRAINT  PRIMARY KEY (lookbookFileNum)
+);
+
+ALTER TABLE lookbookFiles
+    ADD CONSTRAINT FK_lookbookFiles_lbfn_lookbook_lbNum FOREIGN KEY (num)
+        REFERENCES lookbook(lookbookNum) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO lookbookFiles(fileName,num)
+VALUES('fileName1',1);
+INSERT INTO lookbookFiles(fileName,num)reviewfiles
+VALUES('fileName2',2);
+INSERT INTO lookbookFiles(fileName,num)
+VALUES('fileName3',3);
+
+
 -- borad end ----------------------------------------------------------------------
 

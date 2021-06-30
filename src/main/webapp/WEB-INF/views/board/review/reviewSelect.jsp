@@ -102,7 +102,9 @@
 					<td colspan='2'>
 					<div class="row">
 					<div class="col-sm-6">${com.writer} ${com.regDate}</div>
-					<sec:authentication property="principal.username" var="user_id"/>
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.username" var="user_id"/>
+					
 						<c:if test="${com.writer == user_id }">
 						<div class="col-sm-6" style="text-align: right;">
 						<a href="./commentUpdate?commentNum=${com.commentNum}&num=${com.num}" class="btn" style="background: gray;
@@ -117,6 +119,7 @@
 						</div>
 						
 						</c:if>
+						</sec:authorize>
 						</div>
 						<div>${com.contents}</div>
 
@@ -126,20 +129,31 @@
 					</c:forEach>
 					</tbody>
 			</table>
+			
+			<sec:authorize access="!isAuthenticated()">
+			<div class="form-group" style="margin: auto;">
+						<textarea class="form-control myCheck" id="contents"
+							name="contents" disabled>회원에게만 댓글 작성 권한이 있습니다.</textarea>
+					</div>
+			</sec:authorize>
+			
+			<sec:authorize access="isAuthenticated()">
 			<c:if test="${Rcvo.commentNum == Null}">
 			<div>
 				<form id="frm" action="./commentInsert" method="post">
+					
 					<div class="form-group">
 						<input type="hidden"
 							class="form-control myCheck" id="writer" name="writer" value="<sec:authentication property="principal.username"/>">
 					</div>
+					
+					
 					<div class="form-group">
 						<input type="hidden"
 							class="form-control myCheck" id="num" name="num" value="${Rvo.num}" }>
 					</div>
 
 					<div class="form-group" style="margin: auto;">
-						<label for="contents">Contents"</label>
 						<textarea class="form-control myCheck" id="contents"
 							name="contents"></textarea>
 					</div>
@@ -154,10 +168,13 @@
 				</form>
 			</div>
 			</c:if>
+			</sec:authorize>
+			
 			<c:if test="${Rcvo.commentNum >=1}">
 				<c:import url="/WEB-INF/views/board/review/rcUpdate.jsp"></c:import>
 			</c:if>
 			
+			<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.username" var="user_id"/>
 			<c:if test="${vo.writer == user_id }">
 			<div style="text-align: right; padding-top: 50px">
@@ -172,6 +189,7 @@
                     font-size:14px;">삭제</a>
 			</div>
 			</c:if>
+			</sec:authorize>
 		</div>
 	</div>
 	<script type="text/javascript">

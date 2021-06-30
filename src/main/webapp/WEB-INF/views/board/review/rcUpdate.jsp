@@ -29,7 +29,7 @@
 					</div>
 
 					<div class="form-group" style="margin: auto;">
-						<label for="contents">Contents"</label>
+						<label for="contents">댓글수정</label>
 						<textarea class="form-control myCheck" id="contents"
 							name="contents">${Rcvo.contents}</textarea>
 					</div>
