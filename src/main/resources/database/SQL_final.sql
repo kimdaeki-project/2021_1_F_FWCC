@@ -115,3 +115,117 @@ CREATE TABLE `productInfo` (
   KEY `PI_PN_FK_idx` (`productNum`),
   CONSTRAINT `PI_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
 ) 
+
+=====================================이리희=======================================================
+---------------------------------------------------------- create table cart ---------------------------------------------------------------------
+CREATE TABLE `fw01`.`cart` (
+	`cartNum` BIGINT NOT NULL AUTO_INCREMENT,
+	`productNum` BIGINT NOT NULL,
+	`pInfoNum` BIGINT NOT NULL,
+	`productCount` BIGINT NOT NULL,
+	`username` VARCHAR(100) NOT NULL,
+	PRIMARY KEY (`cartNum`) USING BTREE,
+	INDEX `CT_PN_FK` (`productNum`) USING BTREE,
+	INDEX `CT_PI_FK` (`pInfoNum`) USING BTREE,
+	INDEX `CT_UN_FK` (`username`) USING BTREE,
+	CONSTRAINT `CT_PI_FK` FOREIGN KEY (`pInfoNum`) REFERENCES `fw01`.`productinfo` (`pInfoNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `CT_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `fw01`.`product` (`productNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `CT_UN_FK` FOREIGN KEY (`username`) REFERENCES `fw01`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
+
+---------------------------------------------------------- create table couponsp -------------------------------------------------------
+
+CREATE TABLE `fw01`.`couponsp` (
+    `cuSpNum` BIGINT NOT NULL AUTO_INCREMENT,
+    `cuName` VARCHAR(100) NOT NULL,
+    `disRate` INT NOT NULL,
+    PRIMARY KEY (cuSpNum) USING BTREE
+)
+;
+
+---------------------------------------------------------- create table coupon ---------------------------------------------------------
+CREATE TABLE `fw01`.`coupon` (
+	`cuNum` BIGINT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(100) NOT NULL,
+	`cuSpNum` BIGINT NOT NULL DEFAULT '1',
+	`pubDate` DATE NOT NULL,
+	`exDate` DATE NOT NULL,
+	`userCheck` BIT NOT NULL DEFAULT b'0',
+	PRIMARY KEY (`cuNum`) USING BTREE,
+	INDEX `CU_UN_FK` (`username`) USING BTREE,
+	CONSTRAINT `CU_UN_FK` FOREIGN KEY (`username`) REFERENCES `fw01`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `CU_CSN_FK` FOREIGN KEY (`cuSpNum`) REFERENCES `fw01`.`couponsp` (`cuSpNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
+
+---------------------------------------------------------- create table orderlist ---------------------------------------------------------------------
+
+CREATE TABLE `fw01`.`orderlist` (
+	`orderNum` VARCHAR(100) NOT NULL,
+	`totPrice` BIGINT NOT NULL,
+	`spPrice` BIGINT NOT NULL,
+	`cuNum` BIGINT,
+	`username` VARCHAR(100) NOT NULL,
+	`destination` VARCHAR(450) NOT NULL DEFAULT '',
+	`orderDate` DATETIME NOT NULL,
+	`orderState` BIGINT NOT NULL default '1',
+	`orderMessage` TEXT NOT NULL,
+	`orderName` VARCHAR(200),
+	PRIMARY KEY (`orderNum`) USING BTREE,
+	INDEX `OD_CN_FK` (`cuNum`) USING BTREE,
+	INDEX `OD_UN_FK` (`username`) USING BTREE,
+	CONSTRAINT `OD_CN_FK` FOREIGN KEY (`cuNum`) REFERENCES `fw01`.`coupon` (`cuNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `OD_UN_FK` FOREIGN KEY (`username`) REFERENCES `fw01`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
+
+---------------------------------------------------------- create table purchase ---------------------------------------------------------------------
+
+CREATE TABLE `fw01`.`purchase` (
+	`purNum` BIGINT NOT NULL AUTO_INCREMENT,
+	`productNum` BIGINT NOT NULL,
+	`pInfoNum` BIGINT NOT NULL,
+	`orderNum` VARCHAR(100) NOT NULL,
+	`productCount` INT NOT NULL DEFAULT '0',
+	`proPriceSum` BIGINT NOT NULL,
+	PRIMARY KEY (`purNum`) USING BTREE,
+	INDEX `PUR_PI_FK` (`pInfoNum`) USING BTREE,
+	INDEX `PUR_PN_FK` (`productNum`) USING BTREE,
+	INDEX `PUR_ON_FK` (`orderNum`) USING BTREE,
+	CONSTRAINT `PUR_ON_FK` FOREIGN KEY (`orderNum`) REFERENCES `fw01`.`orderlist` (`orderNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `PUR_PI_FK` FOREIGN KEY (`pInfoNum`) REFERENCES `fw01`.`productinfo` (`pInfoNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `PUR_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `fw01`.`product` (`productNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
+
+---------------------------------------------------------- create table mileage ---------------------------------------------------------------------
+
+CREATE TABLE `fw01`.`mileage` (
+	`mileNum` BIGINT NOT NULL AUTO_INCREMENT,
+	`usedMile` BIGINT NOT NULL,
+	`changeMile` BIGINT NOT NULL,
+	`username` VARCHAR(100) NOT NULL,
+	`orderNum` VARCHAR(100),
+	`mileContents` VARCHAR(100) NOT NULL,
+	`enabledMile` BIGINT NOT NULL,
+	PRIMARY KEY (`mileNum`) USING BTREE,
+	INDEX `MI_UN_FK` (`username`) USING BTREE,
+	INDEX `MI_ON_FK` (`orderNum`) USING BTREE,
+	CONSTRAINT `MI_ON_FK` FOREIGN KEY (`orderNum`) REFERENCES `fw01`.`orderlist` (`orderNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `MI_UN_FK` FOREIGN KEY (`username`) REFERENCES `fw01`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
+
+----------------------------------------admin table-----------------------------------------------
+
+CREATE TABLE `fw01`.`admin` (
+	`adminIdx` BIGINT NOT NULL AUTO_INCREMENT,
+	`adminDate` DATE NOT NULL,
+	`productNum` BIGINT NOT NULL DEFAULT '0',
+	`sellCount` BIGINT NOT NULL DEFAULT '0',
+	PRIMARY KEY (`adminIdx`) USING BTREE,
+	INDEX `ADM_PN_FK` (`productNum`) USING BTREE,
+	CONSTRAINT `ADM_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `fw01`.`product` (`productNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
