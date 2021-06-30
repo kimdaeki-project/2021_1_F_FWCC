@@ -62,3 +62,56 @@ CREATE TABLE `boardType` (
   `typeName` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`typeNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+
+-- 이찬우 ====================================================
+-- table create
+-- productDivision
+
+CREATE TABLE `productDivision` (
+  `productDivNum` bigint(20) NOT NULL AUTO_INCREMENT,
+  `collab` varchar(100) DEFAULT NULL,
+  `productType` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`productDivNum`)
+) 
+-- product
+
+CREATE TABLE `product` (
+  `productNum` bigint(20) NOT NULL AUTO_INCREMENT,
+  `productTitle` varchar(100) DEFAULT NULL,
+  `productPrice` bigint(20) DEFAULT NULL,
+  `productDisRate` bigint(20) DEFAULT 0,
+  `summary` longtext DEFAULT NULL,
+  `productContents` longtext DEFAULT NULL,
+  `finalPrice` bigint(20) DEFAULT NULL,
+  `productMileage` bigint(20) DEFAULT NULL,
+  `productSaleable` bit(1) DEFAULT b'0',
+  `productDivNum` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`productNum`),
+  KEY `PRODUCT_PDI_NUM_idx` (`productDivNum`),
+  CONSTRAINT `PRODUCT_PDI_NUM` FOREIGN KEY (`productDivNum`) REFERENCES `productDivision` (`productDivNum`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+
+-- productFiles
+
+CREATE TABLE `productFiles` (
+  `fileNum` bigint(20) NOT NULL AUTO_INCREMENT,
+  `productNum` bigint(20) DEFAULT NULL,
+  `fileName` varchar(100) DEFAULT NULL,
+  `oriName` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`fileNum`),
+  KEY `PF_PN_FK_idx` (`productNum`),
+  CONSTRAINT `PF_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
+
+-- productInfo
+
+CREATE TABLE `productInfo` (
+  `pInfoNum` bigint(20) NOT NULL AUTO_INCREMENT,
+  `productNum` bigint(20) DEFAULT NULL,
+  `size` varchar(10) DEFAULT NULL,
+  `stock` bigint(20) DEFAULT 0,
+  PRIMARY KEY (`pInfoNum`),
+  KEY `PI_PN_FK_idx` (`productNum`),
+  CONSTRAINT `PI_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
+) 
