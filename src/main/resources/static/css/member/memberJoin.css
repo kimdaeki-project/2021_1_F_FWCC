@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.agreeArea {
+    color: #747474;
+    line-height: 20px;
+}
+
+.fr-view {
+    word-wrap: break-word;
+}
+
+.fr-view:after {
+    content: "";
+    display: block;
+    clear: both;
+}

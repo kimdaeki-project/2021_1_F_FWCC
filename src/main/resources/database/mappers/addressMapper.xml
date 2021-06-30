@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.s1.address.AddressMapper">
+
+	<insert id="setJoinAddress" parameterType="AddressVO">
+		insert into address(addrNum, username, addrName, recipient, addrPhone, zipCode, basicAddr, detailAddr, orderAddr, recentUse)
+		values(0, #{username}, "미지정", #{recipient}, #{addrPhone}, #{zipCode}, #{basicAddr}, #{detailAddr}, false, false)
+	</insert>
+
+  <select id="getAddressList" parameterType="MemberVO" resultType="AddressVO">
+  	select * from address where username=#{username}
+  </select>
+
+  <select id="getSelectOne" parameterType="AddressVO" resultType="AddressVO">
+  	select * from address where username=#{username} and addrNum = #{addrNum}
+  </select>
+
+  <select id="getSelectRecent" parameterType="AddressVO" resultType="AddressVO">
+  	select * from address where recentUse=1 and username=#{username}
+  </select>
+
+  <select id="checkCount" parameterType="AddressVO" resultType="java.lang.Long">
+  	select count(addrNum) from address where username=#{username} and orderAddr=0
+  </select>
+
+  <insert id="setAddress" parameterType="AddressVO">
+  	insert into address(username, addrName, recipient, zipCode, basicAddr, detailAddr, addrPhone, recentUse, orderAddr) 
+  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 1, 0)
+  </insert>
+
+  <update id="beforeAddress" parameterType="AddressVO">
+  	update address set recentUse=0 where username=#{username} and recentUse = 1
+  </update>
+ 
+  <update id="updateAddress" parameterType="AddressVO">
+  	update address set addrName=#{addrName}, recipient=#{recipient}, addrPhone=#{addrPhone},
+  	zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}, recentUse=1
+  	where username=#{username} and addrNum=#{addrNum}
+  </update>
+ 
+  <delete id="deleteSelect" parameterType="java.util.List">
+  	delete from address where
+  	<foreach collection="list" item="item" separator="or" open="(" close=")">
+  		username=#{item.username} and addrNum=#{item.addrNum}
+  	</foreach>
+  </delete>
+  
+  <!-- member -->
+  <select id="getProfileAddress" parameterType="MemberVO" resultType="AddressVO">
+  	select * from address where username=#{username} and orderAddr=0
+  </select>
+  
+  <update id="setProfileAddressUpdate" parameterType="MemberVO">
+  	update address set zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}
+  	where username=#{username} and orderAddr=0
+  </update>
+  
+  <select id="getMemberAddress" parameterType="MemberVO" resultType="AddressVO">
+  	select * from address where username = #{username}
+  </select>
+  
+  <insert id="setMemberAddress" parameterType="AddressVO">
+  	insert into address(username, addrName, recipient, zipCode, basicAddr, detailAddr, addrPhone, recentUse, orderAddr) 
+  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 0, 0)
+  </insert>
+  
+  <update id="updateMemberAddress" parameterType="AddressVO">
+  	update address set addrName=#{addrName}, recipient=#{recipient}, addrPhone=#{addrPhone},
+  	zipCode=#{zipCode}, basicAddr=#{basicAddr}, detailAddr=#{detailAddr}, recentUse=0
+  	where username=#{username} and addrNum=#{addrNum}
+  </update>
+  
+  <delete id="deleteMemberAddress" parameterType="AddressVO">
+  		delete from address where
+  		<foreach collection="array" item="VO" open="(" separator="," close=")">
+  			username=#{VO.username} and addrNum=#{VO.addrNum}
+  		</foreach>
+  </delete>
+  
+</mapper>

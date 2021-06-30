@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fw.s1.product.ProductMapper">
+
+	<!-- +++++++++++++++++++++++++CW START+++++++++++++++++++++++++++++++++++ -->
+
+	<!-- ++++++++++ R ++++++++++ -->
+	<select id="getTotalCount" parameterType="ProductPager"
+		resultType="java.lang.Long">
+		select count(productNum) from product
+		where
+
+		<!-- and collab like concat('%',#{collab},'%') and productType like concat('%',#{productType},'%') -->
+		<!-- <choose> <when test="productType=='top'"> productDivNum in (select 
+			productDivNum from productDivision where productType like '%top%') and </when> 
+			<when test="productType=='bottom'"> productDivNum in (select productDivNum 
+			from productDivision where productType like concat('%','bottom','%')) and 
+			</when> <otherwise> </otherwise> </choose> -->
+		productDivNum in (select productDivNum from productDivision where
+		productType like concat('%',#{productType},'%'))
+		and
+		productDivNum in (select productDivNum from productDivision where collab like concat('%',#{collab},'%'))
+		and
+		productSaleable = 1
+		<if test="sale">
+			and productDisRate > 0
+		</if>
+	</select>
+
+	<select id="getList" parameterType="ProductPager"
+		resultType="ProductVO">
+		select * from
+		(select row_number() over(
+		order by
+		<choose>
+			<when test="sortStandard=='name'">
+				productTitle asc
+			</when>
+			<when test="sortStandard=='lowPrice'">
+				productPrice asc
+			</when>
+			<when test="sortStandard=='highPrice'">
+				productPrice desc
+			</when>
+			<otherwise>
+				productNum desc
+			</otherwise>
+		</choose>
+
+		) as R, P.* from
+		(select * from product
+		where
+		productDivNum in (select productDivNum from productDivision where productType like concat('%',#{productType},'%'))
+		and
+		productDivNum in (select productDivNum from productDivision where collab like concat('%',#{collab},'%'))
+		and
+		productSaleable = 1
+		<if test="sale">
+			and productDisRate > 0
+		</if>
+		) as P
+		) as RP
+		where R between #{startRow} and #{lastRow}
+	</select>
+
+
+	<select id="getNextNum" resultType="java.lang.Long">
+		select max(productNum)+1 from
+		product
+	</select>
+
+	<select id="getFileName" parameterType="ProductFileVO"
+		resultType="ProductFileVO">
+		select * from productFiles where fileNum=#{fileNum}
+	</select>
+	<select id="getThumbNail" parameterType="ProductFileVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum} and fileName like 'T_%'
+	</select>
+	<select id="getMain" parameterType="ProductFileVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum} and fileName like 'M_%'
+	</select>
+	<select id="getAllList" resultType="ProductVO">
+		select * from product
+	</select>
+	
+	<select id="getProductSelect" parameterType="ProductVO" resultType="ProductVO">
+		select * from product where productNum = #{productNum}
+	</select>
+	<select id="getInfoSelect" parameterType="ProductVO" resultType="ProductInfoVO">
+		select * from productInfo where productNum = #{productNum}
+	</select>
+	<select id="getFileSelect" parameterType="ProductVO" resultType="ProductFileVO">
+		select * from productFiles where productNum = #{productNum}
+	</select>
+	<select id="getDivisionSelect" parameterType="ProductVO" resultType="ProductDivisionVO">
+		select * from productDivision where productDivNum = #{productDivNum}
+	</select>
+	<select id="getDivisions" resultType="java.lang.String">
+		select distinct collab from productDivision;
+	</select>
+	<select id="getDivision" parameterType="productDivisionVO" resultType="productDivisionVO">
+		select * from productDivision where collab=#{collab}
+	</select>
+
+	<!-- ++++++++++ C ++++++++++ -->
+
+	<insert id="setInsert" parameterType="ProductVO">
+		insert into product
+		(productTitle,summary,productPrice,productContents,finalPrice,productMileage,productSaleable,productDivNum)
+		values
+		(#{productTitle},#{summary},#{productPrice},#{productContents},#{finalPrice},#{productMileage},#{productSaleable},(select productDivNum from productDivision where collab=#{collab} and productType=#{productType}))
+	</insert>
+
+
+	<insert id="setInsertPInfo" parameterType="ProductInfoVO">
+		insert into
+		productInfo (productNum,size)
+		values(#{productNum},#{size})
+	</insert>
+
+	<insert id="setFileInsert" parameterType="ProductFileVO">
+		insert into
+		productFiles (productNum,fileName,oriName)
+		values(#{productNum},#{fileName},#{oriName})
+	</insert>
+	
+	<insert id="setInsertDivision" parameterType="ProductDivisionVO">
+		insert into
+		productDivision (collab,producttype)
+		values(#{collab},#{productType})
+	</insert>
+
+	<!-- ++++++++++ U ++++++++++ -->
+	<update id="setUpdate" parameterType="ProductVO">
+		update product set
+		productTitle=#{productTitle},
+		productPrice=#{productPrice},
+		summary=#{summary},
+		productContents=#{productContents},
+		productDisRate=#{productDisRate},
+		finalPrice=#{finalPrice},
+		productMileage=#{productMileage},
+		productSaleable=#{productSaleable},
+		productDivNum=(select productDivNum from productDivision where collab=#{collab} and productType=#{productType})
+		where
+		productNum=#{productNum}
+	</update>
+	
+	<update id="setUpdateProductInfo" parameterType="ProductInfoVO">
+		update productInfo set
+		stock = #{stock}
+		where
+		productNum = #{productNum}
+		and
+		size = #{size}
+	</update>
+
+
+	<!-- ++++++++++ D ++++++++++ -->
+
+	<delete id="setDelete" parameterType="ProductVO">
+		delete from product where
+		productNum=#{productNum}
+	</delete>
+	<delete id="setFileDelete" parameterType="ProductVO">
+		delete from productFiles
+		where productNum =#{productNum}
+	</delete>
+
+
+
+	<!-- +++++++++++++++++++++++++CW END+++++++++++++++++++++++++++++++++++ -->
+
+
+	<update id="updateStock" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			update
+			productinfo set stock = stock - #{item.stock} where
+			pInfoNum=#{item.pInfoNum} and productNum=#{item.productNum}
+		</foreach>
+	</update>
+</mapper>

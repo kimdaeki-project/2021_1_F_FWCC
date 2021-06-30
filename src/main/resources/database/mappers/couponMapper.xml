@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fw.s1.coupon.CouponMapper">
+	<resultMap type="CouponVO" id="getCouponDetails">
+		<id column="cuNum" property="cuNum"/>
+		<result column="username" property="username"/>
+		<result column="cuSpNum" property="cuSpNum"/>
+		<result column="pubDate" property="pubDate"/>
+		<result column="exDate" property="exDate"/>
+		<result column="useCheck" property="useCheck"/>
+		<association property="couponspVO" javaType="CouponspVO">
+			<id column="cuSpNum" property="cuSpNum"/>
+			<result column="cuName" property="cuName"/>
+			<result column="disRate" property="disRate"/>
+		</association>
+	</resultMap>
+
+	<select id="getCouponList" parameterType="MemberVO" resultMap="getCouponDetails">
+		select c.*, cs.* from coupon c inner join couponsp cs on c.cuSpNum=cs.cuSpNum 
+		where c.username=#{username} and useCheck=0
+	</select>
+	
+	<select id="getCouponspList" resultType="CouponspVO">
+		select * from couponsp
+	</select>
+	
+	<select id="getCouponsp" parameterType="CouponspVO" resultType="CouponspVO">
+		select * from couponsp where cuSpNum=#{cuSpNum}
+	</select>
+	
+	<insert id="setCouponsp" parameterType="CouponspVO">
+		insert into couponsp(cuName, disRate) values(#{cuName}, #{disRate})
+	</insert>
+	
+	<insert id="couponForAll" parameterType="CouponVO">
+		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) 
+		select m.username, #{cuSpNum}, #{pubDate}, #{exDate}, 0 from member m
+		group by username
+	</insert>
+	
+	<insert id="couponForSelected" parameterType="java.util.List">
+		insert into coupon(username,cuSpNum, pubDate, exDate, useCheck) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.username}, #{item.cuSpNum}, #{item.pubDate}, #{item.exDate}, 0)
+		</foreach>
+	</insert>
+	
+	<update id="useUpdate" parameterType="CouponVO">
+		update coupon set useCheck=1 where username=#{username} and cuNum=#{cuNum}
+	</update>
+	
+	<delete id="scheduleDelete" parameterType="java.sql.Date">
+		<![CDATA[delete from coupon where useCheck = 0 and exDate <= #{param}]]>
+	</delete>
+	
+	<select id="getMemberCouponCount" parameterType="MemberVO" resultType="java.lang.Long">
+		select count(cuNum) from coupon where username = #{username} and useCheck = 0
+	</select>
+</mapper>

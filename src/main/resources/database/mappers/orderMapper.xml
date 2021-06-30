@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.fw.s1.order.OrderMapper">
+ 	<resultMap type="OrderlistVO" id="orderAndMileage">
+ 		<id column="orderNum" property="orderNum"/>
+ 		<result column="totPrice" property="totPrice"/>
+ 		<result column="spPrice" property="spPrice"/>
+ 		<result column="cuNum" property="cuNum"/>
+ 		<result column="username" property="username"/>
+ 		<result column="destination" property="destination"/>
+ 		<result column="orderDate" property="orderDate"/>
+		<result column="orderState" property="orderState"/>
+		<result column="orderMessage" property="orderMessage"/>
+		<result column="orderName" property="orderName"/>
+		<association property="mileageVO" javaType="MileageVO">
+			<id column="mileNum" property="mileNum"/>
+			<result column="usedMile" property="usedMile"/>
+			<result column="changeMile" property="changeMile"/>
+			<result column="username" property="username"/>
+			<result column="orderNum" property="orderNum"/>
+			<result column="mileContents" property="mileContents"/>
+			<result column="enabledMile" property="enabledMile"/>
+		</association>
+ 	</resultMap>
+	
+	<resultMap type="ProductFileVO" id="getOrderProduct">
+		<id column="fileNum" property="fileNum"/>
+		<result column="productNum" property="productNum"/>
+		<result column="fileName" property="fileName"/>
+		<result column="oriName" property="oriName"/>
+		<association property="productVO">
+			<id column="productNum" property="productNum"/>
+			<result column="productTitle" property="productTitle"/>
+		</association> 
+		<association property="purchaseVO">
+			<id column="purNum" property="purNum"/>
+			<result column="productNum" property="productNum"/>
+			<result column="pInfoNum" property="pInfoNum"/>
+			<result column="orderNum" property="orderNum"/>
+			<result column="productCount" property="productCount"/>
+			<result column="proPriceSum" property="proPriceSum"/>
+		</association>
+		<association property="orderlistVO">
+			<id column="orderNum" property="orderNum"/>
+			<result column="totPrice" property="totPrice"/>
+			<result column="spPrice" property="spPrice"/>
+			<result column="cuNum" property="cuNum"/>
+			<result column="username" property="username"/>
+			<result column="destination" property="destination"/>
+			<result column="orderDate" property="orderDate"/>
+			<result column="orderState" property="orderState"/>
+			<result column="orderMessage" property="orderMessage"/>
+			<result column="orderName" property="orderName"/>
+		</association>
+	</resultMap>
+ 
+ 	<insert id="setOrder" parameterType="OrderlistVO">
+ 		insert into orderlist(orderNum, totPrice, spPrice, cuNum, username, destination, orderDate, orderState, orderMessage, orderName)
+ 		values(#{orderNum}, #{totPrice}, #{spPrice}, <if test="cuNum==0">null</if><if test="cuNum!=0">#{cuNum}</if>, 
+ 		#{username}, #{destination}, sysdate(), 1, #{orderMessage}, #{orderName})
+ 	</insert>
+	<select id="getOrder" parameterType="OrderlistVO" resultMap="orderAndMileage">
+		select * from orderlist o inner join mileage m on o.orderNum = m.orderNum
+		where o.username=#{username} and m.mileNum = (select max(mileNum) from mileage where orderNum=#{orderNum})
+	</select>
+	
+	<select id="orderStateChange" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderState=#{orderState}
+	</select>
+	<select id="selectedOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderNum = #{orderNum}
+	</select>
+	<select id="checkOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
+		select * from orderlist where orderNum = #{orderNum} and username = #{username}
+	</select>
+	
+	<update id="orderlistUpdate" parameterType="OrderlistVO">
+		update orderlist set orderState = #{orderState} where orderNum = #{orderNum}
+	</update>
+	<update id="orderlistsUpdate" parameterType="java.util.List">
+		update orderlist set orderState = orderState+1 where 
+		<foreach collection="list" item="item" separator="or">
+			(orderNum=#{item.orderNum})
+		</foreach>
+	</update>
+	
+	<!-- member -->
+	<select id="getOrderList" parameterType="OrderlistVO" resultMap="getOrderProduct">
+		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
+		INNER JOIN purchase PU ON O.orderNum = PU.orderNum
+		INNER JOIN product P ON PU.productNum = P.productNum 
+		LEFT JOIN (
+			SELECT * FROM productfiles 
+			WHERE fileName LIKE CONCAT('T\_', '%')
+		) PF ON P.productNum = PF.productNum
+		WHERE O.username = #{username}
+		ORDER BY O.orderNum DESC
+	</select>
+	
+	<select id="getFilteredList" parameterType="OrderlistVO" resultMap="getOrderProduct">
+		SELECT O.*, PU.*, P.productTitle, PF.fileName FROM orderlist O 
+        INNER JOIN purchase PU ON O.orderNum = PU.orderNum
+        INNER JOIN product P ON PU.productNum = P.productNum 
+        LEFT JOIN (
+            SELECT * FROM productfiles 
+            WHERE fileName LIKE CONCAT('T\_', '%') 
+                and orderDate between #{startDate} and #{endDate}
+        ) PF ON P.productNum = PF.productNum
+        WHERE O.username = #{username}
+        ORDER BY O.orderNum DESC
+	</select>
+
+ </mapper>

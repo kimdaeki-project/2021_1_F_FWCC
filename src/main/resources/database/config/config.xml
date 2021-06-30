@@ -2,9 +2,32 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
+
 <configuration>
- 	<typeAliases>
-		
+	<typeAliases>
+		<typeAlias type="com.fw.s1.product.ProductVO" alias="ProductVO" />
+		<typeAlias type="com.fw.s1.product.ProductFileVO" alias="ProductFileVO" />
+		<typeAlias type="com.fw.s1.product.ProductInfoVO" alias="ProductInfoVO" />
+		<typeAlias type="com.fw.s1.util.ProductPager" alias="ProductPager"/>
+		<typeAlias type="com.fw.s1.product.ProductDivisionVO" alias="ProductDivisionVO"/>
+		<typeAlias type="com.fw.s1.admin.AdminVO" alias="AdminVO"/>
+		<typeAlias type="com.fw.s1.cart.CartVO" alias="CartVO"/>
+		<typeAlias type="com.fw.s1.order.OrderlistVO" alias="OrderlistVO"/>
+		<typeAlias type="com.fw.s1.purchase.PurchaseVO" alias="PurchaseVO"/>
+		<typeAlias type="com.fw.s1.coupon.CouponVO" alias="CouponVO"/>
+		<typeAlias type="com.fw.s1.coupon.CouponspVO" alias="CouponspVO"/>
+		<typeAlias type="com.fw.s1.board.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.fw.s1.board.BoardFileVO" alias="BoardFileVO"/>
+		<typeAlias type="com.fw.s1.board.BoardCommentVO" alias="BoardCommentVO"/>
+  		<typeAlias type="com.fw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.fw.s1.board.qna.QnaVO" alias="QnaVO"/>
+  		<typeAlias type="com.fw.s1.board.review.ReviewVO" alias="ReviewVO"/>
+  		<typeAlias type="com.fw.s1.board.lookbook.LookBookVO" alias="LookBookVO"/>
+  		<typeAlias type="com.fw.s1.board.lookbook.LookBookFileVO" alias="LookBookFileVO"/>
+  		<typeAlias type="com.fw.s1.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.fw.s1.member.RoleVO" alias="RoleVO"/>
+  		<typeAlias type="com.fw.s1.address.AddressVO" alias="AddressVO"/>
+  		<typeAlias type="com.fw.s1.mileage.MileageVO" alias="MileageVO"/>
+  		<typeAlias type="com.fw.s1.util.Pager" alias="Pager"/>
 	</typeAliases>
 </configuration>

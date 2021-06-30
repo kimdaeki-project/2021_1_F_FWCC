@@ -6,10 +6,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Bean
+	public PasswordEncoder passowrdEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -31,9 +38,44 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
+				.antMatchers("/**").permitAll()
 				.antMatchers("/").permitAll()
-				// 여기부터 쓰시오
+				// --- community START ---
+				.antMatchers("/notice/list", "/qna/list","/review/list").permitAll()
+				// --- community END ---
+				// --- product START ---
+				.antMatchers("/product/**").permitAll()
+//				.antMatchers("/product/list").permitAll()
+//				.antMatchers("/product/select").permitAll()
+//				.antMatchers("/product/**").hasRole("ADMIN")
+				// --- product END ---
+				// --- cart END ---
+				.antMatchers("/cart/counting").permitAll()
+				.antMatchers("/cart/**").hasAnyRole("MEMBER","ADMIN")
+				// --- cart END ---
+				// --- orderlist START
+				.antMatchers("/order/**").hasAnyRole("MEMBER", "ADMIN")
+				// --- orderlist END ---
+				// --- admin START
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				// --- admin END
+				// --- member START ---
+				.antMatchers("/member/memberJoin", "/member/memberLogin").permitAll()
+				.antMatchers("/member/memberPage/**").hasAnyRole("MEMBER", "ADMIN")
+				// --- member END ---
 				.anyRequest().authenticated()
+			.and()
+			.formLogin()
+				.loginPage("/member/memberLogin")
+				.defaultSuccessUrl("/member/memberLoginSuccess")
+				.failureUrl("/member/memberLoginFail")
+				.permitAll()
+			.and()
+			.logout()
+				.logoutUrl("/member/memberLogout")
+				.logoutSuccessUrl("/")
+				.invalidateHttpSession(false)
+				
 				;
 	}
 	

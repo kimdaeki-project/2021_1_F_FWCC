@@ -11,13 +11,125 @@ CREATE TABLE `fw01`.`product` (
   `productType` VARCHAR(100) NULL,
   PRIMARY KEY (`productNum`));
   
+  ALTER TABLE `fw01`.`product` 
+ADD COLUMN `finalPrice` BIGINT NULL AFTER `productType`,
+ADD COLUMN `productMileage` BIGINT NULL AFTER `finalPrice`,
+CHANGE COLUMN `productPrice` `productPrice` BIGINT NULL DEFAULT NULL ,
+CHANGE COLUMN `productDisRate` `productDisRate` BIGINT NULL DEFAULT 0 ;
+ALTER TABLE fw01.product 
+ADD COLUMN productSaleable BIT NULL DEFAULT 0 AFTER productMileage;
+ALTER TABLE fw01.product 
+ADD COLUMN summary LONGTEXT NULL AFTER productDisRate;
+  
+CREATE TABLE `fw01`.`productDivision` (
+  `productDivNum` BIGINT NOT NULL AUTO_INCREMENT,
+  `collab` VARCHAR(100) NULL,
+  `productType` VARCHAR(100) NULL,
+  PRIMARY KEY (`productDivNum`));
+
+insert into productDivision (collab,productType)
+values('none','top-long');
+insert into productDivision (collab,productType)
+values('none','top-short');
+insert into productDivision (collab,productType)
+values('none','bottom-long');
+insert into productDivision (collab,productType)
+values('none','bottom-short');
+
+insert into productDivision (collab,productType)
+values('collab1','top-long');
+insert into productDivision (collab,productType)
+values('collab1','top-short');
+insert into productDivision (collab,productType)
+values('collab1','bottom-long');
+insert into productDivision (collab,productType)
+values('collab1','bottom-short');
+
+ALTER TABLE `fw01`.`product` 
+DROP COLUMN `productType`,
+DROP COLUMN `collab`,
+ADD COLUMN `productDivNum` BIGINT NULL AFTER `productSaleable`,
+ADD INDEX `PRODUCT_PDI_NUM_idx` (`productDivNum` ASC) VISIBLE;
+
+ALTER TABLE `fw01`.`product` 
+ADD CONSTRAINT `PRODUCT_PDI_NUM`
+  FOREIGN KEY (`productDivNum`)
+  REFERENCES `fw01`.`productDivision` (`productDivNum`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 -- product table dummydata
-  insert into product(productTitle, productPrice,productContents,collab,productType)
-values('productTitle1',10000,'productContensts1','collaboration','top-short');
-insert into product(productTitle, productPrice,productContents,collab,productType)
-values('productTitle2',20000,'productContensts2','none','bottom-short');
-insert into product(productTitle, productPrice,productContents,collab,productType)
-values('productTitle3',30000,'productContensts3','nont','top-long');
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('none-top-long',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,1);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('none-top-short',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,2);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('none-bottom-long',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,3);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('none-bottom-short',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,4);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('collab1-top-long',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,5);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('collab1-top-short',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,6);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('collab1-bottom-long',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,7);
+END FOR;
+//
+DELIMITER ;
+
+DELIMITER //
+FOR i IN 1..5
+DO
+	insert into product (productTitle, productPrice, productDisRate, summary, productContents, finalPrice, productMileage, productSaleable, productDivNum)
+	values(concat('collab1-bottom-short',i),100000,0,concat('summary',i),concat('productContents',i),100000,5000,1,8);
+END FOR;
+//
+DELIMITER ;
 
 -- productInfo table 생성 ---------------------------------------------------------------------
 CREATE TABLE `fw01`.`productInfo` (
@@ -92,6 +204,9 @@ insert into productFiles (productNum,fileName, oriName)
 values(2,'fileName2-3','oriName2-3');
 insert into productFiles (productNum,fileName, oriName)
 values(3,'fileName3-3','oriName3-3');
+
+
+
 
 -- 형수 데이터 테이블 =======================================================================================
 -- member table -----------------------------------------------------------------------------------
@@ -295,10 +410,13 @@ CREATE TABLE `fw01`.`orderlist` (
 	`orderNum` VARCHAR(100) NOT NULL,
 	`totPrice` BIGINT NOT NULL,
 	`spPrice` BIGINT NOT NULL,
-	`cuNum` BIGINT NOT NULL,
+	`cuNum` BIGINT,
 	`username` VARCHAR(100) NOT NULL,
 	`destination` VARCHAR(450) NOT NULL DEFAULT '',
 	`orderDate` DATETIME NOT NULL,
+	`orderState` BIGINT NOT NULL default '1',
+	`orderMessage` TEXT NOT NULL,
+	`orderName` VARCHAR(200),
 	PRIMARY KEY (`orderNum`) USING BTREE,
 	INDEX `OD_CN_FK` (`cuNum`) USING BTREE,
 	INDEX `OD_UN_FK` (`username`) USING BTREE,
@@ -349,9 +467,9 @@ VALUES(0, 1, 2, '234-234', 1, 10000);
 CREATE TABLE `fw01`.`mileage` (
 	`mileNum` BIGINT NOT NULL AUTO_INCREMENT,
 	`usedMile` BIGINT NOT NULL,
-	`unableMile` BIGINT NOT NULL,
+	`changeMile` BIGINT NOT NULL,
 	`username` VARCHAR(100) NOT NULL,
-	`orderNum` VARCHAR(100) NOT NULL,
+	`orderNum` VARCHAR(100),
 	`mileContents` VARCHAR(100) NOT NULL,
 	`enabledMile` BIGINT NOT NULL,
 	PRIMARY KEY (`mileNum`) USING BTREE,
@@ -368,6 +486,19 @@ INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileConte
 VALUES(0, 0, 0, 'admin', '123-123', 'testing', 0);
 INSERT INTO mileage(mileNum, usedMile, unableMile, username, orderNum, mileContents, enabledMile)
 VALUES(0, 1000, 0, 'admin', '234-234', 'testing', 0);
+
+----------------------------------------admin table-----------------------------------------------
+
+CREATE TABLE `fw01`.`admin` (
+	`adminIdx` BIGINT NOT NULL AUTO_INCREMENT,
+	`adminDate` DATE NOT NULL,
+	`productNum` BIGINT NOT NULL DEFAULT '0',
+	`sellCount` BIGINT NOT NULL DEFAULT '0',
+	PRIMARY KEY (`adminIdx`) USING BTREE,
+	INDEX `ADM_PN_FK` (`productNum`) USING BTREE,
+	CONSTRAINT `ADM_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `fw01`.`product` (`productNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+;
 
 --한철 --------------------------------------------------------------------------------------------
 -- notice ----------------------------------------------------------------------------------------

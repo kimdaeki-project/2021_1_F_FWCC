@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.fw.s1.mileage.MileageMapper">
+	<select id="getRecentMileage" parameterType="MileageVO" resultType="MileageVO">
+		select * from mileage where mileNum = (select Max(mileNum) from mileage where username = #{username})
+	</select>
+	<insert id="setMileAfterOrder" parameterType="java.util.List">
+		insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledMile)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.usedMile}, #{item.changeMile}, #{item.username}, #{item.orderNum},
+			#{item.mileContents}, #{item.enabledMile})
+		</foreach>
+	</insert>
+	<insert id="mileageForAll" parameterType="MileageVO">
+		INSERT INTO mileage (usedMile, changeMile, username, orderNum, mileContents, enabledmile)
+  		SELECT usedMile, changeMile+#{changeMile}, username, NULL, #{mileContents}, enabledMile+#{enabledMile} 
+  		FROM mileage WHERE mileNum IN (SELECT MAX(mileNum) FROM mileage GROUP BY username);
+	</insert>
+	<insert id="mileageForSelect" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			insert into mileage (usedMile, changeMile, username, orderNum, mileContents, enabledmile)
+			(select usedMile, #{item.changeMile}, username, null, #{item.mileContents}, enabledMile+#{item.enabledMile}
+			from mileage where mileNum = (select max(mileNum) from mileage where username=#{item.username}))
+		</foreach>
+	</insert>
+	
+<!-- member -->
+	<insert id="setMileAfterJoin" parameterType="MileageVO">
+		INSERT INTO mileage(mileNum, usedMile, changeMile, username, orderNum, mileContents, enabledMile)
+		VALUES(0, #{usedMile}, #{changeMile}, #{username}, null, #{mileContents}, #{enabledMile})
+	</insert>
+	
+	<select id="getMemberMileage" parameterType="MemberVO" resultMap="memberMileage">
+		select M.*, O.orderDate from mileage M
+		left join orderlist O
+		on M.orderNum = O.orderNum
+		where M.username = #{username} order by M.mileNum desc
+	</select>
+	<resultMap type="MileageVO" id="memberMileage">
+		<id column="mileNum" property="mileNum"/>
+		<result column="usedMile" property="usedMile"/>
+		<result column="changeMile" property="changeMile"/>
+		<result column="username" property="username"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="mileContents" property="mileContents"/>
+		<result column="enabledMile" property="enabledMile"/>
+		<association property="orderlistVO" javaType="OrderlistVO" >
+			<result column="orderDate" property="orderDate"/>
+		</association>
+	</resultMap>
+	
+	<select id="getRecentMemberMileage" parameterType="MemberVO" resultType="MileageVO">
+		select * from mileage 
+		where username = #{username}
+		order by mileNum desc
+		limit 1
+	</select>
+</mapper>
