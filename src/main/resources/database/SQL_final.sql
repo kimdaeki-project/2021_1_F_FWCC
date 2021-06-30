@@ -73,7 +73,7 @@ CREATE TABLE `productDivision` (
   `collab` varchar(100) DEFAULT NULL,
   `productType` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`productDivNum`)
-) 
+);
 -- product
 
 CREATE TABLE `product` (
@@ -90,7 +90,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`productNum`),
   KEY `PRODUCT_PDI_NUM_idx` (`productDivNum`),
   CONSTRAINT `PRODUCT_PDI_NUM` FOREIGN KEY (`productDivNum`) REFERENCES `productDivision` (`productDivNum`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) 
+);
 
 -- productFiles
 
@@ -102,7 +102,7 @@ CREATE TABLE `productFiles` (
   PRIMARY KEY (`fileNum`),
   KEY `PF_PN_FK_idx` (`productNum`),
   CONSTRAINT `PF_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
-) 
+);
 
 -- productInfo
 
@@ -114,7 +114,7 @@ CREATE TABLE `productInfo` (
   PRIMARY KEY (`pInfoNum`),
   KEY `PI_PN_FK_idx` (`productNum`),
   CONSTRAINT `PI_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
-) 
+);
 
 -- =====================================이리희=======================================================
 ---------------------------------------------------------- create table cart ---------------------------------------------------------------------
