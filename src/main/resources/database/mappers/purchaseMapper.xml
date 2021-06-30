@@ -22,10 +22,15 @@
 		</association>
 	</resultMap>
 	<select id="getTodayPurchase" parameterType="java.sql.Date" resultMap="purchaseAndProduct">
-		select p.*, pro.* from purchase p inner join orderlist o on o.orderNum = p.orderNum 
+		select p.*, pro.* from purchase p inner join (select * from orderlist where orderState != 4) o on o.orderNum = p.orderNum 
 		inner join product pro on p.productNum=pro.productNum
 		where o.orderDate like concat(#{value}, '%')
 	</select>
+	
+	<select id="getPurAdmin" parameterType="OrderlistVO" resultMap="PurchaseVO">
+		select * from purchase where orderNum=#{orderNum}
+	</select>
+	
 	<insert id="setOrderPurchase" parameterType="java.util.List">
 	insert into purchase(productNum, pInfoNum, orderNum, productCount, proPriceSum)
 	values
