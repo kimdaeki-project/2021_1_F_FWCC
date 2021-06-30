@@ -83,6 +83,11 @@ public class MemberController {
 		return mv;
 	}
 	
+	@GetMapping("finder/idFind")
+	public void getId() throws Exception {
+		
+	}
+	
 // Member Join ============================================================================
 	@GetMapping("memberJoin")
 	public void setJoin(Model model) throws Exception {

@@ -70,11 +70,11 @@
 							/></label>
 							<button class="btnLogin">LOGIN</button>
 							<ul>
-								<li><a href="#">아이디찾기</a></li>
+								<li><a href="./finder/idFind">아이디찾기</a></li>
 								<li>/</li>
-								<li><a href="#">비밀번호찾기</a></li>
+								<li><a href="./finder/pwFind">비밀번호찾기</a></li>
 							</ul>
-							<ul class="snsArea">
+							<!-- <ul class="snsArea">
 								<li class=""><a
 									href="#none"
 									onclick=""
@@ -103,7 +103,7 @@
 										src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_kakao_login.gif"
 										alt="카카오계정 로그인"
 									/></a></li>
-							</ul>
+							</ul> -->
 							<p class="link">
 								회원가입을 하시면 다양하고 특별한<br />혜택이 준비되어 있습니다. <a
 									href="./memberJoin"
