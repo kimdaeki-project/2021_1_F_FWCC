@@ -122,7 +122,6 @@
 		$(".delInfo").click(function() {
 			let str = $(this).attr("data-value")
 			$("#size_" + str).attr("style", "display:none;");
-			$("")
 			tPrice = tPrice - Number($("#size_" + str).attr("title"))
 			countTotal();
 		})
@@ -147,6 +146,7 @@
 			tPrice = t;
 			countTotal()
 		})
+		
 	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/product/productSelect.js"></script>
 </body>

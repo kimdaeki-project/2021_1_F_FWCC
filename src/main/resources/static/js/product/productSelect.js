@@ -1,14 +1,18 @@
 
 $("#addcartbutton").click(function(event){
-	event.preventDefault();
-	
-	toChart(false);
+		event.preventDefault();
+	if(tPrice != 0){
+					
+		toChart(false);
+	}
 });
 
 $("#buynowbutton").click(function(event){
-	event.preventDefault();
-
-	toChart(true);
+		event.preventDefault();
+	if(tPrice != 0){
+					
+		toChart(true);
+	}
 });
 
 function toChart(data){

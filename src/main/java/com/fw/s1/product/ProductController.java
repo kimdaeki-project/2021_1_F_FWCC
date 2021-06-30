@@ -26,9 +26,9 @@ public class ProductController {
 		if(collab.length()>0) {
 			productPager.setProductType("");
 		}
-		System.out.println("collab length"+productPager.getCollab().length());
-		System.out.println(productPager.getProductType());
-		System.out.println(productPager.isSale());
+//		System.out.println("collab length"+productPager.getCollab().length());
+//		System.out.println(productPager.getProductType());
+//		System.out.println(productPager.isSale());
 //		String str=productPager.getProductType();
 //		if(str.equals("TOP-")||str.equals("BOTTOM-")) {
 //			System.out.println("str1 : "+str);
@@ -43,11 +43,11 @@ public class ProductController {
 		}
 		Long total = productService.getTotalCount(productPager);
 		List<ProductVO> list = productService.getList(productPager);
-		for(ProductVO vo:list) {
-			if(vo.getFile()!=null) {
-				System.out.println(vo.getFile());
-			}
-		}
+//		for(ProductVO vo:list) {
+//			if(vo.getFile()!=null) {
+//				System.out.println(vo.getFile());
+//			}
+//		}
 		model.addAttribute("productList", list);
 		model.addAttribute("totalCount",total);
 		model.addAttribute("collab",collab);
@@ -56,10 +56,10 @@ public class ProductController {
 		model.addAttribute("pager", productPager);
 		model.addAttribute("sortStandard", productPager.getSortStandard());
 		model.addAttribute("sale", productPager.isSale());
-		System.out.println("lastNum : "+productPager.getLastNum());
-		System.out.println("pre : "+ productPager.isPre());
-		System.out.println("next : "+productPager.isNext());
-		System.out.println("totalPage : "+productPager.getTotalPage());
+//		System.out.println("lastNum : "+productPager.getLastNum());
+//		System.out.println("pre : "+ productPager.isPre());
+//		System.out.println("next : "+productPager.isNext());
+//		System.out.println("totalPage : "+productPager.getTotalPage());
 		return "/product/productList";
 	}
 
@@ -71,20 +71,21 @@ public class ProductController {
 
 	@PostMapping(value="insert")
 	public String  setInsert(ProductVO productVO, MultipartFile thumbnail, String size)throws Exception{
-		System.out.println("");
-		System.out.println("=============================================================");
-		System.out.println("productNum : "+productVO.getProductNum());
-		System.out.println("title : "+productVO.getProductTitle());
-		System.out.println("price : "+productVO.getProductPrice());
-		System.out.println("summary : "+productVO.getSummary());
-		System.out.println("contents : "+productVO.getProductContents());
-		System.out.println("thumbNail : "+thumbnail.getOriginalFilename());
-		System.out.println("disRate : "+productVO.getProductDisRate());
+//		System.out.println("");
+//		System.out.println("=============================================================");
+//		System.out.println("productNum : "+productVO.getProductNum());
+//		System.out.println("title : "+productVO.getProductTitle());
+//		System.out.println("price : "+productVO.getProductPrice());
+//		System.out.println("summary : "+productVO.getSummary());
+//		System.out.println("contents : "+productVO.getProductContents());
+//		System.out.println("thumbNail : "+thumbnail.getOriginalFilename());
+//		System.out.println("disRate : "+productVO.getProductDisRate());
 //		System.out.println(files == null);
 //		System.out.println(files.length);
 //		for(MultipartFile mf:files) {
 //			System.out.println(mf.getOriginalFilename());
 //		}
+		System.out.println("C_mile"+productVO.getProductMileage());
 		System.out.println("size : "+size);
 		int result = productService.setInsert(productVO, size, thumbnail);
 		return "redirect:/admin/adminHome";
@@ -93,8 +94,8 @@ public class ProductController {
 	
 	@PostMapping(value="summerFileDelete")
 	public ModelAndView setSummerFileDelete(String fileName,String productNum) throws Exception{
-		System.out.println(fileName);
-		System.out.println(productNum);
+//		System.out.println(fileName);
+//		System.out.println(productNum);
 		ModelAndView mv  = new ModelAndView();
 		boolean result = productService.setSummerFileDelete(fileName,productNum);
 		mv.addObject("result", result);
@@ -106,10 +107,10 @@ public class ProductController {
 	@PostMapping(value="summerFileUpload")
 	@ResponseBody
 	public String setSummerFileUpload(MultipartFile file,String productNum)throws Exception{
-		System.out.println(productNum);
-		System.out.println("summerfileUpload");
-		System.out.println(file == null);
-		System.out.println(file.getOriginalFilename());
+//		System.out.println(productNum);
+//		System.out.println("summerfileUpload");
+//		System.out.println(file == null);
+//		System.out.println(file.getOriginalFilename());
 		String fileName = productService.setSummerFileUpload(file,productNum);
 		fileName="/resources/images/product/"+productNum+"/"+fileName;
 		
@@ -126,26 +127,26 @@ public class ProductController {
 	
 	@GetMapping(value="update")
 	public String setUpdate(Model model,ProductVO productVO)throws Exception{
-		System.out.println(productVO.getProductNum());
+//		System.out.println(productVO.getProductNum());
 		ProductVO vo = productService.setUpdate(productVO);
 		model.addAttribute("VO", vo);
 		return "product/productUpdate";
 	}
 	@PostMapping(value="update")
 	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
-		System.out.println(productVO.getProductTitle());
-		System.out.println(productVO.getProductPrice());
-		System.out.println(productVO.getProductDisRate());
-		System.out.println(productVO.getFinalPrice());
-		System.out.println(thumbnail==null);
-		System.out.println("oriName : "+thumbnail.getOriginalFilename());
-		System.out.println("oriNameLenghth : "+thumbnail.getOriginalFilename().length());
-		System.out.println(productVO.getSummary());
-		System.out.println(productVO.getProductContents());
-		System.out.println(productVO.getCollab());
-		System.out.println(productVO.getProductType());
-		System.out.println(sizeList.length);
-		System.out.println(stockList.length);
+//		System.out.println(productVO.getProductTitle());
+//		System.out.println(productVO.getProductPrice());
+//		System.out.println(productVO.getProductDisRate());
+//		System.out.println(productVO.getFinalPrice());
+//		System.out.println(thumbnail==null);
+//		System.out.println("oriName : "+thumbnail.getOriginalFilename());
+//		System.out.println("oriNameLenghth : "+thumbnail.getOriginalFilename().length());
+//		System.out.println(productVO.getSummary());
+//		System.out.println(productVO.getProductContents());
+//		System.out.println(productVO.getCollab());
+//		System.out.println(productVO.getProductType());
+//		System.out.println(sizeList.length);
+//		System.out.println(stockList.length);
 		for(String size:sizeList) {
 			System.out.println(size);
 		}

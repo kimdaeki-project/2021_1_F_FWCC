@@ -31,13 +31,13 @@ public class ProductService {
 	
 	public List<ProductVO> getList(ProductPager productPager) throws Exception{
 		long num = productMapper.getTotalCount(productPager);
-		System.out.println("totalNum"+num);
+//		System.out.println("totalNum"+num);
 		
 		
 		productPager.makeRow();
 		productPager.makeNum(num);
 		List<ProductVO> list = productMapper.getList(productPager);
-		System.out.println(list.size());
+//		System.out.println(list.size());
 		return list;
 	}
 	
@@ -59,20 +59,22 @@ public class ProductService {
 		}
 		Long finalPrice = price*(100-disRate)/100;
 		Long mileage = ((price/100)*5);
+		System.out.println(mileage);
 		productVO.setFinalPrice(finalPrice);
 		productVO.setProductMileage(mileage);
+		System.out.println(productVO.getProductMileage());
 		productVO.setProductType(type);
-		productVO.setProductSaleable(true);
-		System.out.println("disRate : "+ disRate);
-		System.out.println("finalPrice : "+finalPrice);
-		System.out.println("mileage : "+mileage);
-		System.out.println("type : "+type);
-		System.out.println("saleable : "+productVO.getProductSaleable());
+		productVO.setProductSaleable(false);
+//		System.out.println("disRate : "+ disRate);
+//		System.out.println("finalPrice : "+finalPrice);
+//		System.out.println("mileage : "+mileage);
+//		System.out.println("type : "+type);
+//		System.out.println("saleable : "+productVO.getProductSaleable());
 		int result = productMapper.setInsert(productVO);
 		
 		String[] fileNames = productFileManager.thumbNailSave("/"+productVO.getProductNum(), thumbNail,session);
 		for(String str:fileNames) {
-			System.out.println(str);
+//			System.out.println(str);
 			ProductFileVO pFileVO = new ProductFileVO();
 			pFileVO.setProductNum(productVO.getProductNum());
 			pFileVO.setFileName(str);
@@ -106,7 +108,7 @@ public class ProductService {
 	
 	
 	public String setSummerFileUpload(MultipartFile file,String productNum) throws Exception{
-		System.out.println("num:"+productNum);
+//		System.out.println("num:"+productNum);
 		String fileName = productFileManager.save("/"+productNum, file, session);
 		return fileName;
 		
@@ -116,7 +118,7 @@ public class ProductService {
 	
 	public List<ProductVO> setUpdate()throws Exception{
 		List<ProductVO> array = productMapper.getAllList();
-		System.out.println(array.size());
+//		System.out.println(array.size());
 		return array;
 	}
 	
@@ -131,10 +133,11 @@ public class ProductService {
 	@Transactional(rollbackFor = Exception.class)
 	public void setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbNail) throws Exception{
 		System.out.println("------service");
+		System.out.println(productVO.getProductMileage());
 		String type = productVO.getProductType();
 		type = type.replace(",", "-");
 		productVO.setProductType(type);
-		System.out.println(type);
+//		System.out.println(type);
 		int result = productMapper.setUpdate(productVO);
 		if(sizeList.length==stockList.length) {
 			System.out.println("listLength : "+sizeList.length);
@@ -147,23 +150,23 @@ public class ProductService {
 				System.out.println(i+" : "+result2);
 			}
 		}
-		System.out.println("file");
-		System.out.println(thumbNail.getOriginalFilename().length());
+//		System.out.println("file");
+//		System.out.println(thumbNail.getOriginalFilename().length());
 		if(thumbNail.getOriginalFilename().length()>0) {
 			List<ProductFileVO> array = productMapper.getFileSelect(productVO);
 			System.out.println(array.size());
 			if(array.size()!=0) {
-				for(ProductFileVO file:array) {
-					boolean delCheck = productFileManager.Delete("/"+productVO.getProductNum(), file.getFileName(), session);
-					System.out.println("=====");
-					System.out.println(delCheck);
-					System.out.println("=====");
-				}
+//				for(ProductFileVO file:array) {
+//					boolean delCheck = productFileManager.Delete("/"+productVO.getProductNum(), file.getFileName(), session);
+//					System.out.println("=====");
+//					System.out.println(delCheck);
+//					System.out.println("=====");
+//				}
 				productMapper.setFileDelete(productVO);
 			}
 			String[] fileNames = productFileManager.thumbNailSave("/"+productVO.getProductNum(), thumbNail, session);
 			for(String str:fileNames) {
-				System.out.println(str);
+//				System.out.println(str);
 				ProductFileVO pFileVO = new ProductFileVO();
 				pFileVO.setProductNum(productVO.getProductNum());
 				pFileVO.setFileName(str);
@@ -176,13 +179,13 @@ public class ProductService {
 	
 	public ProductVO getSelect(ProductVO productVO)throws Exception{
 		productVO = productMapper.getProductSelect(productVO);
-		System.out.println("=====================Select==========================");
-		System.out.println(productVO);
-		System.out.println("pTitle : "+productVO.getProductTitle());
-		System.out.println("pPrice : "+productVO.getProductPrice());
-		System.out.println("pFinalPrice : "+productVO.getFinalPrice());
-		System.out.println("pSummary : "+productVO.getSummary());
-		System.out.println("pContents : "+productVO.getProductContents());
+//		System.out.println("=====================Select==========================");
+//		System.out.println(productVO);
+//		System.out.println("pTitle : "+productVO.getProductTitle());
+//		System.out.println("pPrice : "+productVO.getProductPrice());
+//		System.out.println("pFinalPrice : "+productVO.getFinalPrice());
+//		System.out.println("pSummary : "+productVO.getSummary());
+//		System.out.println("pContents : "+productVO.getProductContents());
 		productVO.setFile(productMapper.getMain(productVO));
 		productVO.setInfos(productMapper.getInfoSelect(productVO));
 		return productVO;
