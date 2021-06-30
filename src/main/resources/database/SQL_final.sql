@@ -116,7 +116,7 @@ CREATE TABLE `productInfo` (
   CONSTRAINT `PI_PN_FK` FOREIGN KEY (`productNum`) REFERENCES `product` (`productNum`) ON DELETE CASCADE ON UPDATE CASCADE
 ) 
 
-=====================================이리희=======================================================
+-- =====================================이리희=======================================================
 ---------------------------------------------------------- create table cart ---------------------------------------------------------------------
 CREATE TABLE `fw01`.`cart` (
 	`cartNum` BIGINT NOT NULL AUTO_INCREMENT,
