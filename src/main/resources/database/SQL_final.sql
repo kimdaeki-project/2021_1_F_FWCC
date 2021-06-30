@@ -248,13 +248,6 @@ ALTER TABLE notice
     ADD CONSTRAINT FK_notice_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-INSERT INTO notice(title,writer,regDate,contents,hit)
-VALUES('title1','username1',NOW(),'contents1',0);
-INSERT INTO notice(title,writer,regDate,contents,hit)
-VALUES('title2','username2',NOW(),'contents2',0);
-INSERT INTO notice(title,writer,regDate,contents,hit)
-VALUES('title3','username3',NOW(),'contents3',0);
-
 -- noticeFiles ----------------------------------------------------------------------------------------
 CREATE TABLE noticeFiles
 (
@@ -268,13 +261,6 @@ CREATE TABLE noticeFiles
 ALTER TABLE noticeFiles
     ADD CONSTRAINT FK_noticeFiles_num_notice_num FOREIGN KEY (num)
         REFERENCES notice (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
-        
-INSERT INTO noticeFiles(num,fileName,oriName)
-VALUES(1,'fileName1','oriName1');
-INSERT INTO noticeFiles(num,fileName,oriName)
-VALUES(2,'fileName2','oriName2');
-INSERT INTO noticeFiles(num,fileName,oriName)
-VALUES(3,'fileName3','oriName3');
 
 -- noticeComment ----------------------------------------------------------------------------------------
 CREATE TABLE noticeComment
@@ -296,13 +282,6 @@ ALTER TABLE noticeComment
 ALTER TABLE noticeComment
     ADD CONSTRAINT FK_noticeComment_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
-        
-INSERT INTO noticeComment(writer,regDate,contents,num)
-VALUES('username1',NOW(),'contetns1',1);
-INSERT INTO noticeComment(writer,regDate,contents,num)
-VALUES('username2',NOW(),'contetns2',2);
-INSERT INTO noticeComment(writer,regDate,contents,num)
-VALUES('username3',NOW(),'contetns3',3);
 
 
 
@@ -329,12 +308,6 @@ ALTER TABLE qna
     ADD CONSTRAINT FK_qna_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
-VALUES(1,'title1','username1',NOW(),1,'contents1');
-INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
-VALUES(2,'title2','username2',NOW(),2,'contents2');
-INSERT INTO qna(productNum,title,writer,regDate,hit,contents)
-VALUES(3,'title3','username3',NOW(),3,'contents3');
 
 -- qnaFiles ----------------------------------------------------------------------------------------         
 CREATE TABLE qnaFiles
@@ -349,14 +322,6 @@ CREATE TABLE qnaFiles
 ALTER TABLE qnaFiles
     ADD CONSTRAINT FK_qnaFiles_num_qna_num FOREIGN KEY (num)
         REFERENCES qna (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-INSERT INTO qnaFiles(num,fileName,oriName)
-VALUES(1,'fileName1','oriName1');
-INSERT INTO qnaFiles(num,fileName,oriName)
-VALUES(2,'fileName2','oriName2');
-INSERT INTO qnaFiles(num,fileName,oriName)
-VALUES(3,'fileName3','oriName3');
-
 
 -- qnaComment ------------------------------------------------------------------------
 CREATE TABLE qnaComment
@@ -379,13 +344,6 @@ ALTER TABLE qnaComment
     ADD CONSTRAINT FK_qnaComment_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-INSERT INTO qnaComment(writer,regDate,contents,num)
-VALUES('username1',NOW(),'contetns1',1);
-INSERT INTO qnaComment(writer,regDate,contents,num)
-VALUES('username2',NOW(),'contetns2',2);
-INSERT INTO qnaComment(writer,regDate,contents,num)
-VALUES('username3',NOW(),'contetns3',3);
-
 
 
 -- review -------------------------------------------------------------------------        
@@ -405,13 +363,6 @@ ALTER TABLE review COMMENT '리뷰테이블';
 ALTER TABLE review
     ADD CONSTRAINT FK_review_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
-        
-INSERT INTO review(title,writer,regDate,contents,hit)
-VALUES('title1','username1',NOW(),'contents1',0);
-INSERT INTO review(title,writer,regDate,contents,hit)
-VALUES('title2','username2',NOW(),'contents2',0);
-INSERT INTO review(title,writer,regDate,contents,hit)
-VALUES('title3','username3',NOW(),'contents3',0);
 
 -- reviewFiles ----------------------------------------------------------------------
 CREATE TABLE reviewFiles
@@ -426,13 +377,6 @@ CREATE TABLE reviewFiles
 ALTER TABLE reviewFiles
     ADD CONSTRAINT FK_reviewFiles_num_review_num FOREIGN KEY (num)
         REFERENCES review (num) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-INSERT INTO reviewFiles(num,fileName,oriName)
-VALUES(1,'fileName1','oriName1');
-INSERT INTO reviewFiles(num,fileName,oriName)
-VALUES(2,'fileName2','oriName2');
-INSERT INTO reviewFiles(num,fileName,oriName)
-VALUES(3,'fileName3','oriName3');
  
 -- reviewComment ----------------------------------------------------------------------        
 CREATE TABLE reviewComment
@@ -455,14 +399,6 @@ ALTER TABLE reviewComment
     ADD CONSTRAINT FK_reviewComment_writer_member_username FOREIGN KEY (writer)
         REFERENCES member (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-INSERT INTO reviewComment(writer,regDate,contents,num)
-VALUES('username1',NOW(),'contetns1',1);
-INSERT INTO reviewComment(writer,regDate,contents,num)
-VALUES('username2',NOW(),'contetns2',2);
-INSERT INTO reviewComment(writer,regDate,contents,num)
-VALUES('username3',NOW(),'contetns3',3);
-
-
 
 -- lookbook ----------------------------------------------------------------------
 CREATE TABLE lookbook
@@ -475,13 +411,6 @@ CREATE TABLE lookbook
 );
 
 ALTER TABLE lookbook COMMENT 'lookbook';
-
-INSERT INTO lookbook(division,fileName,title)
-VALUES('p','fileName1','title1');
-INSERT INTO lookbook(division,fileName,title)
-VALUES('p','fileName2','title12');
-INSERT INTO lookbook(division,fileName,title)
-VALUES('v','fileName3','title3');
 
 -- lookbookfile -----------------------------------------------------------
 
@@ -497,13 +426,6 @@ CREATE TABLE lookbookFiles
 ALTER TABLE lookbookFiles
     ADD CONSTRAINT FK_lookbookFiles_lbfn_lookbook_lbNum FOREIGN KEY (num)
         REFERENCES lookbook(lookbookNum) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-INSERT INTO lookbookFiles(fileName,num)
-VALUES('fileName1',1);
-INSERT INTO lookbookFiles(fileName,num)reviewfiles
-VALUES('fileName2',2);
-INSERT INTO lookbookFiles(fileName,num)
-VALUES('fileName3',3);
 
 
 -- borad end ----------------------------------------------------------------------
