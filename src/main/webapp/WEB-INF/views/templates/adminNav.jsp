@@ -12,7 +12,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/productInsert">상품등록</a></li>
 				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/productDivInsert">상품분류등록</a></li>
 				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/adminAllList">상품정보수정</a></li>
-				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/orderlistUpdate">배송정보수정</a></li>
+				<li style="margin-top:5%;"><a href="${pageContext.request.contextPath}/admin/orderlistUpdate">배송상태수정</a></li>
 			</ul>
 		</div>
 		<div style="padding:2%; font-size: 1.7rem;">판매현황

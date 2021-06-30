@@ -110,7 +110,7 @@
 		<h4>상세 내용</h4>
 		<textarea name="productContents" style="resize: none;" id="contents">${VO.productContents}</textarea>
 	</form>
-	<a id="sBtn">수정</a>
+	<input type="button" id="sBtn" value="수정">
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 <script type="text/javascript" src="/js/product/summerFile.js"></script>

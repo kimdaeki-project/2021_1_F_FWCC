@@ -33,11 +33,10 @@ input[type="number"]::-webkit-inner-spin-button {
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div class="container">
+<div style="padding: 5% 10%;">
 	<form id="frm" action="/product/insert" method="post" enctype="multipart/form-data">
 		<h1>productInsert</h1>
 		<input hidden="hidden" name=productNum value="${productNum}" id="pNum" title="${productNum}">
-		<p>${productNum}</p>
 		
 		<h4>제품 이름</h4>
 		<input type="text" name="productTitle" id="pTitle">
@@ -86,7 +85,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		<h4>상세 내용</h4>
 		<textarea name="productContents" style="resize: none;" id="contents"></textarea>
 	</form>
-	<a id="sBtn">올리기</a>
+	<input type="button" id="sBtn" value="올리기">
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminFooter.jsp"></c:import>
 <script type="text/javascript" src="/js/product/summerFile.js"></script>

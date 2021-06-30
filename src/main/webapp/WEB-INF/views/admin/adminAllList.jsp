@@ -12,9 +12,9 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div style="padding:5% 10%; overflow: auto;">
+<div style="padding:5% 10%; text-align: center;">
 	<h1>all List</h1>
-	<table>
+	<table style="width: 100%;">
 		<thead>
 			<tr>
 				<td>product number</td>

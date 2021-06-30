@@ -33,7 +33,7 @@ function getData(){
 			
 			let checkdate = new Date(date);
 			const checkmonth = checkdate.getMonth();
-			while(checkdate.getMonth==checkmonth){
+			while(checkdate.getMonth()==checkmonth){
 				let insert = checkdate.getFullYear()+"-"+(checkdate.getMonth()+1)+"-"+checkdate.getDate();
 				arr2.set(insert, 0);
 				checkdate.setDate(checkdate.getDate()+1);
@@ -70,6 +70,7 @@ function getData(){
 				}
 			}
 			
+			console.log(arr2);
 			let array2 = Array.from(arr2);
 			
 			google.charts.setOnLoadCallback(

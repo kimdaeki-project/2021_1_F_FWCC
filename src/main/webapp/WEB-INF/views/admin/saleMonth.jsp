@@ -12,8 +12,9 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div style="padding:5% 10%; overflow: auto;">
-	<div>
+<div style="padding:5% 10%; text-align:center; overflow: auto;">
+	<h1>월간 판매 현황</h1>
+	<div style="text-align: left; margin-top:5%;">
 		<input type="month" id="getMonth" value="<c:out value='${lastMonth}'></c:out>" min="2021-06" max='<c:out value="${lastMonth}"></c:out>'/>
 		<button id="ajaxMonth">월 선택</button>
 	</div>

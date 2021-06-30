@@ -1,7 +1,7 @@
 const adduser = $("#adduser").html();
 
 $("#toggleselectusers").click(function(){
-	if($("#selectusers").css("display")=='none'){
+	if($("#selectusers").css("display") == 'none'){
 		$("#selectusers").css("display", 'block');
 	}else{
 		$("#selectusers").css("display", 'none');
@@ -12,7 +12,7 @@ $("#addinput").click(function(){
 	$("#adduser").append(adduser);
 });
 
-$("#adduser").on("click", 'deleteuser', function(){
+$("#adduser").on("click", '.deleteuser', function(){
 	$(this).parent().remove();
 });
 

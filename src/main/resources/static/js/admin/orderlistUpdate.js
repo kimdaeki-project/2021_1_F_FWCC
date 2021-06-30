@@ -10,7 +10,6 @@ $(document).ready(function(){
 			for(let datas of result){
 				$("#orderlists").append("<tr id='jsoninjection'></tr>");
 				let data = JSON.parse(datas);
-				console.log(data.orderNum);
 				$("#jsoninjection").append("<td><input type='checkbox' class='checklist' data-orderNum='"+data.orderNum+"'></td>")
 				$("#jsoninjection").append("<td>"+data.orderNum+"</td>");
 				$("#jsoninjection").append("<td>"+data.orderName+"</td>");
@@ -90,27 +89,32 @@ $("#typebutton").click(function(){
 			orderNum:ordernum
 		},
 		success:function(result){
+			if(result.trim()==''){
+				$("#checkBoolean").prop("checked", false);
+				return;
+			}
 			let data = JSON.parse(result);
 			$("#vieworderlist").empty();
 			$("#vieworderlist").append(change);
 			let insert = "<p id='selectedOrderNum'>"+data.orderNum+"</p><p>"+data.orderName+"</p><p>"+data.orderState+"</p>";
 			$("#vieworderlist").append(insert);
 			$("#selectedOrderState").val(data.orderState);
+			$("#checkBoolean").prop("checked", true);
 		}
 	});
 });
 
-$("#vieworderlist").on("#fixorderbutton", "click", function(event){
+$("#selectedlist").on("click", "#fixorderbutton", function(event){
 	event.preventDefault();
 	
 	let orderNum = $("#selectedOrderNum").text();
 	let selectedOrderState = $("#selectedOrderState").val();
 	
-	if(orderNum.trim()==''){
+	if(!$("#checkBoolean").prop("checked")) {
 		return;
 	}
 	
-	if(selectedOrderState=='' || selectedOrderState<1 || selectedOrderState>4){
+	if(selectedOrderState == '' || selectedOrderState < 1 || selectedOrderState > 4){
 		swal({
 			icon:"info",
 			title:"INFO",
@@ -127,6 +131,7 @@ $("#vieworderlist").on("#fixorderbutton", "click", function(event){
 		},
 		success:function(result){
 			if(result>0){
+				alert("정보가 수정되었습니다.");
 				location.href="./orderlistUpdate";
 			}else{
 				swal({
@@ -144,8 +149,19 @@ $("#stateChangeButton").click(function(event){
 	
 	let orderNums = new Array();
 	$(".checklist").each(function(){
-		orderNums.push($(this).attr("data-orderNum"));
+		if($(this).prop("checked")){
+			orderNums.push($(this).attr("data-orderNum"));
+		}
 	});
+	
+	if(orderNums.length==0){
+		swal({
+			icon:"info",
+			title:"체크요망",
+			text:"상태정보를 업데이트할 주문번호를 선택해주세요."
+		});
+		return;
+	}
 	
 	$.post({
 		url:"./orderlistsUpdate",
@@ -155,9 +171,14 @@ $("#stateChangeButton").click(function(event){
 		},
 		success:function(result){
 			if(result>0){
-				
+				alert("orderState가 변경되었습니다.");
+				location.href="./orderlistUpdate";
 			}else{
-				
+				swal({
+					icon:"error",
+					title:"ERROR",
+					text:"orderState 변경중 문제가 발생하였습니다."
+				});
 			}
 		}
 	});

@@ -12,8 +12,9 @@
 <body style="width: 100%; height:100%; display: grid; grid-template-columns: 15% 85%; grid-template-rows:11% auto;">
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminHeader.jsp"></c:import>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
-<div>
-	<table style="width:80%; margin: 10% 5%; text-align: center;">
+<div style="padding:1%; text-align: center;">
+	<h1 style="margin-top:5%;">쿠폰 전송</h1>
+	<table style="width:80%; margin: 3% 5%; text-align: center;">
 		<thead>
 			<tr>
 				<th style="padding:1%;">쿠폰 번호</th>
