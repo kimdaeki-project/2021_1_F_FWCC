@@ -55,7 +55,7 @@
 								name="username"
 								class="inputTypeText"
 								placeholder="ID"
-								value="test"
+								value=""
 								type="text"
 							/></label> <label
 								class="password ePlaceholder"
@@ -64,7 +64,7 @@
 								id="member_passwd"
 								name="password"
 								autocomplete="off"
-								value="test"
+								value=""
 								type="password"
 								placeholder="PASSWORD"
 							/></label>

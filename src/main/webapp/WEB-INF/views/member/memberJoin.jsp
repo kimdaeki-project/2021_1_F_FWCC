@@ -75,7 +75,7 @@
 									class="inputTypeText eraser"
 									placeholder=""
 									type="text"
-									value="test"
+									value=""
 									onfocus="inputInit()"
 									onblur="inputEssentials()"
 								/> <span
@@ -103,7 +103,7 @@
 									autocomplete="off"
 									minlength="4"
 									maxlength="16"
-									value="test"
+									value=""
 								/> <span
 								id="passwordError"
 								class="errorPassword error1"
@@ -121,7 +121,7 @@
 									autocomplete="off"
 									minlength="4"
 									maxlength="16"
-									value="test"
+									value=""
 								/> <span
 								id="pwCheckError"
 								class="errorPassword error1"
@@ -144,7 +144,7 @@
 									class="ec-member-name eraser"
 									placeholder=""
 									maxlength="30"
-									value="test"
+									value=""
 									type="text"
 								/> <span
 								id="nameError"
@@ -167,7 +167,7 @@
 									placeholder=""
 									readonly="readonly"
 									maxlength="14"
-									value="05670"
+									value=""
 									size="10"
 									type="text"
 								/> <a
@@ -183,7 +183,7 @@
 									class="inputTypeText"
 									placeholder=""
 									readonly="readonly"
-									value="서울 송파구 가락로 192 (송파동, 2차한양아파트)"
+									value=""
 									size="50"
 									type="text"
 								/> 기본주소<br /> <span
@@ -194,7 +194,7 @@
 									path="detailAddr"
 									class="inputTypeText"
 									placeholder=""
-									value="29동 405호"
+									value=""
 									size="50"
 									type="text"
 								/> 나머지주소</td>
@@ -239,14 +239,14 @@
 								name="phone1"
 								class="eraser"
 								maxlength="4"
-								value="1111"
+								value=""
 								type="text"
 							/>-<input
 								id="phone2"
 								name="phone2"
 								class="eraser"
 								maxlength="4"
-								value="1111"
+								value=""
 								type="text"
 							/></td>
 						</tr>
@@ -259,7 +259,7 @@
 									id="emailT"
 									path="email"
 									class="eraser"
-									value="test@gmail.com"
+									value=""
 									type="text"
 									size="30"
 								/> <span id="emailMsg"></span></td>
