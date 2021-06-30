@@ -28,7 +28,9 @@
 </head>
 <body>
 	<!-- header START -->
-	<c:import url="/WEB-INF/views/templates/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/templates/navbar.jsp">
+		<c:param name="isCommon" value="true"></c:param>
+	</c:import>
 	<!-- header END -->
 
 	<!-- contents START -->
