@@ -14,7 +14,7 @@
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/adminNav.jsp"></c:import>
 <div style="padding:5% 10%; text-align: center;">
 	<h1>all List</h1>
-	<table style="width: 100%;">
+	<table style="width: 100%; margin-top: 2%;">
 		<thead>
 			<tr>
 				<td>product number</td>
