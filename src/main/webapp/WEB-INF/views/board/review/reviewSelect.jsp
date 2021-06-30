@@ -71,26 +71,55 @@
 						</tr>
 					</tbody>
 				</table>
-				<div style="text-align: center;">${Rvo.contents}</div>
-				<c:forEach items="${Rvo.files}" var="fileVO">
-					<a
-						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a>
-				</c:forEach>
+				<div>${Rvo.contents}</div>
 			</div>
 			<table class="table"
 					style="border-collapse: separate; border-spacing: 1px; text-align: left; line-height: 1.5; ">
 					<tbody>
-					<c:forEach items="${Rcm}" var="Rcom" >
+					<c:forEach items="${Rvo.files}" var="fileVO">
 					<tr>
-					<td><div>${Rcom.commentNum} ${Rcom.writer} ${Rcom.regDate} </div>
-						<div>${Rcom.contents}</div>
-						<div>
-						<sec:authentication property="principal.username" var="user_id"/>
-						<c:if test="${Rcom.writer == user_id }">
-						<a href="./commentUpdate?commentNum=${Rcom.commentNum}&num=${Rcom.num}" class="btn btn-danger">Updatec</a>
-						<a href="./commentDelete?commentNum=${Rcom.commentNum}" id="del" class="btn btn-info">Deletec</a>
+					<th scope="row"
+								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">File
+							</th>
+					<td>
+
+					<a style="color:black;"
+						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a></td></tr>
+				</c:forEach>
+				<tr>
+				<td colspan='2'>
+				<div style="text-align: right;">
+				<a href="./list" class="btn" style="border:1px solid gray;
+                    width:132px;
+                    height:32px;
+                    font-size:14px
+                    ">List</a>
+				</div>
+				</td>
+				</tr>
+					<c:forEach items="${Rcm}" var="com" >
+					<tr>
+					<td colspan='2'>
+					<div class="row">
+					<div class="col-sm-6">${com.writer} ${com.regDate}</div>
+					<sec:authentication property="principal.username" var="user_id"/>
+						<c:if test="${com.writer == user_id }">
+						<div class="col-sm-6" style="text-align: right;">
+						<a href="./commentUpdate?commentNum=${com.commentNum}&num=${com.num}" class="btn" style="background: gray;
+						color:white;
+                    width:62px;
+                    height:26px;
+                    font-size:10px;">MODIFY</a>
+						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn" style="border:1px solid gray;
+                    width:62px;
+                    height:26px;
+                    font-size:10px;">DELETE</a>
+						</div>
+						
 						</c:if>
 						</div>
+						<div>${com.contents}</div>
+
 					</td>
 						
 					</tr>
@@ -115,7 +144,13 @@
 							name="contents"></textarea>
 					</div>
 
-					<input type="button" id="btn" value="WRITE" class="btn btn-primary">
+					<div style="text-align: right; padding: 10px;">
+					<input type="button" id="btn" value="확인" class="btn" style="background: gray;
+						color:white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+				</div>
 				</form>
 			</div>
 			</c:if>
@@ -124,10 +159,17 @@
 			</c:if>
 			
 			<sec:authentication property="principal.username" var="user_id"/>
-			<c:if test="${com.writer == user_id }">
-			<div>
-				<a href="./update?num=${Rvo.num}" class="btn btn-danger">Update</a>
-				<a href="./delete?num=${Rvo.num}" id="del" class="btn btn-info">Delete</a>
+			<c:if test="${vo.writer == user_id }">
+			<div style="text-align: right; padding-top: 50px">
+				<a href="./update?num=${vo.num}" class="btn" style="background: gray;
+						color:white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">글 수정</a>
+				<a href="./delete?num=${vo.num}" id="del" class="btn" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">삭제</a>
 			</div>
 			</c:if>
 		</div>

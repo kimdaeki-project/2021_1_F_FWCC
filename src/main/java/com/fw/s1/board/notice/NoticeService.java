@@ -32,13 +32,7 @@ public class NoticeService implements BoardService {
 	private HttpSession session;
 
 	
-	 public boolean setSummerFileDelete(String fileName)throws Exception{ boolean
-	 result = fileManager.delete("notice", fileName, session); return result; }
-	  
-	 public String setSummerFileUpload(MultipartFile file)throws Exception{
-	  
-	 String fileName = fileManager.save("notice", file, session); return fileName;
-	 }
+	 
 
 
 	@Override
@@ -79,12 +73,32 @@ public class NoticeService implements BoardService {
 
 		return result;
 	}
+	
+	@Override
+	public int setUpdate(BoardVO boardVO,MultipartFile[] files) throws Exception {
+		
+		return noticeMapper.setUpdate(boardVO);
+	}
+
+	@Override
+	public int setDelete(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.setDelete(boardVO);
+	}
 
 	@Override
 	public int commentInsert(BoardCommentVO boardCommentVO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeMapper.commentInsert(boardCommentVO);
 	}
+	
+	public boolean setSummerFileDelete(String fileName)throws Exception{ boolean
+		 result = fileManager.delete("notice", fileName, session); return result; }
+		  
+		 public String setSummerFileUpload(MultipartFile file)throws Exception{
+		  
+		 String fileName = fileManager.save("notice", file, session); return fileName;
+		 }
 
 	@Override
 	public List<BoardCommentVO> commentList(BoardCommentVO boardCommentVO) throws Exception {
@@ -104,17 +118,7 @@ public class NoticeService implements BoardService {
 		return noticeMapper.commentDelete(boardCommentVO);
 	}
 
-	@Override
-	public int setUpdate(BoardVO boardVO,MultipartFile[] files) throws Exception {
-		
-		return noticeMapper.setUpdate(boardVO);
-	}
-
-	@Override
-	public int setDelete(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return noticeMapper.setDelete(boardVO);
-	}
+	
 	
 	@Override
 	public BoardCommentVO commentSelect(BoardCommentVO boardCommentVO) throws Exception {

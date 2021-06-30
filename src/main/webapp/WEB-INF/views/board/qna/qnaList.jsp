@@ -17,6 +17,8 @@ a:hover {
 }
 
 .pagination a { 
+	outline: none;
+	font-size:12px;
     font-weight:bold; 
     color: black; 
     float: left; 
@@ -80,6 +82,18 @@ a:hover {
 		</table>
 	</div>
 	
+		<sec:authorize access="isAuthenticated()">
+
+	<div style="text-align: right">
+  		<a href="./insert" class="btn " role="button" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">글쓰기</a>
+  		</div>
+
+
+	</sec:authorize>
+	
 	<div style="margin: 40px 0 40px;">
 	  <ul class="pagination" style=" justify-content: center;">
 	  
@@ -102,22 +116,19 @@ a:hover {
 	<form id="frm" action="./list" class="form-inline">
 		<input type="hidden" name="curPage" value="1" id="curPage">
 	  <div class="input-group-prepend">
-	   <select class="form-control" name="kind" id="kind" >
-	    <option class="sel">Title</option>
-	    <option class="sel">Contents</option>
-	    <option class="sel">Writer</option>
-	  </select>
+	  <select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
+<option value="subject">제목</option>
+<option value="contents">내용</option>
+<option value="writer">글쓴이</option>
+</select>
+<input id="search" name="search" fw-filter="" fw-label="" fw-msg="" class="inputTypeText" placeholder="" value="${pager.search}" type="text">
 	  </div>
-	  <input type="text" class="form-control" name="search" id="search" value="${pager.search}" placeholder="">
-	    <div class="input-group-append">
-	    <button class="btn btn-success" type="submit">Search</button>
-	  </div>
+	  
+	  <button type="submit" class="btn btn-link" ><font color="black">find</font></button>
 	 </form> 
 	</div> 
   
-  <sec:authorize access="isAuthenticated()">
-		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	</sec:authorize>
+
 
 <script type="text/javascript">
 	let kind= '${pager.kind}';

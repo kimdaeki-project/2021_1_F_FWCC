@@ -8,13 +8,12 @@
    		
    		
    		<select id="List" resultType="LookBookVO" parameterType="Pager">
-			select * from lookbook
-
+			SELECT  lookbook.lookbookNum,lookbook.division,lookbook.title,lookbookfiles.fileName from lookbook, lookbookfiles where lookbook.lookbookNum = lookbookfiles.num 
 
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			select count(lookbookNum) from lookbook
+   			SELECT count(Num)  from lookbook, lookbookfiles where lookbook.lookbookNum = lookbookfiles.num
 
    		</select>
    		
@@ -43,8 +42,8 @@
    		</insert>
    		
    		<insert id="setFileInsert" parameterType="LookBookFileVO">
-   			insert into lookbookFiles (num, filename)
-   			values (#{num}, #{fileName})
+   			insert into lookbookFiles (num, filename,oriName)
+   			values (#{num}, #{fileName}, #{oriName})
    		</insert>
    		
    		<update id="setUpdate" parameterType="LookBookVO" useGeneratedKeys="true" keyProperty="lookbookNum">

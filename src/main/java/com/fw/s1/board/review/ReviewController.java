@@ -63,6 +63,9 @@ public class ReviewController {
 	// /review/list
 	@GetMapping("list")
 	public String getList(Model model, Pager pager) throws Exception {
+		BoardVO boardVO = new BoardVO();
+		boardVO = reviewService.getSelect(boardVO);
+		model.addAttribute("Rvo", boardVO);
 		List<BoardVO> ar = reviewService.getList(pager);
 		model.addAttribute("Rlist", ar);
 		model.addAttribute("pager", pager);
@@ -126,13 +129,13 @@ public class ReviewController {
 	@PostMapping("commentInsert")
 	public String commentInsert(BoardCommentVO boardCommentVO) throws Exception {
 		int result = reviewService.commentInsert(boardCommentVO);
-		return "redirect:";
+		return "redirect:./list";
 	}
 
 	@GetMapping("commentDelete")
 	public String commentDelete(BoardCommentVO boardCommentVO) throws Exception {
 		int result = reviewService.commentDelete(boardCommentVO);
-		return "redirect:";
+		return "redirect:./list";
 	}
 
 	@GetMapping("commentUpdate")
@@ -150,7 +153,7 @@ public class ReviewController {
 	@PostMapping("commentUpdate")
 	public String commentUpdate(BoardCommentVO boardCommentVO) throws Exception {
 		int result = reviewService.commentUpdate(boardCommentVO);
-		return "redirect:";
+		return "redirect:./list";
 	}
 
 }

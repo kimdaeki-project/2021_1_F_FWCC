@@ -9,4 +9,5 @@ public class LookBookFileVO {
 	private Long lookbookFileNum;
 	private Long num;
 	private String fileName;
+	private String oriName;
 }

@@ -51,7 +51,7 @@ public class FileManager {
 		file = new File(file, fileName);
 		
 		//a. FileCopyUtils
-		//FileCopyUtils.copy(multipartFile.getBytes(), file);
+		FileCopyUtils.copy(multipartFile.getBytes(), file);
 		
 		//b. MultipartFile
 	     multipartFile.transferTo(file);
@@ -96,6 +96,7 @@ public class FileManager {
 	return file;
 	
 	}
+
 	
 	
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- spring security에 관련된 태그   -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,17 +25,17 @@
 			<c:forEach items="${list}" var="dto" >
 				<div class="col-sm-6">
 
-				  
 				  <div class="card-body">
 				    <p class="card-text">
 				   <a style="color:black;" href="./select?lookbookNum=${dto.lookbookNum}">
 					<c:catch>
 					<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
 					</c:catch>
-					<img class="card-img-top" src="https://frizm.co.kr/web/product/big/202106/7458c8457a4a3cf2f34c7c5411651009.jpg" alt="Card image cap">
+					<img alt="ss" style="width: 560px; height: 400px; " src="../upload/lookbook/${dto.fileName}">
 					</a>
-					${dto.title}
+					<div>${dto.title}</div>
 					${dto.division}
+					
 					</p>
 				  </div>
 
@@ -57,12 +59,10 @@
 	    
 	  </ul>
 	 </div> 
-	 <sec:authorize access="hasRole('ROLE_ADMIN')">
-  		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	</sec:authorize>
-	<sec:authorize access="isAuthenticated()">
-		<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	</sec:authorize>
+	<%--  <sec:authorize access="hasRole('ROLE_ADMIN')">
+  		
+	</sec:authorize> --%>
+<a href="./insert" class="btn  btn-primary" role="button">Write</a>
 	 
 			</div>
 			</div>

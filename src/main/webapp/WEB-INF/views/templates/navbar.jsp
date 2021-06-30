@@ -50,7 +50,7 @@
 				</ul>
 			</li>
 			<!-- <li class="xans-record-"><a href="/product/list.html?cate_no=37">Original Garments®</a></li> -->
-			<li><a href="#">Lookbook</a></li>
+			<li><a href="${pageContext.request.contextPath}/lookbook/list"">Lookbook</a></li>
 		</ul>
 	</div>
 	
@@ -83,7 +83,7 @@
 				<a href="#">Community</a>
 				<ul id="navbar-rightul">
 					<li><a href="${pageContext.request.contextPath}/notice/list">Notice</a></li>
-					<li><a href="#">Stockist</a></li>
+					<li><a href="${pageContext.request.contextPath}/stockist">Stockist</a></li>
 					<li><a href="${pageContext.request.contextPath}/qna/list">Q&amp;A</a></li>
 					<li><a href="${pageContext.request.contextPath}/review/list">Review</a></li>
 				</ul>

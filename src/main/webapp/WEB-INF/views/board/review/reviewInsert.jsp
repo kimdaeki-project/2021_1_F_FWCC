@@ -26,11 +26,11 @@
 <div id="container">
 <div style="padding: 68px 34px 0;">
 	<div class="container">
-		<h2>${board}form</h2>
+		<h2>reviewInsert</h2>
 		<form id="frm" action="./insert" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="writer">Writer:</label> <input type="text"
-					 value="${member.id}"
+				 <input type="text"
+					value="<sec:authentication property="principal.username"/>"
 					class="form-control myCheck" id="writer" name="writer">
 			</div>
 
@@ -44,15 +44,17 @@
 				<textarea class="form-control myCheck" rows="5" id="contents"
 					name="contents"></textarea>
 			</div>
+
 			<div class="form-group">
-				<input type="file" name="files">
 				<input type="file" name="files">
 			</div>
 
-			
-			
-			
-			<input type="button" id="btn" value="WRITE" class="btn btn-primary">
+			<div style="text-align: right">
+  		<input type="button" id="btn" value="WRITE" class="btn" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+  		</div>
 		</form>
 	</div>
 
