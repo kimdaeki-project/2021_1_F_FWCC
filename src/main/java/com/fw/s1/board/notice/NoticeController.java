@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,21 +30,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	
-	  @PostMapping("summerFileDelete") public ModelAndView
-	  setSummerFileDelete(String fileName)throws Exception{ ModelAndView mv = new
-	  ModelAndView(); boolean result = noticeService.setSummerFileDelete(fileName);
-	  mv.addObject("result", result); mv.setViewName("common/ajaxResult"); return
-	  mv; }
 	  
-	  @PostMapping("summerFileUpload") public ModelAndView
-	  setSummerFileUpload(MultipartFile file)throws Exception{ ModelAndView mv =
-	  new ModelAndView(); System.out.println("Summer File Upload");
-	  System.out.println(file.getOriginalFilename()); String fileName =
-	  noticeService.setSummerFileUpload(file); fileName =
-	  "../resources/upload/notice/"+fileName; mv.addObject("result", fileName) ;
-	  mv.setViewName("common/ajaxResult");
-	  
-	  return mv; }
 	 
 
 	// /notice/fileDown
@@ -99,13 +86,29 @@ public class NoticeController {
 
 		return "redirect:./list";
 	}
+	
+	@PostMapping("summerFileDelete") public ModelAndView
+	  setSummerFileDelete(String fileName)throws Exception{ ModelAndView mv = new
+	  ModelAndView(); boolean result = noticeService.setSummerFileDelete(fileName);
+	  mv.addObject("result", result); mv.setViewName("common/ajaxResult"); return
+	  mv; }
+	  
+	  @PostMapping("summerFileUpload") 
+	  @ResponseBody
+	  public String setSummerFileUpload(MultipartFile file)throws Exception{ 
+		  System.out.println("Summer File Upload");
+	  System.out.println(file.getOriginalFilename()); String fileName =
+	  noticeService.setSummerFileUpload(file); 
+	  fileName ="../resources/upload/notice/"+fileName;
+	  
+	  return fileName; }
 
 	@GetMapping("update")
 	public String setUpdate(BoardVO boardVO, Model model) throws Exception {
 		boardVO = noticeService.getSelect(boardVO);
 		model.addAttribute("vo", boardVO);
 		model.addAttribute("action", "update");
-		return "board/notice/form";
+		return "board/notice/noticeUpdate";
 
 	}
 

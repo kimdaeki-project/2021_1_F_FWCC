@@ -24,11 +24,11 @@
 <body>
 <c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
 	<div class="container">
-		<h2>noticeform</h2>
+		<h2>댓글수정</h2>
 		<form id="frm" action="./commentUpdate" method="post">
 					<div class="form-group">
 						<input type="hidden"
-							class="form-control myCheck" id="commentNum" name="commentNum" value="${cvo.commentNum}" }>
+							class="form-control myCheck" id="commentNum" name="commentNum" value="${cvo.commentNum}" >
 					</div>
 
 					<div class="form-group" style="margin: auto;">
@@ -37,7 +37,13 @@
 							name="contents">${cvo.contents}</textarea>
 					</div>
 
-					<input type="submit" id="btn" value="WRITE" class="btn btn-primary">
+					<div style="text-align: right; padding: 10px;">
+					<input type="button" id="btn" value="확인" class="btn" style="background: gray;
+						color:white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+				</div>
 				</form>
 	</div>
 

@@ -23,8 +23,10 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
+<div id="container">
+<div style="padding: 68px 34px 0;">
 	<div class="container">
-		<h2>noticeform</h2>
+		<h2>reviewform</h2>
 		<form id="frm" action="./Rupdate" method="post" enctype="multipart/form-data">
   			<input type="hidden" name="num" value="${Rvo.num}">
 
@@ -45,9 +47,13 @@
 			
 			<div id="files" title="0"></div>
 			
-			
-			
-			<input type="submit" id="btn" value="UPDATE" class="btn btn-primary">
+			<div style="text-align: right; padding-bottom: 50px">
+			<input type="submit" id="btn" value="UPDATE" class="btn" style="background: gray;
+					color: white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+                    </div>
 		</form>
 	</div>
 
@@ -65,6 +71,10 @@
 
 
 	</div>
+	</div>
+</div>
+
+<c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 
 	<script type="text/javascript" src="/js/board/fileAdd.js"></script>
 	<script type="text/javascript" src="/js/board/summerFile.js"></script>

@@ -40,19 +40,18 @@ public class LookBookController {
 	
 	@GetMapping("insert")
 	public String setInsert(Model model) throws Exception {
-		model.addAttribute("vo", new BoardVO());
 		model.addAttribute("action", "insert");
 		return "board/lookbook/lookbookInsert";
 	}
 
 	@PostMapping("insert")
-	public String setInsert(LookBookVO lookbookVO) throws Exception {
+	public String setInsert(LookBookVO lookbookVO,MultipartFile[] files) throws Exception {
 //			System.out.println(files.length);
 //			for(MultipartFile f : files) {
 //				System.out.println(f.getOriginalFilename());
 //			}
 
-		int result = lookbookService.setInsert(lookbookVO);
+		int result = lookbookService.setInsert(lookbookVO,files);
 
 		return "redirect:./list";
 	}

@@ -34,7 +34,13 @@
 							name="contents">${Rcvo.contents}</textarea>
 					</div>
 
-					<input type="submit" id="btn" value="WRITE" class="btn btn-primary">
+					<div style="text-align: right; padding: 10px;">
+					<input type="button" id="btn" value="확인" class="btn" style="background: gray;
+						color:white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+				</div>
 				</form>
 
 

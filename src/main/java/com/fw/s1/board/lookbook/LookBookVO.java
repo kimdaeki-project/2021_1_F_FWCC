@@ -11,4 +11,5 @@ public class LookBookVO {
 	private String division;
 	private String title;
 	private List<LookBookFileVO> files;
+	private String fileName;
 }

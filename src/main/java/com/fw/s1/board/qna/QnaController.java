@@ -126,13 +126,13 @@ public class QnaController {
 	@PostMapping("commentInsert")
 	public String commentInsert(BoardCommentVO boardCommentVO) throws Exception {
 		int result = qnaService.commentInsert(boardCommentVO);
-		return "redirect:./select";
+		return "redirect:./list";
 	}
 
 	@GetMapping("commentDelete")
 	public String commentDelete(BoardCommentVO boardCommentVO) throws Exception {
 		int result = qnaService.commentDelete(boardCommentVO);
-		return "redirect:./select";
+		return "redirect:./list";
 	}
 
 	@GetMapping("commentUpdate")
@@ -150,7 +150,7 @@ public class QnaController {
 	@PostMapping("commentUpdate")
 	public String commentUpdate(BoardCommentVO boardCommentVO) throws Exception {
 		int result = qnaService.commentUpdate(boardCommentVO);
-		return "redirect:./select";
+		return "redirect:./list";
 	}
 
 }

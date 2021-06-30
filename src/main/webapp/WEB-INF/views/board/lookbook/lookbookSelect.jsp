@@ -14,7 +14,7 @@
 	<p>${vo.title}</p>
 	<p>${vo.division}</p>
 		<c:forEach items="${vo.files}" var="fileVO">
-					<p>${fileVO.fileName}</p>
+					<img alt="ss" src="../upload/lookbook/${fileVO.fileName}">
 				</c:forEach>
 	</c:if>
 	</div>
@@ -25,8 +25,8 @@
 	<p>${vo.title}</p>
 	<p>${vo.division}</p>
 		<c:forEach items="${vo.files}" var="fileVO">
-					<p>${fileVO.fileName}</p>
-				</c:forEach>
+		<video src="../upload/lookbook/${fileVO.fileName}"></video>
+	</c:forEach>
 	</c:if>
 	</div>
 </body>

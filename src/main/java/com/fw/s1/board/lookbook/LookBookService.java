@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fw.s1.util.FileManager;
+import com.fw.s1.util.FileManager2;
 import com.fw.s1.util.Pager;
 
 
@@ -17,19 +18,12 @@ import com.fw.s1.util.Pager;
 public class LookBookService {
 	@Autowired
 	private LookBookMapper lookbookMapper;
+
 	@Autowired
-	private FileManager fileManager;
-	@Autowired
-	private HttpSession session;
+	private FileManager2 fileManager2;
+
 	
-	 public boolean setSummerFileDelete(String fileName)throws Exception{ boolean
-		 result = fileManager.delete("notice", fileName, session); return result; }
-		  
-		 public String setSummerFileUpload(MultipartFile file)throws Exception{
-		  
-		 String fileName = fileManager.save("notice", file, session); return fileName;
-		 }
-	
+
 	public List<LookBookVO> List(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
 		pager.makeRow();
@@ -42,8 +36,23 @@ public class LookBookService {
 		return lookbookMapper.getSelect(lookbookVO);
 	}
 	
-	public int setInsert(LookBookVO lookbookVO) throws Exception {
+	public int setInsert(LookBookVO lookbookVO,MultipartFile[] files) throws Exception {
 		int result = lookbookMapper.setInsert(lookbookVO);
+
+		String filePath= "upload/lookbook/";
+		
+		for(MultipartFile multipartFile:files) {
+			if(multipartFile.getSize()==0) {
+				continue;
+			}
+			String fileName= fileManager2.save(multipartFile, filePath);
+			System.out.println(fileName);
+			LookBookFileVO boardFileVO = new LookBookFileVO();
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriName(multipartFile.getOriginalFilename());
+			boardFileVO.setNum(lookbookVO.getLookbookNum());
+			lookbookMapper.setFileInsert(boardFileVO);
+		}
 
 		return result;
 	}

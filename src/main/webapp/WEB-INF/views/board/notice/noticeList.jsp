@@ -84,7 +84,12 @@ a:hover {
 	<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.username" var="user_id"/>
 	<c:if test="${user_id == 'admin'}">
-  		<a href="./insert" class="btn  btn-primary" role="button">aWrite</a>
+	<div style="text-align: right">
+  		<a href="./insert" class="btn " role="button" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">글쓰기</a>
+  		</div>
 	</c:if>
 
 	</sec:authorize>

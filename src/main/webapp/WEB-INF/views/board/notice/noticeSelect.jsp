@@ -19,7 +19,7 @@
 	<div id="container">
 		<div style="padding: 68px 34px 0;">
 			<div class="title" style="margin: 60px 0 40px; text-align: center;">
-				<p>Review</p>
+				<p>Notice</p>
 			</div>
 			<div>
 				<table class="table"
@@ -83,6 +83,7 @@
 								style="width: 100px; padding: 10px; font-weight: bold; vertical-align: top;">File
 							</th>
 					<td>
+
 					<a style="color:black;"
 						href="fileDown?fileName=${fileVO.fileName}&oriName=${fileVO.oriName}">${fileVO.oriName}</a></td></tr>
 				</c:forEach>
@@ -109,7 +110,7 @@
 						color:white;
                     width:62px;
                     height:26px;
-                    font-size:10px";>MODIFY</a>
+                    font-size:10px;">MODIFY</a>
 						<a href="./commentDelete?commentNum=${com.commentNum}" id="del" class="btn" style="border:1px solid gray;
                     width:62px;
                     height:26px;
@@ -144,29 +145,40 @@
 					</div>
 
 					<div style="text-align: right; padding: 10px;">
-					<input type="button" id="btn" value="WRITE" class="btn" style="border:1px solid gray;
+					<input type="button" id="btn" value="확인" class="btn" style="background: gray;
+						color:white;
                     width:100px;
                     height:30px;
                     font-size:14px;">
 				</div>
 				
-				</div>
+				
 				</form>
-			</div>
-			</c:if>
+				</div>
+				</c:if>
 			<c:if test="${cvo.commentNum >=1}">
 				<c:import url="/WEB-INF/views/board/notice/cUpdate.jsp"></c:import>
 			</c:if>
 			
 			<sec:authentication property="principal.username" var="user_id"/>
 			<c:if test="${vo.writer == user_id }">
-			<div>
-				<a href="./update?num=${vo.num}" class="btn btn-danger">Update</a>
-				<a href="./delete?num=${vo.num}" id="del" class="btn btn-info">Delete</a>
+			<div style="text-align: right; padding-top: 50px">
+				<a href="./update?num=${vo.num}" class="btn" style="background: gray;
+						color:white;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">글 수정</a>
+				<a href="./delete?num=${vo.num}" id="del" class="btn" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">삭제</a>
 			</div>
 			</c:if>
+				
+			</div>
+			
 		</div>
-	</div>
+
 	<script type="text/javascript">
 	const del = document.getElementById("del");
 	const frm = document.getElementById("frm");
