@@ -325,7 +325,7 @@ public class OrderController {
 		for(AddressVO addressVO : addresslist) {
 			addressVO.phoneSeperator();
 			addressVO.concatAddress();
-			if(addressVO.getOrderAddr()) {
+			if(!addressVO.getOrderAddr()) {
 				orderAddr = addressVO;
 			}else if(addressVO.getRecentUse()){
 				recentAddr = addressVO;

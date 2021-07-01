@@ -22,7 +22,7 @@
   </select>
 
   <select id="checkCount" parameterType="AddressVO" resultType="java.lang.Long">
-  	select count(addrNum) from address where username=#{username} and orderAddr=0
+  	select count(addrNum) from address where username=#{username} and orderAddr=1
   </select>
 
   <insert id="setAddress" parameterType="AddressVO">
