@@ -60,7 +60,7 @@
 						data-cartNum='<c:out value="${item.cartNum}"></c:out>'
 						style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
 						<td style="padding:1%;">
-							<img alt="" src="${pageContext.request.contextPath}/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
+							<img alt="" src="${pageContext.request.contextPath}/resources/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
 								width="100px" height="100px">
 						</td>
 						<td style="text-align: left; padding:1% 3%;">

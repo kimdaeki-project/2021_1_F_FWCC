@@ -64,7 +64,7 @@
 										name="checklist">
 							</td>
 							<td style="padding: 1%;"> <!-- 섬네일 -->
-								<img alt="" src="${pageContext.request.contextPath}/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
+								<img alt="" src="${pageContext.request.contextPath}/resources/images/product/${item.productVO.productNum}/${item.productFileVO.fileName}"
 									width="100px" height="100px">
 							</td>
 							<td style="text-align: left; padding:1% 3%;"><!-- 상품이름 --> <!-- 그 아래에는 내가 선택한 옵션도 적혀있게된다. -->
