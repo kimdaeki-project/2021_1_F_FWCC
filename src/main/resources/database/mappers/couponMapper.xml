@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="getCouponspList" resultType="CouponspVO">
-		select * from couponsp
+		select * from couponsp order by cuSpNum desc
 	</select>
 	
 	<select id="getCouponsp" parameterType="CouponspVO" resultType="CouponspVO">
