@@ -176,14 +176,14 @@
 			
 			<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.username" var="user_id"/>
-			<c:if test="${vo.writer == user_id }">
+			<c:if test="${Rvo.writer == user_id }">
 			<div style="text-align: right; padding-top: 50px">
-				<a href="./update?num=${vo.num}" class="btn" style="background: gray;
+				<a href="./update?num=${Rvo.num}" class="btn" style="background: gray;
 						color:white;
                     width:100px;
                     height:30px;
                     font-size:14px;">글 수정</a>
-				<a href="./delete?num=${vo.num}" id="del" class="btn" style="border:1px solid gray;
+				<a href="./delete?num=${Rvo.num}" id="del" class="btn" style="border:1px solid gray;
                     width:100px;
                     height:30px;
                     font-size:14px;">삭제</a>

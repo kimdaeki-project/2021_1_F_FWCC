@@ -8,30 +8,31 @@
    		
    		
    		<select id="List" resultType="LookBookVO" parameterType="Pager">
-			SELECT  lookbook.lookbookNum,lookbook.division,lookbook.title,lookbookfiles.fileName from lookbook, lookbookfiles where lookbook.lookbookNum = lookbookfiles.num 
-
+   		SELECT  lookbook.lookbookNum,lookbook.division,lookbook.title,lookbookfiles.fileName from lookbook, lookbookfiles where lookbook.lookbookNum = lookbookfiles.num GROUP BY lookbooknum order by lookbookNum DESC
+			limit #{startRow}, #{perPage}
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			SELECT count(Num)  from lookbook, lookbookfiles where lookbook.lookbookNum = lookbookfiles.num
+   			SELECT count(DISTINCT num) from lookbookfiles 
 
    		</select>
    		
-   		<select id="getSelect" resultMap="selectResult" parameterType="LookBookVO">
+   		<select id="getSelect" resultMap="selectResult" parameterType="LBSelectVO">
 			SELECT N.*, NF.* from
 			lookbook N left join lookbookFiles NF
 			on N.lookbookNum = NF.num
 			WHERE N.lookbookNum=#{lookbookNum}
    		</select>
    		
-   		<resultMap type="LookBookVO" id="selectResult">
+   		<resultMap type="LBSelectVO" id="selectResult">
    			<id column="lookbookNum" property="lookbookNum"/>
    			<result column="division" property="division"/>
    			<result column="title" property="title"/>
    			<collection property="files" javaType="java.util.List" ofType="LookBookFileVO">
-   				<id column="lookbookFileNum" property="lookbookFileNum"/>
+   				<id column="fileNum" property="fileNum"/>
    				<result column="num" property="num"/>
    				<result column="fileName" property="fileName"/>
+   				<result column="oriName" property="oriName"/>
    			</collection>
    		</resultMap>
    		

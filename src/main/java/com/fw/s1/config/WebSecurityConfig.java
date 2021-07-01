@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// --- community START ---
 				.antMatchers("/notice/list", "/qna/list","/review/list").permitAll()
 				.antMatchers("/notice/select", "/qna/select","/review/select").permitAll()
+				.antMatchers("/lookbook/list", "/lookbook/select","/stockist").permitAll()
 				.antMatchers("/notice/**").hasAnyRole("MEMBER","ADMIN")
 				// --- community END ---
 				// --- product START ---

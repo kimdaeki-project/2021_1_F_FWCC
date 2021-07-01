@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fw.s1.board.BoardVO;
 import com.fw.s1.util.Pager;
 
 @Controller
@@ -30,16 +29,17 @@ public class LookBookController {
 	}
 	
 	@GetMapping("select")
-	public ModelAndView getSelect(LookBookVO lookbookVO) throws Exception {
+	public ModelAndView getSelect(LBSelectVO lbSelectVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		lookbookVO = lookbookService.getSelect(lookbookVO);
-		mv.addObject("vo", lookbookVO);
+		lbSelectVO = lookbookService.getSelect(lbSelectVO);
+		mv.addObject("vo", lbSelectVO);
 		mv.setViewName("board/lookbook/lookbookSelect");
 		return mv;
 	}
 	
 	@GetMapping("insert")
 	public String setInsert(Model model) throws Exception {
+		model.addAttribute("vo", new LookBookVO());
 		model.addAttribute("action", "insert");
 		return "board/lookbook/lookbookInsert";
 	}

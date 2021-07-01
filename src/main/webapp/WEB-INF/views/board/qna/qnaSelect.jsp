@@ -103,6 +103,7 @@
 					<td colspan='2'>
 					<div class="row">
 					<div class="col-sm-6">${com.writer} ${com.regDate}</div>
+					<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal.username" var="user_id"/>
 						<c:if test="${com.writer == user_id }">
 						<div class="col-sm-6" style="text-align: right;">
@@ -118,6 +119,7 @@
 						</div>
 						
 						</c:if>
+						</sec:authorize>
 						</div>
 						<div>${com.contents}</div>
 
@@ -127,6 +129,15 @@
 					</c:forEach>
 					</tbody>
 			</table>
+			
+			<sec:authorize access="!isAuthenticated()">
+			<div class="form-group" style="margin: auto;">
+						<textarea class="form-control myCheck" id="contents"
+							name="contents" disabled>회원에게만 댓글 작성 권한이 있습니다.</textarea>
+					</div>
+			</sec:authorize>
+			
+			<sec:authorize access="isAuthenticated()">
 			<c:if test="${Qcvo.commentNum == Null}">
 			<div>
 				<form id="frm" action="./commentInsert" method="post">
@@ -155,25 +166,29 @@
 				</form>
 			</div>
 			</c:if>
+			</sec:authorize>
+			
 			<c:if test="${Qcvo.commentNum >=1}">
 				<c:import url="/WEB-INF/views/board/qna/qcUpdate.jsp"></c:import>
 			</c:if>
 			
+			<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.username" var="user_id"/>
-			<c:if test="${vo.writer == user_id }">
-			<div>
-				<a href="./update?num=${Qvo.num}" class="btn btn-danger" style="background: gray;
+			<c:if test="${Qvo.writer == user_id }">
+			<div style="text-align: right; padding-top: 50px">
+				<a href="./update?num=${Qvo.num}" class="btn" style="background: gray;
 						color:white;
                     width:100px;
                     height:30px;
                     font-size:14px;">글 수정</a>
-				<a href="./delete?num=${Qvo.num}" id="del" class="btn btn-info" style="border:1px solid gray;
+				<a href="./delete?num=${Qvo.num}" id="del" class="btn" style="border:1px solid gray;
                     width:100px;
                     height:30px;
                     font-size:14px;">삭제</a>
 				
 			</div>
 			</c:if>
+			</sec:authorize>
 		</div>
 	</div>
 	<script type="text/javascript">

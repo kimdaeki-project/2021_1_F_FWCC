@@ -27,7 +27,7 @@
 <div style="padding: 68px 34px 0;">
 	<div class="container">
 		<h2>reviewform</h2>
-		<form id="frm" action="./Rupdate" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./update" method="post" enctype="multipart/form-data">
   			<input type="hidden" name="num" value="${Rvo.num}">
 
 			<div class="form-group">

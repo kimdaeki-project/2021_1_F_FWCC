@@ -2,13 +2,12 @@ package com.fw.s1.board.lookbook;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fw.s1.util.FileManager;
+
 import com.fw.s1.util.FileManager2;
 import com.fw.s1.util.Pager;
 
@@ -32,8 +31,8 @@ public class LookBookService {
 		return lookbookMapper.List(pager);
 	}
 	 	
-	public LookBookVO getSelect(LookBookVO lookbookVO) throws Exception {
-		return lookbookMapper.getSelect(lookbookVO);
+	public LBSelectVO getSelect(LBSelectVO lbSelectVO) throws Exception {
+		return lookbookMapper.getSelect(lbSelectVO);
 	}
 	
 	public int setInsert(LookBookVO lookbookVO,MultipartFile[] files) throws Exception {
@@ -51,7 +50,7 @@ public class LookBookService {
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriName(multipartFile.getOriginalFilename());
 			boardFileVO.setNum(lookbookVO.getLookbookNum());
-			lookbookMapper.setFileInsert(boardFileVO);
+			result = lookbookMapper.setFileInsert(boardFileVO);
 		}
 
 		return result;

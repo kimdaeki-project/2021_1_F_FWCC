@@ -23,8 +23,9 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/templates/navbar.jsp"><c:param name="isCommon" value="true"></c:param></c:import>
-	<div class="container">
+
 		<h2>댓글수정</h2>
+		<div>
 		<form id="frm" action="./commentUpdate" method="post">
 					<div class="form-group">
 						<input type="hidden"
@@ -45,7 +46,7 @@
                     font-size:14px;">
 				</div>
 				</form>
-	</div>
+				</div>
 
 
 	<script type="text/javascript" src="/js/board/fileAdd.js"></script>

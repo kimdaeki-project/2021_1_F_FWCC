@@ -3,9 +3,7 @@ package com.fw.s1.board.lookbook;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.fw.s1.board.BoardFileVO;
 import com.fw.s1.util.Pager;
 
 @Mapper
@@ -17,7 +15,7 @@ public interface LookBookMapper {
 	//lbList
 	public List<LookBookVO> List(Pager pager)throws Exception;
 	//lbSelect
-	public LookBookVO getSelect(LookBookVO lookbookVO)throws Exception;
+	public LBSelectVO getSelect(LBSelectVO lbSelectVO)throws Exception;
 	//lbUpdate
 	public int setUpdate(LookBookVO lookbookVO)throws Exception;
 	//lbDelete

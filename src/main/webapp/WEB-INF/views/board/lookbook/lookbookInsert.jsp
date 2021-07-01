@@ -13,7 +13,7 @@
 <div id="container">
 <div style="padding: 68px 34px 0;">
 <div class="container">
-<h2>${board}form</h2>
+<h2>lookbookInsert</h2>
 		<form id="frm" action="./insert" method="post" enctype="multipart/form-data">
 
 
@@ -22,18 +22,28 @@
 					class="form-control myCheck" id="title" name="title">
 			</div>
 			
-			<div class="form-group">
-				<label for="division">division:</label> <input type="text"
-					class="form-control myCheck" id="division" name="division">
-			</div>
+			<h4>파일구분</h4>
+			<select name="division" id="division" onchange="handleOnChange(this)">
+			<option >종류 선택</option>
+			<option value="p">사진</option>
+			<option value="v">비디오</option>
+			</select>
+			<div id='result'></div>
 
+			
 
-
-			<div class="form-group">
+			<div class="form-group" id="pic">
+			<div>다중이미지 첨부</div>
 				<input type="file" name="files" multiple="multiple">
 			</div>
 
 			
+			<div class="form-group" id="vdo">
+				<div>대표이미지 첨부</div>
+				<input type="file" name="files">
+				<div>비디오 첨부</div>
+				<input type="file" name="files">
+			</div>
 			
 			
 			<input type="button" id="btn" value="WRITE" class="btn btn-primary">
@@ -44,7 +54,22 @@
 </div>
 <c:import url="${pageContext.request.contextPath}/WEB-INF/views/templates/footer.jsp"></c:import>
 
-
+<script type="text/javascript">
+$('#pic').hide();
+$('#vdo').hide();
+function handleOnChange(e) {
+	  // 선택된 데이터의 텍스트값 가져오기
+	  const text = e.options[e.selectedIndex].text;
+	  
+	  if(text == '사진'){
+	      $('#pic').show();
+	      $('#vdo').hide();
+	    }else{
+	      $('#pic').hide();
+	      $('#vdo').show();
+	    }
+	}
+</script> 
 
 	<script type="text/javascript" src="/js/board/boardInsert.js"></script>
 	<script type="text/javascript" src="/js/board/fileAdd.js"></script>

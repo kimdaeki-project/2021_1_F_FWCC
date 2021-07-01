@@ -11,6 +11,31 @@
 <c:import
 	url="${pageContext.request.contextPath}/WEB-INF/views/templates/head.jsp"></c:import>
 </head>
+
+<style>
+a:hover {
+  text-decorationd: underline;
+}
+
+
+.pagination a { 
+	outline: none;
+	font-size:12px;
+    font-weight:bold; 
+    color: black; 
+    float: left; 
+    padding: 10px 16px; 
+    text-decoration: none; 
+} 
+.pagination a.active {     
+    text-decoration:underline ; 
+} 
+.pagination a:hover:not(.active) { 
+    text-decoration:underline ; 
+    border-radius:15px; 
+} 
+
+</style>
 <body>
 <c:import
 		url="${pageContext.request.contextPath}/WEB-INF/views/templates/navbar.jsp">
@@ -31,17 +56,29 @@
 					<c:catch>
 					<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
 					</c:catch>
-					<img alt="ss" style="width: 560px; height: 400px; " src="../upload/lookbook/${dto.fileName}">
+					<img alt="ss" style="width: 560px; height: 400px; " src="../upload/lookbook/${dto.fileName} ">
 					</a>
 					<div>${dto.title}</div>
-					${dto.division}
-					
-					</p>
+
 				  </div>
 
 				</div>
 			</c:forEach>
 			</div>
+			
+			<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="user_id"/>
+	<c:if test="${user_id == 'admin'}">
+	<div style="text-align: right">
+  		<a href="./insert" class="btn " role="button" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">글쓰기</a>
+  		</div>
+	</c:if>
+
+	</sec:authorize>
+			
 			<div style="margin: 40px 0 40px;">
 	  <ul class="pagination" style=" justify-content: center;">
 	  
@@ -59,11 +96,29 @@
 	    
 	  </ul>
 	 </div> 
-	<%--  <sec:authorize access="hasRole('ROLE_ADMIN')">
-  		
-	</sec:authorize> --%>
-<a href="./insert" class="btn  btn-primary" role="button">Write</a>
-	 
+	
+	<div class="input-group mt-3 mb-3" style=" justify-content: center;">
+	<form id="frm" action="./list" class="form-inline">
+		<input type="hidden" name="curPage" value="1" id="curPage">
+
+	
+
+	 <script type="text/javascript">
+	let kind= '${pager.kind}';
+	$(".sel").each(function() {
+		let t = $(this).text();
+		if(t == kind){
+			$(this).prop("selected", true);
+		}
+	});
+	
+	$(".p").click(function () {
+		let curPage = $(this).attr("title");
+		$("#curPage").val(curPage);
+		let search= '${pager.search}';
+		$("#frm").submit();
+	});
+</script> 
 			</div>
 			</div>
 			
