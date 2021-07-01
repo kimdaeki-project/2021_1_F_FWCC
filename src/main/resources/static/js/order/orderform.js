@@ -524,7 +524,7 @@ $("#purchasebutton").click(function(event){
 		productNums.push(Number($(this).attr("data-productNum")));
 		pInfoNums.push(Number($(this).attr("data-pInfoNum")));
 		productCounts.push(Number($(this).attr("data-productCount")));
-		finalPrices.push(Number($(this).attr("data-finalPrice")));
+		finalPrices.push(Number($(this).attr("data-finalprice")));
 		cartNums.push(Number($(this).attr("data-cartNum")));
 	});
 	
