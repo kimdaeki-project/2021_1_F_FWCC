@@ -55,7 +55,7 @@
 					<tr class="productDataList"
 						data-productNum='<c:out value="${item.productNum}"></c:out>'
 						data-pInfoNum='<c:out value="${item.PInfoNum}"></c:out>'
-						data-finalPrice='<c:out value="${item.finalPrice}"></c:out>'
+						data-finalPrice='<c:out value="${item.productVO.finalPrice}"></c:out>'
 						data-productCount='<c:out value="${item.productCount}"></c:out>'
 						data-cartNum='<c:out value="${item.cartNum}"></c:out>'
 						style="border-bottom: 1px rgba(128,128,128,0.5) solid;">
