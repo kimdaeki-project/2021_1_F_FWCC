@@ -193,7 +193,7 @@
 								var="VO"
 							>
 								<tr>
-									<td>${VO.fileName }</td>
+									<td><img src="${pageContext.request.contextPath}/resources/images/product/${VO.productVO.productNum}/${VO.fileName}" alt="img"/></td>
 									<td>${VO.productVO.productTitle}</td>
 									<td>${VO.orderlistVO.orderNum}</td>
 									<td>${VO.purchaseVO.productCount}</td>
