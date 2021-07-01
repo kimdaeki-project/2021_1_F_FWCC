@@ -14,7 +14,7 @@ class AdminTest {
 	@Test
 	void test() {
 		Random random = new Random(Calendar.getInstance().getTimeInMillis());
-		random.nextInt();
+		int count = random.nextInt()%7+1;
 	}
 
 }
