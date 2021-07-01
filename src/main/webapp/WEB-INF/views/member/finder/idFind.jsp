@@ -28,7 +28,9 @@
 </head>
 <body>
 	<!-- header START -->
-	<c:import url="/WEB-INF/views/templates/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/templates/navbar.jsp">
+		<c:param name="isCommon" value="true"></c:param>
+	</c:import>
 	<!-- header END -->
 
 	<!-- contents START -->
@@ -43,7 +45,7 @@
 			<form
 				id="findIdForm"
 				action="./idFind"
-				method="post"
+				method="POST"
 			>
 				<div class="xans-element- xans-member xans-member-findid">
 					<div class="findId">
@@ -51,18 +53,18 @@
 							<p class="check">
 								<input
 									id="check_method1"
+									class="radioBtn"
 									name="check_method"
-									value="2"
+									value=""
 									type="radio"
 									checked="checked"
 								/><label for="check_method1">이메일</label> <input
 									id="check_method2"
+									class="radioBtn"
 									name="check_method"
-									value="3"
+									value=""
 									type="radio"
-								/><label for="check_method2"><span
-									id="search_type_mobile_lable"
-								>휴대폰번호</span></label>
+								/><label for="check_method2"><span id="search_type_mobile_lable">휴대폰번호</span></label>
 							</p>
 							<p
 								id="name_view"
@@ -70,7 +72,7 @@
 							>
 								<strong id="name_lable">이름</strong> <input
 									id="name"
-									name="username"
+									name="name"
 									class="lostInput"
 									placeholder=""
 									value=""
@@ -93,7 +95,6 @@
 							<p
 								id="mobile_view"
 								class="mobile"
-								hidden=""
 							>
 								<strong>휴대폰 번호로 찾기</strong> <select
 									id="phone0"
@@ -101,37 +102,37 @@
 									class="eraser"
 									title=""
 								>
-										<option
-											value="010"
-											id="010"
-											label="010"
-											selected="selected"
-										/>
-										<option
-											value="011"
-											id="011"
-											label="011"
-										/>
-										<option
-											value="016"
-											id="016"
-											label="016"
-										/>
-										<option
-											value="017"
-											id="017"
-											label="017"
-										/>
-										<option
-											value="018"
-											id="018"
-											label="018"
-										/>
-										<option
-											value="019"
-											id="019"
-											label="019"
-										/>
+									<option
+										value="010"
+										id="010"
+										label="010"
+										selected="selected"
+									/>
+									<option
+										value="011"
+										id="011"
+										label="011"
+									/>
+									<option
+										value="016"
+										id="016"
+										label="016"
+									/>
+									<option
+										value="017"
+										id="017"
+										label="017"
+									/>
+									<option
+										value="018"
+										id="018"
+										label="018"
+									/>
+									<option
+										value="019"
+										id="019"
+										label="019"
+									/>
 								</select>-<input
 									id="phone1"
 									name="phone1"
@@ -151,11 +152,12 @@
 								/>
 							</p>
 							<p class="ec-base-button ">
-								<button
-								><img
-									src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif"
-									alt="확인"
-								/></button>
+								<button>
+									<img
+										src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif"
+										alt="확인"
+									/>
+								</button>
 							</p>
 						</fieldset>
 					</div>
@@ -172,6 +174,9 @@
 	<!-- External JS -->
 
 	<!-- Custom JS -->
-
+	<script
+		type="text/javascript"
+		src="/js/member/finder/idFind.js"
+	></script>
 </body>
 </html>
