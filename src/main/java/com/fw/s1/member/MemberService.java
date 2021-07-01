@@ -3,6 +3,7 @@ package com.fw.s1.member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ import com.fw.s1.board.qna.QnaVO;
 import com.fw.s1.mileage.MileageMapper;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
+import com.fw.s1.util.Mailer;
 
 @Service
 public class MemberService implements UserDetailsService {
@@ -45,6 +47,9 @@ public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private QnaMapper qnaMapper;
+	
+	@Autowired
+	private Mailer mailer;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(MemberVO memberVO) throws Exception {
@@ -138,6 +143,23 @@ public class MemberService implements UserDetailsService {
 			memberVO.setPhone(memberVO.getPhone0()+"-"+memberVO.getPhone1()+"-"+memberVO.getPhone2());
 		}
 		return memberMapper.getMember(memberVO);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public long sendTempPw(MemberVO memberVO) throws Exception {
+		// 1. 임시비밀번호 생성
+		Random random = new Random();
+		String tempPw = random.nextInt()+"";
+		System.out.println("Temporary Password : "+tempPw);
+		// 2. 임시비밀번호 인코딩
+		memberVO.setPassword(passwordEncoder.encode(tempPw));
+		// 3. DB에 임시비밀번호로 바꾸기
+		long result = memberMapper.setPw(memberVO);
+		System.out.println("SERVICE ---------> Password Change Complete");
+		// 4. Mail로 임시비밀번호 보내기
+		result = mailer.sendMail(memberVO, tempPw);
+		
+		return result;
 	}
 	
 	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception {

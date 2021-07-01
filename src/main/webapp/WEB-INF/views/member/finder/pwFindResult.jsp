@@ -44,7 +44,7 @@
 			</div>
 			<form
 				id="findPasswdMethod"
-				action="#"
+				action="./tempPw"
 				method="POST"
 			>
 				<div class="xans-element- xans-member xans-member-findpasswdmethod ">
@@ -58,6 +58,32 @@
 						<fieldset>
 							<legend>임시 비밀번호 전송</legend>
 							<ul class="ec-base-desc typeBullet gSmall">
+								<li><input
+									hidden=""
+									name="username"
+									value="${VO.username}"
+								/></li>
+								<li>
+									<input
+									hidden=""
+									name="name"
+									value="${VO.name}"
+								/>
+								</li>
+								<li>
+									<input
+									hidden=""
+									name="email"
+									value="${VO.email}"
+								/>
+								</li>
+								<li>
+									<input
+									hidden=""
+									name="email"
+									value="${VO.phone}"
+								/>
+								</li>
 								<li><strong class="term">임시 비밀번호</strong><span class="desc"> <c:if
 											test="${not empty VO.email}"
 										>
@@ -91,10 +117,10 @@
 								</c:if>
 							</ul>
 							<p class="ec-base-button gBlank20">
-								<a href="#"><img
+								<button><img
 									src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_send_password.gif"
 									alt="임시 비밀번호 전송"
-								/></a> <a href="#"><img
+								/></button> <a href="${pageContext.request.contextPath}/"><img
 									src="//img.echosting.cafe24.com/skin/base_ko_KR/member/btn_cancel.gif"
 									alt="취소"
 								/></a>

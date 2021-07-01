@@ -40,6 +40,9 @@
 		</choose>
 	</select>
 
+	<update id="setPw" parameterType="MemberVO">
+		update member set password=#{password} where username=#{username}
+	</update>
 
 	<insert id="setJoin" parameterType="MemberVO">
 		insert into member(username, password, name, phone, email, birth, smsAgree, emailAgree, enabled)

@@ -120,15 +120,31 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getMember(memberVO);
 		String msg = "입력하신 정보로 가입된 회원은 존재하지 않습니다.";
-		String path = "/member/finder/pwFind";
+		String path = "member/finder/pwFind";
 		String viewName="common/commonResult";
 		if(memberVO != null) {
-			viewName = "/member/finder/pwFindResult";
+			viewName = "member/finder/pwFindResult";
 		}
 		mv.addObject("msg", msg);
 		mv.addObject("path", path);
 		mv.addObject("VO", memberVO);
 		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	@PostMapping("finder/tempPw")
+	public ModelAndView sendTempPw(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(memberVO);
+		long result = memberService.sendTempPw(memberVO);
+		if (result > 0) {			
+			mv.addObject("VO", memberVO);
+			mv.setViewName("member/finder/tempPwResult");
+		} else {			
+			mv.addObject("msg", "메일 발송이 실패하였습니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/commonResult");
+		}
 		return mv;
 	}
 	

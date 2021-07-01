@@ -12,6 +12,8 @@ public interface MemberMapper {
 	
 	public MemberVO getMember(MemberVO memberVO) throws Exception;
 	
+	public Long setPw(MemberVO memberVO) throws Exception;
+	
 	public int setJoin(MemberVO memberVO) throws Exception;
 	
 	public int setMemberRole(Map<String, String> map) throws Exception;
