@@ -55,4 +55,13 @@ public class LookBookController {
 
 		return "redirect:./list";
 	}
+	
+	@GetMapping("modal")
+	public ModelAndView setModal(LookBookFileVO lookbookFileVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		lookbookFileVO = lookbookService.setModal(lookbookFileVO);
+		mv.addObject("md", lookbookFileVO);
+		mv.setViewName("board/lookbook/lookbookModal");
+		return mv;
+	}
 }

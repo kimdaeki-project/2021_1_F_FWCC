@@ -20,4 +20,5 @@ public interface LookBookMapper {
 	public int setUpdate(LookBookVO lookbookVO)throws Exception;
 	//lbDelete
 	public int setDelete(LookBookVO lookbookVO)throws Exception;
+	public LookBookFileVO setModal(LookBookFileVO boardFileVO)throws Exception;
 }

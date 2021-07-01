@@ -25,16 +25,17 @@
    		
    		
    		<select id="getList" resultType="reviewVO" parameterType="Pager">
-			select * from review
-			<include refid="searcher"></include>
+			SELECT review.num,review.writer,review.title,review.regDate,review.hit,reviewFiles.fileName from review, reviewFiles 
+where review.num = reviewFiles.num GROUP BY num
+			
 			order by num desc
 			limit #{startRow}, #{perPage}
 			<!-- limit 시작index번호(0부터시작), 갯수 --> 
    		</select>
    		
    		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
-   			select count(num) from review
-   			<include refid="searcher"></include>
+   			SELECT count(DISTINCT num) from reviewFiles 
+   		
    		</select>
    		
    		<select id="getSelect" resultMap="selectResult" parameterType="BoardVO">

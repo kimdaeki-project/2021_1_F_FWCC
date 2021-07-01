@@ -29,7 +29,7 @@
    			<result column="division" property="division"/>
    			<result column="title" property="title"/>
    			<collection property="files" javaType="java.util.List" ofType="LookBookFileVO">
-   				<id column="fileNum" property="fileNum"/>
+   				<id column="lookbookFileNum" property="lookbookFileNum"/>
    				<result column="num" property="num"/>
    				<result column="fileName" property="fileName"/>
    				<result column="oriName" property="oriName"/>
@@ -56,6 +56,10 @@
 			delete from lookbookfiles where lookbookFileNum=#{lookbookFileNum}
 
    		</delete>
+   		
+   		<select id="setModal" parameterType="LookBookFileVO" resultType="LookBookFileVO">
+   			select * from lookbookFiles where lookbookFileNum=#{lookbookFileNum}
+   		</select>
    		
    
    </mapper>

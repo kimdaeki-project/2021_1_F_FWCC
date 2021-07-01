@@ -64,5 +64,9 @@ public class LookBookService {
 	public int setDelete(LookBookVO lookbookVO) throws Exception {
 		return lookbookMapper.setDelete(lookbookVO);
 	}
+	
+	public LookBookFileVO setModal(LookBookFileVO lookbookFileVO) throws Exception {
+		return lookbookMapper.setModal(lookbookFileVO);
+	}
 
 }

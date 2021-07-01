@@ -44,7 +44,7 @@ a:hover {
 	<div id="container">
 		<div style="padding: 68px 34px 0;">
 			<div class="title" style="margin: 60px 0 40px; text-align: center;">
-				<p>Review</p>
+				<p>lookbook</p>
 			</div>
 <div class="row">
 			<c:forEach items="${list}" var="dto" >
@@ -56,10 +56,10 @@ a:hover {
 					<c:catch>
 					<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
 					</c:catch>
-					<img alt="ss" style="width: 560px; height: 400px; " src="../upload/lookbook/${dto.fileName} ">
+					<img alt="ss" style="width: 560px; height: 400px; " src="/upload/lookbook/${dto.fileName} ">
 					</a>
 					<div>${dto.title}</div>
-
+						${dto.fileName}
 				  </div>
 
 				</div>
@@ -100,7 +100,7 @@ a:hover {
 	<div class="input-group mt-3 mb-3" style=" justify-content: center;">
 	<form id="frm" action="./list" class="form-inline">
 		<input type="hidden" name="curPage" value="1" id="curPage">
-
+	</form>
 	
 
 	 <script type="text/javascript">
@@ -119,6 +119,7 @@ a:hover {
 		$("#frm").submit();
 	});
 </script> 
+			</div>
 			</div>
 			</div>
 			

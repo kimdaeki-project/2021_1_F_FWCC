@@ -50,7 +50,7 @@ a:hover {
 
 	<div class="row">
 			<c:forEach items="${Rlist}" var="Rdto" >
-				<div class="col-sm-4">
+				<div class="col-sm-4" style="padding-bottom: 30px">
 				<div class="card" style="width: 22rem; height: 22rem;">
 				  
 				  <div class="card-body">
@@ -60,14 +60,12 @@ a:hover {
 					<c:forEach begin="1" end="${Rdto.depth}">--</c:forEach>
 					</c:catch>
 
-					<img style="width: 310px; height: 260px;" src="https://frizm.co.kr/file_data/frizm/gallery/2021/06/26/5efc7d63b2c45b234d44e5392a4dc40c.jpg">
+					<img style="width: 310px; height: 260px;" src="/upload/review/${Rdto.fileName}">
 
 					</a>
 					<div>${Rdto.title}</div>
 					<div>${Rdto.writer} ${Rdto.regDate}</div>
-					
-					
-					</p>
+
 				  </div>
 				</div>
 				</div>

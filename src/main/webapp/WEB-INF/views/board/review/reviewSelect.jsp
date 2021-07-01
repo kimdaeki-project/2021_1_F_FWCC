@@ -71,6 +71,10 @@
 						</tr>
 					</tbody>
 				</table>
+				<c:forEach items="${Rvo.files}" var="fileVO">
+				<div><img style="width: 310px; height: 260px;" src="/upload/review/${fileVO.fileName}"></div>
+				</c:forEach>
+				
 				<div>${Rvo.contents}</div>
 			</div>
 			<table class="table"

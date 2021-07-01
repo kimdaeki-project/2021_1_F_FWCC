@@ -52,7 +52,6 @@ a:hover {
 			<thead >
 				<tr>
 					<th style="width: 100px;">NO</th>
-					<th style="width: 100px;">PRODUCT</th>
 					<th style="width: 500px;">SUBJECT</th>
 					<th style="width: 100px; text-align:center;">WRITER</th>
 					<th style="width: 100px; text-align:center;">DATE</th>
@@ -64,7 +63,6 @@ a:hover {
 			<c:forEach items="${Qlist}" var="Qdto" >
 				<tr>
 					<td>${Qdto.num}</td>
-					<td>${Qdto.productNum}</td>
 					<td><a style="color:black;" href="./select?num=${Qdto.num}">
 					
 					<c:catch>

@@ -12,4 +12,5 @@ import lombok.Setter;
 @Setter
 public class ReviewVO extends BoardVO{
 	private List<BoardFileVO> files;
+	private String fileName;
 }
