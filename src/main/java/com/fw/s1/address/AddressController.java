@@ -76,7 +76,7 @@ public class AddressController {
 		Gson gson = new Gson();
 		for(int i = 0 ; i < length; i++) {
 			AddressVO addressVO = list.get(i);
-			if(!addressVO.getOrderAddr()) {
+			if(addressVO.getOrderAddr()) {
 				addressVO.concatAddress();
 				results[temp+i] = gson.toJson(addressVO);
 			}else {
