@@ -18,7 +18,7 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
-	@Test
+//	@Test
 	void getDivisionTest()throws Exception{
 		ProductDivisionVO pdVO = new ProductDivisionVO();
 		pdVO.setCollab("collab12");
@@ -55,21 +55,29 @@ class ProductMapperTest {
 		
 		List<ProductVO> list = productMapper.getList(productPager);
 		System.out.println(list.size());
+		System.out.println("");
 		for(ProductVO vo:list) {
 //			if(vo.getProductSaleable()!=1) {
 //				System.out.println(vo.getProductTitle());
 //			}
+			System.out.println("insert into product(productNum,productTitle,productPrice,productDisRate,summary,productContents,finalPrice,productMileage,productSaleable,productDivNum)"
+					+ "values("+vo.getProductNum()+",'"+vo.getProductTitle()+"',"+vo.getProductPrice()+","+vo.getProductDisRate()+",'"+vo.getSummary()+"','"+vo.getProductContents()+"',"+vo.getFinalPrice()+","+vo.getProductMileage()+","+vo.getProductSaleable()+","+vo.getProductDivNum()+")");
 		}
+		System.out.println("");
 		assertNotNull(list);
 	}
+
+	
 	
 //	@Test
 	void getSelectTest() throws Exception{
 		ProductVO vo = new ProductVO();
-		vo.setProductNum(33L);
+		vo.setProductNum(723L);
 		vo = productMapper.getProductSelect(vo);
-		System.out.println(vo.getProductTitle());
-		
+		System.out.println("");
+		System.out.println("insert into product(productNum,productTitle,productPrice,productDisRate,summary,productContents,finalPrice,productMileage,productSaleable,productDivNum)"
+				+ "values("+vo.getProductNum()+",'"+vo.getProductTitle()+"',"+vo.getProductPrice()+","+vo.getProductDisRate()+",'"+vo.getSummary()+"','"+vo.getProductContents()+"',"+vo.getFinalPrice()+","+vo.getProductMileage()+","+vo.getProductSaleable()+","+vo.getProductDivNum()+")");
+		System.out.println("");
 		assertNotNull(vo);
 		
 	}
@@ -158,4 +166,89 @@ class ProductMapperTest {
 //		int result = productMapper.setDelete(vo);
 //		assertNotEquals(0, result);
 	}
+	
+	/*
+	 * sql 추출용
+	 */
+	
+//	@Test
+	void getTempList()throws Exception{
+		ProductPager productPager = new ProductPager();
+		int num=814;
+		productPager.setStartRow(num);
+		productPager.setLastRow(num+30);
+		List<ProductVO> list = productMapper.getTempList(productPager);
+		System.out.println(list.size());
+		System.out.println("");
+		for(ProductVO vo:list) {
+//			if(vo.getProductSaleable()!=1) {
+//				System.out.println(vo.getProductTitle());
+//			}
+			System.out.println("insert into product(productNum,productTitle,productPrice,productDisRate,summary,productContents,finalPrice,productMileage,productSaleable,productDivNum)"
+					+ "values("+vo.getProductNum()+",'"+vo.getProductTitle()+"',"+vo.getProductPrice()+","+vo.getProductDisRate()+",'"+vo.getSummary()+"','"+vo.getProductContents()+"',"+vo.getFinalPrice()+","+vo.getProductMileage()+","+vo.getProductSaleable()+","+vo.getProductDivNum()+")");
+		}
+		System.out.println("");
+		assertNotNull(list);
+	}
+//	@Test
+	void getTempInfoList()throws Exception{
+		ProductPager productPager = new ProductPager();
+		int num=843;
+		productPager.setStartRow(num);
+		productPager.setLastRow(num+9);
+		List<ProductInfoVO> list = productMapper.getTempInfoList(productPager);
+		System.out.println(list.size());
+		System.out.println("");
+		for(ProductInfoVO vo:list) {
+//			if(vo.getProductSaleable()!=1) {
+//				System.out.println(vo.getProductTitle());
+//			}
+			System.out.println(
+					"insert into productInfo(pInfoNum,productNum,size,stock)"
+					+ "values("+vo.getPInfoNum()+","+vo.getProductNum()+",'"+vo.getSize()+"',"+vo.getStock()+");"
+					);
+		}
+		System.out.println("");
+		assertNotNull(list);
+	}
+//	@Test
+	void getDivList()throws Exception{
+		List<ProductDivisionVO> list = productMapper.getDivList();
+		System.out.println(list.size());
+		System.out.println("");
+		for(ProductDivisionVO vo:list) {
+//			if(vo.getProductSaleable()!=1) {
+//				System.out.println(vo.getProductTitle());
+//			}
+			System.out.println(
+					"insert into productDivision(productDivNum,collab,productType)"
+					+ "values("+vo.getProductDivNum()+",'"+vo.getCollab()+"','"+vo.getProductType()+"');"
+					);
+			
+		}
+		System.out.println("");
+	}
+	
+	@Test
+	void getFileList()throws Exception{
+		ProductPager productPager = new ProductPager();
+		int num=844;
+		productPager.setStartRow(num);
+		productPager.setLastRow(num+19);
+		List<ProductFileVO> list = productMapper.getFileList(productPager);
+		System.out.println(list.size());
+		System.out.println("");
+		for(ProductFileVO vo:list) {
+//			if(vo.getProductSaleable()!=1) {
+//				System.out.println(vo.getProductTitle());
+//			}
+			System.out.println(
+					"insert into productFiles(fileNum,productNum,fileName,oriName)"
+					+ "values("+vo.getFileNum()+","+vo.getProductNum()+",'"+vo.getFileName()+"','"+vo.getOriName()+"');"
+					);
+		}
+		System.out.println("");
+		assertNotNull(list);
+	}
+	
 }

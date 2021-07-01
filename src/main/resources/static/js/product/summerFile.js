@@ -4,6 +4,7 @@
 
 $("#contents").summernote({
 			height:500,
+			width:1200,
 			placeholder:'write here...',
 			callbacks :{
 				onImageUpload: function(files){
