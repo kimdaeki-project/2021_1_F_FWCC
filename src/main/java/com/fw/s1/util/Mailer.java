@@ -27,8 +27,10 @@ public class Mailer {
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);
 	    
-	    mailSender.setUsername("hyungsoolim0@gmail.com");
-	    mailSender.setPassword("tgzljzythhboxuym");
+	    // 자신의 gmail 주소 넣으면 됨
+	    mailSender.setUsername("email 주소");
+	    // PW 또는 생성한 앱 비밀번호
+	    mailSender.setPassword("비밀번호 / 생성한 앱 비밀번호");
 	    
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");
