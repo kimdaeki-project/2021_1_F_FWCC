@@ -97,8 +97,6 @@ public class MemberService implements UserDetailsService {
 		memberVO = memberMapper.getUsernameCheck(memberVO);
 		if(memberVO !=null) {
 			String checkName = memberVO.getUsername();
-			System.out.println("username : "+username);
-			System.out.println("checkName : "+checkName);
 			if(username.equals(checkName)) {
 				result = 0;
 			}			
