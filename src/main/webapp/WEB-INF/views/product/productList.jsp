@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
 <style type="text/css">
+a { color: #000; }
+a:link { color: #000; }
+a:visited { color: #000; }
+a:hover{text-decoration: none;}
 .selBtn {
 	padding-left: 50px;
 	padding-right: 50px;

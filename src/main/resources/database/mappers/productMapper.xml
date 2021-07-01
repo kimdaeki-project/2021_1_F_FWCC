@@ -102,7 +102,7 @@
 		select * from productFiles where productNum = #{productNum} and fileName like 'M\_%'
 	</select>
 	<select id="getAllList" resultType="ProductVO">
-		select * from product
+		select * from product order by productNum desc
 	</select>
 	
 	<select id="getProductSelect" parameterType="ProductVO" resultType="ProductVO">
