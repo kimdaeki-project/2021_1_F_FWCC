@@ -170,12 +170,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("usernameCheck")
-	public ModelAndView getUsernameCheck(MemberVO memberVO) throws Exception {		
-		ModelAndView mv = new ModelAndView();
+	@ResponseBody
+	public int getUsernameCheck(MemberVO memberVO) throws Exception {	
+//		ModelAndView mv = new ModelAndView();
 		int result = memberService.getUsernameCheck(memberVO);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		return mv;
+//		mv.addObject("result", result);
+//		mv.setViewName("common/ajaxResult");
+		return result;
 	}
 	
 // My Page ================================================================================

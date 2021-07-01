@@ -78,11 +78,14 @@ $(".ec-base-chk").click(function(){
 		$("#sAgreeAllChecked").prop("checked", result);
 	});
 });
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+// 										FINISHED									$$$
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 // input 커서 집어넣으면 값 초기화 ============================
 $(".eraser").click(function(){
 	$(this).val("");
-	$("errorUsername").html("");
+	$(".errorUsername").html("");
 });
 
 $(".eraser").each(function(){	
@@ -90,7 +93,7 @@ $(".eraser").each(function(){
 		let eraser = $(this).val();
 		if(eraser.length == 0){
 			$(this).next().html("필수입력사항 입니다");
-		}else if (eraser.length >= 4){
+		}else if (eraser.length >= 2){
 			$(this).next().html("");
 		}
 	});
@@ -124,13 +127,16 @@ let emailAgree = "";
 $("#usernameCheck").click(function(){
 	$(".errorUsername").html("");
 	username = $("#usernameT").val();
+	console.log(username);
 	$.ajax({
-		method:"POST",
+		type:"POST",
 		url:"./usernameCheck",
 		data:{username:username},
-		success:function(result){
-			result = result.trim();
-			if(result != 0){
+		success:function(data, status, xhr){
+			console.log(data);
+			console.log(status);
+			console.log(xhr);
+			if(data == 0){
 				// 중복됐을때
 				$("#usernameError").html("중복된 ID입니다");
 			}else {
