@@ -46,7 +46,12 @@
 			</div>
 			
 			
-			<input type="button" id="btn" value="WRITE" class="btn btn-primary">
+			<div style="text-align: right">
+  		<input type="button" id="btn" value="WRITE" class="btn" style="border:1px solid gray;
+                    width:100px;
+                    height:30px;
+                    font-size:14px;">
+  		</div>
 		</form>
 	</div>
 
