@@ -11,7 +11,7 @@ $(document).ready(function(){
 		url:"/product/getDivisions",
 		success:function(result){
 			let hostIndex = location.href.indexOf(location.host)+location.host.length;
-			let contextPath = location.href.substring(hostIndex,location.href.indexOf('/',hostIndex+1));
+			let contextPath = location.href.substring(hostIndex,location.href.lastIndexOf('/',hostIndex+1));
 			let step;
 			for(step=0;step<result.length;step++){
 				if(result[step]!="none"){
