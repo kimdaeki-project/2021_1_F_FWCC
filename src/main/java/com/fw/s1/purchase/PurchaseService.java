@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fw.s1.order.OrderlistVO;
+
 @Service
 public class PurchaseService {
 
@@ -18,5 +20,9 @@ public class PurchaseService {
 	
 	public Long setOrderPurchase(List<PurchaseVO> list)throws Exception{
 		return purchaseMapper.setOrderPurchase(list);
+	}
+	
+	public List<PurchaseVO> getPurAdmin(OrderlistVO orderlistVO)throws Exception{
+		return purchaseMapper.getPurAdmin(orderlistVO);
 	}
 }

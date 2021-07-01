@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +27,8 @@ import com.fw.s1.order.OrderService;
 import com.fw.s1.order.OrderlistVO;
 import com.fw.s1.product.ProductService;
 import com.fw.s1.product.ProductVO;
+import com.fw.s1.purchase.PurchaseService;
+import com.fw.s1.purchase.PurchaseVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -42,6 +45,8 @@ public class AdminController {
 	private ProductService productService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	@ModelAttribute("date")
 	public String adminAll() {
@@ -289,7 +294,27 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("orderlistUpdate")
+	@Transactional(rollbackFor = Exception.class)
 	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception{
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		if(orderlistVO.getOrderState()==4) {
+			orderlistVO = orderService.selectedOrder(orderlistVO);
+			if(!date.toString().equals(orderlistVO.getOrderDate().toString())) {
+				List<PurchaseVO> list = purchaseService.getPurAdmin(orderlistVO);
+				if(adminService.cancledOrder(list) == 0) {
+					throw new Exception();
+				}
+			}
+		}else {
+			orderlistVO = orderService.selectedOrder(orderlistVO);
+			if(orderlistVO.getOrderState()==4) {
+				List<PurchaseVO> list = purchaseService.getPurAdmin(orderlistVO);
+				if(adminService.reCancledOrder(list) == 0) {
+					throw new Exception();
+				}
+			}
+		}
+		orderlistVO.setOrderState(4L);
 		return orderService.orderlistUpdate(orderlistVO);
 	}
 	

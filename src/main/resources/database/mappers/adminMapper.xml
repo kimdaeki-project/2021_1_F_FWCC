@@ -48,4 +48,20 @@
 			(#{item.adminDate}, #{item.productNum}, #{item.sellCount})
 		</foreach>
 	</insert>
+	
+	<update id="cancledOrder" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			update admin set sellCount=sellCount-#{item.sellCount}
+			where productNum = #{item.productNum} 
+			and orderDate = (select orderDate from orderlist where orderNum=#{item.orderNum})
+		</foreach>	
+	</update>
+	
+	<update id="reCancledOrder" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";">
+			update admin set sellCount=sellCount+#{item.sellCount}
+			where productNum = #{item.productNum} 
+			and orderDate = (select orderDate from orderlist where orderNum=#{item.orderNum})
+		</foreach>	
+	</update>
 </mapper>

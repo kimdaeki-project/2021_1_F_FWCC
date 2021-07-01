@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fw.s1.purchase.PurchaseVO;
+
 @Service
 public class AdminService {
 
@@ -26,5 +28,13 @@ public class AdminService {
 	
 	public List<AdminVO> saleMonth(String date)throws Exception{
 		return adminMapper.saleMonth(date);
+	}
+	
+	public Long cancledOrder(List<PurchaseVO> list)throws Exception{
+		return adminMapper.cancledOrder(list);
+	}
+	
+	public Long reCancledOrder(List<PurchaseVO> list)throws Exception{
+		return adminMapper.reCancledOrder(list);
 	}
 }

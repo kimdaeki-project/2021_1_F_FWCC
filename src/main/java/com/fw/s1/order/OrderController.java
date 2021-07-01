@@ -2,6 +2,8 @@ package com.fw.s1.order;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
+import com.fw.s1.admin.AdminService;
 import com.fw.s1.cart.CartService;
 import com.fw.s1.cart.CartVO;
 import com.fw.s1.coupon.CouponService;
@@ -65,6 +68,8 @@ public class OrderController {
 	private PurchaseService purchaseService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private AdminService adminService;
 	
 	
 	private IamportClient api;
@@ -91,6 +96,25 @@ public class OrderController {
 		cancel_data.setEscrowConfirmed(true); //에스크로 구매확정 후 취소인 경우 true설정
 		OrderlistVO orderlistVO = new OrderlistVO();
 		orderlistVO.setOrderNum(merchant_uid);
+		Calendar calendar = Calendar.getInstance();
+		Date tempdate = calendar.getTime();
+		java.sql.Date date = new java.sql.Date(tempdate.getTime());
+		
+		try {
+			orderlistVO = orderService.selectedOrder(orderlistVO);
+			if(!date.toString().equals(orderlistVO.getOrderDate().toString())) {
+				List<PurchaseVO> list = purchaseService.getPurAdmin(orderlistVO);
+				Long result = adminService.cancledOrder(list);
+				if(result==0) {
+					return false;
+				}
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return false;
+		}
+		
 		boolean check = true;
 		try {
 			if(authentication==null) {
