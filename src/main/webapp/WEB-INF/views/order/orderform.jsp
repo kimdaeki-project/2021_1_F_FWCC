@@ -296,7 +296,7 @@
 		</div>
 	</div>
 	
-	<div style="display:none; position: fixed; top:10%; left:15%; max-width:70%; max-height: 75%;" id="forAddAddress" class="modal">
+	<div style="display:none; position: fixed; top:10%; left:15%; max-width:70%; max-height: 75%; overflow-y: auto;" id="forAddAddress" class="modal">
 		<div id="addressChapter1" style="margin:2%; width:96%; display:contents;">
 			<table style="border: 1px rgba(128,128,128,0.5) solid; width: 100%;">
 				<thead style="border-bottom: 1px rgba(128,128,128,0.25) solid;">

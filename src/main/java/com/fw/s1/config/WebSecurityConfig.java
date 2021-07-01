@@ -53,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/product/select").permitAll()
 //				.antMatchers("/product/**").hasRole("ADMIN")
 				// --- product END ---
+				// --- address START ---
+				.antMatchers("/address/**").hasAnyRole("MEMBER","ADMIN")
+				// --- address END ---
 				// --- cart END ---
 				.antMatchers("/cart/counting").permitAll()
 				.antMatchers("/cart/**").hasAnyRole("MEMBER","ADMIN")

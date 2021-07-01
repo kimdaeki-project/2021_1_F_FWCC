@@ -27,7 +27,7 @@
 
   <insert id="setAddress" parameterType="AddressVO">
   	insert into address(username, addrName, recipient, zipCode, basicAddr, detailAddr, addrPhone, recentUse, orderAddr) 
-  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 0, 1)
+  	values (#{username}, #{addrName}, #{recipient}, #{zipCode}, #{basicAddr}, #{detailAddr}, #{addrPhone}, 1, 1)
   </insert>
 
   <update id="beforeAddress" parameterType="AddressVO">
