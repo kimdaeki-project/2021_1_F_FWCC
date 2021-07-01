@@ -23,7 +23,6 @@ function getData(){
 	let first = new Date(date);
 	first.setDate(first.getDate()-7);
 	let count = 0;
-	const arr1 = new Array();
 	const arr2 = new Map();
 	while(count<7){
 		let tempdate = new Date(first);
@@ -33,6 +32,7 @@ function getData(){
 		arr2.set(tempdate, 0);
 		count++;
 	}
+	const productMap = new Map();
 
 	const hm = new Map();
 	$.get({
@@ -43,13 +43,13 @@ function getData(){
 		success:function(result){
 			for(let datas of result){
 				let data = JSON.parse(datas);
-				let temparr = new Array();
 				
 				//상품별로 판매한 수량
-				temparr.push(data.productVO.productTitle);
-				temparr.push(data.sellCount);
-				temparr.push(randomRGB());
-				arr1.push(temparr);
+				if(productMap.has(data.productVO.productTitle)) {
+					productMap.set(data.productVO.productTitle, productMap.get(data.productVO.productTitle) + data.sellCount);
+				}else {
+					productMap.set(data.productVO.productTitle, data.sellCount);
+				}
 				
 				//일별로 판매한 수량
 				let tempdate = new Date(data.parseDate);
@@ -67,6 +67,13 @@ function getData(){
 			}
 			let array2 = Array.from(arr2);
 			let array1 = new Array();
+			
+			let arr1 = Array.from(productMap);
+			
+			arr1.forEach(function(value){
+				value.push(randomRGB());
+			});
+			
 			arr1.sort(function(a, b){
 				return b[1]-a[1];
 			});

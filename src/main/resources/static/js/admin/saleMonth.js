@@ -27,9 +27,9 @@ function getData(){
 		},
 		success:function(result){
 			let array1 = new Array();
-			const arr1 = new Array();
 			const arr2 = new Map();
 			const hm = new Map();
+			const productMap = new Map();
 			
 			let checkdate = new Date(date);
 			const checkmonth = checkdate.getMonth();
@@ -41,11 +41,12 @@ function getData(){
 			
 			for(let datas of result){
 				let data = JSON.parse(datas);
-				let temparr = new Array();
-				temparr.push(data.productVO.productTitle);
-				temparr.push(data.sellCount);
-				temparr.push(randomRGB());
-				arr1.push(temparr);
+				
+				if(productMap.has(data.productVO.productTitle)) {
+					productMap.set(data.productVO.productTitle, productMap.get(data.productVO.productTitle) + data.sellCount);
+				}else {
+					productMap.set(data.productVO.productTitle, data.sellCount);
+				}
 				
 				tempdate = new Date(data.parseDate);
 				tempdate = tempdate.getFullYear()+"-"+(tempdate.getMonth()+1)+"-"+tempdate.getDate();
@@ -59,12 +60,19 @@ function getData(){
 				}
 			}
 			
+			let arr1 = Array.from(productMap);
+			
+			arr1.forEach(function(value) {
+				value.push(randomRGB());
+			});
+			
+			arr1.sort(function(a, b){
+				return b[1]-a[1];
+			});
+			
 			if(arr1.length<=10){
 				array1 = arr1;
-			}else{
-				arr1.sort(function(a, b){
-					return b[1]-a[1];
-				});
+			}else{	
 				for(let i = 0 ; i < 10; i++){
 					array1.push(arr1[i]);
 				}
