@@ -124,6 +124,7 @@
 		select * from productDivision where collab=#{collab}
 	</select>
 	
+	<!-- 
 	<select id="getTempList" parameterType="ProductPager" resultType="ProductVO">
 		select * from product
 		where productNum between #{startRow} and #{lastRow}
@@ -139,7 +140,7 @@
 	select * from productFiles where productNum between #{startRow} and #{lastRow}
 	</select>
 	
-	
+	 -->
 
 	<!-- ++++++++++ C ++++++++++ -->
 
