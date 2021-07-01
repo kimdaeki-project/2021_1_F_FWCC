@@ -8,22 +8,22 @@
 		<div id="footer-snsLink">
 			<ul>
 				<li>
-					<a href="#" title="페이스북" target="_blank">
+					<a href="http://facebook.com/frizmworks" title="페이스북" target="_blank">
 						<i class="fab fa-facebook-f"></i>
 					</a> 
 				</li>
 				<li>
-					<a href="#" title="블로그" target="_blank">
+					<a href="https://blog.naver.com/frizmworks" title="블로그" target="_blank">
 						<i class="fas fa-bold"></i>
 					</a>
 				</li>
 				<li>
-					<a href="#" title="인스타그램" target="_blank">
+					<a href="http://instagram.com/frizmworks_official" title="인스타그램" target="_blank">
 						<i class="fab fa-instagram"></i>
 					</a>
 				</li>
 				<li>
-					<a href="#" title="유튜브" target="_blank">
+					<a href="https://www.youtube.com/channel/UC4UfMCMlbelhoyaeidXyX-g/featured" title="유튜브" target="_blank">
 						<i class="fab fa-youtube"></i>
 					</a>
 				</li>
@@ -31,11 +31,11 @@
 		</div>
 		<div id="footer-menubar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath }/">HOME</a></li>
-				<li><a href="#">ABOUT US</a></li>
-				<li><a href="#">TERMS OF USE</a></li>
-				<li><a href="#">PRIVACY POLICY</a></li>
-				<li><a href="#">GUIDE</a></li>
+				<li><a href="${pageContext.request.contextPath}/">HOME</a></li>
+				<li><a href="https://frizm.co.kr/shopinfo/company.html">ABOUT US</a></li>
+				<li><a href="https://frizm.co.kr/member/agreement.html">TERMS OF USE</a></li>
+				<li><a href="https://frizm.co.kr/member/privacy.html">PRIVACY POLICY</a></li>
+				<li><a href="https://frizm.co.kr/shopinfo/guide.html">GUIDE</a></li>
 			</ul>
 		</div>
 		<div>
