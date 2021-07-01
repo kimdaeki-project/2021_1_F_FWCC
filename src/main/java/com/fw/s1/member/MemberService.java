@@ -92,13 +92,15 @@ public class MemberService implements UserDetailsService {
 	}
 	
 	public int getUsernameCheck(MemberVO memberVO) throws Exception {
-		int result = 0;
+		int result = 1;
 		String username = memberVO.getUsername();
 		memberVO = memberMapper.getUsernameCheck(memberVO);
 		if(memberVO !=null) {
 			String checkName = memberVO.getUsername();
+			System.out.println("username : "+username);
+			System.out.println("checkName : "+checkName);
 			if(username.equals(checkName)) {
-				result = 1;
+				result = 0;
 			}			
 		}
 		return result;

@@ -78,8 +78,6 @@
 									placeholder=""
 									type="text"
 									value=""
-									onfocus="inputInit()"
-									onblur="inputEssentials()"
 								/> <span
 								id="usernameError"
 								class="errorUsername error1"
@@ -87,8 +85,8 @@
 								id="usernameSuccess"
 								class="errorUsername"
 							></span> <span id="usernameMsg"></span> (영문소문자/숫자, 4~16자) <a
-								role="button"
 								style="margin-left: 50px;"
+								href="#"
 								id="usernameCheck"
 								class="btn btn-sm"
 							>중복확인</a></td>
