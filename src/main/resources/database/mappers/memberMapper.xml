@@ -28,6 +28,17 @@
 			<result column="roleName" property="roleName"/>
 		</collection>
 	</resultMap>
+	
+	<select id="getMember" parameterType="MemberVO" resultType="MemberVO">
+		<choose>
+			<when test="email == ''">
+				select username, name, phone from member where name=#{name} and phone=#{phone}	
+			</when>
+			<otherwise>
+				select username, name, email from member where name=#{name} and email=#{email}	
+			</otherwise>
+		</choose>
+	</select>
 
 
 	<insert id="setJoin" parameterType="MemberVO">

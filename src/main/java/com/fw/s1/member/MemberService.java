@@ -133,6 +133,13 @@ public class MemberService implements UserDetailsService {
 		return result;
 	}
 	
+	public MemberVO getMember(MemberVO memberVO) throws Exception {
+		if(memberVO.getEmail().equals("")) {
+			memberVO.setPhone(memberVO.getPhone0()+"-"+memberVO.getPhone1()+"-"+memberVO.getPhone2());
+		}
+		return memberMapper.getMember(memberVO);
+	}
+	
 	public List<MileageVO> getMemberMileage(MemberVO memberVO) throws Exception {
 		return mileageMapper.getMemberMileage(memberVO);
 	}

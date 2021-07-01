@@ -84,8 +84,52 @@ public class MemberController {
 	}
 	
 	@GetMapping("finder/idFind")
-	public void getId() throws Exception {
+	public void getMember() throws Exception {
 		
+	}
+	
+	@PostMapping("finder/idFind")
+	public ModelAndView getMember(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getMember(memberVO);
+		String msg = "입력하신 정보로 가입된 회원 아이디는 존재하지 않습니다.";
+		String path = "/member/finder/idFind";
+		String viewName="common/commonResult";
+		if(memberVO != null) {
+			viewName = "/member/finder/idFindResult";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("path", path);
+		mv.addObject("VO", memberVO);
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	@GetMapping("finder/idFindResult")
+	public void getidResult() throws Exception {
+		
+	}
+	
+	@GetMapping("finder/pwFind")
+	public void getPw() throws Exception {
+		
+	}
+	
+	@PostMapping("finder/pwFind")
+	public ModelAndView getPw(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getMember(memberVO);
+		String msg = "입력하신 정보로 가입된 회원은 존재하지 않습니다.";
+		String path = "/member/finder/pwFind";
+		String viewName="common/commonResult";
+		if(memberVO != null) {
+			viewName = "/member/finder/pwFindResult";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("path", path);
+		mv.addObject("VO", memberVO);
+		mv.setViewName(viewName);
+		return mv;
 	}
 	
 // Member Join ============================================================================
