@@ -297,6 +297,7 @@ public class AdminController {
 	@Transactional(rollbackFor = Exception.class)
 	public Long orderlistUpdate(OrderlistVO orderlistVO)throws Exception{
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		Long temp = orderlistVO.getOrderState();
 		if(orderlistVO.getOrderState()==4) {
 			orderlistVO = orderService.selectedOrder(orderlistVO);
 			if(!date.toString().equals(orderlistVO.getOrderDate().toString())) {
@@ -314,7 +315,7 @@ public class AdminController {
 				}
 			}
 		}
-		orderlistVO.setOrderState(4L);
+		orderlistVO.setOrderState(temp);
 		return orderService.orderlistUpdate(orderlistVO);
 	}
 	
