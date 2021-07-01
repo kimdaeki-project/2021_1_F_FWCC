@@ -35,8 +35,9 @@
 					${VO.productDisRate}% SALE</span>
 			</c:if>
 			<br> <span style="font-size: 12px; color: #000000;">${VO.productMileage}
-				(5%)</span> <br> <span style="font-size: 12px; color: #000000;">${VO.summary}</span>
-			<br> <select id="sizes"
+				(5%)</span> <br> 
+				<textarea readonly="readonly" rows="10" style="width:100%; resize: none; border:white;">${VO.summary}</textarea>
+				 <select id="sizes"
 				onchange="changed(this.value)">
 				<option value="default">사이즈 선택</option>
 				<c:forEach items="${VO.infos}" var="info">
@@ -55,9 +56,9 @@
 						<c:forEach items="${VO.infos}" var="info">
 							<tr style="display: none;" id="size_${info.size}" title="1">
 								<td>${VO.productTitle}-${info.size}</td>
-								<td><input type="number" min="1" value="1"
-									data-value="${info.size}" class="noProduct"><a
-									class="delInfo" data-value="${info.size}" data-infoNum="${info.PInfoNum}">X</a></td>
+								<td><input style="width:100px;" type="number" min="1" value="1"
+									data-value="${info.size}" class="noProduct"><input type="button"
+									class="delInfo" data-value="${info.size}" data-infoNum="${info.PInfoNum}" value="X" style="margin:0 5px;"></td>
 								<td><span class="finalPrices" id="${info.size}FinalPrice"
 									title="${VO.finalPrice}">${VO.finalPrice}</span><br> <span
 									style="font-size: 12px; color: #000000;" id="${info.size}Mile"
@@ -73,8 +74,8 @@
 					</tbody>
 				</table>
 			</div>
-			<button style="width: 100%" id="buynowbutton">BUY NOW</button>
-			<button style="width: 100%" id="addcartbutton">ADD CART</button>
+			<button style="margin: 5px 0; width: 100%" id="buynowbutton">BUY NOW</button>
+			<button style="margin: 5px 0;  width: 100%" id="addcartbutton">ADD CART</button>
 		</div>
 
 

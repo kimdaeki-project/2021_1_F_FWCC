@@ -123,6 +123,24 @@
 	<select id="getDivision" parameterType="productDivisionVO" resultType="productDivisionVO">
 		select * from productDivision where collab=#{collab}
 	</select>
+	
+	<!-- 
+	<select id="getTempList" parameterType="ProductPager" resultType="ProductVO">
+		select * from product
+		where productNum between #{startRow} and #{lastRow}
+	</select>
+	<select id="getTempInfoList" parameterType="ProductPager" resultType="ProductInfoVO">
+		select * from productInfo
+		where productNum between #{startRow} and #{lastRow}
+	</select>
+	<select id="getDivList" resultType="ProductDivisionVO">
+		select * from productDivision;
+	</select>
+	<select id="getFileList" parameterType="ProductPager" resultType="ProductFileVO">
+	select * from productFiles where productNum between #{startRow} and #{lastRow}
+	</select>
+	
+	 -->
 
 	<!-- ++++++++++ C ++++++++++ -->
 

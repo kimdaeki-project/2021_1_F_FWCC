@@ -23,6 +23,11 @@ public interface ProductMapper {
 	public String[] getDivisions() throws Exception;
 	public List<ProductDivisionVO> getDivision(ProductDivisionVO productDivisonVO) throws Exception;
 	
+	public List<ProductVO> getTempList(ProductPager productPager) throws Exception;
+	public List<ProductInfoVO>getTempInfoList(ProductPager productPager)throws Exception;
+	public List<ProductDivisionVO>getDivList()throws Exception;
+	public List<ProductFileVO>getFileList(ProductPager productPager)throws Exception;
+	
 	public int setInsert(ProductVO productVO) throws Exception;
 	public int setUpdate(ProductVO productVO) throws Exception;
 	public int setFileDelete(ProductVO productVO) throws Exception;
