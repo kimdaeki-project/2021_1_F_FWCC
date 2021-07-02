@@ -1,5 +1,8 @@
 package com.fw.s1.member;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,8 @@ import com.fw.s1.address.AddressService;
 import com.fw.s1.address.AddressVO;
 import com.fw.s1.board.qna.QnaMapper;
 import com.fw.s1.board.qna.QnaVO;
+import com.fw.s1.coupon.CouponMapper;
+import com.fw.s1.coupon.CouponVO;
 import com.fw.s1.mileage.MileageMapper;
 import com.fw.s1.mileage.MileageService;
 import com.fw.s1.mileage.MileageVO;
@@ -50,6 +55,9 @@ public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private Mailer mailer;
+	
+	@Autowired
+	private CouponMapper couponMapper;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int setJoin(MemberVO memberVO) throws Exception {
@@ -83,6 +91,18 @@ public class MemberService implements UserDetailsService {
 		mileageVO.setMileContents("신규회원 적립금");
 		mileageVO.setEnabledMile(2000L);
 		result = (int)mileageService.setMileAfterJoin(mileageVO).longValue();
+		
+		// 7. coupon table 저장
+		Date sdate = new Date(Calendar.getInstance().getTimeInMillis());
+		Date edate = new Date(Calendar.getInstance().getTimeInMillis()+2592000000L);
+		CouponVO couponVO = new CouponVO();
+		List<CouponVO> ar = new ArrayList<CouponVO>();
+		couponVO.setCuSpNum(9L);
+		couponVO.setUsername(memberVO.getUsername());
+		couponVO.setPubDate(sdate);
+		couponVO.setExDate(edate);
+		ar.add(couponVO);
+		couponMapper.couponForSelected(ar);
 		
 		if(result<1) {
 			throw new Exception();
