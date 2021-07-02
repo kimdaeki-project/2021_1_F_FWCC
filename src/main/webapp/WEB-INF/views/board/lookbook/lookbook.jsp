@@ -59,7 +59,6 @@ a:hover {
 					<img alt="ss" style="width: 560px; height: 400px; " src="/upload/lookbook/${dto.fileName} ">
 					</a>
 					<div>${dto.title}</div>
-						${dto.fileName}
 				  </div>
 
 				</div>
