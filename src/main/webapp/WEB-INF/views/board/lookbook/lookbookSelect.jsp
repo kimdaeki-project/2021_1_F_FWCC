@@ -41,7 +41,7 @@
 	</c:if>
 	</div>
 	
-	<div>
+	<div style="text-align: center;">
 	<c:if test="${vo.division == 'v'}">
 
 		<c:forEach items="${vo.files}" var="fileVO">
@@ -50,7 +50,7 @@
 
 
 		<c:if test="${fileName[fn:length(fileName)-1] == 'mp4'}">
-		<video src="../upload/lookbook/${fileVO.fileName}" controls="controls"></video>
+		<video src="../upload/lookbook/${fileVO.fileName}" controls="controls" style="width: 800px;"></video>
 		</c:if>
 	</c:forEach>
 	</c:if>
