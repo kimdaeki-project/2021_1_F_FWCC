@@ -282,6 +282,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"공백이 아닌 1~10글자를 입력해 주세요."
 		});
+		return;
 	}
 	if(!reg.test(recipient)){
 		swal({
@@ -289,6 +290,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"공백이 아닌 1~10글자를 입력해 주세요."
 		});
+		return;
 	}
 	reg = new RegExp("[0-9]{4,5}");
 	if(!reg.test(zipCode)){
@@ -297,6 +299,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"주소를 입력해주세요."
 		});
+		return;
 	}
 	reg = new RegExp(".{1,}");
 	if(!reg.test(basicAddr)){
@@ -305,6 +308,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"주소를 입력해주세요."
 		});
+		return;
 	}
 	if(!reg.test(detailAddr)){
 		swal({
@@ -312,6 +316,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"주소를 입력해주세요."
 		});
+		return;
 	}
 	reg = new RegExp("[0-9]{2,3}");
 	if(!reg.test(addrPhone1)){
@@ -320,6 +325,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"전화번호를 제대로 입력해 주세요."
 		});
+		return;
 	}
 	reg = new RegExp("[0-9]{3,4}");
 	if(!reg.test(addrPhone2)){
@@ -328,6 +334,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"전화번호를 제대로 입력해 주세요."
 		});
+		return;
 	}
 	if(!reg.test(addrPhone3)){
 		swal({
@@ -335,6 +342,7 @@ $("#addThisAddress").click(function(event){
 			title:"형식에러",
 			text:"전화번호를 제대로 입력해 주세요."
 		});
+		return;
 	}
 	
 	if($(this).attr("data-role")=='edit'){
