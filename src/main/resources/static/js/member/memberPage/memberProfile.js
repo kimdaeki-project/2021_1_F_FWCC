@@ -154,7 +154,7 @@ $("#updateBtn").click(function(){
 					}
 				}); // --- memberUpdate ajax END ---/
 			}else {
-				console.log("Update failed");
+				alert("비밀번호를 확인해주세요.");
 			}
 		} // --- pwCheck success END ---
 	}); // --- pwCheck ajax END ---
