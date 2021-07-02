@@ -92,6 +92,6 @@
   </delete>
   
   <delete id="deleteCart" parameterType="MemberVO">
-  	delete cart where username=#{username}
+  	delete from cart where username=#{username}
   </delete>
 </mapper>
