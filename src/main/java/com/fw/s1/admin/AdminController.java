@@ -345,6 +345,7 @@ public class AdminController {
 	
 	@PostMapping("productUpdate")
 	public String setUpdate(ProductVO productVO,String[] sizeList, Long[] stockList, MultipartFile thumbnail)throws Exception{
+		/*
 		System.out.println("-------controller");
 		System.out.println(productVO.getProductTitle());
 		System.out.println(productVO.getProductPrice());
@@ -359,6 +360,7 @@ public class AdminController {
 		System.out.println(productVO.getProductType());
 		System.out.println(sizeList.length);
 		System.out.println(stockList.length);
+		*/
 		for(String size:sizeList) {
 			System.out.println(size);
 		}

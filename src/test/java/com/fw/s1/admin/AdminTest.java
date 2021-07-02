@@ -36,7 +36,7 @@ class AdminTest {
 				AdminVO adminVO = new AdminVO();
 				adminVO.setAdminDate(middle);
 				random = new Random(Calendar.getInstance().getTimeInMillis());
-				long pNum = (long)(random.nextInt(81) + 723);
+				long pNum = (long)(random.nextInt(121) + 723);
 				boolean check = false;
 				for(int k = 0 ; k < templist.size(); k++) {
 					if(pNum == templist.get(k).getProductNum()) {
