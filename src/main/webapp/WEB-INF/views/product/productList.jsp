@@ -183,27 +183,27 @@ clear:both;
 			<div class="page">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=1&sortStandard=${sortStandard}&sale=${sale}"
+					href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=1&sortStandard=${sortStandard}&sale=${sale}"
 					title="${pager.startNum-1}"><</a></li>
 
 				<li class="page-item"><a class="page-link p"
-					href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.startNum-1}&sortStandard=${sortStandard}&sale=${sale}">PREV</a></li>
+					href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.startNum-1}&sortStandard=${sortStandard}&sale=${sale}">PREV</a></li>
 
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}&sortStandard=${sortStandard}&sale=${sale}">${i}</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${i}&sortStandard=${sortStandard}&sale=${sale}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.next}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum+1}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
 				</c:if>
 				<c:if test="${!pager.next}">
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.lastNum}&sortStandard=${sortStandard}&sale=${sale}">NEXT</a></li>
 					<li class="page-item"><a class="page-link p"
-						href="${pageContext.request.contextPath }/product/list?collab=&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
+						href="${pageContext.request.contextPath }/product/list?collab=${collab}&productType=${name}-${division}&name=${name}&division=${division}&curPage=${pager.totalPage}&sortStandard=${sortStandard}&sale=${sale}">></a></li>
 				</c:if>
 			</ul>
 			</div>

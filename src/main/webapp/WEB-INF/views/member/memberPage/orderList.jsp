@@ -212,7 +212,7 @@
 											취소
 										</c:when>
 										</c:choose></td>
-									<td><c:if test="${VO.orderlistVO.orderState != 4}">
+									<td><c:if test="${VO.orderlistVO.orderState == 1}">
 											<a
 												href="#"
 												class="orderCancle"

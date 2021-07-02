@@ -68,7 +68,7 @@
 	</select>
 	
 	<select id="orderStateChange" parameterType="OrderlistVO" resultType="OrderlistVO">
-		select * from orderlist where orderState=#{orderState}
+		select * from orderlist where orderState=#{orderState} order by orderNum desc
 	</select>
 	<select id="selectedOrder" parameterType="OrderlistVO" resultType="OrderlistVO">
 		select * from orderlist where orderNum = #{orderNum}
